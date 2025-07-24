@@ -23,8 +23,37 @@ struct limine_framebuffer *get_framebuffer() {
 	return framebuffer_request.response->framebuffers[0];
 }
 
+// Verify Limine's protocol support and framebuffer initialization
+void verify_limine_support() {
+	if (framebuffer_request.response == NULL) {
+		serial_write("Limine framebuffer request failed.\n");
+		serial_write("Possible causes:\n");
+		serial_write("- Limine is not providing a framebuffer.\n");
+		serial_write("- Limine configuration is incorrect.\n");
+		serial_write("- The environment does not support framebuffer mode.\n");
+		return;
+	}
+
+	if (framebuffer_request.response->framebuffer_count < 1) {
+		serial_write("No framebuffers available.\n");
+		return;
+	}
+
+	struct limine_framebuffer *framebuffer =
+		framebuffer_request.response->framebuffers[0];
+	serial_write("Framebuffer initialized.\n");
+	serial_write("Width: ");
+	serial_write_dec(framebuffer->width);
+	serial_write("\nHeight: ");
+	serial_write_dec(framebuffer->height);
+	serial_write("\nPitch: ");
+	serial_write_dec(framebuffer->pitch);
+	serial_write("\n");
+}
+
 // Function to initialize the framebuffer (e.g., clear screen)
 void fb_init() {
+	verify_limine_support();
 	if (framebuffer_request.response == NULL) {
 		serial_write("Framebuffer request response is NULL.\n");
 		cpu_state_t state;
@@ -54,21 +83,5 @@ void fb_init() {
 	volatile uint32_t *fb_ptr = framebuffer->address;
 	for (size_t i = 0; i < framebuffer->width * framebuffer->height; i++) {
 		fb_ptr[i] = 0x000000; // Black color
-	}
-}
-
-// Function to draw a yellow diagonal line (example)
-void fb_draw() {
-	if (!fb_avail()) {
-		serial_write("Framebuffer not available!\n");
-		return;
-	}
-
-	struct limine_framebuffer *framebuffer = get_framebuffer();
-
-	// Draw a yellow diagonal line
-	for (size_t i = 0; i < framebuffer->width && i < framebuffer->height; i++) {
-		volatile uint32_t *fb_ptr = framebuffer->address;
-		fb_ptr[i * framebuffer->pitch / 4 + i] = 0xFFFF00; // Yellow color
 	}
 }
