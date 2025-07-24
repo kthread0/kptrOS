@@ -1,5 +1,6 @@
 #include "fb.h"
 #include "../../include/limine.h"
+#include "../serial.h"
 #include <stdbool.h>
 
 // Limine framebuffer request
@@ -12,19 +13,43 @@ extern unsigned char _binary_font_psf_start;
 extern unsigned char _binary_font_psf_end;
 
 void fb_init(void) {
-	if (framebuffer_request.response == NULL ||
-		framebuffer_request.response->framebuffer_count < 1) {
-		// Handle error: No framebuffer available
-		return;
+	serial_write("Attempting to request framebuffer...\n");
+
+	if (framebuffer_request.response == NULL) {
+		serial_write("Framebuffer response is NULL!\n");
+		while (1)
+			;
 	}
 
-	struct limine_framebuffer *framebuffer =
+	if (framebuffer_request.response->framebuffer_count < 1) {
+		serial_write("No framebuffers provided by Limine!\n");
+		while (1)
+			;
+	}
+
+	struct limine_framebuffer *fb =
 		framebuffer_request.response->framebuffers[0];
-	fb.address = (uint32_t *)framebuffer->address;
-	fb.width = framebuffer->width;
-	fb.height = framebuffer->height;
-	fb.pitch = framebuffer->pitch;
-	fb.bpp = framebuffer->bpp;
+
+	serial_write("Framebuffer properties:\n");
+	serial_write("Address: ");
+	serial_write_hex((uint64_t)fb->address);
+	serial_write("\n");
+	serial_write("Width: ");
+	serial_write_dec(fb->width);
+	serial_write("\n");
+	serial_write("Height: ");
+	serial_write_dec(fb->height);
+	serial_write("\n");
+	serial_write("Pitch: ");
+	serial_write_dec(fb->pitch);
+	serial_write("\n");
+
+	fb->address = fb->address;
+	fb->width = fb->width;
+	fb->width = fb->height;
+	fb->pitch = fb->pitch;
+
+	serial_write("Framebuffer request succeeded!\n");
 }
 
 void fb_put_pixel(uint32_t x, uint32_t y, uint32_t color) {

@@ -3,6 +3,7 @@
 #include "framebuffer/fb.h"
 #include "framebuffer/font.h"
 #include "idt.h"
+#include "serial.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -35,13 +36,8 @@ static inline void outb(uint16_t port, uint8_t value) {
 	__asm__ volatile("outb %0, %1" : : "a"(value), "Nd"(port));
 }
 
-void serial_write(char *str) {
-	while (*str) {
-		outb(0x3F8, *str++); // 0x3F8 is the serial port base address
-	}
-}
-
-__attribute__((interrupt)) void exception_handler(void *stack_frame) {
+__attribute__((interrupt)) void exception_handler(void *stack_frame
+												  __attribute__((unused))) {
 	while (1)
 		; // Hang the system to indicate an exception occurred
 }
@@ -62,13 +58,14 @@ void kmain(void) {
 		serial_write("Kernel panicked!\n");
 		panic();
 	}
+	__asm__ volatile("cli");
 	idt_init();
 	serial_write("IDT Initialized!\n");
 
 	fb_init();
-	serial_write("Framebuffer initialized!\n");
-
 	// Render some text
 	font_text("Hello, kptrOS!", 50, 50, 0xFFFFFF); // White color
 	serial_write("Framebuffer renderer!\n");
+	while (1)
+		;
 }
