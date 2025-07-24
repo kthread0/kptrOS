@@ -4,6 +4,7 @@
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
 #include "cpu/pic.h"
+#include "mem/paging/paging.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -61,12 +62,16 @@ __attribute__((used,
 	// Fetch the first framebuffer.
 	struct limine_framebuffer *framebuffer =
 		framebuffer_request.response->framebuffers[0];
+	intended_usage();
 
 	// Note: we assume the framebuffer model is RGB with 32-bit pixels.
-	for (size_t i = 0; i < 100; i++) {
+	for (size_t i = 0; i < framebuffer->pitch; i++) {
 		volatile uint32_t *fb_ptr = framebuffer->address;
-		fb_ptr[i * (framebuffer->pitch / 4) + i] = 0xffffff;
+		fb_ptr[i * (framebuffer->pitch / 255) + i] = 0xffff00;
 	}
+
+	loadPageDirectory(page_directory);
+	enablePaging();
 
 	serial_write("Started!\n");
 	panic();
