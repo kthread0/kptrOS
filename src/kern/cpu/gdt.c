@@ -1,5 +1,5 @@
 #include "gdt.h"
-#include "../serial.h"
+#include "../../include/system.h"
 #include <stdint.h>
 
 // Each define here is for a specific flag in the descriptor.
