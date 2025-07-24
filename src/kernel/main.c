@@ -41,7 +41,7 @@ void kmain(void) {
 	// Clear screen (set it to black)
 	for (uint32_t y = 0; y < fb.height; y++) {
 		for (uint32_t x = 0; x < fb.width; x++) {
-			framebuffer_put_pixel(x, y, 0x000000); // Black color
+			fb_put_pixel(x, y, 0x000000); // Black color
 		}
 	}
 

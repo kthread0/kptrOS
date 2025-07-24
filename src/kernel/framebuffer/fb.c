@@ -6,14 +6,7 @@
 struct limine_framebuffer_request framebuffer_request = {
 	.id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0};
 
-// Framebuffer information
-struct framebuffer {
-		uint32_t *address;
-		uint32_t width;
-		uint32_t height;
-		uint32_t pitch;
-		uint16_t bpp;
-} fb;
+struct framebuffer fb;
 
 extern unsigned char _binary_font_psf_start;
 extern unsigned char _binary_font_psf_end;
