@@ -1,5 +1,6 @@
+#include "gdt.h"
+#include "../serial.h"
 #include <stdint.h>
-#include <stdio.h>
 
 // Each define here is for a specific flag in the descriptor.
 // Refer to the intel documentation for a description of what each one does.
@@ -62,9 +63,11 @@ void create_descriptor(uint32_t base, uint32_t limit, uint16_t flag) {
 	// Create the low 32 bit segment
 	descriptor |= base << 16;		  // set base bits 15:0
 	descriptor |= limit & 0x0000FFFF; // set limit bits 15:0
+
+	serial_write("Descriptor created\n");
 }
 
-int main(void) {
+int gdt_init(void) {
 	create_descriptor(0, 0, 0);
 	create_descriptor(0, 0x000FFFFF, (GDT_CODE_PL0));
 	create_descriptor(0, 0x000FFFFF, (GDT_DATA_PL0));

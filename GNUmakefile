@@ -32,7 +32,7 @@ ifeq ($(TOOLCHAIN),llvm)
 endif
 
 # User controllable C flags.
-CFLAGS := -g -O3 -pipe
+CFLAGS := -g -O2 -pipe
 
 # User controllable C preprocessor flags. We set none by default.
 CPPFLAGS :=
@@ -58,16 +58,18 @@ override CFLAGS += \
     -Wextra \
     -std=gnu11 \
     -ffreestanding \
-    -fPIC \
     -fno-stack-protector \
     -fno-stack-check \
+    -fno-lto \
+    -fno-PIC \
     -m64 \
-    -mno-sse \
-    -mno-sse2 \
-    -mno-mmx \
     -march=x86-64 \
     -mno-80387 \
-    -mcmodel=large
+    -mno-mmx \
+    -mno-sse \
+    -mno-sse2 \
+    -mno-red-zone \
+    -mcmodel=kernel
 
 # Internal C preprocessor flags that should not be changed by the user.
 override CPPFLAGS := \
