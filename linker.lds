@@ -67,9 +67,7 @@ SECTIONS
         _binary_myfont_bin_end = .;
     }
 
-    /* Discard .note.* and .eh_frame* since they may cause issues on some hosts. */
-    /DISCARD/ : {
-        *(.eh_frame*)
-        *(.note .note.*)
+    .note.gnu.property : {
+        *(.note.gnu.property)
     }
 }

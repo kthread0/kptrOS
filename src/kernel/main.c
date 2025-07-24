@@ -2,7 +2,9 @@
 #include "../include/system.h"
 #include "framebuffer/fb.h"
 #include "framebuffer/font.h"
+#include "idt.h"
 #include <stdbool.h>
+#include <stdint.h>
 
 // Set the base revision to 3, this is recommended as this is the latest
 // base revision described by the Limine boot protocol specification.
@@ -29,25 +31,44 @@ __attribute__((
 // DO NOT remove or rename these functions, or stuff will eventually break!
 // They CAN be moved to a different .c file.
 
+static inline void outb(uint16_t port, uint8_t value) {
+	__asm__ volatile("outb %0, %1" : : "a"(value), "Nd"(port));
+}
+
+void serial_write(char *str) {
+	while (*str) {
+		outb(0x3F8, *str++); // 0x3F8 is the serial port base address
+	}
+}
+
+__attribute__((interrupt)) void exception_handler(void *stack_frame) {
+	while (1)
+		; // Hang the system to indicate an exception occurred
+}
+
+void idt_setup_debug(void) {
+	for (int i = 0; i < 256; i++) {
+		idt_set_entry(i, exception_handler, 0x08, 0x8E);
+	}
+	idt_load();
+}
+
 // The following will be our kernel's entry point.
 // If renaming kmain() to something else, make sure to change the
 // linker script accordingly.
 void kmain(void) {
 	// Ensure the bootloader actually understands our base revision (see spec).
 	if (LIMINE_BASE_REVISION_SUPPORTED == false) {
+		serial_write("Kernel panicked!\n");
 		panic();
 	}
+	idt_init();
+	serial_write("IDT Initialized!\n");
 
-	// Clear screen (set it to black)
-	for (uint32_t y = 0; y < fb.height; y++) {
-		for (uint32_t x = 0; x < fb.width; x++) {
-			fb_put_pixel(x, y, 0x000000); // Black color
-		}
-	}
+	fb_init();
+	serial_write("Framebuffer initialized!\n");
 
 	// Render some text
 	font_text("Hello, kptrOS!", 50, 50, 0xFFFFFF); // White color
-
-	// We're done, just hang...
-	panic();
+	serial_write("Framebuffer renderer!\n");
 }
