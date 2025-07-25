@@ -69,11 +69,13 @@ override CFLAGS += \
     -mno-sse \
     -mno-sse2 \
     -mno-red-zone \
-    -mcmodel=large
+    -mcmodel=large \
+    -Isrc/include
 
 #Internal C preprocessor flags that should not be changed by the user.
 override CPPFLAGS := \
     -I src \
+    -I src/include \
     $(CPPFLAGS) \
     -DLIMINE_API_REVISION=3 \
     -MMD \
@@ -91,7 +93,7 @@ override LDFLAGS += \
     -nostdlib \
     -static \
     -z max-page-size=0x1000 \
-    -T linker.lds
+    -T linker.lds \
 
 #Use "find" to glob all *.c, *.S, and*.asm files in the tree and obtain the
 #object and header dependency file names.

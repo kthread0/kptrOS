@@ -22,6 +22,7 @@ SECTIONS
     /* Any address in this region will do, but often 0xffffffff80000000 is chosen as */
     /* that is the beginning of the region. */
     . = 0xffffffff80000000;
+    _kernel_start = .;
 
     /* Define a section to contain the Limine requests and assign it to its own PHDR */
     .limine_requests : {
@@ -56,8 +57,12 @@ SECTIONS
     /* If you need, for example, .init_array and .fini_array, those should be placed */
     /* above this. */
     .bss : {
+        sbss = .;
         *(.bss .bss.*)
         *(COMMON)
+	ebss = .;
+	endkernel = .;
+	_kernel_end = .;
     } :data
 
     /* Discard .note.* and .eh_frame* since they may cause issues on some hosts. */

@@ -17,10 +17,20 @@
 	uint64_t limine_requests_end_marker[2] = {0xadc0e0531bb10d03,              \
 											  0x9572709f31764c62};
 
+static volatile struct limine_memmap_request memmap_request = {
+	.id = LIMINE_MEMMAP_REQUEST, .revision = 0};
+
 extern void panic(cpu_state_t *state);
 
 void kmain(void)
 {
+	if (memmap_request.response == NULL)
+	{
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+	}
+
 	debug_limine_requests();
 	uint64_t limine_base_revision[3];
 	// Ensure the bootloader actually understands our base revision (see spec).
