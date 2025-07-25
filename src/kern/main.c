@@ -1,12 +1,10 @@
 #include "../include/system.h"
 #include "cpu/access.h"
-#include "cpu/cpuid.h"
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
 #include "cpu/pic.h"
 #include "gpu/fb/fb.h"
 #include "mem/paging/paging.h"
-#include "serial/serial.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -24,8 +22,6 @@ extern void panic(cpu_state_t *state);
 void kmain(void)
 {
 	debug_limine_requests();
-	serial_printf("CPU Model: %d", get_model());
-	serial_write("\n");
 	uint64_t limine_base_revision[3];
 	// Ensure the bootloader actually understands our base revision (see spec).
 	if (limine_base_revision[2] != 0)

@@ -44,6 +44,17 @@ void verify_limine_support()
 		serial_write("No framebuffers available.\n");
 		return;
 	}
+
+	struct limine_framebuffer *framebuffer =
+		framebuffer_request.response->framebuffers[0];
+	serial_write("Framebuffer initialized.\n");
+	serial_write("Width: ");
+	serial_write_dec(framebuffer->width);
+	serial_write("\nHeight: ");
+	serial_write_dec(framebuffer->height);
+	serial_write("\nPitch: ");
+	serial_write_dec(framebuffer->pitch);
+	serial_write("\n");
 }
 
 // Function to initialize the framebuffer (e.g., clear screen)

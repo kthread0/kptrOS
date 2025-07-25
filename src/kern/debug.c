@@ -13,6 +13,8 @@ volatile struct limine_smbios_request smbios_request
 
 void debug_limine_requests()
 {
+	serial_write("Debugging Limine Requests...\n");
+
 	// Kernel address request
 	if (executable_address_request.response == NULL)
 	{
@@ -32,4 +34,6 @@ void debug_limine_requests()
 	{
 		serial_write("SMBIOS request succeeded.\n");
 	}
+
+	serial_write("Limine Requests Debug Complete.\n");
 }
