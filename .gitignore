@@ -60,3 +60,4 @@ bin
 limine
 
 .cache/
+*.idx
