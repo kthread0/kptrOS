@@ -3,12 +3,13 @@
 #include <stddef.h>
 #include <stdint.h>
 
-typedef struct {
-		uint64_t rip; // Instruction pointer
-		uint64_t rsp; // Stack pointer
-		uint64_t rbp; // Base pointer
-		uint64_t rflags;
-		uint64_t registers[16]; // General-purpose registers
+typedef struct
+{
+	uint64_t rip; // Instruction pointer
+	uint64_t rsp; // Stack pointer
+	uint64_t rbp; // Base pointer
+	uint64_t rflags;
+	uint64_t registers[16]; // General-purpose registers
 } cpu_state_t;
 
 void enable_cursor(uint8_t, uint8_t);

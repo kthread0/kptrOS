@@ -10,22 +10,27 @@ volatile struct limine_framebuffer_request framebuffer_request = {
 	.id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0};
 
 // Function to check framebuffer availability
-bool fb_avail() {
+bool fb_avail()
+{
 	return framebuffer_request.response != NULL &&
 		   framebuffer_request.response->framebuffer_count > 0;
 }
 
 // Function to get the first framebuffer
-struct limine_framebuffer *get_framebuffer() {
-	if (!fb_avail()) {
+struct limine_framebuffer *get_framebuffer()
+{
+	if (!fb_avail())
+	{
 		return NULL;
 	}
 	return framebuffer_request.response->framebuffers[0];
 }
 
 // Verify Limine's protocol support and framebuffer initialization
-void verify_limine_support() {
-	if (framebuffer_request.response == NULL) {
+void verify_limine_support()
+{
+	if (framebuffer_request.response == NULL)
+	{
 		serial_write("Limine framebuffer request failed.\n");
 		serial_write("Possible causes:\n");
 		serial_write("- Limine is not providing a framebuffer.\n");
@@ -34,23 +39,27 @@ void verify_limine_support() {
 		return;
 	}
 
-	if (framebuffer_request.response->framebuffer_count < 1) {
+	if (framebuffer_request.response->framebuffer_count < 1)
+	{
 		serial_write("No framebuffers available.\n");
 		return;
 	}
 }
 
 // Function to initialize the framebuffer (e.g., clear screen)
-void fb_init() {
+void fb_init()
+{
 	verify_limine_support();
-	if (framebuffer_request.response == NULL) {
+	if (framebuffer_request.response == NULL)
+	{
 		serial_write("Framebuffer request response is NULL.\n");
 		cpu_state_t state;
 		capture_cpu_state(&state);
 		panic(&state);
 	}
 
-	if (framebuffer_request.response->framebuffer_count < 1) {
+	if (framebuffer_request.response->framebuffer_count < 1)
+	{
 		serial_write("No framebuffers provided by bootloader.\n");
 		cpu_state_t state;
 		capture_cpu_state(&state);
@@ -70,7 +79,8 @@ void fb_init() {
 
 	// Clear the screen
 	volatile uint32_t *fb_ptr = framebuffer->address;
-	for (size_t i = 0; i < framebuffer->width * framebuffer->height; i++) {
+	for (size_t i = 0; i < framebuffer->width * framebuffer->height; i++)
+	{
 		fb_ptr[i] = 0x000000; // Black color
 	}
 }

@@ -11,18 +11,25 @@ volatile struct limine_executable_address_request executable_address_request
 volatile struct limine_smbios_request smbios_request
 	__attribute__((aligned(8))) = {.id = LIMINE_SMBIOS_REQUEST, .revision = 0};
 
-void debug_limine_requests() {
+void debug_limine_requests()
+{
 	// Kernel address request
-	if (executable_address_request.response == NULL) {
+	if (executable_address_request.response == NULL)
+	{
 		serial_write("Kernel address request failed: response is NULL.\n");
-	} else {
+	}
+	else
+	{
 		serial_write("Kernel address request succeeded.\n");
 	}
 
 	// SMBIOS request
-	if (smbios_request.response == NULL) {
+	if (smbios_request.response == NULL)
+	{
 		serial_write("SMBIOS request failed: response is NULL.\n");
-	} else {
+	}
+	else
+	{
 		serial_write("SMBIOS request succeeded.\n");
 	}
 }

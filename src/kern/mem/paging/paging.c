@@ -4,10 +4,12 @@
 uint32_t page_directory[1024] __attribute__((aligned(4096)));
 uint32_t page_table[1024] __attribute__((aligned(4096)));
 
-void page(unsigned int *) {
+void page(unsigned int *)
+{
 	// set each entry to not present
 	int i = 0;
-	for (i = 0; i < 1024; i++) {
+	for (i = 0; i < 1024; i++)
+	{
 		// This sets the following flags to the pages:
 		//   Supervisor: Only kernel-mode can access them
 		//   Write Enabled: It can be both read from and written to
@@ -16,7 +18,8 @@ void page(unsigned int *) {
 	}
 
 	// we will fill all 1024 entries in the table, mapping 4 megabytes
-	for (i = 0; i < 1024; i++) {
+	for (i = 0; i < 1024; i++)
+	{
 		// As the address is page aligned, it will always leave 12 bits zeroed.
 		// Those bits are used by the attributes ;)
 		page_table[i] = (i * 0x1000) |

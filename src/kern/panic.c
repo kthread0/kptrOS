@@ -2,7 +2,8 @@
 #include "../kern/serial/serial.h"
 
 // Function to capture CPU state
-void capture_cpu_state(cpu_state_t *state) {
+void capture_cpu_state(cpu_state_t *state)
+{
 	__asm__ volatile(
 		"lea (%%rip), %0\n" // Load the address of the next instruction into RIP
 		"mov %%rsp, %1\n"	// Move stack pointer into RSP
@@ -15,7 +16,8 @@ void capture_cpu_state(cpu_state_t *state) {
 		: "memory");
 }
 
-void coredump(cpu_state_t *state) {
+void coredump(cpu_state_t *state)
+{
 	serial_write("\n--- CORE DUMP ---\n");
 
 	serial_write("RIP: ");
@@ -34,7 +36,8 @@ void coredump(cpu_state_t *state) {
 	serial_write_hex(state->rflags);
 	serial_write("\n");
 
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 16; i++)
+	{
 		serial_write("REG[");
 		serial_write_dec(i);
 		serial_write("]: ");
@@ -45,7 +48,8 @@ void coredump(cpu_state_t *state) {
 	serial_write("--- END CORE DUMP ---\n");
 }
 
-void panic(cpu_state_t *state) {
+void panic(cpu_state_t *state)
+{
 	serial_write("\n*** KERNEL PANIC ***\n");
 	serial_write("System halted due to critical error.\n");
 
@@ -53,7 +57,8 @@ void panic(cpu_state_t *state) {
 	coredump(state);
 
 	// Halt the CPU
-	for (;;) {
+	for (;;)
+	{
 		asm("hlt");
 	}
 }

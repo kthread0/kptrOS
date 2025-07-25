@@ -36,7 +36,8 @@
 #define CPUID_VENDOR_ROSETTA_2 "VirtualApple"
 #define CPUID_VENDOR_NEKO_PROJECT "Neko Project"
 
-enum {
+enum
+{
 	CPUID_FEAT_ECX_SSE3 = 1 << 0,
 	CPUID_FEAT_ECX_PCLMUL = 1 << 1,
 	CPUID_FEAT_ECX_DTES64 = 1 << 2,
