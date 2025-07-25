@@ -59,4 +59,4 @@ obj
 bin
 limine
 
-.cache
+.cache/
