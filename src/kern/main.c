@@ -1,4 +1,3 @@
-#include "../include/limine.h"
 #include "../include/system.h"
 #include "cpu/access.h"
 #include "cpu/cpuid.h"
@@ -20,20 +19,17 @@
 	uint64_t limine_requests_end_marker[2] = {0xadc0e0531bb10d03,              \
 											  0x9572709f31764c62};
 
-// Limine Base Revision Macro
-#define LIMINE_BASE_REVISION(N)                                                \
-	extern uint64_t limine_base_revision[3] = {0xf9562b2d5c95a6c8,             \
-											   0x6a7b384944536bdc, (3)};
-
 extern void panic(cpu_state_t *state);
 
-void kmain(void) {
+void kmain(void)
+{
 	debug_limine_requests();
 	serial_printf("CPU Model: %d", get_model());
 	serial_write("\n");
 	uint64_t limine_base_revision[3];
 	// Ensure the bootloader actually understands our base revision (see spec).
-	if (limine_base_revision[2] != 0) {
+	if (limine_base_revision[2] != 0)
+	{
 		cpu_state_t state;
 		capture_cpu_state(&state);
 		panic(&state);
