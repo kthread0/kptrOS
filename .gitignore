@@ -58,3 +58,5 @@ iso_root
 obj
 bin
 limine
+
+.cache
