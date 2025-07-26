@@ -35,7 +35,7 @@ void fbinit()
 		framebuffer->blue_mask_shift, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 		NULL, 0, 0, 1, 0, 0, 0);
 
-	const char msg[] = "Hello world\n";
+	const char msg[] = "Hello from the framebuffer!\n";
 
 	flanterm_write(ft_ctx, msg, sizeof(msg));
 }

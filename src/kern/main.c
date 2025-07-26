@@ -29,11 +29,10 @@ void kmain(void)
 		serial_write("IDT Initialized!\n");
 	}
 
-	int i = 0;
+	fbinit();
+	serial_printf("Hello from Serial Console!\n");
 
 	for (;;)
 	{
-		i++;
-		serial_printf("Cycle: %d\n", i);
 	}
 }
