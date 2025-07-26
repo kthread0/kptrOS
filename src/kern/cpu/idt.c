@@ -40,7 +40,7 @@ void exception_handler(uint64_t vector, uint64_t error_code)
 	panic(&state);
 }
 
-void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags)
+void idt_set_descriptor(uint64_t vector, void *isr, uint8_t flags)
 {
 	idt_entry_t *descriptor = &idt[vector];
 	uintptr_t isr_addr = (uintptr_t)isr;

@@ -34,4 +34,7 @@ void kmain(void)
 	fb_init();
 
 	serial_write("Started!\n");
+	for (;;)
+	{
+	}
 }

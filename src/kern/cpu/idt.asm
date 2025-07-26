@@ -16,7 +16,8 @@ isr_stub_%+%1:
     push r14
     push r15
     pushfq             ; Save flags
-    push qword [rsp + 8] ; Push error code
+    mov rdi, %1        ; Pass interrupt vector as first argument
+    mov rsi, [rsp + 8] ; Pass error code as second argument
     call exception_handler
     add rsp, 8         ; Remove error code from stack
     popfq              ; Restore flags
@@ -56,6 +57,8 @@ isr_stub_%+%1:
     push r14
     push r15
     pushfq             ; Save flags
+    mov rdi, %1        ; Pass interrupt vector as first argument
+    xor rsi, rsi       ; Pass 0 as second argument (no error code)
     call exception_handler
     popfq              ; Restore flags
     pop r15
