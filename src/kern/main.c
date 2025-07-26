@@ -2,9 +2,8 @@
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
 #include "cpu/pic.h"
-#include "gpu/fb/fb.h"
 #include "mem/paging/paging.h"
-#include "mem/pmm.h"
+#include <limine.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <system.h>
@@ -31,10 +30,8 @@ void kmain(void)
 		serial_write("IDT Initialized!\n");
 	}
 
-	fb_init();
-
-	serial_write("Started!\n");
 	for (;;)
 	{
+		serial_write("Started!\n");
 	}
 }

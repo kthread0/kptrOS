@@ -7,9 +7,6 @@
 #include <uacpi/kernel_api.h>
 #include <uacpi/types.h>
 
-static struct limine_rsdp_request rsdp_request
-	__attribute__((aligned(8))) = {.id = LIMINE_RSDP_REQUEST, .revision = 0};
-
 // Memory allocation
 
 void *uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len)

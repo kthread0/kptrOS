@@ -32,13 +32,13 @@ ifeq ($(TOOLCHAIN),llvm)
 endif
 
 #User controllable C flags.
-CFLAGS := -g -O2 -pipe
+CFLAGS := -g3 -ggdb3 -O2 -pipe
 
 #User controllable C preprocessor flags.We set none by default.
 CPPFLAGS :=
 
 #User controllable nasm flags.
-NASMFLAGS := -F dwarf -g
+ASMFLAGS := -F dwarf -g -O2
 
 #User controllable linker flags.We set none by default.
 LDFLAGS :=
@@ -83,9 +83,9 @@ override CPPFLAGS := \
     -MP
 
 #Internal nasm flags that should not be changed by the user.
-override NASMFLAGS := \
+override ASMFLAGS := \
     -f elf64 \
-    $(NASMFLAGS) \
+    $(ASMFLAGS) \
     -Wall
 
 #Internal linker flags that should not be changed by the user.
@@ -130,7 +130,7 @@ obj/%.S.o: %.S GNUmakefile
 #Compilation rules for *.asm(nasm) files.
 obj/%.asm.o: %.asm GNUmakefile
 	mkdir -p "$$(dirname $@)"
-	nasm $(NASMFLAGS) $< -o $@
+	nasm $(ASMFLAGS) $< -o $@
 
 #Remove object files and the final executable.
 .PHONY: clean
