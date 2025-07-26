@@ -33,7 +33,7 @@ void debug_limine_requests()
 	}
 	else
 	{
-		serial_printf("SMBIOS: %s\n", smbios_request.response->entry_32);
+		serial_printf("SMBIOS: %x\n", smbios_request.response->entry_64);
 	}
 
 	serial_printf("Limine Requests Debug Complete.\n");
