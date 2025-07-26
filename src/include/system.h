@@ -48,31 +48,4 @@ void *memmove(void *, const void *, size_t);
 void *memset(void *, int, size_t);
 void debug_limine_requests();
 void debug();
-
-// Memory map request
-static volatile struct limine_memmap_request memmap_request = {
-	.id = LIMINE_MEMMAP_REQUEST, .revision = 0};
-
-// Entry point request
-static volatile struct limine_executable_address_request
-	executable_address_request __attribute__((aligned(8))) = {
-		.id = LIMINE_EXECUTABLE_ADDRESS_REQUEST, .revision = 0};
-
-// SMBIOS request
-static volatile struct limine_smbios_request smbios_request
-	__attribute__((aligned(8))) = {.id = LIMINE_SMBIOS_REQUEST, .revision = 0};
-
-static volatile struct limine_rsdp_request rsdp_request
-	__attribute__((aligned(8))) = {.id = LIMINE_RSDP_REQUEST, .revision = 0};
-
-// Paging mode request for 4-level paging
-static volatile struct limine_paging_mode_request paging_mode_request = {
-	.id = LIMINE_PAGING_MODE_REQUEST,
-	.revision = 0,
-	.mode = LIMINE_PAGING_MODE_X86_64_4LVL,
-	.max_mode = LIMINE_PAGING_MODE_X86_64_4LVL,
-	.min_mode = LIMINE_PAGING_MODE_X86_64_4LVL};
-
-// Framebuffer request
-static volatile struct limine_framebuffer_request limine_framebuffer = {
-	.id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0};
+void fbinit();

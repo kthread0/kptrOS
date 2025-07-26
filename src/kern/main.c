@@ -12,11 +12,10 @@ extern void panic(cpu_state_t *state);
 
 void kmain(void)
 {
+
 	gdt_init();
 	serial_write("GDT Initialized!\n");
 	idt_init();
-	serial_write("IDT Initialized!\n");
-
 	debug_limine_requests();
 
 	if (are_interrupts_enabled() == false)
@@ -30,8 +29,11 @@ void kmain(void)
 		serial_write("IDT Initialized!\n");
 	}
 
+	int i = 0;
+
 	for (;;)
 	{
-		serial_write("Started!\n");
+		i++;
+		serial_printf("Cycle: %d\n", i);
 	}
 }

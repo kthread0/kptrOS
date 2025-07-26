@@ -3,6 +3,10 @@
 #include <flanterm/flanterm.h>
 #include <system.h>
 
+// Framebuffer request
+static volatile struct limine_framebuffer_request limine_framebuffer = {
+	.id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0};
+
 void fbinit()
 {
 	if (limine_framebuffer.response == NULL ||
@@ -21,7 +25,7 @@ void fbinit()
 	}
 
 	struct limine_framebuffer *framebuffer =
-		limine_framebuffer.response->framebuffers[8];
+		limine_framebuffer.response->framebuffers[0];
 
 	struct flanterm_context *ft_ctx = flanterm_fb_init(
 		NULL, NULL, framebuffer->address, framebuffer->width,
@@ -30,4 +34,8 @@ void fbinit()
 		framebuffer->green_mask_shift, framebuffer->blue_mask_size,
 		framebuffer->blue_mask_shift, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 		NULL, 0, 0, 1, 0, 0, 0);
+
+	const char msg[] = "Hello world\n";
+
+	flanterm_write(ft_ctx, msg, sizeof(msg));
 }

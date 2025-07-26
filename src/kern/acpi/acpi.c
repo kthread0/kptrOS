@@ -2,12 +2,15 @@
 #include "kern/mem/pmm.h"
 #include "uacpi/platform/types.h"
 #include "uacpi/status.h"
-#include <include/system.h>
 #include <limine.h>
+#include <system.h>
 #include <uacpi/kernel_api.h>
 #include <uacpi/types.h>
 
 // Memory allocation
+
+static volatile struct limine_rsdp_request rsdp_request
+	__attribute__((aligned(8))) = {.id = LIMINE_RSDP_REQUEST, .revision = 0};
 
 void *uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len)
 {
