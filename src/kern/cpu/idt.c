@@ -1,8 +1,9 @@
 #include "idt.h"
 #include <limine.h>
 #include <stdbool.h>
+#include <system.h>
 
-#define KERNEL_CS 0x08
+#define KERNEL_CS 0x1000
 #define IDT_MAX_DESCRIPTORS 256
 
 typedef struct
@@ -31,9 +32,12 @@ __attribute__((aligned(0x10))) static idt_entry_t
 	idt[IDT_MAX_DESCRIPTORS]; // Create an array of IDT entries; aligned for
 							  // performance
 
-void exception_handler(void)
+void exception_handler(uint64_t vector, uint64_t error_code)
 {
-	__asm__ volatile("cli; hlt"); // Completely hangs the computer
+	serial_printf("Exception: Vector=%d, Error Code=%x\n", vector, error_code);
+	cpu_state_t state;
+	capture_cpu_state(&state);
+	panic(&state);
 }
 
 void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags)
@@ -61,7 +65,7 @@ void idt_init()
 
 	for (uint16_t vector = 0; vector < IDT_MAX_DESCRIPTORS; vector++)
 	{
-		// idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
+		idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
 		vectors[vector] = true;
 	}
 

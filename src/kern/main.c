@@ -13,20 +13,12 @@ extern void panic(cpu_state_t *state);
 
 void kmain(void)
 {
-	debug_limine_requests();
-	uint64_t limine_base_revision[3];
-	// Ensure the bootloader actually understands our base revision (see spec).
-	if (limine_base_revision[2] != 0)
-	{
-		cpu_state_t state;
-		capture_cpu_state(&state);
-		panic(&state);
-	}
-
 	gdt_init();
 	serial_write("GDT Initialized!\n");
-
 	idt_init();
+	serial_write("IDT Initialized!\n");
+
+	debug_limine_requests();
 
 	if (are_interrupts_enabled() == false)
 	{
