@@ -47,12 +47,6 @@ static inline void irqrestore(unsigned long flags)
 	asm("push %0\n\tpopf" : : "rm"(flags) : "memory", "cc");
 }
 
-static void intended_usage(void)
-{
-	unsigned long f = save_irqdisable();
-	irqrestore(f);
-}
-
 static inline void lidt(void *base, uint16_t size)
 {
 	// This function works in 32 and 64bit mode

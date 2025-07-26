@@ -2,6 +2,8 @@
 #include "stdio.h"
 #include <stddef.h>
 #include <stdint.h>
+#include <uacpi/helpers.h>
+#include <uacpi/kernel_api.h>
 
 typedef struct
 {

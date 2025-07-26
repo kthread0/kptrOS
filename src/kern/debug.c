@@ -16,6 +16,9 @@ volatile struct limine_executable_address_request executable_address_request
 volatile struct limine_smbios_request smbios_request
 	__attribute__((aligned(8))) = {.id = LIMINE_SMBIOS_REQUEST, .revision = 0};
 
+volatile struct limine_rsdp_request rsdp_request
+	__attribute__((aligned(8))) = {.id = LIMINE_RSDP_REQUEST, .revision = 0};
+
 // Paging mode request for 4-level paging
 static volatile struct limine_paging_mode_request paging_mode_request = {
 	.id = LIMINE_PAGING_MODE_REQUEST,
