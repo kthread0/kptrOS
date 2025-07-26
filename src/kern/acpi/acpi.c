@@ -14,7 +14,7 @@ static struct limine_rsdp_request rsdp_request
 
 void *uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len)
 {
-	return pmm_alloc(len); // Replace with your kernel malloc
+	return pmm_alloc(len);
 }
 void uacpi_kernel_unmap(void *addr, uacpi_size len)
 {
@@ -22,7 +22,7 @@ void uacpi_kernel_unmap(void *addr, uacpi_size len)
 }
 void *uacpi_kernel_alloc(uacpi_phys_addr addr)
 {
-	return pmm_alloc(addr); // Replace with your kernel malloc
+	return pmm_alloc(addr);
 }
 void uacpi_kernel_free(void *addr)
 {
@@ -31,7 +31,7 @@ void uacpi_kernel_free(void *addr)
 void uacpi_kernel_log(uacpi_log_level level, const char *fmt)
 {
 	va_list args;
-	serial_printf(fmt); // Replace with your kernel's printf/log system
+	serial_printf(fmt);
 	va_end(args);
 }
 
