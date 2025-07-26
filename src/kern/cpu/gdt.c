@@ -65,7 +65,7 @@ void create_descriptor(uint32_t base, uint32_t limit, uint16_t flag)
 	descriptor |= base << 16;		  // set base bits 15:0
 	descriptor |= limit & 0x0000FFFF; // set limit bits 15:0
 
-	serial_write("Descriptor created\n");
+	serial_printf("Descriptor %x\n", &descriptor);
 }
 
 int gdt_init(void)

@@ -1,6 +1,5 @@
 #include <stdint.h>
 
-extern void loadPageDirectory(unsigned int *);
-extern void enablePaging();
-extern uint32_t page_directory[1024] __attribute__((aligned(4096)));
-extern uint32_t page_table[1024] __attribute__((aligned(4096)));
+extern void load_page(unsigned int *);
+extern uint64_t page_directory[512] __attribute__((aligned(0x1000)));
+extern uint64_t page_table[512] __attribute__((aligned(0x1000)));

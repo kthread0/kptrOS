@@ -12,7 +12,7 @@ int get_model(void)
 /* Example: Check for builtin local APIC. */
 int check_apic(void)
 {
-	unsigned int eax, unused, edx;
+	unsigned int eax, unused, edx = 0;
 	__get_cpuid(1, &eax, &unused, &unused, &edx);
 	return edx & CPUID_FEAT_EDX_APIC;
 }

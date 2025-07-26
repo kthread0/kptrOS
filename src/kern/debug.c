@@ -13,27 +13,28 @@ volatile struct limine_smbios_request smbios_request
 
 void debug_limine_requests()
 {
-	serial_write("Debugging Limine Requests...\n");
+	serial_printf("Debugging Limine Requests...\n");
 
 	// Kernel address request
 	if (executable_address_request.response == NULL)
 	{
-		serial_write("Kernel address request failed: response is NULL.\n");
+		serial_printf("Kernel address request failed: response is NULL.\n");
 	}
 	else
 	{
-		serial_write("Kernel address request succeeded.\n");
+		serial_printf("Kernel address: %x\n",
+					  executable_address_request.response->virtual_base);
 	}
 
 	// SMBIOS request
 	if (smbios_request.response == NULL)
 	{
-		serial_write("SMBIOS request failed: response is NULL.\n");
+		serial_printf("SMBIOS request failed: response is NULL.\n");
 	}
 	else
 	{
-		serial_write("SMBIOS request succeeded.\n");
+		serial_printf("SMBIOS: %s\n", smbios_request.response->entry_32);
 	}
 
-	serial_write("Limine Requests Debug Complete.\n");
+	serial_printf("Limine Requests Debug Complete.\n");
 }

@@ -32,7 +32,7 @@ ifeq ($(TOOLCHAIN),llvm)
 endif
 
 #User controllable C flags.
-CFLAGS := -g -O0 -pipe
+CFLAGS := -g -O2 -pipe
 
 #User controllable C preprocessor flags.We set none by default.
 CPPFLAGS :=
@@ -55,6 +55,7 @@ endif
 #Internal C flags that should not be changed by the user.
 override CFLAGS += \
     -Wall \
+    -Wpedantic \
     -Wextra \
     -std=gnu23 \
     -ffreestanding \
@@ -93,7 +94,7 @@ override LDFLAGS += \
     -nostdlib \
     -static \
     -z max-page-size=0x1000 \
-    -T linker.lds \
+    -T linker.lds
 
 #Use "find" to glob all *.c, *.S, and*.asm files in the tree and obtain the
 #object and header dependency file names.

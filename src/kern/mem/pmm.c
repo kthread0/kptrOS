@@ -1,4 +1,5 @@
 #include "pmm.h"
+#include "limine.h"
 #include <stddef.h> // for NULL
 
 extern char _kernel_start[], _kernel_end[];
@@ -51,7 +52,7 @@ void pmm_init(struct limine_memmap_response *memmap)
 			entry->length >= metadata_size)
 		{
 			page_metadata = (struct page *)entry->base;
-			metadata_region = entry;
+			entry = metadata_region;
 			break;
 		}
 	}
