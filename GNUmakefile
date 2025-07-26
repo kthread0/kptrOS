@@ -55,8 +55,6 @@ endif
 #Internal C flags that should not be changed by the user.
 override CFLAGS += \
     -Wall \
-    -Wpedantic \
-    -Wextra \
     -std=gnu23 \
     -ffreestanding \
     -fno-stack-protector \
