@@ -75,41 +75,76 @@ static const scancode_entry_t us_qwerty[] = {
 
 static keyboard_state_t kbd_state = {false, false, false, false, false};
 
+static void kbd_wait_input(void)
+{
+	while (inb(KEYBOARD_STATUS_PORT) & 0x2)
+	{
+		// Do nothing, just wait
+	}
+}
+
+static void kbd_wait_output(void)
+{
+	while (!(inb(KEYBOARD_STATUS_PORT) & 0x1))
+	{
+		// Do nothing, just wait
+	}
+}
+
 void keyboard_init(void)
 {
-	// Test the controller first
-	keyboard_test_controller();
+	serial_write("Initializing keyboard...\n");
 
-	// Disable keyboard
-	outb(0x64, 0xAD);
-	io_wait();
+	// --- Step 1: Disable the PS/2 devices ---
+	kbd_wait_input();
+	outb(KEYBOARD_STATUS_PORT, 0xAD); // Disable first PS/2 port (keyboard)
+	kbd_wait_input();
+	outb(KEYBOARD_STATUS_PORT, 0xA7); // Disable second PS/2 port (mouse)
 
-	// Flush the output buffer
-	while (inb(0x64) & 0x01)
+	// --- Step 2: Flush the output buffer ---
+	// It's possible there's leftover data from the BIOS
+	while (inb(KEYBOARD_STATUS_PORT) & 0x1)
 	{
-		inb(0x60);
+		inb(KEYBOARD_DATA_PORT);
 	}
 
-	// Enable keyboard
-	outb(0x64, 0xAE);
-	io_wait();
+	// --- Step 3: Set the controller configuration byte ---
+	kbd_wait_input();
+	outb(KEYBOARD_STATUS_PORT, 0x20); // Command to read config byte
+	kbd_wait_output();
+	uint8_t config = inb(KEYBOARD_DATA_PORT);
 
-	// Reset keyboard
-	outb(0x60, 0xFF);
-	io_wait();
+	// --- Step 4: Modify and write the new config byte ---
+	// Bit 0: Enable interrupt for keyboard (port 1)
+	// Bit 1: Enable interrupt for mouse (port 2) - we'll leave it disabled for
+	// now Bit 6: Enable translation to scancode set 1
+	config |= 1;	// Enable keyboard interrupt
+	config &= ~0x2; // Disable mouse interrupt
+	config |= 0x40; // Enable translation
 
-	// Wait for ACK
-	while (!(inb(0x64) & 0x01))
-		;
-	uint8_t ack = inb(0x60);
-	serial_printf("Keyboard reset ACK: %x\n", ack);
+	kbd_wait_input();
+	outb(KEYBOARD_STATUS_PORT, 0x60); // Command to write config byte
+	kbd_wait_input();
+	outb(KEYBOARD_DATA_PORT, config);
 
-	// Unmask IRQ1 in PIC
-	uint8_t mask = inb(PIC1_DATA);
-	mask &= ~(1 << 1);
-	outb(PIC1_DATA, mask);
+	// --- Step 5: Controller Self-Test ---
+	kbd_wait_input();
+	outb(KEYBOARD_STATUS_PORT, 0xAA); // Command to perform self-test
+	kbd_wait_output();
+	if (inb(KEYBOARD_DATA_PORT) != 0x55)
+	{
+		serial_write("Keyboard controller self-test failed!\n");
+		return;
+	}
 
-	serial_write("Keyboard initialized successfully\n");
+	// --- Step 6: Enable the keyboard ---
+	kbd_wait_input();
+	outb(KEYBOARD_STATUS_PORT, 0xAE); // Enable first PS/2 port (keyboard)
+
+	// --- Step 7: Unmask the keyboard IRQ in the PIC ---
+	pic_unmask_irq(KEYBOARD_IRQ);
+
+	serial_write("Keyboard initialized successfully.\n");
 }
 
 void keyboard_interrupt_handler(void)
