@@ -1,2 +1,2 @@
-bool check_fb(void);
-void fbinit(void);
+bool check_fb (void);
+void fbinit (void);

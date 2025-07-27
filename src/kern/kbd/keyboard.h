@@ -78,7 +78,7 @@
 #define SCANCODE_K 0x25
 #define SCANCODE_L 0x26
 #define SCANCODE_SEMICOLON 0x27 // ;:
-#define SCANCODE_QUOTE 0x28		// '"
+#define SCANCODE_QUOTE 0x28			// '"
 
 // ZXCV row
 #define SCANCODE_Z 0x2C
@@ -119,10 +119,10 @@ typedef struct
 } keyboard_state_t;
 
 // Function declarations
-void keyboard_init(void);
-void keyboard_interrupt_handler(void);
-char scancode_to_ascii(uint8_t scancode);
-keyboard_state_t *get_keyboard_state(void);
-void keyboard_test_controller(void);
+void keyboard_init (void);
+void keyboard_interrupt_handler (void);
+char scancode_to_ascii (uint8_t scancode);
+keyboard_state_t *get_keyboard_state (void);
+void keyboard_test_controller (void);
 
 #endif // KEYBOARD_H

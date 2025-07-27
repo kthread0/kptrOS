@@ -1,2 +1,3 @@
-# kptrOS
-Hobbyist Operating System (UEFI only)
+#kptrOS
+Hobbyist Operating
+System (UEFI only)

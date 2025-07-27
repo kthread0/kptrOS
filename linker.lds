@@ -71,4 +71,3 @@ SECTIONS
         *(.note .note.*)
     }
 }
-

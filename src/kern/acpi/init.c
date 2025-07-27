@@ -16,7 +16,8 @@
 #include "../serial/serial.h"
 #include "uacpi/platform/config.h"
 
-int acpi_init(void)
+int
+acpi_init (void)
 {
 	/*
 	 * Start with this as the first step of the initialization. This loads all
@@ -25,14 +26,14 @@ int acpi_init(void)
 	 * now.
 	 */
 	void *tmp = 0;
-	uacpi_status ret =
-		uacpi_setup_early_table_access(&tmp, UACPI_STATIC_TABLE_ARRAY_LEN);
-	if (uacpi_unlikely_error(ret))
-	{
-		serial_printf("uacpi_initialize error: %s",
-					  uacpi_status_to_string(ret));
-		return -1;
-	}
+	uacpi_status ret
+			= uacpi_setup_early_table_access (&tmp, UACPI_STATIC_TABLE_ARRAY_LEN);
+	if (uacpi_unlikely_error (ret))
+		{
+			serial_printf ("uacpi_initialize error: %s",
+										 uacpi_status_to_string (ret));
+			return -1;
+		}
 	/*
 	 * That's it, uACPI is now fully initialized and working! You can proceed to
 	 * using any public API at your discretion. The next recommended step is

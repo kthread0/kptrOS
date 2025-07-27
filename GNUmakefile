@@ -70,7 +70,7 @@ override CFLAGS += \
     -mno-red-zone \
     -mcmodel=large \
     -Isrc/include \
-    -Isrc/include/acpi 
+    -Isrc/include/acpi
 
 #Internal C preprocessor flags that should not be changed by the user.
 override CPPFLAGS := \

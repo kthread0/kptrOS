@@ -30,15 +30,15 @@
 // --- Function Prototypes ---
 
 // Disables the PICs by masking all IRQs.
-void pic_disable(void);
+void pic_disable (void);
 
 // Remaps the PIC controllers to the specified vector offsets.
-void pic_remap(void);
+void pic_remap (void);
 
 // Sends the End-of-Interrupt signal to the appropriate PIC.
-void pic_send_eoi(uint8_t irq);
+void pic_send_eoi (uint8_t irq);
 
 // Unmasks (enables) a given IRQ line.
-void pic_unmask_irq(uint8_t irq);
+void pic_unmask_irq (uint8_t irq);
 
 #endif // KERN_CPU_PIC_H

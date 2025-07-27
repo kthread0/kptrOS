@@ -1,22 +1,8 @@
 Language: Cpp
-BasedOnStyle: LLVM
+BasedOnStyle: GNU
 
 # Indentation
-IndentWidth: 4
-TabWidth: 4
+IndentWidth: 2
+TabWidth: 2
 UseTab: Always
-
-# Braces and Control Statements
-BreakBeforeBraces: Allman
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: None
-AllowShortBlocksOnASingleLine: false
-AllowShortCaseLabelsOnASingleLine: false
-
-# Other
-IndentCaseLabels: false
-ColumnLimit: 80
-AccessModifierOffset: -4
-AlignConsecutiveAssignments: false
-AlignConsecutiveDeclarations: false
+AccessModifierOffset: -2

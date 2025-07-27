@@ -1,1 +1,1 @@
-int acpi_init(void);
+int acpi_init (void);
