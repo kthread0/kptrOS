@@ -1,5 +1,5 @@
 Language: Cpp
-BasedOnStyle: GNU
+BasedOnStyle: Chromium
 
 # Indentation
 IndentWidth: 2
