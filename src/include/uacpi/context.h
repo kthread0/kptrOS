@@ -1,7 +1,7 @@
 #pragma once
 
-#include <uacpi/types.h>
 #include <uacpi/log.h>
+#include <uacpi/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,7 +46,7 @@ void uacpi_context_set_loop_timeout(uacpi_u32 seconds);
 void uacpi_context_set_max_call_stack_depth(uacpi_u32 depth);
 
 uacpi_u32 uacpi_context_get_loop_timeout(void);
-#endif // !UACPI_BAREBONES_MODE
+#endif	// !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <uacpi/types.h>
 #include <uacpi/status.h>
+#include <uacpi/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -10,30 +10,30 @@ extern "C" {
 #ifndef UACPI_BAREBONES_MODE
 
 typedef enum uacpi_vendor_interface {
-    UACPI_VENDOR_INTERFACE_NONE = 0,
-    UACPI_VENDOR_INTERFACE_WINDOWS_2000,
-    UACPI_VENDOR_INTERFACE_WINDOWS_XP,
-    UACPI_VENDOR_INTERFACE_WINDOWS_XP_SP1,
-    UACPI_VENDOR_INTERFACE_WINDOWS_SERVER_2003,
-    UACPI_VENDOR_INTERFACE_WINDOWS_XP_SP2,
-    UACPI_VENDOR_INTERFACE_WINDOWS_SERVER_2003_SP1,
-    UACPI_VENDOR_INTERFACE_WINDOWS_VISTA,
-    UACPI_VENDOR_INTERFACE_WINDOWS_SERVER_2008,
-    UACPI_VENDOR_INTERFACE_WINDOWS_VISTA_SP1,
-    UACPI_VENDOR_INTERFACE_WINDOWS_VISTA_SP2,
-    UACPI_VENDOR_INTERFACE_WINDOWS_7,
-    UACPI_VENDOR_INTERFACE_WINDOWS_8,
-    UACPI_VENDOR_INTERFACE_WINDOWS_8_1,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10_RS1,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10_RS2,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10_RS3,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10_RS4,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10_RS5,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10_19H1,
-    UACPI_VENDOR_INTERFACE_WINDOWS_10_20H1,
-    UACPI_VENDOR_INTERFACE_WINDOWS_11,
-    UACPI_VENDOR_INTERFACE_WINDOWS_11_22H2,
+	UACPI_VENDOR_INTERFACE_NONE = 0,
+	UACPI_VENDOR_INTERFACE_WINDOWS_2000,
+	UACPI_VENDOR_INTERFACE_WINDOWS_XP,
+	UACPI_VENDOR_INTERFACE_WINDOWS_XP_SP1,
+	UACPI_VENDOR_INTERFACE_WINDOWS_SERVER_2003,
+	UACPI_VENDOR_INTERFACE_WINDOWS_XP_SP2,
+	UACPI_VENDOR_INTERFACE_WINDOWS_SERVER_2003_SP1,
+	UACPI_VENDOR_INTERFACE_WINDOWS_VISTA,
+	UACPI_VENDOR_INTERFACE_WINDOWS_SERVER_2008,
+	UACPI_VENDOR_INTERFACE_WINDOWS_VISTA_SP1,
+	UACPI_VENDOR_INTERFACE_WINDOWS_VISTA_SP2,
+	UACPI_VENDOR_INTERFACE_WINDOWS_7,
+	UACPI_VENDOR_INTERFACE_WINDOWS_8,
+	UACPI_VENDOR_INTERFACE_WINDOWS_8_1,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10_RS1,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10_RS2,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10_RS3,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10_RS4,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10_RS5,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10_19H1,
+	UACPI_VENDOR_INTERFACE_WINDOWS_10_20H1,
+	UACPI_VENDOR_INTERFACE_WINDOWS_11,
+	UACPI_VENDOR_INTERFACE_WINDOWS_11_22H2,
 } uacpi_vendor_interface;
 
 /*
@@ -50,10 +50,10 @@ typedef enum uacpi_vendor_interface {
 uacpi_vendor_interface uacpi_latest_queried_vendor_interface(void);
 
 typedef enum uacpi_interface_kind {
-    UACPI_INTERFACE_KIND_VENDOR = (1 << 0),
-    UACPI_INTERFACE_KIND_FEATURE = (1 << 1),
-    UACPI_INTERFACE_KIND_ALL = UACPI_INTERFACE_KIND_VENDOR |
-                               UACPI_INTERFACE_KIND_FEATURE,
+	UACPI_INTERFACE_KIND_VENDOR = (1 << 0),
+	UACPI_INTERFACE_KIND_FEATURE = (1 << 1),
+	UACPI_INTERFACE_KIND_ALL =
+			UACPI_INTERFACE_KIND_VENDOR | UACPI_INTERFACE_KIND_FEATURE,
 } uacpi_interface_kind;
 
 /*
@@ -64,17 +64,16 @@ typedef enum uacpi_interface_kind {
  *
  * After installing an interface, all _OSI queries report it as supported.
  */
-uacpi_status uacpi_install_interface(
-    const uacpi_char *name, uacpi_interface_kind
-);
-uacpi_status uacpi_uninstall_interface(const uacpi_char *name);
+uacpi_status uacpi_install_interface(const uacpi_char* name,
+																		 uacpi_interface_kind);
+uacpi_status uacpi_uninstall_interface(const uacpi_char* name);
 
 typedef enum uacpi_host_interface {
-    UACPI_HOST_INTERFACE_MODULE_DEVICE = 1,
-    UACPI_HOST_INTERFACE_PROCESSOR_DEVICE,
-    UACPI_HOST_INTERFACE_3_0_THERMAL_MODEL,
-    UACPI_HOST_INTERFACE_3_0_SCP_EXTENSIONS,
-    UACPI_HOST_INTERFACE_PROCESSOR_AGGREGATOR_DEVICE,
+	UACPI_HOST_INTERFACE_MODULE_DEVICE = 1,
+	UACPI_HOST_INTERFACE_PROCESSOR_DEVICE,
+	UACPI_HOST_INTERFACE_3_0_THERMAL_MODEL,
+	UACPI_HOST_INTERFACE_3_0_SCP_EXTENSIONS,
+	UACPI_HOST_INTERFACE_PROCESSOR_AGGREGATOR_DEVICE,
 } uacpi_host_interface;
 
 /*
@@ -85,8 +84,8 @@ typedef enum uacpi_host_interface {
 uacpi_status uacpi_enable_host_interface(uacpi_host_interface);
 uacpi_status uacpi_disable_host_interface(uacpi_host_interface);
 
-typedef uacpi_bool (*uacpi_interface_handler)
-    (const uacpi_char *name, uacpi_bool supported);
+typedef uacpi_bool (*uacpi_interface_handler)(const uacpi_char* name,
+																							uacpi_bool supported);
 
 /*
  * Set a custom interface query (_OSI) handler.
@@ -100,8 +99,8 @@ typedef uacpi_bool (*uacpi_interface_handler)
 uacpi_status uacpi_set_interface_query_handler(uacpi_interface_handler);
 
 typedef enum uacpi_interface_action {
-    UACPI_INTERFACE_ACTION_DISABLE = 0,
-    UACPI_INTERFACE_ACTION_ENABLE,
+	UACPI_INTERFACE_ACTION_DISABLE = 0,
+	UACPI_INTERFACE_ACTION_ENABLE,
 } uacpi_interface_action;
 
 /*
@@ -114,11 +113,10 @@ typedef enum uacpi_interface_action {
  * By default, all vendor strings (like "Windows 2000") are enabled, and all
  * host features (like "3.0 Thermal Model") are disabled.
  */
-uacpi_status uacpi_bulk_configure_interfaces(
-    uacpi_interface_action action, uacpi_interface_kind kind
-);
+uacpi_status uacpi_bulk_configure_interfaces(uacpi_interface_action action,
+																						 uacpi_interface_kind kind);
 
-#endif // !UACPI_BAREBONES_MODE
+#endif	// !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

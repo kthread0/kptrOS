@@ -9,59 +9,59 @@ extern "C" {
 #ifndef UACPI_BAREBONES_MODE
 
 typedef enum uacpi_resource_type {
-    UACPI_RESOURCE_TYPE_IRQ,
-    UACPI_RESOURCE_TYPE_EXTENDED_IRQ,
+	UACPI_RESOURCE_TYPE_IRQ,
+	UACPI_RESOURCE_TYPE_EXTENDED_IRQ,
 
-    UACPI_RESOURCE_TYPE_DMA,
-    UACPI_RESOURCE_TYPE_FIXED_DMA,
+	UACPI_RESOURCE_TYPE_DMA,
+	UACPI_RESOURCE_TYPE_FIXED_DMA,
 
-    UACPI_RESOURCE_TYPE_IO,
-    UACPI_RESOURCE_TYPE_FIXED_IO,
+	UACPI_RESOURCE_TYPE_IO,
+	UACPI_RESOURCE_TYPE_FIXED_IO,
 
-    UACPI_RESOURCE_TYPE_ADDRESS16,
-    UACPI_RESOURCE_TYPE_ADDRESS32,
-    UACPI_RESOURCE_TYPE_ADDRESS64,
-    UACPI_RESOURCE_TYPE_ADDRESS64_EXTENDED,
+	UACPI_RESOURCE_TYPE_ADDRESS16,
+	UACPI_RESOURCE_TYPE_ADDRESS32,
+	UACPI_RESOURCE_TYPE_ADDRESS64,
+	UACPI_RESOURCE_TYPE_ADDRESS64_EXTENDED,
 
-    UACPI_RESOURCE_TYPE_MEMORY24,
-    UACPI_RESOURCE_TYPE_MEMORY32,
-    UACPI_RESOURCE_TYPE_FIXED_MEMORY32,
+	UACPI_RESOURCE_TYPE_MEMORY24,
+	UACPI_RESOURCE_TYPE_MEMORY32,
+	UACPI_RESOURCE_TYPE_FIXED_MEMORY32,
 
-    UACPI_RESOURCE_TYPE_START_DEPENDENT,
-    UACPI_RESOURCE_TYPE_END_DEPENDENT,
+	UACPI_RESOURCE_TYPE_START_DEPENDENT,
+	UACPI_RESOURCE_TYPE_END_DEPENDENT,
 
-    // Up to 7 bytes
-    UACPI_RESOURCE_TYPE_VENDOR_SMALL,
+	// Up to 7 bytes
+	UACPI_RESOURCE_TYPE_VENDOR_SMALL,
 
-    // Up to 2^16 - 1 bytes
-    UACPI_RESOURCE_TYPE_VENDOR_LARGE,
+	// Up to 2^16 - 1 bytes
+	UACPI_RESOURCE_TYPE_VENDOR_LARGE,
 
-    UACPI_RESOURCE_TYPE_GENERIC_REGISTER,
-    UACPI_RESOURCE_TYPE_GPIO_CONNECTION,
+	UACPI_RESOURCE_TYPE_GENERIC_REGISTER,
+	UACPI_RESOURCE_TYPE_GPIO_CONNECTION,
 
-    // These must always be contiguous in this order
-    UACPI_RESOURCE_TYPE_SERIAL_I2C_CONNECTION,
-    UACPI_RESOURCE_TYPE_SERIAL_SPI_CONNECTION,
-    UACPI_RESOURCE_TYPE_SERIAL_UART_CONNECTION,
-    UACPI_RESOURCE_TYPE_SERIAL_CSI2_CONNECTION,
+	// These must always be contiguous in this order
+	UACPI_RESOURCE_TYPE_SERIAL_I2C_CONNECTION,
+	UACPI_RESOURCE_TYPE_SERIAL_SPI_CONNECTION,
+	UACPI_RESOURCE_TYPE_SERIAL_UART_CONNECTION,
+	UACPI_RESOURCE_TYPE_SERIAL_CSI2_CONNECTION,
 
-    UACPI_RESOURCE_TYPE_PIN_FUNCTION,
-    UACPI_RESOURCE_TYPE_PIN_CONFIGURATION,
-    UACPI_RESOURCE_TYPE_PIN_GROUP,
-    UACPI_RESOURCE_TYPE_PIN_GROUP_FUNCTION,
-    UACPI_RESOURCE_TYPE_PIN_GROUP_CONFIGURATION,
+	UACPI_RESOURCE_TYPE_PIN_FUNCTION,
+	UACPI_RESOURCE_TYPE_PIN_CONFIGURATION,
+	UACPI_RESOURCE_TYPE_PIN_GROUP,
+	UACPI_RESOURCE_TYPE_PIN_GROUP_FUNCTION,
+	UACPI_RESOURCE_TYPE_PIN_GROUP_CONFIGURATION,
 
-    UACPI_RESOURCE_TYPE_CLOCK_INPUT,
+	UACPI_RESOURCE_TYPE_CLOCK_INPUT,
 
-    UACPI_RESOURCE_TYPE_END_TAG,
-    UACPI_RESOURCE_TYPE_MAX = UACPI_RESOURCE_TYPE_END_TAG,
+	UACPI_RESOURCE_TYPE_END_TAG,
+	UACPI_RESOURCE_TYPE_MAX = UACPI_RESOURCE_TYPE_END_TAG,
 } uacpi_resource_type;
 
 typedef struct uacpi_resource_source {
-    uacpi_u8 index;
-    uacpi_bool index_present;
-    uacpi_u16 length;
-    uacpi_char *string;
+	uacpi_u8 index;
+	uacpi_bool index_present;
+	uacpi_u16 length;
+	uacpi_char* string;
 } uacpi_resource_source;
 
 /*
@@ -81,9 +81,9 @@ typedef struct uacpi_resource_source {
  * ------------------------------------------------------------------------
  */
 enum uacpi_resource_length_kind {
-    UACPI_RESOURCE_LENGTH_KIND_DONT_CARE = 0,
-    UACPI_RESOURCE_LENGTH_KIND_ONE_LESS,
-    UACPI_RESOURCE_LENGTH_KIND_FULL,
+	UACPI_RESOURCE_LENGTH_KIND_DONT_CARE = 0,
+	UACPI_RESOURCE_LENGTH_KIND_ONE_LESS,
+	UACPI_RESOURCE_LENGTH_KIND_FULL,
 };
 
 // triggering fields
@@ -104,24 +104,24 @@ enum uacpi_resource_length_kind {
 #define UACPI_NOT_WAKE_CAPABLE 0
 
 typedef struct uacpi_resource_irq {
-    uacpi_u8 length_kind;
-    uacpi_u8 triggering;
-    uacpi_u8 polarity;
-    uacpi_u8 sharing;
-    uacpi_u8 wake_capability;
-    uacpi_u8 num_irqs;
-    uacpi_u8 irqs[];
+	uacpi_u8 length_kind;
+	uacpi_u8 triggering;
+	uacpi_u8 polarity;
+	uacpi_u8 sharing;
+	uacpi_u8 wake_capability;
+	uacpi_u8 num_irqs;
+	uacpi_u8 irqs[];
 } uacpi_resource_irq;
 
 typedef struct uacpi_resource_extended_irq {
-    uacpi_u8 direction;
-    uacpi_u8 triggering;
-    uacpi_u8 polarity;
-    uacpi_u8 sharing;
-    uacpi_u8 wake_capability;
-    uacpi_u8 num_irqs;
-    uacpi_resource_source source;
-    uacpi_u32 irqs[];
+	uacpi_u8 direction;
+	uacpi_u8 triggering;
+	uacpi_u8 polarity;
+	uacpi_u8 sharing;
+	uacpi_u8 wake_capability;
+	uacpi_u8 num_irqs;
+	uacpi_resource_source source;
+	uacpi_u32 irqs[];
 } uacpi_resource_extended_irq;
 
 // transfer_type
@@ -147,17 +147,17 @@ typedef struct uacpi_resource_extended_irq {
 #define UACPI_TRANSFER_WIDTH_256 0x05
 
 typedef struct uacpi_resource_dma {
-    uacpi_u8 transfer_type;
-    uacpi_u8 bus_master_status;
-    uacpi_u8 channel_speed;
-    uacpi_u8 num_channels;
-    uacpi_u8 channels[];
+	uacpi_u8 transfer_type;
+	uacpi_u8 bus_master_status;
+	uacpi_u8 channel_speed;
+	uacpi_u8 num_channels;
+	uacpi_u8 channels[];
 } uacpi_resource_dma;
 
 typedef struct uacpi_resource_fixed_dma {
-    uacpi_u16 request_line;
-    uacpi_u16 channel;
-    uacpi_u8 transfer_width;
+	uacpi_u16 request_line;
+	uacpi_u16 channel;
+	uacpi_u8 transfer_width;
 } uacpi_resource_fixed_dma;
 
 // decode_type
@@ -165,16 +165,16 @@ typedef struct uacpi_resource_fixed_dma {
 #define UACPI_DECODE_10 0b0
 
 typedef struct uacpi_resource_io {
-    uacpi_u8 decode_type;
-    uacpi_u16 minimum;
-    uacpi_u16 maximum;
-    uacpi_u8 alignment;
-    uacpi_u8 length;
+	uacpi_u8 decode_type;
+	uacpi_u16 minimum;
+	uacpi_u16 maximum;
+	uacpi_u8 alignment;
+	uacpi_u8 length;
 } uacpi_resource_io;
 
 typedef struct uacpi_resource_fixed_io {
-    uacpi_u16 address;
-    uacpi_u8 length;
+	uacpi_u16 address;
+	uacpi_u8 length;
 } uacpi_resource_fixed_io;
 
 // write_status
@@ -219,94 +219,94 @@ typedef struct uacpi_resource_fixed_io {
 #define UACPI_ADDRESS_FIXED 1
 
 typedef struct uacpi_memory_attribute {
-    uacpi_u8 write_status;
-    uacpi_u8 caching;
-    uacpi_u8 range_type;
-    uacpi_u8 translation;
+	uacpi_u8 write_status;
+	uacpi_u8 caching;
+	uacpi_u8 range_type;
+	uacpi_u8 translation;
 } uacpi_memory_attribute;
 
 typedef struct uacpi_io_attribute {
-    uacpi_u8 range_type;
-    uacpi_u8 translation;
-    uacpi_u8 translation_type;
+	uacpi_u8 range_type;
+	uacpi_u8 translation;
+	uacpi_u8 translation_type;
 } uacpi_io_attribute;
 
 typedef union uacpi_address_attribute {
-    uacpi_memory_attribute memory;
-    uacpi_io_attribute io;
-    uacpi_u8 type_specific;
+	uacpi_memory_attribute memory;
+	uacpi_io_attribute io;
+	uacpi_u8 type_specific;
 } uacpi_address_attribute;
 
 typedef struct uacpi_resource_address_common {
-    uacpi_address_attribute attribute;
-    uacpi_u8 type;
-    uacpi_u8 direction;
-    uacpi_u8 decode_type;
-    uacpi_u8 fixed_min_address;
-    uacpi_u8 fixed_max_address;
+	uacpi_address_attribute attribute;
+	uacpi_u8 type;
+	uacpi_u8 direction;
+	uacpi_u8 decode_type;
+	uacpi_u8 fixed_min_address;
+	uacpi_u8 fixed_max_address;
 } uacpi_resource_address_common;
 
 typedef struct uacpi_resource_address16 {
-    uacpi_resource_address_common common;
-    uacpi_u16 granularity;
-    uacpi_u16 minimum;
-    uacpi_u16 maximum;
-    uacpi_u16 translation_offset;
-    uacpi_u16 address_length;
-    uacpi_resource_source source;
+	uacpi_resource_address_common common;
+	uacpi_u16 granularity;
+	uacpi_u16 minimum;
+	uacpi_u16 maximum;
+	uacpi_u16 translation_offset;
+	uacpi_u16 address_length;
+	uacpi_resource_source source;
 } uacpi_resource_address16;
 
 typedef struct uacpi_resource_address32 {
-    uacpi_resource_address_common common;
-    uacpi_u32 granularity;
-    uacpi_u32 minimum;
-    uacpi_u32 maximum;
-    uacpi_u32 translation_offset;
-    uacpi_u32 address_length;
-    uacpi_resource_source source;
+	uacpi_resource_address_common common;
+	uacpi_u32 granularity;
+	uacpi_u32 minimum;
+	uacpi_u32 maximum;
+	uacpi_u32 translation_offset;
+	uacpi_u32 address_length;
+	uacpi_resource_source source;
 } uacpi_resource_address32;
 
 typedef struct uacpi_resource_address64 {
-    uacpi_resource_address_common common;
-    uacpi_u64 granularity;
-    uacpi_u64 minimum;
-    uacpi_u64 maximum;
-    uacpi_u64 translation_offset;
-    uacpi_u64 address_length;
-    uacpi_resource_source source;
+	uacpi_resource_address_common common;
+	uacpi_u64 granularity;
+	uacpi_u64 minimum;
+	uacpi_u64 maximum;
+	uacpi_u64 translation_offset;
+	uacpi_u64 address_length;
+	uacpi_resource_source source;
 } uacpi_resource_address64;
 
 typedef struct uacpi_resource_address64_extended {
-    uacpi_resource_address_common common;
-    uacpi_u8 revision_id;
-    uacpi_u64 granularity;
-    uacpi_u64 minimum;
-    uacpi_u64 maximum;
-    uacpi_u64 translation_offset;
-    uacpi_u64 address_length;
-    uacpi_u64 attributes;
+	uacpi_resource_address_common common;
+	uacpi_u8 revision_id;
+	uacpi_u64 granularity;
+	uacpi_u64 minimum;
+	uacpi_u64 maximum;
+	uacpi_u64 translation_offset;
+	uacpi_u64 address_length;
+	uacpi_u64 attributes;
 } uacpi_resource_address64_extended;
 
 typedef struct uacpi_resource_memory24 {
-    uacpi_u8 write_status;
-    uacpi_u16 minimum;
-    uacpi_u16 maximum;
-    uacpi_u16 alignment;
-    uacpi_u16 length;
+	uacpi_u8 write_status;
+	uacpi_u16 minimum;
+	uacpi_u16 maximum;
+	uacpi_u16 alignment;
+	uacpi_u16 length;
 } uacpi_resource_memory24;
 
 typedef struct uacpi_resource_memory32 {
-    uacpi_u8 write_status;
-    uacpi_u32 minimum;
-    uacpi_u32 maximum;
-    uacpi_u32 alignment;
-    uacpi_u32 length;
+	uacpi_u8 write_status;
+	uacpi_u32 minimum;
+	uacpi_u32 maximum;
+	uacpi_u32 alignment;
+	uacpi_u32 length;
 } uacpi_resource_memory32;
 
 typedef struct uacpi_resource_fixed_memory32 {
-    uacpi_u8 write_status;
-    uacpi_u32 address;
-    uacpi_u32 length;
+	uacpi_u8 write_status;
+	uacpi_u32 address;
+	uacpi_u32 length;
 } uacpi_resource_fixed_memory32;
 
 // compatibility & performance
@@ -315,29 +315,29 @@ typedef struct uacpi_resource_fixed_memory32 {
 #define UACPI_SUB_OPTIMAL 2
 
 typedef struct uacpi_resource_start_dependent {
-    uacpi_u8 length_kind;
-    uacpi_u8 compatibility;
-    uacpi_u8 performance;
+	uacpi_u8 length_kind;
+	uacpi_u8 compatibility;
+	uacpi_u8 performance;
 } uacpi_resource_start_dependent;
 
 typedef struct uacpi_resource_vendor_defined {
-    uacpi_u8 length;
-    uacpi_u8 data[];
+	uacpi_u8 length;
+	uacpi_u8 data[];
 } uacpi_resource_vendor;
 
 typedef struct uacpi_resource_vendor_typed {
-    uacpi_u16 length;
-    uacpi_u8 sub_type;
-    uacpi_u8 uuid[16];
-    uacpi_u8 data[];
+	uacpi_u16 length;
+	uacpi_u8 sub_type;
+	uacpi_u8 uuid[16];
+	uacpi_u8 data[];
 } uacpi_resource_vendor_typed;
 
 typedef struct uacpi_resource_generic_register {
-    uacpi_u8 address_space_id;
-    uacpi_u8 bit_width;
-    uacpi_u8 bit_offset;
-    uacpi_u8 access_size;
-    uacpi_u64 address;
+	uacpi_u8 address_space_id;
+	uacpi_u8 bit_width;
+	uacpi_u8 bit_offset;
+	uacpi_u8 access_size;
+	uacpi_u64 address;
 } uacpi_resource_generic_register;
 
 // type
@@ -345,10 +345,10 @@ typedef struct uacpi_resource_generic_register {
 #define UACPI_GPIO_CONNECTION_IO 0x01
 
 typedef struct uacpi_interrupt_connection_flags {
-    uacpi_u8 triggering;
-    uacpi_u8 polarity;
-    uacpi_u8 sharing;
-    uacpi_u8 wake_capability;
+	uacpi_u8 triggering;
+	uacpi_u8 polarity;
+	uacpi_u8 sharing;
+	uacpi_u8 wake_capability;
 } uacpi_interrupt_connection_flags;
 
 // restriction
@@ -358,8 +358,8 @@ typedef struct uacpi_interrupt_connection_flags {
 #define UACPI_IO_RESTRICTION_NONE_PRESERVE 0x3
 
 typedef struct uacpi_io_connection_flags {
-    uacpi_u8 restriction;
-    uacpi_u8 sharing;
+	uacpi_u8 restriction;
+	uacpi_u8 sharing;
 } uacpi_io_connection_flags;
 
 // pull_configuration
@@ -369,24 +369,24 @@ typedef struct uacpi_io_connection_flags {
 #define UACPI_PIN_CONFIG_NO_PULL 0x03
 
 typedef struct uacpi_resource_gpio_connection {
-    uacpi_u8 revision_id;
-    uacpi_u8 type;
-    uacpi_u8 direction;
+	uacpi_u8 revision_id;
+	uacpi_u8 type;
+	uacpi_u8 direction;
 
-    union {
-        uacpi_interrupt_connection_flags intr;
-        uacpi_io_connection_flags io;
-        uacpi_u16 type_specific;
-    };
+	union {
+		uacpi_interrupt_connection_flags intr;
+		uacpi_io_connection_flags io;
+		uacpi_u16 type_specific;
+	};
 
-    uacpi_u8 pull_configuration;
-    uacpi_u16 drive_strength;
-    uacpi_u16 debounce_timeout;
-    uacpi_u16 vendor_data_length;
-    uacpi_u16 pin_table_length;
-    uacpi_resource_source source;
-    uacpi_u16 *pin_table;
-    uacpi_u8 *vendor_data;
+	uacpi_u8 pull_configuration;
+	uacpi_u16 drive_strength;
+	uacpi_u16 debounce_timeout;
+	uacpi_u16 vendor_data_length;
+	uacpi_u16 pin_table_length;
+	uacpi_resource_source source;
+	uacpi_u16* pin_table;
+	uacpi_u8* vendor_data;
 } uacpi_resource_gpio_connection;
 
 // mode
@@ -394,16 +394,16 @@ typedef struct uacpi_resource_gpio_connection {
 #define UACPI_MODE_DEVICE_INITIATED 0x1
 
 typedef struct uacpi_resource_serial_bus_common {
-    uacpi_u8 revision_id;
-    uacpi_u8 type;
-    uacpi_u8 mode;
-    uacpi_u8 direction;
-    uacpi_u8 sharing;
-    uacpi_u8 type_revision_id;
-    uacpi_u16 type_data_length;
-    uacpi_u16 vendor_data_length;
-    uacpi_resource_source source;
-    uacpi_u8 *vendor_data;
+	uacpi_u8 revision_id;
+	uacpi_u8 type;
+	uacpi_u8 mode;
+	uacpi_u8 direction;
+	uacpi_u8 sharing;
+	uacpi_u8 type_revision_id;
+	uacpi_u16 type_data_length;
+	uacpi_u16 vendor_data_length;
+	uacpi_resource_source source;
+	uacpi_u8* vendor_data;
 } uacpi_resource_serial_bus_common;
 
 // addressing_mode
@@ -411,10 +411,10 @@ typedef struct uacpi_resource_serial_bus_common {
 #define UACPI_I2C_10BIT 0x1
 
 typedef struct uacpi_resource_i2c_connection {
-    uacpi_resource_serial_bus_common common;
-    uacpi_u8 addressing_mode;
-    uacpi_u16 slave_address;
-    uacpi_u32 connection_speed;
+	uacpi_resource_serial_bus_common common;
+	uacpi_u8 addressing_mode;
+	uacpi_u16 slave_address;
+	uacpi_u32 connection_speed;
 } uacpi_resource_i2c_connection;
 
 // wire_mode
@@ -434,14 +434,14 @@ typedef struct uacpi_resource_i2c_connection {
 #define UACPI_SPI_START_HIGH 1
 
 typedef struct uacpi_resource_spi_connection {
-    uacpi_resource_serial_bus_common common;
-    uacpi_u8 wire_mode;
-    uacpi_u8 device_polarity;
-    uacpi_u8 data_bit_length;
-    uacpi_u8 phase;
-    uacpi_u8 polarity;
-    uacpi_u16 device_selection;
-    uacpi_u32 connection_speed;
+	uacpi_resource_serial_bus_common common;
+	uacpi_u8 wire_mode;
+	uacpi_u8 device_polarity;
+	uacpi_u8 data_bit_length;
+	uacpi_u8 phase;
+	uacpi_u8 polarity;
+	uacpi_u16 device_selection;
+	uacpi_u32 connection_speed;
 } uacpi_resource_spi_connection;
 
 // stop_bits
@@ -482,16 +482,16 @@ typedef struct uacpi_resource_spi_connection {
 #define UACPI_UART_FLOW_CONTROL_XON_XOFF 0b10
 
 typedef struct uacpi_resource_uart_connection {
-    uacpi_resource_serial_bus_common common;
-    uacpi_u8 stop_bits;
-    uacpi_u8 data_bits;
-    uacpi_u8 endianness;
-    uacpi_u8 parity;
-    uacpi_u8 lines_enabled;
-    uacpi_u8 flow_control;
-    uacpi_u32 baud_rate;
-    uacpi_u16 rx_fifo;
-    uacpi_u16 tx_fifo;
+	uacpi_resource_serial_bus_common common;
+	uacpi_u8 stop_bits;
+	uacpi_u8 data_bits;
+	uacpi_u8 endianness;
+	uacpi_u8 parity;
+	uacpi_u8 lines_enabled;
+	uacpi_u8 flow_control;
+	uacpi_u32 baud_rate;
+	uacpi_u16 rx_fifo;
+	uacpi_u16 tx_fifo;
 } uacpi_resource_uart_connection;
 
 // phy_type
@@ -499,21 +499,21 @@ typedef struct uacpi_resource_uart_connection {
 #define UACPI_CSI2_PHY_D 0b01
 
 typedef struct uacpi_resource_csi2_connection {
-    uacpi_resource_serial_bus_common common;
-    uacpi_u8 phy_type;
-    uacpi_u8 local_port;
+	uacpi_resource_serial_bus_common common;
+	uacpi_u8 phy_type;
+	uacpi_u8 local_port;
 } uacpi_resource_csi2_connection;
 
 typedef struct uacpi_resource_pin_function {
-    uacpi_u8 revision_id;
-    uacpi_u8 sharing;
-    uacpi_u8 pull_configuration;
-    uacpi_u16 function_number;
-    uacpi_u16 pin_table_length;
-    uacpi_u16 vendor_data_length;
-    uacpi_resource_source source;
-    uacpi_u16 *pin_table;
-    uacpi_u8 *vendor_data;
+	uacpi_u8 revision_id;
+	uacpi_u8 sharing;
+	uacpi_u8 pull_configuration;
+	uacpi_u16 function_number;
+	uacpi_u16 pin_table_length;
+	uacpi_u16 vendor_data_length;
+	uacpi_resource_source source;
+	uacpi_u16* pin_table;
+	uacpi_u8* vendor_data;
 } uacpi_resource_pin_function;
 
 // type
@@ -533,54 +533,54 @@ typedef struct uacpi_resource_pin_function {
 #define UACPI_PIN_CONFIG_INPUT_SCHMITT_TRIGGER 0x0D
 
 typedef struct uacpi_resource_pin_configuration {
-    uacpi_u8 revision_id;
-    uacpi_u8 sharing;
-    uacpi_u8 direction;
-    uacpi_u8 type;
-    uacpi_u32 value;
-    uacpi_u16 pin_table_length;
-    uacpi_u16 vendor_data_length;
-    uacpi_resource_source source;
-    uacpi_u16 *pin_table;
-    uacpi_u8 *vendor_data;
+	uacpi_u8 revision_id;
+	uacpi_u8 sharing;
+	uacpi_u8 direction;
+	uacpi_u8 type;
+	uacpi_u32 value;
+	uacpi_u16 pin_table_length;
+	uacpi_u16 vendor_data_length;
+	uacpi_resource_source source;
+	uacpi_u16* pin_table;
+	uacpi_u8* vendor_data;
 } uacpi_resource_pin_configuration;
 
 typedef struct uacpi_resource_label {
-    uacpi_u16 length;
-    const uacpi_char *string;
+	uacpi_u16 length;
+	const uacpi_char* string;
 } uacpi_resource_label;
 
 typedef struct uacpi_resource_pin_group {
-    uacpi_u8 revision_id;
-    uacpi_u8 direction;
-    uacpi_u16 pin_table_length;
-    uacpi_u16 vendor_data_length;
-    uacpi_resource_label label;
-    uacpi_u16 *pin_table;
-    uacpi_u8 *vendor_data;
+	uacpi_u8 revision_id;
+	uacpi_u8 direction;
+	uacpi_u16 pin_table_length;
+	uacpi_u16 vendor_data_length;
+	uacpi_resource_label label;
+	uacpi_u16* pin_table;
+	uacpi_u8* vendor_data;
 } uacpi_resource_pin_group;
 
 typedef struct uacpi_resource_pin_group_function {
-    uacpi_u8 revision_id;
-    uacpi_u8 sharing;
-    uacpi_u8 direction;
-    uacpi_u16 function;
-    uacpi_u16 vendor_data_length;
-    uacpi_resource_source source;
-    uacpi_resource_label label;
-    uacpi_u8 *vendor_data;
+	uacpi_u8 revision_id;
+	uacpi_u8 sharing;
+	uacpi_u8 direction;
+	uacpi_u16 function;
+	uacpi_u16 vendor_data_length;
+	uacpi_resource_source source;
+	uacpi_resource_label label;
+	uacpi_u8* vendor_data;
 } uacpi_resource_pin_group_function;
 
 typedef struct uacpi_resource_pin_group_configuration {
-    uacpi_u8 revision_id;
-    uacpi_u8 sharing;
-    uacpi_u8 direction;
-    uacpi_u8 type;
-    uacpi_u32 value;
-    uacpi_u16 vendor_data_length;
-    uacpi_resource_source source;
-    uacpi_resource_label label;
-    uacpi_u8 *vendor_data;
+	uacpi_u8 revision_id;
+	uacpi_u8 sharing;
+	uacpi_u8 direction;
+	uacpi_u8 type;
+	uacpi_u32 value;
+	uacpi_u16 vendor_data_length;
+	uacpi_resource_source source;
+	uacpi_resource_label label;
+	uacpi_u8* vendor_data;
 } uacpi_resource_pin_group_configuration;
 
 // scale
@@ -593,75 +593,75 @@ typedef struct uacpi_resource_pin_group_configuration {
 #define UACPI_FREQUENCY_VARIABLE 0x1
 
 typedef struct uacpi_resource_clock_input {
-    uacpi_u8 revision_id;
-    uacpi_u8 frequency;
-    uacpi_u8 scale;
-    uacpi_u16 divisor;
-    uacpi_u32 numerator;
-    uacpi_resource_source source;
+	uacpi_u8 revision_id;
+	uacpi_u8 frequency;
+	uacpi_u8 scale;
+	uacpi_u16 divisor;
+	uacpi_u32 numerator;
+	uacpi_resource_source source;
 } uacpi_resource_clock_input;
 
 typedef struct uacpi_resource {
-    uacpi_u32 type;
-    uacpi_u32 length;
+	uacpi_u32 type;
+	uacpi_u32 length;
 
-    union {
-        uacpi_resource_irq irq;
-        uacpi_resource_extended_irq extended_irq;
-        uacpi_resource_dma dma;
-        uacpi_resource_fixed_dma fixed_dma;
-        uacpi_resource_io io;
-        uacpi_resource_fixed_io fixed_io;
-        uacpi_resource_address16 address16;
-        uacpi_resource_address32 address32;
-        uacpi_resource_address64 address64;
-        uacpi_resource_address64_extended address64_extended;
-        uacpi_resource_memory24 memory24;
-        uacpi_resource_memory32 memory32;
-        uacpi_resource_fixed_memory32 fixed_memory32;
-        uacpi_resource_start_dependent start_dependent;
-        uacpi_resource_vendor vendor;
-        uacpi_resource_vendor_typed vendor_typed;
-        uacpi_resource_generic_register generic_register;
-        uacpi_resource_gpio_connection gpio_connection;
-        uacpi_resource_serial_bus_common serial_bus_common;
-        uacpi_resource_i2c_connection i2c_connection;
-        uacpi_resource_spi_connection spi_connection;
-        uacpi_resource_uart_connection uart_connection;
-        uacpi_resource_csi2_connection csi2_connection;
-        uacpi_resource_pin_function pin_function;
-        uacpi_resource_pin_configuration pin_configuration;
-        uacpi_resource_pin_group pin_group;
-        uacpi_resource_pin_group_function pin_group_function;
-        uacpi_resource_pin_group_configuration pin_group_configuration;
-        uacpi_resource_clock_input clock_input;
-    };
+	union {
+		uacpi_resource_irq irq;
+		uacpi_resource_extended_irq extended_irq;
+		uacpi_resource_dma dma;
+		uacpi_resource_fixed_dma fixed_dma;
+		uacpi_resource_io io;
+		uacpi_resource_fixed_io fixed_io;
+		uacpi_resource_address16 address16;
+		uacpi_resource_address32 address32;
+		uacpi_resource_address64 address64;
+		uacpi_resource_address64_extended address64_extended;
+		uacpi_resource_memory24 memory24;
+		uacpi_resource_memory32 memory32;
+		uacpi_resource_fixed_memory32 fixed_memory32;
+		uacpi_resource_start_dependent start_dependent;
+		uacpi_resource_vendor vendor;
+		uacpi_resource_vendor_typed vendor_typed;
+		uacpi_resource_generic_register generic_register;
+		uacpi_resource_gpio_connection gpio_connection;
+		uacpi_resource_serial_bus_common serial_bus_common;
+		uacpi_resource_i2c_connection i2c_connection;
+		uacpi_resource_spi_connection spi_connection;
+		uacpi_resource_uart_connection uart_connection;
+		uacpi_resource_csi2_connection csi2_connection;
+		uacpi_resource_pin_function pin_function;
+		uacpi_resource_pin_configuration pin_configuration;
+		uacpi_resource_pin_group pin_group;
+		uacpi_resource_pin_group_function pin_group_function;
+		uacpi_resource_pin_group_configuration pin_group_configuration;
+		uacpi_resource_clock_input clock_input;
+	};
 } uacpi_resource;
 
 #define UACPI_NEXT_RESOURCE(cur) \
-    ((uacpi_resource*)((uacpi_u8*)(cur) + (cur)->length))
+	((uacpi_resource*)((uacpi_u8*)(cur) + (cur)->length))
 
 typedef struct uacpi_resources {
-    /*
-     * Length of the 'entries' array in BYTES (NOT the count of resources),
-     * see comment above 'entries' for more information.
-     */
-    uacpi_size length;
+	/*
+	 * Length of the 'entries' array in BYTES (NOT the count of resources),
+	 * see comment above 'entries' for more information.
+	 */
+	uacpi_size length;
 
-    /*
-     * Resources are variable length! See UACPI_NEXT_RESOURCE to see how to
-     * retrieve the next resource. You can alternatively use
-     * uacpi_for_each_resource instead of iterating manually.
-     *
-     * Resources are guaranteed to be naturally aligned and are always
-     * terminated by a resource of type UACPI_RESOURCE_TYPE_END_TAG.
-     */
-    uacpi_resource *entries;
+	/*
+	 * Resources are variable length! See UACPI_NEXT_RESOURCE to see how to
+	 * retrieve the next resource. You can alternatively use
+	 * uacpi_for_each_resource instead of iterating manually.
+	 *
+	 * Resources are guaranteed to be naturally aligned and are always
+	 * terminated by a resource of type UACPI_RESOURCE_TYPE_END_TAG.
+	 */
+	uacpi_resource* entries;
 } uacpi_resources;
 void uacpi_free_resources(uacpi_resources*);
 
-typedef uacpi_iteration_decision (*uacpi_resource_iteration_callback)
-    (void *user, uacpi_resource *resource);
+typedef uacpi_iteration_decision (
+		*uacpi_resource_iteration_callback)(void* user, uacpi_resource* resource);
 
 /*
  * Evaluate the _CRS method for a 'device' and get the returned resource list
@@ -673,9 +673,8 @@ typedef uacpi_iteration_decision (*uacpi_resource_iteration_callback)
  * uacpi_for_each_device_resource(device, "_CRS", ...) instead, which takes
  * care of iteration & memory management on its own.
  */
-uacpi_status uacpi_get_current_resources(
-    uacpi_namespace_node *device, uacpi_resources **out_resources
-);
+uacpi_status uacpi_get_current_resources(uacpi_namespace_node* device,
+																				 uacpi_resources** out_resources);
 
 /*
  * Evaluate the _PRS method for a 'device' and get the returned resource list
@@ -687,9 +686,8 @@ uacpi_status uacpi_get_current_resources(
  * uacpi_for_each_device_resource(device, "_PRS", ...) instead, which takes
  * care of iteration & memory management on its own.
  */
-uacpi_status uacpi_get_possible_resources(
-    uacpi_namespace_node *device, uacpi_resources **out_resources
-);
+uacpi_status uacpi_get_possible_resources(uacpi_namespace_node* device,
+																					uacpi_resources** out_resources);
 
 /*
  * Evaluate an arbitrary method that is expected to return an AML resource
@@ -701,10 +699,9 @@ uacpi_status uacpi_get_possible_resources(
  * uacpi_for_each_device_resource(device, method, ...) instead, which takes
  * care of iteration & memory management on its own.
  */
-uacpi_status uacpi_get_device_resources(
-    uacpi_namespace_node *device, const uacpi_char *method,
-    uacpi_resources **out_resources
-);
+uacpi_status uacpi_get_device_resources(uacpi_namespace_node* device,
+																				const uacpi_char* method,
+																				uacpi_resources** out_resources);
 
 /*
  * Set the configuration to be used by the 'device' by calling its _SRS method.
@@ -714,17 +711,16 @@ uacpi_status uacpi_get_device_resources(
  * done automatically by this API. If you want to _SRS a raw AML resources
  * bytestream, use 'uacpi_execute' or similar API directly.
  */
-uacpi_status uacpi_set_resources(
-    uacpi_namespace_node *device, uacpi_resources *resources
-);
+uacpi_status uacpi_set_resources(uacpi_namespace_node* device,
+																 uacpi_resources* resources);
 
 /*
  * A convenience helper for iterating over the resource list returned by any
  * of the uacpi_get_*_resources functions.
  */
-uacpi_status uacpi_for_each_resource(
-    uacpi_resources *resources, uacpi_resource_iteration_callback cb, void *user
-);
+uacpi_status uacpi_for_each_resource(uacpi_resources* resources,
+																		 uacpi_resource_iteration_callback cb,
+																		 void* user);
 
 /*
  * A shorthand for uacpi_get_device_resources() + uacpi_for_each_resource().
@@ -734,9 +730,10 @@ uacpi_status uacpi_for_each_resource(
  * right away.
  */
 uacpi_status uacpi_for_each_device_resource(
-    uacpi_namespace_node *device, const uacpi_char *method,
-    uacpi_resource_iteration_callback cb, void *user
-);
+		uacpi_namespace_node* device,
+		const uacpi_char* method,
+		uacpi_resource_iteration_callback cb,
+		void* user);
 
 /*
  * Convert a single AML-encoded resource to native format.
@@ -747,12 +744,11 @@ uacpi_status uacpi_for_each_device_resource(
  *
  * NOTE: the returned buffer must be released via uacpi_free_resource()
  */
-uacpi_status uacpi_get_resource_from_buffer(
-    uacpi_data_view aml_buffer, uacpi_resource **out_resource
-);
+uacpi_status uacpi_get_resource_from_buffer(uacpi_data_view aml_buffer,
+																						uacpi_resource** out_resource);
 void uacpi_free_resource(uacpi_resource*);
 
-#endif // !UACPI_BAREBONES_MODE
+#endif	// !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

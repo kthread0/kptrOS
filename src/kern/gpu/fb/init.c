@@ -1,42 +1,36 @@
-#include "flanterm_backends/fb.h"
-#include "limine.h"
 #include <flanterm/flanterm.h>
 #include <system.h>
+#include "flanterm_backends/fb.h"
+#include "limine.h"
 
 // Framebuffer request
-static volatile struct limine_framebuffer_request limine_framebuffer
-		= { .id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0 };
+static volatile struct limine_framebuffer_request limine_framebuffer = {
+		.id = LIMINE_FRAMEBUFFER_REQUEST,
+		.revision = 0};
 
-bool
-check_fb (void)
-{
-	if (limine_framebuffer.response == NULL
-			|| limine_framebuffer.response->framebuffer_count < 1)
-		{
-			serial_printf (
-					"Framebuffer request failed: response is NULL or count < 1\n");
-			cpu_state_t state;
-			capture_cpu_state (&state);
-			panic (&state);
-			return false;
-		}
-	else
-		{
-			serial_printf ("Framebuffers: %d\n",
-										 limine_framebuffer.response->framebuffer_count);
-		}
+bool check_fb(void) {
+	if (limine_framebuffer.response == NULL ||
+			limine_framebuffer.response->framebuffer_count < 1) {
+		serial_printf(
+				"Framebuffer request failed: response is NULL or count < 1\n");
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+		return false;
+	} else {
+		serial_printf("Framebuffers: %d\n",
+									limine_framebuffer.response->framebuffer_count);
+	}
 	return true;
 }
 
-void
-fbinit (void)
-{
-	struct limine_framebuffer *framebuffer
-			= limine_framebuffer.response->framebuffers[0];
+void fbinit(void) {
+	struct limine_framebuffer* framebuffer =
+			limine_framebuffer.response->framebuffers[0];
 
-	struct flanterm_context *ft_ctx = flanterm_fb_init (
-			NULL, NULL, framebuffer->address, framebuffer->width,
-			framebuffer->height, framebuffer->pitch, framebuffer->red_mask_size,
+	struct flanterm_context* ft_ctx = flanterm_fb_init(
+			NULL, NULL, framebuffer->address, framebuffer->width, framebuffer->height,
+			framebuffer->pitch, framebuffer->red_mask_size,
 			framebuffer->red_mask_shift, framebuffer->green_mask_size,
 			framebuffer->green_mask_shift, framebuffer->blue_mask_size,
 			framebuffer->blue_mask_shift, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
@@ -44,5 +38,5 @@ fbinit (void)
 
 	const char msg[] = "Hello from the framebuffer!\n";
 
-	flanterm_write (ft_ctx, msg, sizeof (msg));
+	flanterm_write(ft_ctx, msg, sizeof(msg));
 }

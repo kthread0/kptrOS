@@ -1,7 +1,7 @@
 #pragma once
 
-#include <uacpi/types.h>
 #include <uacpi/status.h>
+#include <uacpi/types.h>
 #include <uacpi/uacpi.h>
 
 #ifdef __cplusplus
@@ -17,18 +17,17 @@ extern "C" {
  * 'addr64' is the protected mode entry-point address
  */
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-uacpi_status uacpi_set_waking_vector(
-    uacpi_phys_addr addr32, uacpi_phys_addr addr64
-))
+		uacpi_status uacpi_set_waking_vector(uacpi_phys_addr addr32,
+																				 uacpi_phys_addr addr64))
 
 typedef enum uacpi_sleep_state {
-    UACPI_SLEEP_STATE_S0 = 0,
-    UACPI_SLEEP_STATE_S1,
-    UACPI_SLEEP_STATE_S2,
-    UACPI_SLEEP_STATE_S3,
-    UACPI_SLEEP_STATE_S4,
-    UACPI_SLEEP_STATE_S5,
-    UACPI_SLEEP_STATE_MAX = UACPI_SLEEP_STATE_S5,
+	UACPI_SLEEP_STATE_S0 = 0,
+	UACPI_SLEEP_STATE_S1,
+	UACPI_SLEEP_STATE_S2,
+	UACPI_SLEEP_STATE_S3,
+	UACPI_SLEEP_STATE_S4,
+	UACPI_SLEEP_STATE_S5,
+	UACPI_SLEEP_STATE_MAX = UACPI_SLEEP_STATE_S5,
 } uacpi_sleep_state;
 
 /*
@@ -60,7 +59,7 @@ uacpi_status uacpi_wake_from_sleep_state(uacpi_sleep_state);
  */
 uacpi_status uacpi_reboot(void);
 
-#endif // !UACPI_BAREBONES_MODE
+#endif	// !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

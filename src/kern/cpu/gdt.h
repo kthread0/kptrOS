@@ -1,1 +1,1 @@
-int gdt_init (void);
+int gdt_init(void);

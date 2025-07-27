@@ -1,9 +1,9 @@
 #pragma once
 
-#include <uacpi/types.h>
-#include <uacpi/status.h>
 #include <uacpi/kernel_api.h>
 #include <uacpi/namespace.h>
+#include <uacpi/status.h>
+#include <uacpi/types.h>
 
 #define UACPI_MAJOR 3
 #define UACPI_MINOR 0
@@ -11,16 +11,18 @@
 
 #ifdef UACPI_REDUCED_HARDWARE
 #define UACPI_MAKE_STUB_FOR_REDUCED_HARDWARE(fn, ret) \
-    UACPI_NO_UNUSED_PARAMETER_WARNINGS_BEGIN          \
-    static inline fn { return ret; }                \
-    UACPI_NO_UNUSED_PARAMETER_WARNINGS_END
+	UACPI_NO_UNUSED_PARAMETER_WARNINGS_BEGIN            \
+	static inline fn {                                  \
+		return ret;                                       \
+	}                                                   \
+	UACPI_NO_UNUSED_PARAMETER_WARNINGS_END
 
 #define UACPI_STUB_IF_REDUCED_HARDWARE(fn) \
-    UACPI_MAKE_STUB_FOR_REDUCED_HARDWARE(fn,)
+	UACPI_MAKE_STUB_FOR_REDUCED_HARDWARE(fn, )
 #define UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(fn) \
-    UACPI_MAKE_STUB_FOR_REDUCED_HARDWARE(fn, UACPI_STATUS_COMPILED_OUT)
+	UACPI_MAKE_STUB_FOR_REDUCED_HARDWARE(fn, UACPI_STATUS_COMPILED_OUT)
 #define UACPI_ALWAYS_OK_FOR_REDUCED_HARDWARE(fn) \
-    UACPI_MAKE_STUB_FOR_REDUCED_HARDWARE(fn, UACPI_STATUS_OK)
+	UACPI_MAKE_STUB_FOR_REDUCED_HARDWARE(fn, UACPI_STATUS_OK)
 #else
 
 #define UACPI_STUB_IF_REDUCED_HARDWARE(fn) fn;
@@ -53,9 +55,8 @@ extern "C" {
  * This function is used to initialize the barebones mode, see
  * UACPI_BAREBONES_MODE in config.h for more information.
  */
-uacpi_status uacpi_setup_early_table_access(
-    void *temporary_buffer, uacpi_size buffer_size
-);
+uacpi_status uacpi_setup_early_table_access(void* temporary_buffer,
+																						uacpi_size buffer_size);
 
 /*
  * Bad table checksum should be considered a fatal error
@@ -126,49 +127,47 @@ uacpi_init_level uacpi_get_current_init_level(void);
  * A value of NULL for 'parent' implies uacpi_namespace_root() relative
  * lookups, unless 'path' is already absolute.
  */
-uacpi_status uacpi_eval(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args, uacpi_object **ret
-);
-uacpi_status uacpi_eval_simple(
-    uacpi_namespace_node *parent, const uacpi_char *path, uacpi_object **ret
-);
+uacpi_status uacpi_eval(uacpi_namespace_node* parent,
+												const uacpi_char* path,
+												const uacpi_object_array* args,
+												uacpi_object** ret);
+uacpi_status uacpi_eval_simple(uacpi_namespace_node* parent,
+															 const uacpi_char* path,
+															 uacpi_object** ret);
 
 /*
  * Same as uacpi_eval() but without a return value.
  */
-uacpi_status uacpi_execute(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args
-);
-uacpi_status uacpi_execute_simple(
-    uacpi_namespace_node *parent, const uacpi_char *path
-);
+uacpi_status uacpi_execute(uacpi_namespace_node* parent,
+													 const uacpi_char* path,
+													 const uacpi_object_array* args);
+uacpi_status uacpi_execute_simple(uacpi_namespace_node* parent,
+																	const uacpi_char* path);
 
 /*
  * Same as uacpi_eval, but the return value type is validated against
  * the 'ret_mask'. UACPI_STATUS_TYPE_MISMATCH is returned on error.
  */
-uacpi_status uacpi_eval_typed(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args, uacpi_object_type_bits ret_mask,
-    uacpi_object **ret
-);
-uacpi_status uacpi_eval_simple_typed(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    uacpi_object_type_bits ret_mask, uacpi_object **ret
-);
+uacpi_status uacpi_eval_typed(uacpi_namespace_node* parent,
+															const uacpi_char* path,
+															const uacpi_object_array* args,
+															uacpi_object_type_bits ret_mask,
+															uacpi_object** ret);
+uacpi_status uacpi_eval_simple_typed(uacpi_namespace_node* parent,
+																		 const uacpi_char* path,
+																		 uacpi_object_type_bits ret_mask,
+																		 uacpi_object** ret);
 
 /*
  * A shorthand for uacpi_eval_typed with UACPI_OBJECT_INTEGER_BIT.
  */
-uacpi_status uacpi_eval_integer(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args, uacpi_u64 *out_value
-);
-uacpi_status uacpi_eval_simple_integer(
-    uacpi_namespace_node *parent, const uacpi_char *path, uacpi_u64 *out_value
-);
+uacpi_status uacpi_eval_integer(uacpi_namespace_node* parent,
+																const uacpi_char* path,
+																const uacpi_object_array* args,
+																uacpi_u64* out_value);
+uacpi_status uacpi_eval_simple_integer(uacpi_namespace_node* parent,
+																			 const uacpi_char* path,
+																			 uacpi_u64* out_value);
 
 /*
  * A shorthand for uacpi_eval_typed with
@@ -176,70 +175,67 @@ uacpi_status uacpi_eval_simple_integer(
  *
  * Use uacpi_object_get_string_or_buffer to retrieve the resulting buffer data.
  */
-uacpi_status uacpi_eval_buffer_or_string(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args, uacpi_object **ret
-);
-uacpi_status uacpi_eval_simple_buffer_or_string(
-    uacpi_namespace_node *parent, const uacpi_char *path, uacpi_object **ret
-);
+uacpi_status uacpi_eval_buffer_or_string(uacpi_namespace_node* parent,
+																				 const uacpi_char* path,
+																				 const uacpi_object_array* args,
+																				 uacpi_object** ret);
+uacpi_status uacpi_eval_simple_buffer_or_string(uacpi_namespace_node* parent,
+																								const uacpi_char* path,
+																								uacpi_object** ret);
 
 /*
  * A shorthand for uacpi_eval_typed with UACPI_OBJECT_STRING_BIT.
  *
  * Use uacpi_object_get_string to retrieve the resulting buffer data.
  */
-uacpi_status uacpi_eval_string(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args, uacpi_object **ret
-);
-uacpi_status uacpi_eval_simple_string(
-    uacpi_namespace_node *parent, const uacpi_char *path, uacpi_object **ret
-);
+uacpi_status uacpi_eval_string(uacpi_namespace_node* parent,
+															 const uacpi_char* path,
+															 const uacpi_object_array* args,
+															 uacpi_object** ret);
+uacpi_status uacpi_eval_simple_string(uacpi_namespace_node* parent,
+																			const uacpi_char* path,
+																			uacpi_object** ret);
 
 /*
  * A shorthand for uacpi_eval_typed with UACPI_OBJECT_BUFFER_BIT.
  *
  * Use uacpi_object_get_buffer to retrieve the resulting buffer data.
  */
-uacpi_status uacpi_eval_buffer(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args, uacpi_object **ret
-);
-uacpi_status uacpi_eval_simple_buffer(
-    uacpi_namespace_node *parent, const uacpi_char *path, uacpi_object **ret
-);
+uacpi_status uacpi_eval_buffer(uacpi_namespace_node* parent,
+															 const uacpi_char* path,
+															 const uacpi_object_array* args,
+															 uacpi_object** ret);
+uacpi_status uacpi_eval_simple_buffer(uacpi_namespace_node* parent,
+																			const uacpi_char* path,
+																			uacpi_object** ret);
 
 /*
  * A shorthand for uacpi_eval_typed with UACPI_OBJECT_PACKAGE_BIT.
  *
  * Use uacpi_object_get_package to retrieve the resulting object array.
  */
-uacpi_status uacpi_eval_package(
-    uacpi_namespace_node *parent, const uacpi_char *path,
-    const uacpi_object_array *args, uacpi_object **ret
-);
-uacpi_status uacpi_eval_simple_package(
-    uacpi_namespace_node *parent, const uacpi_char *path, uacpi_object **ret
-);
+uacpi_status uacpi_eval_package(uacpi_namespace_node* parent,
+																const uacpi_char* path,
+																const uacpi_object_array* args,
+																uacpi_object** ret);
+uacpi_status uacpi_eval_simple_package(uacpi_namespace_node* parent,
+																			 const uacpi_char* path,
+																			 uacpi_object** ret);
 
 /*
  * Get the bitness of the currently loaded AML code according to the DSDT.
  *
  * Returns either 32 or 64.
  */
-uacpi_status uacpi_get_aml_bitness(uacpi_u8 *out_bitness);
+uacpi_status uacpi_get_aml_bitness(uacpi_u8* out_bitness);
 
 /*
  * Helpers for entering & leaving ACPI mode. Note that ACPI mode is entered
  * automatically during the call to uacpi_initialize().
  */
-UACPI_ALWAYS_OK_FOR_REDUCED_HARDWARE(
-    uacpi_status uacpi_enter_acpi_mode(void)
-)
+UACPI_ALWAYS_OK_FOR_REDUCED_HARDWARE(uacpi_status uacpi_enter_acpi_mode(void))
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-    uacpi_status uacpi_leave_acpi_mode(void)
-)
+		uacpi_status uacpi_leave_acpi_mode(void))
 
 /*
  * Attempt to acquire the global lock for 'timeout' milliseconds.
@@ -248,10 +244,10 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  * On success, 'out_seq' is set to a unique sequence number for the current
  * acquire transaction. This number is used for validation during release.
  */
-uacpi_status uacpi_acquire_global_lock(uacpi_u16 timeout, uacpi_u32 *out_seq);
+uacpi_status uacpi_acquire_global_lock(uacpi_u16 timeout, uacpi_u32* out_seq);
 uacpi_status uacpi_release_global_lock(uacpi_u32 seq);
 
-#endif // !UACPI_BAREBONES_MODE
+#endif	// !UACPI_BAREBONES_MODE
 
 /*
  * Reset the global uACPI state by freeing all internally allocated data

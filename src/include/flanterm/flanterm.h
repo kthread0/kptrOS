@@ -26,9 +26,9 @@
 #ifndef FLANTERM_H
 #define FLANTERM_H 1
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -62,16 +62,26 @@ struct flanterm_context;
 
 #endif
 
-void flanterm_write(struct flanterm_context *ctx, const char *buf, size_t count);
-void flanterm_flush(struct flanterm_context *ctx);
-void flanterm_full_refresh(struct flanterm_context *ctx);
-void flanterm_deinit(struct flanterm_context *ctx, void (*_free)(void *ptr, size_t size));
+void flanterm_write(struct flanterm_context* ctx,
+										const char* buf,
+										size_t count);
+void flanterm_flush(struct flanterm_context* ctx);
+void flanterm_full_refresh(struct flanterm_context* ctx);
+void flanterm_deinit(struct flanterm_context* ctx,
+										 void (*_free)(void* ptr, size_t size));
 
-void flanterm_get_dimensions(struct flanterm_context *ctx, size_t *cols, size_t *rows);
-void flanterm_set_autoflush(struct flanterm_context *ctx, bool state);
-void flanterm_set_callback(struct flanterm_context *ctx, void (*callback)(struct flanterm_context *, uint64_t, uint64_t, uint64_t, uint64_t));
-uint64_t flanterm_get_oob_output(struct flanterm_context *ctx);
-void flanterm_set_oob_output(struct flanterm_context *ctx, uint64_t oob_output);
+void flanterm_get_dimensions(struct flanterm_context* ctx,
+														 size_t* cols,
+														 size_t* rows);
+void flanterm_set_autoflush(struct flanterm_context* ctx, bool state);
+void flanterm_set_callback(struct flanterm_context* ctx,
+													 void (*callback)(struct flanterm_context*,
+																						uint64_t,
+																						uint64_t,
+																						uint64_t,
+																						uint64_t));
+uint64_t flanterm_get_oob_output(struct flanterm_context* ctx);
+void flanterm_set_oob_output(struct flanterm_context* ctx, uint64_t oob_output);
 
 #ifdef __cplusplus
 }
