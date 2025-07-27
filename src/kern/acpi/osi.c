@@ -9,7 +9,7 @@
 #ifndef UACPI_BAREBONES_MODE
 
 struct registered_interface {
-	const uacpi_char* name;
+	const uacpi_char *name;
 	uacpi_u8 weight;
 	uacpi_u8 kind;
 
@@ -20,25 +20,25 @@ struct registered_interface {
 	uacpi_u8 disabled : 1;
 	uacpi_u8 dynamic : 1;
 
-	struct registered_interface* next;
+	struct registered_interface *next;
 };
 
 static uacpi_handle interface_mutex;
-static struct registered_interface* registered_interfaces;
+static struct registered_interface *registered_interfaces;
 static uacpi_interface_handler interface_handler;
 static uacpi_u32 latest_queried_interface;
 
-#define WINDOWS(string, interface)                       \
-	{.name = "Windows " string,                            \
-	 .weight = UACPI_VENDOR_INTERFACE_WINDOWS_##interface, \
-	 .kind = UACPI_INTERFACE_KIND_VENDOR,                  \
-	 .host_type = 0,                                       \
-	 .disabled = 0,                                        \
-	 .dynamic = 0,                                         \
-	 .next = UACPI_NULL}
+#	define WINDOWS(string, interface)                        \
+		{ .name = "Windows " string,                            \
+			.weight = UACPI_VENDOR_INTERFACE_WINDOWS_##interface, \
+			.kind = UACPI_INTERFACE_KIND_VENDOR,                  \
+			.host_type = 0,                                       \
+			.disabled = 0,                                        \
+			.dynamic = 0,                                         \
+			.next = UACPI_NULL }
 
-#define HOST_FEATURE(string, type)              \
-	{                                             \
+#	define HOST_FEATURE(string, type)            \
+		{                                           \
 			.name = string,                           \
 			.weight = 0,                              \
 			.kind = UACPI_INTERFACE_KIND_FEATURE,     \
@@ -46,43 +46,43 @@ static uacpi_u32 latest_queried_interface;
 			.disabled = 1,                            \
 			.dynamic = 0,                             \
 			.next = UACPI_NULL,                       \
-	}
+		}
 
 static struct registered_interface predefined_interfaces[] = {
-		// Vendor strings
-		WINDOWS("2000", 2000),
-		WINDOWS("2001", XP),
-		WINDOWS("2001 SP1", XP_SP1),
-		WINDOWS("2001.1", SERVER_2003),
-		WINDOWS("2001 SP2", XP_SP2),
-		WINDOWS("2001.1 SP1", SERVER_2003_SP1),
-		WINDOWS("2006", VISTA),
-		WINDOWS("2006.1", SERVER_2008),
-		WINDOWS("2006 SP1", VISTA_SP1),
-		WINDOWS("2006 SP2", VISTA_SP2),
-		WINDOWS("2009", 7),
-		WINDOWS("2012", 8),
-		WINDOWS("2013", 8_1),
-		WINDOWS("2015", 10),
-		WINDOWS("2016", 10_RS1),
-		WINDOWS("2017", 10_RS2),
-		WINDOWS("2017.2", 10_RS3),
-		WINDOWS("2018", 10_RS4),
-		WINDOWS("2018.2", 10_RS5),
-		WINDOWS("2019", 10_19H1),
-		WINDOWS("2020", 10_20H1),
-		WINDOWS("2021", 11),
-		WINDOWS("2022", 11_22H2),
+	// Vendor strings
+	WINDOWS("2000", 2000),
+	WINDOWS("2001", XP),
+	WINDOWS("2001 SP1", XP_SP1),
+	WINDOWS("2001.1", SERVER_2003),
+	WINDOWS("2001 SP2", XP_SP2),
+	WINDOWS("2001.1 SP1", SERVER_2003_SP1),
+	WINDOWS("2006", VISTA),
+	WINDOWS("2006.1", SERVER_2008),
+	WINDOWS("2006 SP1", VISTA_SP1),
+	WINDOWS("2006 SP2", VISTA_SP2),
+	WINDOWS("2009", 7),
+	WINDOWS("2012", 8),
+	WINDOWS("2013", 8_1),
+	WINDOWS("2015", 10),
+	WINDOWS("2016", 10_RS1),
+	WINDOWS("2017", 10_RS2),
+	WINDOWS("2017.2", 10_RS3),
+	WINDOWS("2018", 10_RS4),
+	WINDOWS("2018.2", 10_RS5),
+	WINDOWS("2019", 10_19H1),
+	WINDOWS("2020", 10_20H1),
+	WINDOWS("2021", 11),
+	WINDOWS("2022", 11_22H2),
 
-		// Feature strings
-		HOST_FEATURE("Module Device", MODULE_DEVICE),
-		HOST_FEATURE("Processor Device", PROCESSOR_DEVICE),
-		HOST_FEATURE("3.0 Thermal Model", 3_0_THERMAL_MODEL),
-		HOST_FEATURE("3.0 _SCP Extensions", 3_0_SCP_EXTENSIONS),
-		HOST_FEATURE("Processor Aggregator Device", PROCESSOR_AGGREGATOR_DEVICE),
+	// Feature strings
+	HOST_FEATURE("Module Device", MODULE_DEVICE),
+	HOST_FEATURE("Processor Device", PROCESSOR_DEVICE),
+	HOST_FEATURE("3.0 Thermal Model", 3_0_THERMAL_MODEL),
+	HOST_FEATURE("3.0 _SCP Extensions", 3_0_SCP_EXTENSIONS),
+	HOST_FEATURE("Processor Aggregator Device", PROCESSOR_AGGREGATOR_DEVICE),
 
-		// Interpreter features
-		{.name = "Extended Address Space Descriptor"},
+	// Interpreter features
+	{ .name = "Extended Address Space Descriptor" },
 };
 
 uacpi_status uacpi_initialize_interfaces(void) {
@@ -116,8 +116,7 @@ void uacpi_deinitialize_interfaces(void) {
 		}
 
 		// Only features are disabled by default
-		iface->disabled =
-				iface->kind == UACPI_INTERFACE_KIND_FEATURE ? UACPI_TRUE : UACPI_FALSE;
+		iface->disabled = iface->kind == UACPI_INTERFACE_KIND_FEATURE ? UACPI_TRUE : UACPI_FALSE;
 	}
 
 	if (interface_mutex)
@@ -133,9 +132,8 @@ uacpi_vendor_interface uacpi_latest_queried_vendor_interface(void) {
 	return uacpi_atomic_load32(&latest_queried_interface);
 }
 
-static struct registered_interface* find_interface_unlocked(
-		const uacpi_char* name) {
-	struct registered_interface* interface = registered_interfaces;
+static struct registered_interface *find_interface_unlocked(const uacpi_char *name) {
+	struct registered_interface *interface = registered_interfaces;
 
 	while (interface) {
 		if (uacpi_strcmp(interface->name, name) == 0)
@@ -147,9 +145,8 @@ static struct registered_interface* find_interface_unlocked(
 	return UACPI_NULL;
 }
 
-static struct registered_interface* find_host_interface_unlocked(
-		uacpi_host_interface type) {
-	struct registered_interface* interface = registered_interfaces;
+static struct registered_interface *find_host_interface_unlocked(uacpi_host_interface type) {
+	struct registered_interface *interface = registered_interfaces;
 
 	while (interface) {
 		if (interface->host_type == type)
@@ -161,11 +158,10 @@ static struct registered_interface* find_host_interface_unlocked(
 	return UACPI_NULL;
 }
 
-uacpi_status uacpi_install_interface(const uacpi_char* name,
-																		 uacpi_interface_kind kind) {
-	struct registered_interface* interface;
+uacpi_status uacpi_install_interface(const uacpi_char *name, uacpi_interface_kind kind) {
+	struct registered_interface *interface;
 	uacpi_status ret;
-	uacpi_char* name_copy;
+	uacpi_char *name_copy;
 	uacpi_size name_size;
 
 	UACPI_ENSURE_INIT_LEVEL_AT_LEAST(UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED);
@@ -212,7 +208,7 @@ out:
 	return ret;
 }
 
-uacpi_status uacpi_uninstall_interface(const uacpi_char* name) {
+uacpi_status uacpi_uninstall_interface(const uacpi_char *name) {
 	struct registered_interface *cur, *prev;
 	uacpi_status ret;
 
@@ -264,9 +260,8 @@ uacpi_status uacpi_uninstall_interface(const uacpi_char* name) {
 	return ret;
 }
 
-static uacpi_status configure_host_interface(uacpi_host_interface type,
-																						 uacpi_bool enabled) {
-	struct registered_interface* interface;
+static uacpi_status configure_host_interface(uacpi_host_interface type, uacpi_bool enabled) {
+	struct registered_interface *interface;
 	uacpi_status ret;
 
 	UACPI_ENSURE_INIT_LEVEL_AT_LEAST(UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED);
@@ -295,8 +290,7 @@ uacpi_status uacpi_disable_host_interface(uacpi_host_interface type) {
 	return configure_host_interface(type, UACPI_FALSE);
 }
 
-uacpi_status uacpi_set_interface_query_handler(
-		uacpi_interface_handler handler) {
+uacpi_status uacpi_set_interface_query_handler(uacpi_interface_handler handler) {
 	uacpi_status ret;
 
 	UACPI_ENSURE_INIT_LEVEL_AT_LEAST(UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED);
@@ -316,10 +310,9 @@ out:
 	return ret;
 }
 
-uacpi_status uacpi_bulk_configure_interfaces(uacpi_interface_action action,
-																						 uacpi_interface_kind kind) {
+uacpi_status uacpi_bulk_configure_interfaces(uacpi_interface_action action, uacpi_interface_kind kind) {
 	uacpi_status ret;
-	struct registered_interface* interface;
+	struct registered_interface *interface;
 
 	UACPI_ENSURE_INIT_LEVEL_AT_LEAST(UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED);
 
@@ -339,9 +332,9 @@ uacpi_status uacpi_bulk_configure_interfaces(uacpi_interface_action action,
 	return ret;
 }
 
-uacpi_status uacpi_handle_osi(const uacpi_char* string, uacpi_bool* out_value) {
+uacpi_status uacpi_handle_osi(const uacpi_char *string, uacpi_bool *out_value) {
 	uacpi_status ret;
-	struct registered_interface* interface;
+	struct registered_interface *interface;
 	uacpi_bool is_supported = UACPI_FALSE;
 
 	ret = uacpi_acquire_native_mutex(interface_mutex);
@@ -364,4 +357,4 @@ out:
 	return UACPI_STATUS_OK;
 }
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE

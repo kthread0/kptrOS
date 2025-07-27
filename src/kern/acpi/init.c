@@ -1,6 +1,7 @@
-#include <uacpi/acpi.h>
-#include <uacpi/uacpi.h>
+#include "../serial/serial.h"
+#include "uacpi/platform/config.h"
 
+#include <uacpi/acpi.h>
 #include <uacpi/internal/context.h>
 #include <uacpi/internal/event.h>
 #include <uacpi/internal/interpreter.h>
@@ -12,9 +13,7 @@
 #include <uacpi/internal/registers.h>
 #include <uacpi/internal/tables.h>
 #include <uacpi/internal/utilities.h>
-
-#include "../serial/serial.h"
-#include "uacpi/platform/config.h"
+#include <uacpi/uacpi.h>
 
 int acpi_init(void) {
 	/*
@@ -23,9 +22,8 @@ int acpi_init(void) {
 	 * in 0 as the flags as we don't want to override any default behavior for
 	 * now.
 	 */
-	void* tmp = 0;
-	uacpi_status ret =
-			uacpi_setup_early_table_access(&tmp, UACPI_STATIC_TABLE_ARRAY_LEN);
+	void *tmp = 0;
+	uacpi_status ret = uacpi_setup_early_table_access(&tmp, UACPI_STATIC_TABLE_ARRAY_LEN);
 	if (uacpi_unlikely_error(ret)) {
 		serial_printf("uacpi_initialize error: %s", uacpi_status_to_string(ret));
 		return -1;

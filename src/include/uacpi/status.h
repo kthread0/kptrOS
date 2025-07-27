@@ -44,7 +44,7 @@ typedef enum uacpi_status {
 	UACPI_STATUS_AML_CALL_STACK_DEPTH_LIMIT = 0x0EFF000A,
 } uacpi_status;
 
-const uacpi_char* uacpi_status_to_string(uacpi_status);
+const uacpi_char *uacpi_status_to_string(uacpi_status);
 
 #define uacpi_unlikely_error(expr) uacpi_unlikely((expr) != UACPI_STATUS_OK)
 #define uacpi_likely_error(expr) uacpi_likely((expr) != UACPI_STATUS_OK)

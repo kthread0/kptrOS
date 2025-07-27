@@ -27,7 +27,7 @@
 #define FLANTERM_FB_PRIVATE_H 1
 
 #ifndef FLANTERM_IN_FLANTERM
-#error "Do not use fb_private.h. Use interfaces defined in fb.h only."
+#	error "Do not use fb_private.h. Use interfaces defined in fb.h only."
 #endif
 
 #include <stdbool.h>
@@ -54,10 +54,7 @@ struct flanterm_fb_queue_item {
 struct flanterm_fb_context {
 	struct flanterm_context term;
 
-	void (*plot_char)(struct flanterm_context* ctx,
-										struct flanterm_fb_char* c,
-										size_t x,
-										size_t y);
+	void (*plot_char)(struct flanterm_context *ctx, struct flanterm_fb_char *c, size_t x, size_t y);
 
 	size_t font_width;
 	size_t font_height;
@@ -69,7 +66,7 @@ struct flanterm_fb_context {
 
 	size_t offset_x, offset_y;
 
-	volatile uint32_t* framebuffer;
+	volatile uint32_t *framebuffer;
 	size_t pitch;
 	size_t width;
 	size_t height;
@@ -80,9 +77,9 @@ struct flanterm_fb_context {
 	uint8_t blue_mask_size, blue_mask_shift;
 
 	size_t font_bits_size;
-	uint8_t* font_bits;
+	uint8_t *font_bits;
 	size_t font_bool_size;
-	bool* font_bool;
+	bool *font_bool;
 
 	uint32_t ansi_colours[8];
 	uint32_t ansi_bright_colours[8];
@@ -90,18 +87,18 @@ struct flanterm_fb_context {
 	uint32_t default_fg_bright, default_bg_bright;
 
 	size_t canvas_size;
-	uint32_t* canvas;
+	uint32_t *canvas;
 
 	size_t grid_size;
 	size_t queue_size;
 	size_t map_size;
 
-	struct flanterm_fb_char* grid;
+	struct flanterm_fb_char *grid;
 
-	struct flanterm_fb_queue_item* queue;
+	struct flanterm_fb_queue_item *queue;
 	size_t queue_i;
 
-	struct flanterm_fb_queue_item** map;
+	struct flanterm_fb_queue_item **map;
 
 	uint32_t text_fg;
 	uint32_t text_bg;

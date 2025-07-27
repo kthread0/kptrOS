@@ -1,4 +1,5 @@
 #include "cpuid.h"
+
 #include <cpuid.h>
 
 /* Example: Get CPU's model number */

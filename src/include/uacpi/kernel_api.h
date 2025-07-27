@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // Returns the PHYSICAL address of the RSDP structure via *out_rsdp_address.
-uacpi_status uacpi_kernel_get_rsdp(uacpi_phys_addr* out_rsdp_address);
+uacpi_status uacpi_kernel_get_rsdp(uacpi_phys_addr *out_rsdp_address);
 
 /*
  * Map a physical memory range starting at 'addr' with length 'len', and return
@@ -35,7 +35,7 @@ uacpi_status uacpi_kernel_get_rsdp(uacpi_phys_addr* out_rsdp_address);
  *              resulting virtual address 0xF000 + 0xABC => 0xFABC. Return it
  *              to uACPI.
  */
-void* uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len);
+void *uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len);
 
 /*
  * Unmap a virtual memory range at 'addr' with a length of 'len' bytes.
@@ -45,14 +45,14 @@ void* uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len);
  *       virtual address originally returned by the VMM for this mapping
  *       as well as its true length.
  */
-void uacpi_kernel_unmap(void* addr, uacpi_size len);
+void uacpi_kernel_unmap(void *addr, uacpi_size len);
 
 #ifndef UACPI_FORMATTED_LOGGING
-void uacpi_kernel_log(uacpi_log_level, const uacpi_char*);
+void uacpi_kernel_log(uacpi_log_level, const uacpi_char *);
 #else
 UACPI_PRINTF_DECL(2, 3)
-void uacpi_kernel_log(uacpi_log_level, const uacpi_char*, ...);
-void uacpi_kernel_vlog(uacpi_log_level, const uacpi_char*, uacpi_va_list);
+void uacpi_kernel_log(uacpi_log_level, const uacpi_char *, ...);
+void uacpi_kernel_vlog(uacpi_log_level, const uacpi_char *, uacpi_va_list);
 #endif
 
 /*
@@ -65,7 +65,7 @@ void uacpi_kernel_vlog(uacpi_log_level, const uacpi_char*, uacpi_va_list);
  * Convenience initialization/deinitialization hooks that will be called by
  * uACPI automatically when appropriate if compiled-in.
  */
-#ifdef UACPI_KERNEL_INITIALIZATION
+#	ifdef UACPI_KERNEL_INITIALIZATION
 /*
  * This API is invoked for each initialization level so that appropriate parts
  * of the host kernel and/or glue code can be initialized at different stages.
@@ -81,7 +81,7 @@ void uacpi_kernel_vlog(uacpi_log_level, const uacpi_char*, uacpi_va_list);
  */
 uacpi_status uacpi_kernel_initialize(uacpi_init_level current_init_lvl);
 void uacpi_kernel_deinitialize(void);
-#endif
+#	endif
 
 /*
  * Open a PCI device at 'address' for reading & writing.
@@ -113,32 +113,19 @@ void uacpi_kernel_deinitialize(void);
  * The handle returned via 'out_handle' is used to perform IO on the
  * configuration space of the device.
  */
-uacpi_status uacpi_kernel_pci_device_open(uacpi_pci_address address,
-																					uacpi_handle* out_handle);
+uacpi_status uacpi_kernel_pci_device_open(uacpi_pci_address address, uacpi_handle *out_handle);
 void uacpi_kernel_pci_device_close(uacpi_handle);
 
 /*
  * Read & write the configuration space of a previously open PCI device.
  */
-uacpi_status uacpi_kernel_pci_read8(uacpi_handle device,
-																		uacpi_size offset,
-																		uacpi_u8* value);
-uacpi_status uacpi_kernel_pci_read16(uacpi_handle device,
-																		 uacpi_size offset,
-																		 uacpi_u16* value);
-uacpi_status uacpi_kernel_pci_read32(uacpi_handle device,
-																		 uacpi_size offset,
-																		 uacpi_u32* value);
+uacpi_status uacpi_kernel_pci_read8(uacpi_handle device, uacpi_size offset, uacpi_u8 *value);
+uacpi_status uacpi_kernel_pci_read16(uacpi_handle device, uacpi_size offset, uacpi_u16 *value);
+uacpi_status uacpi_kernel_pci_read32(uacpi_handle device, uacpi_size offset, uacpi_u32 *value);
 
-uacpi_status uacpi_kernel_pci_write8(uacpi_handle device,
-																		 uacpi_size offset,
-																		 uacpi_u8 value);
-uacpi_status uacpi_kernel_pci_write16(uacpi_handle device,
-																			uacpi_size offset,
-																			uacpi_u16 value);
-uacpi_status uacpi_kernel_pci_write32(uacpi_handle device,
-																			uacpi_size offset,
-																			uacpi_u32 value);
+uacpi_status uacpi_kernel_pci_write8(uacpi_handle device, uacpi_size offset, uacpi_u8 value);
+uacpi_status uacpi_kernel_pci_write16(uacpi_handle device, uacpi_size offset, uacpi_u16 value);
+uacpi_status uacpi_kernel_pci_write32(uacpi_handle device, uacpi_size offset, uacpi_u32 value);
 
 /*
  * Map a SystemIO address at [base, base + len) and return a kernel-implemented
@@ -147,9 +134,7 @@ uacpi_status uacpi_kernel_pci_write32(uacpi_handle device,
  * NOTE: The x86 architecture uses the in/out family of instructions
  *       to access the SystemIO address space.
  */
-uacpi_status uacpi_kernel_io_map(uacpi_io_addr base,
-																 uacpi_size len,
-																 uacpi_handle* out_handle);
+uacpi_status uacpi_kernel_io_map(uacpi_io_addr base, uacpi_size len, uacpi_handle *out_handle);
 void uacpi_kernel_io_unmap(uacpi_handle handle);
 
 /*
@@ -163,39 +148,27 @@ void uacpi_kernel_io_unmap(uacpi_handle handle);
  * You are NOT allowed to break e.g. a 4-byte access into four 1-byte accesses.
  * Hardware ALWAYS expects accesses to be of the exact width.
  */
-uacpi_status uacpi_kernel_io_read8(uacpi_handle,
-																	 uacpi_size offset,
-																	 uacpi_u8* out_value);
-uacpi_status uacpi_kernel_io_read16(uacpi_handle,
-																		uacpi_size offset,
-																		uacpi_u16* out_value);
-uacpi_status uacpi_kernel_io_read32(uacpi_handle,
-																		uacpi_size offset,
-																		uacpi_u32* out_value);
+uacpi_status uacpi_kernel_io_read8(uacpi_handle, uacpi_size offset, uacpi_u8 *out_value);
+uacpi_status uacpi_kernel_io_read16(uacpi_handle, uacpi_size offset, uacpi_u16 *out_value);
+uacpi_status uacpi_kernel_io_read32(uacpi_handle, uacpi_size offset, uacpi_u32 *out_value);
 
-uacpi_status uacpi_kernel_io_write8(uacpi_handle,
-																		uacpi_size offset,
-																		uacpi_u8 in_value);
-uacpi_status uacpi_kernel_io_write16(uacpi_handle,
-																		 uacpi_size offset,
-																		 uacpi_u16 in_value);
-uacpi_status uacpi_kernel_io_write32(uacpi_handle,
-																		 uacpi_size offset,
-																		 uacpi_u32 in_value);
+uacpi_status uacpi_kernel_io_write8(uacpi_handle, uacpi_size offset, uacpi_u8 in_value);
+uacpi_status uacpi_kernel_io_write16(uacpi_handle, uacpi_size offset, uacpi_u16 in_value);
+uacpi_status uacpi_kernel_io_write32(uacpi_handle, uacpi_size offset, uacpi_u32 in_value);
 
 /*
  * Allocate a block of memory of 'size' bytes.
  * The contents of the allocated memory are unspecified.
  */
-void* uacpi_kernel_alloc(uacpi_size size);
+void *uacpi_kernel_alloc(uacpi_size size);
 
-#ifdef UACPI_NATIVE_ALLOC_ZEROED
+#	ifdef UACPI_NATIVE_ALLOC_ZEROED
 /*
  * Allocate a block of memory of 'size' bytes.
  * The returned memory block is expected to be zero-filled.
  */
-void* uacpi_kernel_alloc_zeroed(uacpi_size size);
-#endif
+void *uacpi_kernel_alloc_zeroed(uacpi_size size);
+#	endif
 
 /*
  * Free a previously allocated memory block.
@@ -207,11 +180,11 @@ void* uacpi_kernel_alloc_zeroed(uacpi_size size);
  * allocation. Note that in some scenarios this incurs additional cost to
  * calculate the object size.
  */
-#ifndef UACPI_SIZED_FREES
-void uacpi_kernel_free(void* mem);
-#else
-void uacpi_kernel_free(void* mem, uacpi_size size_hint);
-#endif
+#	ifndef UACPI_SIZED_FREES
+void uacpi_kernel_free(void *mem);
+#	else
+void uacpi_kernel_free(void *mem, uacpi_size size_hint);
+#	endif
 
 /*
  * Returns the number of nanosecond ticks elapsed since boot,
@@ -294,7 +267,7 @@ void uacpi_kernel_reset_event(uacpi_handle);
  *
  * Currently either a Breakpoint or Fatal operators.
  */
-uacpi_status uacpi_kernel_handle_firmware_request(uacpi_firmware_request*);
+uacpi_status uacpi_kernel_handle_firmware_request(uacpi_firmware_request *);
 
 /*
  * Install an interrupt handler at 'irq', 'ctx' is passed to the provided
@@ -304,17 +277,13 @@ uacpi_status uacpi_kernel_handle_firmware_request(uacpi_firmware_request*);
  * refer to this handler from other API.
  */
 uacpi_status uacpi_kernel_install_interrupt_handler(
-		uacpi_u32 irq,
-		uacpi_interrupt_handler,
-		uacpi_handle ctx,
-		uacpi_handle* out_irq_handle);
+								uacpi_u32 irq, uacpi_interrupt_handler, uacpi_handle ctx, uacpi_handle *out_irq_handle);
 
 /*
  * Uninstall an interrupt handler. 'irq_handle' is the value returned via
  * 'out_irq_handle' during installation.
  */
-uacpi_status uacpi_kernel_uninstall_interrupt_handler(uacpi_interrupt_handler,
-																											uacpi_handle irq_handle);
+uacpi_status uacpi_kernel_uninstall_interrupt_handler(uacpi_interrupt_handler, uacpi_handle irq_handle);
 
 /*
  * Create/free a kernel spinlock object.
@@ -357,9 +326,7 @@ typedef void (*uacpi_work_handler)(uacpi_handle);
  * Schedules deferred work for execution.
  * Might be invoked from an interrupt context.
  */
-uacpi_status uacpi_kernel_schedule_work(uacpi_work_type,
-																				uacpi_work_handler,
-																				uacpi_handle ctx);
+uacpi_status uacpi_kernel_schedule_work(uacpi_work_type, uacpi_work_handler, uacpi_handle ctx);
 
 /*
  * Waits for two types of work to finish:
@@ -371,7 +338,7 @@ uacpi_status uacpi_kernel_schedule_work(uacpi_work_type,
  */
 uacpi_status uacpi_kernel_wait_for_work_completion(void);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

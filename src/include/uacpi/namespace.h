@@ -11,7 +11,7 @@ extern "C" {
 
 typedef struct uacpi_namespace_node uacpi_namespace_node;
 
-uacpi_namespace_node* uacpi_namespace_root(void);
+uacpi_namespace_node *uacpi_namespace_root(void);
 
 typedef enum uacpi_predefined_namespace {
 	UACPI_PREDEFINED_NAMESPACE_ROOT = 0,
@@ -26,15 +26,14 @@ typedef enum uacpi_predefined_namespace {
 	UACPI_PREDEFINED_NAMESPACE_REV,
 	UACPI_PREDEFINED_NAMESPACE_MAX = UACPI_PREDEFINED_NAMESPACE_REV,
 } uacpi_predefined_namespace;
-uacpi_namespace_node* uacpi_namespace_get_predefined(
-		uacpi_predefined_namespace);
+uacpi_namespace_node *uacpi_namespace_get_predefined(uacpi_predefined_namespace);
 
 /*
  * Returns UACPI_TRUE if the provided 'node' is an alias.
  */
-uacpi_bool uacpi_namespace_node_is_alias(uacpi_namespace_node* node);
+uacpi_bool uacpi_namespace_node_is_alias(uacpi_namespace_node *node);
 
-uacpi_object_name uacpi_namespace_node_name(const uacpi_namespace_node* node);
+uacpi_object_name uacpi_namespace_node_name(const uacpi_namespace_node *node);
 
 /*
  * Returns the type of object stored at the namespace node.
@@ -42,8 +41,7 @@ uacpi_object_name uacpi_namespace_node_name(const uacpi_namespace_node* node);
  * NOTE: due to the existance of the CopyObject operator in AML, the
  *       return value of this function is subject to TOCTOU bugs.
  */
-uacpi_status uacpi_namespace_node_type(const uacpi_namespace_node* node,
-																			 uacpi_object_type* out_type);
+uacpi_status uacpi_namespace_node_type(const uacpi_namespace_node *node, uacpi_object_type *out_type);
 
 /*
  * Returns UACPI_TRUE via 'out' if the type of the object stored at the
@@ -52,9 +50,7 @@ uacpi_status uacpi_namespace_node_type(const uacpi_namespace_node* node,
  * NOTE: due to the existance of the CopyObject operator in AML, the
  *       return value of this function is subject to TOCTOU bugs.
  */
-uacpi_status uacpi_namespace_node_is(const uacpi_namespace_node* node,
-																		 uacpi_object_type type,
-																		 uacpi_bool* out);
+uacpi_status uacpi_namespace_node_is(const uacpi_namespace_node *node, uacpi_object_type type, uacpi_bool *out);
 
 /*
  * Returns UACPI_TRUE via 'out' if the type of the object stored at the
@@ -64,17 +60,14 @@ uacpi_status uacpi_namespace_node_is(const uacpi_namespace_node* node,
  * NOTE: due to the existance of the CopyObject operator in AML, the
  *       return value of this function is subject to TOCTOU bugs.
  */
-uacpi_status uacpi_namespace_node_is_one_of(const uacpi_namespace_node* node,
-																						uacpi_object_type_bits type_mask,
-																						uacpi_bool* out);
+uacpi_status uacpi_namespace_node_is_one_of(
+								const uacpi_namespace_node *node, uacpi_object_type_bits type_mask, uacpi_bool *out);
 
-uacpi_size uacpi_namespace_node_depth(const uacpi_namespace_node* node);
+uacpi_size uacpi_namespace_node_depth(const uacpi_namespace_node *node);
 
-uacpi_namespace_node* uacpi_namespace_node_parent(uacpi_namespace_node* node);
+uacpi_namespace_node *uacpi_namespace_node_parent(uacpi_namespace_node *node);
 
-uacpi_status uacpi_namespace_node_find(uacpi_namespace_node* parent,
-																			 const uacpi_char* path,
-																			 uacpi_namespace_node** out_node);
+uacpi_status uacpi_namespace_node_find(uacpi_namespace_node *parent, const uacpi_char *path, uacpi_namespace_node **out_node);
 
 /*
  * Same as uacpi_namespace_node_find, except the search recurses upwards when
@@ -83,24 +76,17 @@ uacpi_status uacpi_namespace_node_find(uacpi_namespace_node* parent,
  * such as a package element.
  */
 uacpi_status uacpi_namespace_node_resolve_from_aml_namepath(
-		uacpi_namespace_node* scope,
-		const uacpi_char* path,
-		uacpi_namespace_node** out_node);
+								uacpi_namespace_node *scope, const uacpi_char *path, uacpi_namespace_node **out_node);
 
-typedef uacpi_iteration_decision (*uacpi_iteration_callback)(
-		void* user,
-		uacpi_namespace_node* node,
-		uacpi_u32 node_depth);
+typedef uacpi_iteration_decision (*uacpi_iteration_callback)(void *user, uacpi_namespace_node *node, uacpi_u32 node_depth);
 
-#define UACPI_MAX_DEPTH_ANY 0xFFFFFFFF
+#	define UACPI_MAX_DEPTH_ANY 0xFFFFFFFF
 
 /*
  * Depth-first iterate the namespace starting at the first child of 'parent'.
  */
 uacpi_status uacpi_namespace_for_each_child_simple(
-		uacpi_namespace_node* parent,
-		uacpi_iteration_callback callback,
-		void* user);
+								uacpi_namespace_node *parent, uacpi_iteration_callback callback, void *user);
 
 /*
  * Depth-first iterate the namespace starting at the first child of 'parent'.
@@ -117,12 +103,12 @@ uacpi_status uacpi_namespace_for_each_child_simple(
  * children etc. Use UACPI_MAX_DEPTH_ANY or -1 to specify infinite depth.
  */
 uacpi_status uacpi_namespace_for_each_child(
-		uacpi_namespace_node* parent,
-		uacpi_iteration_callback descending_callback,
-		uacpi_iteration_callback ascending_callback,
-		uacpi_object_type_bits type_mask,
-		uacpi_u32 max_depth,
-		void* user);
+								uacpi_namespace_node *parent,
+								uacpi_iteration_callback descending_callback,
+								uacpi_iteration_callback ascending_callback,
+								uacpi_object_type_bits type_mask,
+								uacpi_u32 max_depth,
+								void *user);
 
 /*
  * Retrieve the next peer namespace node of '*iter', or, if '*iter' is
@@ -149,8 +135,7 @@ uacpi_status uacpi_namespace_for_each_child(
  * as they avoid recursion and/or the need to use dynamic data structures
  * entirely.
  */
-uacpi_status uacpi_namespace_node_next(uacpi_namespace_node* parent,
-																			 uacpi_namespace_node** iter);
+uacpi_status uacpi_namespace_node_next(uacpi_namespace_node *parent, uacpi_namespace_node **iter);
 
 /*
  * Retrieve the next peer namespace node of '*iter', or, if '*iter' is
@@ -164,15 +149,13 @@ uacpi_status uacpi_namespace_node_next(uacpi_namespace_node* parent,
  * as they avoid recursion and/or the need to use dynamic data structures
  * entirely.
  */
-uacpi_status uacpi_namespace_node_next_typed(uacpi_namespace_node* parent,
-																						 uacpi_namespace_node** iter,
-																						 uacpi_object_type_bits type_mask);
+uacpi_status uacpi_namespace_node_next_typed(
+								uacpi_namespace_node *parent, uacpi_namespace_node **iter, uacpi_object_type_bits type_mask);
 
-const uacpi_char* uacpi_namespace_node_generate_absolute_path(
-		const uacpi_namespace_node* node);
-void uacpi_free_absolute_path(const uacpi_char* path);
+const uacpi_char *uacpi_namespace_node_generate_absolute_path(const uacpi_namespace_node *node);
+void uacpi_free_absolute_path(const uacpi_char *path);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

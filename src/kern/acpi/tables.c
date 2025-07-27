@@ -5,12 +5,8 @@
 #include <uacpi/internal/utilities.h>
 #include <uacpi/types.h>
 
-DYNAMIC_ARRAY_WITH_INLINE_STORAGE(table_array,
-																	struct uacpi_installed_table,
-																	UACPI_STATIC_TABLE_ARRAY_LEN)
-DYNAMIC_ARRAY_WITH_INLINE_STORAGE_IMPL(table_array,
-																			 struct uacpi_installed_table,
-																			 static)
+DYNAMIC_ARRAY_WITH_INLINE_STORAGE(table_array, struct uacpi_installed_table, UACPI_STATIC_TABLE_ARRAY_LEN)
+DYNAMIC_ARRAY_WITH_INLINE_STORAGE_IMPL(table_array, struct uacpi_installed_table, static)
 
 static struct table_array tables;
 static uacpi_bool early_table_access;
@@ -20,12 +16,11 @@ static uacpi_table_installation_handler installation_handler;
 
 static uacpi_handle table_mutex;
 
-#define ENSURE_TABLES_ONLINE()                     \
-	do {                                             \
-		if (!early_table_access)                       \
-			UACPI_ENSURE_INIT_LEVEL_AT_LEAST(            \
-					UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED); \
-	} while (0)
+#	define ENSURE_TABLES_ONLINE()                                                  \
+		do {                                                                          \
+			if (!early_table_access)                                                    \
+				UACPI_ENSURE_INIT_LEVEL_AT_LEAST(UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED); \
+		} while (0)
 
 #else
 
@@ -38,60 +33,60 @@ static inline uacpi_status dummy_mutex_acquire_release(uacpi_handle mtx) {
 	return UACPI_STATUS_OK;
 }
 
-#define table_mutex UACPI_NULL
-#define uacpi_acquire_native_mutex_may_be_null dummy_mutex_acquire_release
-#define uacpi_release_native_mutex_may_be_null dummy_mutex_acquire_release
+#	define table_mutex UACPI_NULL
+#	define uacpi_acquire_native_mutex_may_be_null dummy_mutex_acquire_release
+#	define uacpi_release_native_mutex_may_be_null dummy_mutex_acquire_release
 
-#define ENSURE_TABLES_ONLINE()                 \
-	do {                                         \
-		if (!early_table_access)                   \
-			return UACPI_STATUS_INIT_LEVEL_MISMATCH; \
-	} while (0)
+#	define ENSURE_TABLES_ONLINE()                 \
+		do {                                         \
+			if (!early_table_access)                   \
+				return UACPI_STATUS_INIT_LEVEL_MISMATCH; \
+		} while (0)
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 static uacpi_status table_install_physical_with_origin_unlocked(
-		uacpi_phys_addr phys,
-		enum uacpi_table_origin origin,
-		const uacpi_char* expected_signature,
-		uacpi_table* out_table);
-static uacpi_status table_install_with_origin_unlocked(
-		void* virt,
-		enum uacpi_table_origin origin,
-		uacpi_table* out_table);
+								uacpi_phys_addr phys,
+								enum uacpi_table_origin origin,
+								const uacpi_char *expected_signature,
+								uacpi_table *out_table);
+static uacpi_status table_install_with_origin_unlocked(void *virt, enum uacpi_table_origin origin, uacpi_table *out_table);
 
 UACPI_PACKED(struct uacpi_rxsdt {
 	struct acpi_sdt_hdr hdr;
 	uacpi_u8 ptr_bytes[];
 })
 
-static void dump_table_header(uacpi_phys_addr phys_addr, void* hdr) {
-	struct acpi_sdt_hdr* sdt = hdr;
+static void dump_table_header(uacpi_phys_addr phys_addr, void *hdr) {
+	struct acpi_sdt_hdr *sdt = hdr;
 
 	if (uacpi_signatures_match(hdr, ACPI_FACS_SIGNATURE)) {
-		uacpi_info("FACS 0x%016" UACPI_PRIX64 " %08X\n", UACPI_FMT64(phys_addr),
-							 sdt->length);
+		uacpi_info("FACS 0x%016" UACPI_PRIX64 " %08X\n", UACPI_FMT64(phys_addr), sdt->length);
 		return;
 	}
 
-	if (!uacpi_memcmp(hdr, ACPI_RSDP_SIGNATURE,
-										sizeof(ACPI_RSDP_SIGNATURE) - 1)) {
-		struct acpi_rsdp* rsdp = hdr;
+	if (!uacpi_memcmp(hdr, ACPI_RSDP_SIGNATURE, sizeof(ACPI_RSDP_SIGNATURE) - 1)) {
+		struct acpi_rsdp *rsdp = hdr;
 
 		uacpi_info("RSDP 0x%016" UACPI_PRIX64 " %08X v%02X (%6.6s)\n",
-							 UACPI_FMT64(phys_addr), rsdp->revision >= 2 ? rsdp->length : 20,
-							 rsdp->revision, rsdp->oemid);
+							 UACPI_FMT64(phys_addr),
+							 rsdp->revision >= 2 ? rsdp->length : 20,
+							 rsdp->revision,
+							 rsdp->oemid);
 		return;
 	}
 
 	uacpi_info("%.4s 0x%016" UACPI_PRIX64 " %08X v%02X (%6.6s %8.8s)\n",
-						 sdt->signature, UACPI_FMT64(phys_addr), sdt->length, sdt->revision,
-						 sdt->oemid, sdt->oem_table_id);
+						 sdt->signature,
+						 UACPI_FMT64(phys_addr),
+						 sdt->length,
+						 sdt->revision,
+						 sdt->oemid,
+						 sdt->oem_table_id);
 }
 
-static uacpi_status initialize_from_rxsdt(uacpi_phys_addr rxsdt_addr,
-																					uacpi_size entry_size) {
-	struct uacpi_rxsdt* rxsdt;
+static uacpi_status initialize_from_rxsdt(uacpi_phys_addr rxsdt_addr, uacpi_size entry_size) {
+	struct uacpi_rxsdt *rxsdt;
 	uacpi_size i, entry_bytes, map_len = sizeof(*rxsdt);
 	uacpi_phys_addr entry_addr;
 	uacpi_status ret;
@@ -102,8 +97,7 @@ static uacpi_status initialize_from_rxsdt(uacpi_phys_addr rxsdt_addr,
 
 	dump_table_header(rxsdt_addr, rxsdt);
 
-	ret = uacpi_check_table_signature(
-			rxsdt, entry_size == 8 ? ACPI_XSDT_SIGNATURE : ACPI_RSDT_SIGNATURE);
+	ret = uacpi_check_table_signature(rxsdt, entry_size == 8 ? ACPI_XSDT_SIGNATURE : ACPI_RSDT_SIGNATURE);
 	if (uacpi_unlikely_error(ret))
 		goto error_out;
 
@@ -133,10 +127,8 @@ static uacpi_status initialize_from_rxsdt(uacpi_phys_addr rxsdt_addr,
 			continue;
 
 		entry_addr = uacpi_truncate_phys_addr_with_warn(entry_phys_addr_large);
-		ret = uacpi_table_install_physical_with_origin(
-				entry_addr, UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL, UACPI_NULL);
-		if (uacpi_unlikely(ret != UACPI_STATUS_OK &&
-											 ret != UACPI_STATUS_OVERRIDDEN))
+		ret = uacpi_table_install_physical_with_origin(entry_addr, UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL, UACPI_NULL);
+		if (uacpi_unlikely(ret != UACPI_STATUS_OK && ret != UACPI_STATUS_OVERRIDDEN))
 			goto error_out;
 	}
 
@@ -150,7 +142,7 @@ error_out:
 static uacpi_status initialize_from_rsdp(void) {
 	uacpi_status ret;
 	uacpi_phys_addr rsdp_phys;
-	struct acpi_rsdp* rsdp;
+	struct acpi_rsdp *rsdp;
 	uacpi_phys_addr rxsdt;
 	uacpi_size rxsdt_entry_size;
 
@@ -166,12 +158,11 @@ static uacpi_status initialize_from_rsdp(void) {
 
 	dump_table_header(rsdp_phys, rsdp);
 
-	if (rsdp->revision > 1 && rsdp->xsdt_addr &&
-			!uacpi_check_flag(UACPI_FLAG_BAD_XSDT)) {
+	if (rsdp->revision > 1 && rsdp->xsdt_addr && !uacpi_check_flag(UACPI_FLAG_BAD_XSDT)) {
 		rxsdt = uacpi_truncate_phys_addr_with_warn(rsdp->xsdt_addr);
 		rxsdt_entry_size = 8;
 	} else {
-		rxsdt = (uacpi_phys_addr)rsdp->rsdt_addr;
+		rxsdt = (uacpi_phys_addr) rsdp->rsdt_addr;
 		rxsdt_entry_size = 4;
 	}
 
@@ -185,8 +176,7 @@ static uacpi_status initialize_from_rsdp(void) {
 	return initialize_from_rxsdt(rxsdt, rxsdt_entry_size);
 }
 
-uacpi_status uacpi_setup_early_table_access(void* temporary_buffer,
-																						uacpi_size buffer_size) {
+uacpi_status uacpi_setup_early_table_access(void *temporary_buffer, uacpi_size buffer_size) {
 	uacpi_status ret;
 
 #ifndef UACPI_BAREBONES_MODE
@@ -212,16 +202,14 @@ uacpi_status uacpi_setup_early_table_access(void* temporary_buffer,
 }
 
 #ifndef UACPI_BAREBONES_MODE
-static uacpi_iteration_decision warn_if_early_referenced(
-		void* user,
-		struct uacpi_installed_table* tbl,
-		uacpi_size idx) {
+static uacpi_iteration_decision warn_if_early_referenced(void *user, struct uacpi_installed_table *tbl, uacpi_size idx) {
 	UACPI_UNUSED(user);
 
 	if (uacpi_unlikely(tbl->reference_count != 0)) {
-		uacpi_warn("table " UACPI_PRI_TBL_HDR
-							 " (%zu) still has %d early reference(s)!\n",
-							 UACPI_FMT_TBL_HDR(&tbl->hdr), idx, tbl->reference_count);
+		uacpi_warn("table " UACPI_PRI_TBL_HDR " (%zu) still has %d early reference(s)!\n",
+							 UACPI_FMT_TBL_HDR(&tbl->hdr),
+							 idx,
+							 tbl->reference_count);
 	}
 
 	return UACPI_ITERATION_DECISION_CONTINUE;
@@ -236,20 +224,18 @@ uacpi_status uacpi_initialize_tables(void) {
 		// Reallocate the user buffer into a normal heap array
 		num_tables = table_array_size(&tables);
 		if (num_tables > table_array_inline_capacity(&tables)) {
-			void* new_buf;
+			void *new_buf;
 
 			/*
 			 * Allocate a new buffer with size equal to exactly the number of
 			 * dynamic tables (that live in the user provided temporary buffer).
 			 */
 			num_tables -= table_array_inline_capacity(&tables);
-			new_buf =
-					uacpi_kernel_alloc(sizeof(struct uacpi_installed_table) * num_tables);
+			new_buf = uacpi_kernel_alloc(sizeof(struct uacpi_installed_table) * num_tables);
 			if (uacpi_unlikely(new_buf == UACPI_NULL))
 				return UACPI_STATUS_OUT_OF_MEMORY;
 
-			uacpi_memcpy(new_buf, tables.dynamic_storage,
-									 sizeof(struct uacpi_installed_table) * num_tables);
+			uacpi_memcpy(new_buf, tables.dynamic_storage, sizeof(struct uacpi_installed_table) * num_tables);
 			tables.dynamic_storage = new_buf;
 			tables.dynamic_capacity = num_tables;
 		} else {
@@ -271,17 +257,15 @@ uacpi_status uacpi_initialize_tables(void) {
 	}
 
 	if (!uacpi_is_hardware_reduced()) {
-		struct acpi_fadt* fadt = &g_uacpi_rt_ctx.fadt;
+		struct acpi_fadt *fadt = &g_uacpi_rt_ctx.fadt;
 		uacpi_table tbl;
 
 		if (fadt->x_firmware_ctrl) {
 			uacpi_status ret;
 
 			ret = table_install_physical_with_origin_unlocked(
-					fadt->x_firmware_ctrl, UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL,
-					ACPI_FACS_SIGNATURE, &tbl);
-			if (uacpi_unlikely(ret != UACPI_STATUS_OK &&
-												 ret != UACPI_STATUS_OVERRIDDEN))
+											fadt->x_firmware_ctrl, UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL, ACPI_FACS_SIGNATURE, &tbl);
+			if (uacpi_unlikely(ret != UACPI_STATUS_OK && ret != UACPI_STATUS_OVERRIDDEN))
 				return ret;
 
 			g_uacpi_rt_ctx.facs = tbl.ptr;
@@ -294,27 +278,27 @@ uacpi_status uacpi_initialize_tables(void) {
 
 	return UACPI_STATUS_OK;
 }
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 void uacpi_deinitialize_tables(void) {
 	uacpi_size i;
 
 	for (i = 0; i < table_array_size(&tables); ++i) {
-		struct uacpi_installed_table* tbl = table_array_at(&tables, i);
+		struct uacpi_installed_table *tbl = table_array_at(&tables, i);
 
 		switch (tbl->origin) {
 #ifndef UACPI_BAREBONES_MODE
-			case UACPI_TABLE_ORIGIN_FIRMWARE_VIRTUAL:
-				uacpi_free(tbl->ptr, tbl->hdr.length);
-				break;
+		case UACPI_TABLE_ORIGIN_FIRMWARE_VIRTUAL:
+			uacpi_free(tbl->ptr, tbl->hdr.length);
+			break;
 #endif
-			case UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL:
-			case UACPI_TABLE_ORIGIN_HOST_PHYSICAL:
-				if (tbl->reference_count != 0)
-					uacpi_kernel_unmap(tbl->ptr, tbl->hdr.length);
-				break;
-			default:
-				break;
+		case UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL:
+		case UACPI_TABLE_ORIGIN_HOST_PHYSICAL:
+			if (tbl->reference_count != 0)
+				uacpi_kernel_unmap(tbl->ptr, tbl->hdr.length);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -335,8 +319,7 @@ void uacpi_deinitialize_tables(void) {
 #endif
 }
 
-uacpi_status uacpi_set_table_installation_handler(
-		uacpi_table_installation_handler handler) {
+uacpi_status uacpi_set_table_installation_handler(uacpi_table_installation_handler handler) {
 	uacpi_status ret;
 
 	ret = uacpi_acquire_native_mutex_may_be_null(table_mutex);
@@ -353,10 +336,10 @@ out:
 	return ret;
 }
 
-static uacpi_status initialize_fadt(const void*);
+static uacpi_status initialize_fadt(const void *);
 
-static uacpi_u8 table_checksum(void* table, uacpi_size size) {
-	uacpi_u8* bytes = table;
+static uacpi_u8 table_checksum(void *table, uacpi_size size) {
+	uacpi_u8 *bytes = table;
 	uacpi_u8 csum = 0;
 	uacpi_size i;
 
@@ -366,7 +349,7 @@ static uacpi_u8 table_checksum(void* table, uacpi_size size) {
 	return csum;
 }
 
-uacpi_status uacpi_verify_table_checksum(void* table, uacpi_size size) {
+uacpi_status uacpi_verify_table_checksum(void *table, uacpi_size size) {
 	uacpi_status ret = UACPI_STATUS_OK;
 	uacpi_u8 csum;
 
@@ -374,53 +357,45 @@ uacpi_status uacpi_verify_table_checksum(void* table, uacpi_size size) {
 
 	if (uacpi_unlikely(csum != 0)) {
 		enum uacpi_log_level lvl = UACPI_LOG_WARN;
-		struct acpi_sdt_hdr* hdr = table;
+		struct acpi_sdt_hdr *hdr = table;
 
 		if (uacpi_check_flag(UACPI_FLAG_BAD_CSUM_FATAL)) {
 			ret = UACPI_STATUS_BAD_CHECKSUM;
 			lvl = UACPI_LOG_ERROR;
 		}
 
-		uacpi_log_lvl(lvl, "invalid table " UACPI_PRI_TBL_HDR " checksum %d!\n",
-									UACPI_FMT_TBL_HDR(hdr), csum);
+		uacpi_log_lvl(lvl, "invalid table " UACPI_PRI_TBL_HDR " checksum %d!\n", UACPI_FMT_TBL_HDR(hdr), csum);
 	}
 
 	return ret;
 }
 
-uacpi_bool uacpi_signatures_match(const void* const lhs,
-																	const void* const rhs) {
+uacpi_bool uacpi_signatures_match(const void * const lhs, const void * const rhs) {
 	return uacpi_memcmp(lhs, rhs, sizeof(uacpi_object_name)) == 0;
 }
 
-uacpi_status uacpi_check_table_signature(void* table,
-																				 const uacpi_char* expect) {
+uacpi_status uacpi_check_table_signature(void *table, const uacpi_char *expect) {
 	uacpi_status ret = UACPI_STATUS_OK;
 
 	if (!uacpi_signatures_match(table, expect)) {
 		enum uacpi_log_level lvl = UACPI_LOG_WARN;
-		struct acpi_sdt_hdr* hdr = table;
+		struct acpi_sdt_hdr *hdr = table;
 
 		if (uacpi_check_flag(UACPI_FLAG_BAD_TBL_SIGNATURE_FATAL)) {
 			ret = UACPI_STATUS_INVALID_SIGNATURE;
 			lvl = UACPI_LOG_ERROR;
 		}
 
-		uacpi_log_lvl(lvl,
-									"invalid table " UACPI_PRI_TBL_HDR
-									" signature (expected '%.4s')\n",
-									UACPI_FMT_TBL_HDR(hdr), expect);
+		uacpi_log_lvl(lvl, "invalid table " UACPI_PRI_TBL_HDR " signature (expected '%.4s')\n", UACPI_FMT_TBL_HDR(hdr), expect);
 	}
 
 	return ret;
 }
 
-static uacpi_status table_alloc(struct uacpi_installed_table** out_tbl,
-																uacpi_size* out_idx) {
-	struct uacpi_installed_table* tbl;
+static uacpi_status table_alloc(struct uacpi_installed_table **out_tbl, uacpi_size *out_idx) {
+	struct uacpi_installed_table *tbl;
 
-	if (early_table_access &&
-			table_array_size(&tables) == table_array_capacity(&tables)) {
+	if (early_table_access && table_array_size(&tables) == table_array_capacity(&tables)) {
 		uacpi_warn("early table access buffer capacity exhausted!\n");
 		return UACPI_STATUS_OUT_OF_MEMORY;
 	}
@@ -434,9 +409,8 @@ static uacpi_status table_alloc(struct uacpi_installed_table** out_tbl,
 	return UACPI_STATUS_OK;
 }
 
-static uacpi_status get_external_table_header(uacpi_phys_addr phys_addr,
-																							struct acpi_sdt_hdr* out_hdr) {
-	void* virt;
+static uacpi_status get_external_table_header(uacpi_phys_addr phys_addr, struct acpi_sdt_hdr *out_hdr) {
+	void *virt;
 
 	virt = uacpi_kernel_map(phys_addr, sizeof(*out_hdr));
 	if (uacpi_unlikely(virt == UACPI_NULL))
@@ -448,42 +422,39 @@ static uacpi_status get_external_table_header(uacpi_phys_addr phys_addr,
 	return UACPI_STATUS_OK;
 }
 
-static uacpi_status table_ref_unlocked(struct uacpi_installed_table* tbl) {
+static uacpi_status table_ref_unlocked(struct uacpi_installed_table *tbl) {
 	switch (tbl->reference_count) {
-		case 0: {
-			uacpi_status ret;
+	case 0: {
+		uacpi_status ret;
 
-			if (tbl->flags & UACPI_TABLE_INVALID)
-				return UACPI_STATUS_INVALID_ARGUMENT;
+		if (tbl->flags & UACPI_TABLE_INVALID)
+			return UACPI_STATUS_INVALID_ARGUMENT;
 
-			if (tbl->origin != UACPI_TABLE_ORIGIN_HOST_PHYSICAL &&
-					tbl->origin != UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL)
-				break;
+		if (tbl->origin != UACPI_TABLE_ORIGIN_HOST_PHYSICAL && tbl->origin != UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL)
+			break;
 
-			tbl->ptr = uacpi_kernel_map(tbl->phys_addr, tbl->hdr.length);
-			if (uacpi_unlikely(tbl->ptr == UACPI_NULL))
-				return UACPI_STATUS_MAPPING_FAILED;
+		tbl->ptr = uacpi_kernel_map(tbl->phys_addr, tbl->hdr.length);
+		if (uacpi_unlikely(tbl->ptr == UACPI_NULL))
+			return UACPI_STATUS_MAPPING_FAILED;
 
-			if (!(tbl->flags & UACPI_TABLE_CSUM_VERIFIED)) {
-				ret = uacpi_verify_table_checksum(tbl->ptr, tbl->hdr.length);
-				if (uacpi_unlikely_error(ret)) {
-					uacpi_kernel_unmap(tbl->ptr, tbl->hdr.length);
-					tbl->flags |= UACPI_TABLE_INVALID;
-					tbl->ptr = UACPI_NULL;
-					return ret;
-				}
-
-				tbl->flags |= UACPI_TABLE_CSUM_VERIFIED;
+		if (!(tbl->flags & UACPI_TABLE_CSUM_VERIFIED)) {
+			ret = uacpi_verify_table_checksum(tbl->ptr, tbl->hdr.length);
+			if (uacpi_unlikely_error(ret)) {
+				uacpi_kernel_unmap(tbl->ptr, tbl->hdr.length);
+				tbl->flags |= UACPI_TABLE_INVALID;
+				tbl->ptr = UACPI_NULL;
+				return ret;
 			}
-			break;
+
+			tbl->flags |= UACPI_TABLE_CSUM_VERIFIED;
 		}
-		case 0xFFFF - 1:
-			uacpi_warn("too many references for " UACPI_PRI_TBL_HDR
-								 ", mapping permanently\n",
-								 UACPI_FMT_TBL_HDR(&tbl->hdr));
-			break;
-		default:
-			break;
+		break;
+	}
+	case 0xFFFF - 1:
+		uacpi_warn("too many references for " UACPI_PRI_TBL_HDR ", mapping permanently\n", UACPI_FMT_TBL_HDR(&tbl->hdr));
+		break;
+	default:
+		break;
 	}
 
 	if (uacpi_likely(tbl->reference_count != 0xFFFF))
@@ -491,42 +462,40 @@ static uacpi_status table_ref_unlocked(struct uacpi_installed_table* tbl) {
 	return UACPI_STATUS_OK;
 }
 
-static uacpi_status table_unref_unlocked(struct uacpi_installed_table* tbl) {
+static uacpi_status table_unref_unlocked(struct uacpi_installed_table *tbl) {
 	switch (tbl->reference_count) {
-		case 0:
-			uacpi_warn("tried to unref table " UACPI_PRI_TBL_HDR
-								 " with no references\n",
-								 UACPI_FMT_TBL_HDR(&tbl->hdr));
-			return UACPI_STATUS_INVALID_ARGUMENT;
-		case 1:
-			if (tbl->origin != UACPI_TABLE_ORIGIN_HOST_PHYSICAL &&
-					tbl->origin != UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL)
-				break;
+	case 0:
+		uacpi_warn("tried to unref table " UACPI_PRI_TBL_HDR " with no references\n", UACPI_FMT_TBL_HDR(&tbl->hdr));
+		return UACPI_STATUS_INVALID_ARGUMENT;
+	case 1:
+		if (tbl->origin != UACPI_TABLE_ORIGIN_HOST_PHYSICAL && tbl->origin != UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL)
+			break;
 
-			uacpi_kernel_unmap(tbl->ptr, tbl->hdr.length);
-			tbl->ptr = UACPI_NULL;
-			break;
-		case 0xFFFF:
-			/*
-			 * Consider the reference count (overflow) of 0xFFFF to be a permanently
-			 * mapped table as we don't know the actual number of references.
-			 */
-			return UACPI_STATUS_OK;
-		default:
-			break;
+		uacpi_kernel_unmap(tbl->ptr, tbl->hdr.length);
+		tbl->ptr = UACPI_NULL;
+		break;
+	case 0xFFFF:
+		/*
+		 * Consider the reference count (overflow) of 0xFFFF to be a permanently
+		 * mapped table as we don't know the actual number of references.
+		 */
+		return UACPI_STATUS_OK;
+	default:
+		break;
 	}
 
 	tbl->reference_count--;
 	return UACPI_STATUS_OK;
 }
 
-static uacpi_status verify_and_install_table(struct acpi_sdt_hdr* hdr,
-																						 uacpi_phys_addr phys_addr,
-																						 void* virt_addr,
-																						 enum uacpi_table_origin origin,
-																						 uacpi_table* out_table) {
+static uacpi_status verify_and_install_table(
+								struct acpi_sdt_hdr *hdr,
+								uacpi_phys_addr phys_addr,
+								void *virt_addr,
+								enum uacpi_table_origin origin,
+								uacpi_table *out_table) {
 	uacpi_status ret;
-	struct uacpi_installed_table* table;
+	struct uacpi_installed_table *table;
 	uacpi_bool is_fadt;
 	uacpi_size idx;
 	uacpi_u8 flags = 0;
@@ -539,9 +508,8 @@ static uacpi_status verify_and_install_table(struct acpi_sdt_hdr* hdr,
 	 */
 	if (uacpi_signatures_match(hdr->signature, ACPI_FACS_SIGNATURE)) {
 		flags |= UACPI_TABLE_CSUM_VERIFIED;
-	} else if (uacpi_check_flag(UACPI_FLAG_PROACTIVE_TBL_CSUM) || is_fadt ||
-						 out_table != UACPI_NULL) {
-		void* mapping = virt_addr;
+	} else if (uacpi_check_flag(UACPI_FLAG_PROACTIVE_TBL_CSUM) || is_fadt || out_table != UACPI_NULL) {
+		void *mapping = virt_addr;
 
 		// We may already have a valid mapping, reuse it if we do
 		if (mapping == UACPI_NULL)
@@ -589,34 +557,30 @@ static uacpi_status verify_and_install_table(struct acpi_sdt_hdr* hdr,
 }
 
 static uacpi_status handle_table_override(
-		uacpi_table_installation_disposition disposition,
-		uacpi_u64 address,
-		uacpi_table* out_table) {
+								uacpi_table_installation_disposition disposition, uacpi_u64 address, uacpi_table *out_table) {
 	uacpi_status ret;
 
 	switch (disposition) {
-		case UACPI_TABLE_INSTALLATION_DISPOSITON_VIRTUAL_OVERRIDE:
-			ret = table_install_with_origin_unlocked(
-					UACPI_VIRT_ADDR_TO_PTR((uacpi_virt_addr)address),
-					UACPI_TABLE_ORIGIN_HOST_VIRTUAL, out_table);
-			return ret;
-		case UACPI_TABLE_INSTALLATION_DISPOSITON_PHYSICAL_OVERRIDE:
-			return table_install_physical_with_origin_unlocked(
-					(uacpi_phys_addr)address, UACPI_TABLE_ORIGIN_HOST_PHYSICAL,
-					UACPI_NULL, out_table);
-		default:
-			uacpi_error("invalid table installation disposition %d\n", disposition);
-			return UACPI_STATUS_INTERNAL_ERROR;
+	case UACPI_TABLE_INSTALLATION_DISPOSITON_VIRTUAL_OVERRIDE:
+		ret = table_install_with_origin_unlocked(
+										UACPI_VIRT_ADDR_TO_PTR((uacpi_virt_addr) address), UACPI_TABLE_ORIGIN_HOST_VIRTUAL, out_table);
+		return ret;
+	case UACPI_TABLE_INSTALLATION_DISPOSITON_PHYSICAL_OVERRIDE:
+		return table_install_physical_with_origin_unlocked(
+										(uacpi_phys_addr) address, UACPI_TABLE_ORIGIN_HOST_PHYSICAL, UACPI_NULL, out_table);
+	default:
+		uacpi_error("invalid table installation disposition %d\n", disposition);
+		return UACPI_STATUS_INTERNAL_ERROR;
 	}
 }
 
 static uacpi_status table_install_physical_with_origin_unlocked(
-		uacpi_phys_addr phys,
-		enum uacpi_table_origin origin,
-		const uacpi_char* expected_signature,
-		uacpi_table* out_table) {
+								uacpi_phys_addr phys,
+								enum uacpi_table_origin origin,
+								const uacpi_char *expected_signature,
+								uacpi_table *out_table) {
 	struct acpi_sdt_hdr hdr;
-	void* virt = UACPI_NULL;
+	void *virt = UACPI_NULL;
 	uacpi_status ret;
 
 	ret = get_external_table_header(phys, &hdr);
@@ -624,8 +588,7 @@ static uacpi_status table_install_physical_with_origin_unlocked(
 		return ret;
 
 	if (uacpi_unlikely(hdr.length < sizeof(struct acpi_sdt_hdr))) {
-		uacpi_error("invalid table '%.4s' (0x%016" UACPI_PRIX64 ") size: %u\n",
-								hdr.signature, UACPI_FMT64(phys), hdr.length);
+		uacpi_error("invalid table '%.4s' (0x%016" UACPI_PRIX64 ") size: %u\n", hdr.signature, UACPI_FMT64(phys), hdr.length);
 		return UACPI_STATUS_INVALID_TABLE_LENGTH;
 	}
 
@@ -641,35 +604,36 @@ static uacpi_status table_install_physical_with_origin_unlocked(
 			return UACPI_STATUS_MAPPING_FAILED;
 	}
 
-	if (origin == UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL &&
-			installation_handler != UACPI_NULL) {
+	if (origin == UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL && installation_handler != UACPI_NULL) {
 		uacpi_u64 override;
 		uacpi_table_installation_disposition disposition;
 
 		disposition = installation_handler(virt, &override);
 
 		switch (disposition) {
-			case UACPI_TABLE_INSTALLATION_DISPOSITON_ALLOW:
-				break;
-			case UACPI_TABLE_INSTALLATION_DISPOSITON_DENY:
-				uacpi_info("table '%.4s' (0x%016" UACPI_PRIX64
-									 ") installation denied "
-									 "by host\n",
-									 hdr.signature, UACPI_FMT64(phys));
-				ret = UACPI_STATUS_DENIED;
-				goto out;
+		case UACPI_TABLE_INSTALLATION_DISPOSITON_ALLOW:
+			break;
+		case UACPI_TABLE_INSTALLATION_DISPOSITON_DENY:
+			uacpi_info("table '%.4s' (0x%016" UACPI_PRIX64
+								 ") installation denied "
+								 "by host\n",
+								 hdr.signature,
+								 UACPI_FMT64(phys));
+			ret = UACPI_STATUS_DENIED;
+			goto out;
 
-			default:
-				uacpi_info("table '%.4s' (0x%016" UACPI_PRIX64
-									 ") installation "
-									 "overridden by host\n",
-									 hdr.signature, UACPI_FMT64(phys));
+		default:
+			uacpi_info("table '%.4s' (0x%016" UACPI_PRIX64
+								 ") installation "
+								 "overridden by host\n",
+								 hdr.signature,
+								 UACPI_FMT64(phys));
 
-				ret = handle_table_override(disposition, override, out_table);
-				if (uacpi_likely_success(ret))
-					ret = UACPI_STATUS_OVERRIDDEN;
+			ret = handle_table_override(disposition, override, out_table);
+			if (uacpi_likely_success(ret))
+				ret = UACPI_STATUS_OVERRIDDEN;
 
-				goto out;
+			goto out;
 		}
 	}
 
@@ -685,62 +649,51 @@ out:
 }
 
 uacpi_status uacpi_table_install_physical_with_origin(
-		uacpi_phys_addr phys,
-		enum uacpi_table_origin origin,
-		uacpi_table* out_table) {
+								uacpi_phys_addr phys, enum uacpi_table_origin origin, uacpi_table *out_table) {
 	uacpi_status ret;
 
 	ret = uacpi_acquire_native_mutex_may_be_null(table_mutex);
 	if (uacpi_unlikely_error(ret))
 		return ret;
 
-	ret = table_install_physical_with_origin_unlocked(phys, origin, UACPI_NULL,
-																										out_table);
+	ret = table_install_physical_with_origin_unlocked(phys, origin, UACPI_NULL, out_table);
 	uacpi_release_native_mutex_may_be_null(table_mutex);
 
 	return ret;
 }
 
-static uacpi_status table_install_with_origin_unlocked(
-		void* virt,
-		enum uacpi_table_origin origin,
-		uacpi_table* out_table) {
-	struct acpi_sdt_hdr* hdr = virt;
+static uacpi_status table_install_with_origin_unlocked(void *virt, enum uacpi_table_origin origin, uacpi_table *out_table) {
+	struct acpi_sdt_hdr *hdr = virt;
 
 	if (uacpi_unlikely(hdr->length < sizeof(struct acpi_sdt_hdr))) {
-		uacpi_error("invalid table '%.4s' (%p) size: %u\n", hdr->signature, virt,
-								hdr->length);
+		uacpi_error("invalid table '%.4s' (%p) size: %u\n", hdr->signature, virt, hdr->length);
 		return UACPI_STATUS_INVALID_TABLE_LENGTH;
 	}
 
 #ifndef UACPI_BAREBONES_MODE
-	if (origin == UACPI_TABLE_ORIGIN_FIRMWARE_VIRTUAL &&
-			installation_handler != UACPI_NULL) {
+	if (origin == UACPI_TABLE_ORIGIN_FIRMWARE_VIRTUAL && installation_handler != UACPI_NULL) {
 		uacpi_u64 override;
 		uacpi_table_installation_disposition disposition;
 
 		disposition = installation_handler(virt, &override);
 
 		switch (disposition) {
-			case UACPI_TABLE_INSTALLATION_DISPOSITON_ALLOW:
-				break;
-			case UACPI_TABLE_INSTALLATION_DISPOSITON_DENY:
-				uacpi_info("table " UACPI_PRI_TBL_HDR " installation denied by host\n",
-									 UACPI_FMT_TBL_HDR(hdr));
-				return UACPI_STATUS_DENIED;
+		case UACPI_TABLE_INSTALLATION_DISPOSITON_ALLOW:
+			break;
+		case UACPI_TABLE_INSTALLATION_DISPOSITON_DENY:
+			uacpi_info("table " UACPI_PRI_TBL_HDR " installation denied by host\n", UACPI_FMT_TBL_HDR(hdr));
+			return UACPI_STATUS_DENIED;
 
-			default: {
-				uacpi_status ret;
-				uacpi_info("table " UACPI_PRI_TBL_HDR
-									 " installation overridden by host\n",
-									 UACPI_FMT_TBL_HDR(hdr));
+		default: {
+			uacpi_status ret;
+			uacpi_info("table " UACPI_PRI_TBL_HDR " installation overridden by host\n", UACPI_FMT_TBL_HDR(hdr));
 
-				ret = handle_table_override(disposition, override, out_table);
-				if (uacpi_likely_success(ret))
-					ret = UACPI_STATUS_OVERRIDDEN;
+			ret = handle_table_override(disposition, override, out_table);
+			if (uacpi_likely_success(ret))
+				ret = UACPI_STATUS_OVERRIDDEN;
 
-				return ret;
-			}
+			return ret;
+		}
 		}
 	}
 #endif
@@ -748,9 +701,7 @@ static uacpi_status table_install_with_origin_unlocked(
 	return verify_and_install_table(hdr, 0, virt, origin, out_table);
 }
 
-uacpi_status uacpi_table_install_with_origin(void* virt,
-																						 enum uacpi_table_origin origin,
-																						 uacpi_table* out_table) {
+uacpi_status uacpi_table_install_with_origin(void *virt, enum uacpi_table_origin origin, uacpi_table *out_table) {
 	uacpi_status ret;
 
 	ret = uacpi_acquire_native_mutex_may_be_null(table_mutex);
@@ -763,27 +714,22 @@ uacpi_status uacpi_table_install_with_origin(void* virt,
 	return ret;
 }
 
-uacpi_status uacpi_table_install(void* virt, uacpi_table* out_table) {
+uacpi_status uacpi_table_install(void *virt, uacpi_table *out_table) {
 	ENSURE_TABLES_ONLINE();
 
-	return uacpi_table_install_with_origin(virt, UACPI_TABLE_ORIGIN_HOST_VIRTUAL,
-																				 out_table);
+	return uacpi_table_install_with_origin(virt, UACPI_TABLE_ORIGIN_HOST_VIRTUAL, out_table);
 }
 
-uacpi_status uacpi_table_install_physical(uacpi_phys_addr addr,
-																					uacpi_table* out_table) {
+uacpi_status uacpi_table_install_physical(uacpi_phys_addr addr, uacpi_table *out_table) {
 	ENSURE_TABLES_ONLINE();
 
-	return uacpi_table_install_physical_with_origin(
-			addr, UACPI_TABLE_ORIGIN_HOST_PHYSICAL, out_table);
+	return uacpi_table_install_physical_with_origin(addr, UACPI_TABLE_ORIGIN_HOST_PHYSICAL, out_table);
 }
 
-uacpi_status uacpi_for_each_table(uacpi_size base_idx,
-																	uacpi_table_iteration_callback cb,
-																	void* user) {
+uacpi_status uacpi_for_each_table(uacpi_size base_idx, uacpi_table_iteration_callback cb, void *user) {
 	uacpi_status ret;
 	uacpi_size idx;
-	struct uacpi_installed_table* tbl;
+	struct uacpi_installed_table *tbl;
 	uacpi_iteration_decision dec;
 
 	ENSURE_TABLES_ONLINE();
@@ -814,49 +760,44 @@ enum search_type {
 
 struct table_search_ctx {
 	union {
-		const uacpi_table_identifiers* id;
+		const uacpi_table_identifiers *id;
 		uacpi_table_match_callback match_cb;
 	};
 
-	uacpi_table* out_table;
+	uacpi_table *out_table;
 	uacpi_u8 search_type;
 	uacpi_status status;
 };
 
-static uacpi_iteration_decision do_search_tables(
-		void* user,
-		struct uacpi_installed_table* tbl,
-		uacpi_size idx) {
-	struct table_search_ctx* ctx = user;
-	uacpi_table* out_table;
+static uacpi_iteration_decision do_search_tables(void *user, struct uacpi_installed_table *tbl, uacpi_size idx) {
+	struct table_search_ctx *ctx = user;
+	uacpi_table *out_table;
 	uacpi_status ret;
 
 	switch (ctx->search_type) {
-		case SEARCH_TYPE_BY_ID: {
-			const uacpi_table_identifiers* id = ctx->id;
+	case SEARCH_TYPE_BY_ID: {
+		const uacpi_table_identifiers *id = ctx->id;
 
-			if (!uacpi_signatures_match(&id->signature, tbl->hdr.signature))
-				return UACPI_ITERATION_DECISION_CONTINUE;
-			if (id->oemid[0] != '\0' &&
-					uacpi_memcmp(id->oemid, tbl->hdr.oemid, sizeof(id->oemid)) != 0)
-				return UACPI_ITERATION_DECISION_CONTINUE;
+		if (!uacpi_signatures_match(&id->signature, tbl->hdr.signature))
+			return UACPI_ITERATION_DECISION_CONTINUE;
+		if (id->oemid[0] != '\0' && uacpi_memcmp(id->oemid, tbl->hdr.oemid, sizeof(id->oemid)) != 0)
+			return UACPI_ITERATION_DECISION_CONTINUE;
 
-			if (id->oem_table_id[0] != '\0' &&
-					uacpi_memcmp(id->oem_table_id, tbl->hdr.oem_table_id,
-											 sizeof(id->oem_table_id)) != 0)
-				return UACPI_ITERATION_DECISION_CONTINUE;
+		if (id->oem_table_id[0] != '\0' &&
+				uacpi_memcmp(id->oem_table_id, tbl->hdr.oem_table_id, sizeof(id->oem_table_id)) != 0)
+			return UACPI_ITERATION_DECISION_CONTINUE;
 
-			break;
-		}
+		break;
+	}
 
-		case SEARCH_TYPE_MATCH:
-			if (!ctx->match_cb(tbl))
-				return UACPI_ITERATION_DECISION_CONTINUE;
-			break;
+	case SEARCH_TYPE_MATCH:
+		if (!ctx->match_cb(tbl))
+			return UACPI_ITERATION_DECISION_CONTINUE;
+		break;
 
-		default:
-			ctx->status = UACPI_STATUS_INVALID_ARGUMENT;
-			return UACPI_ITERATION_DECISION_BREAK;
+	default:
+		ctx->status = UACPI_STATUS_INVALID_ARGUMENT;
+		return UACPI_ITERATION_DECISION_BREAK;
 	}
 
 	ret = table_ref_unlocked(tbl);
@@ -880,11 +821,9 @@ static uacpi_iteration_decision do_search_tables(
 }
 
 #ifndef UACPI_BAREBONES_MODE
-uacpi_status uacpi_table_match(uacpi_size base_idx,
-															 uacpi_table_match_callback cb,
-															 uacpi_table* out_table) {
+uacpi_status uacpi_table_match(uacpi_size base_idx, uacpi_table_match_callback cb, uacpi_table *out_table) {
 	uacpi_status ret;
-	struct table_search_ctx ctx = {0};
+	struct table_search_ctx ctx = { 0 };
 
 	ctx.match_cb = cb;
 	ctx.search_type = SEARCH_TYPE_MATCH;
@@ -899,11 +838,9 @@ uacpi_status uacpi_table_match(uacpi_size base_idx,
 }
 #endif
 
-static uacpi_status find_table(uacpi_size base_idx,
-															 const uacpi_table_identifiers* id,
-															 uacpi_table* out_table) {
+static uacpi_status find_table(uacpi_size base_idx, const uacpi_table_identifiers *id, uacpi_table *out_table) {
 	uacpi_status ret;
-	struct table_search_ctx ctx = {0};
+	struct table_search_ctx ctx = { 0 };
 
 	ctx.id = id;
 	ctx.out_table = out_table;
@@ -917,9 +854,8 @@ static uacpi_status find_table(uacpi_size base_idx,
 	return ctx.status;
 }
 
-uacpi_status uacpi_table_find_by_signature(const uacpi_char* signature_string,
-																					 struct uacpi_table* out_table) {
-	struct uacpi_table_identifiers id = {0};
+uacpi_status uacpi_table_find_by_signature(const uacpi_char *signature_string, struct uacpi_table *out_table) {
+	struct uacpi_table_identifiers id = { 0 };
 
 	id.signature.text[0] = signature_string[0];
 	id.signature.text[1] = signature_string[1];
@@ -931,24 +867,21 @@ uacpi_status uacpi_table_find_by_signature(const uacpi_char* signature_string,
 	return find_table(0, &id, out_table);
 }
 
-uacpi_status uacpi_table_find_next_with_same_signature(
-		uacpi_table* in_out_table) {
-	struct uacpi_table_identifiers id = {0};
+uacpi_status uacpi_table_find_next_with_same_signature(uacpi_table *in_out_table) {
+	struct uacpi_table_identifiers id = { 0 };
 
 	ENSURE_TABLES_ONLINE();
 
 	if (uacpi_unlikely(in_out_table->ptr == UACPI_NULL))
 		return UACPI_STATUS_INVALID_ARGUMENT;
 
-	uacpi_memcpy(&id.signature, in_out_table->hdr->signature,
-							 sizeof(id.signature));
+	uacpi_memcpy(&id.signature, in_out_table->hdr->signature, sizeof(id.signature));
 	uacpi_table_unref(in_out_table);
 
 	return find_table(in_out_table->index + 1, &id, in_out_table);
 }
 
-uacpi_status uacpi_table_find(const uacpi_table_identifiers* id,
-															uacpi_table* out_table) {
+uacpi_status uacpi_table_find(const uacpi_table_identifiers *id, uacpi_table *out_table) {
 	ENSURE_TABLES_ONLINE();
 
 	return find_table(0, id, out_table);
@@ -969,12 +902,12 @@ struct table_ctl_request {
 	uacpi_u8 set;
 	uacpi_u8 clear;
 
-	void* out_tbl;
+	void *out_tbl;
 };
 
-static uacpi_status table_ctl(uacpi_size idx, struct table_ctl_request* req) {
+static uacpi_status table_ctl(uacpi_size idx, struct table_ctl_request *req) {
 	uacpi_status ret;
-	struct uacpi_installed_table* tbl;
+	struct uacpi_installed_table *tbl;
 
 	ENSURE_TABLES_ONLINE();
 
@@ -983,8 +916,7 @@ static uacpi_status table_ctl(uacpi_size idx, struct table_ctl_request* req) {
 		return ret;
 
 	if (uacpi_unlikely(table_array_size(&tables) <= idx)) {
-		uacpi_error("requested invalid table index %zu (%zu tables installed)\n",
-								idx, table_array_size(&tables));
+		uacpi_error("requested invalid table index %zu (%zu tables installed)\n", idx, table_array_size(&tables));
 		ret = UACPI_STATUS_INVALID_ARGUMENT;
 		goto out;
 	}
@@ -997,9 +929,7 @@ static uacpi_status table_ctl(uacpi_size idx, struct table_ctl_request* req) {
 		uacpi_u8 mask = req->expect_set;
 
 		if (uacpi_unlikely((tbl->flags & mask) != mask)) {
-			uacpi_error(
-					"unexpected table '%.4s' flags %02X, expected %02X to be set\n",
-					tbl->hdr.signature, tbl->flags, mask);
+			uacpi_error("unexpected table '%.4s' flags %02X, expected %02X to be set\n", tbl->hdr.signature, tbl->flags, mask);
 			ret = UACPI_STATUS_INVALID_ARGUMENT;
 			goto out;
 		}
@@ -1009,10 +939,11 @@ static uacpi_status table_ctl(uacpi_size idx, struct table_ctl_request* req) {
 		uacpi_u8 mask = req->expect_clear;
 
 		if (uacpi_unlikely((tbl->flags & mask) != 0)) {
-			uacpi_error(
-					"unexpected table '%.4s' flags %02X, expected %02X "
-					"to be clear\n",
-					tbl->hdr.signature, tbl->flags, mask);
+			uacpi_error("unexpected table '%.4s' flags %02X, expected %02X "
+									"to be clear\n",
+									tbl->hdr.signature,
+									tbl->flags,
+									mask);
 			ret = UACPI_STATUS_ALREADY_EXISTS;
 			goto out;
 		}
@@ -1043,14 +974,12 @@ out:
 }
 
 #ifndef UACPI_BAREBONES_MODE
-uacpi_status uacpi_table_load_with_cause(uacpi_size idx,
-																				 enum uacpi_table_load_cause cause) {
+uacpi_status uacpi_table_load_with_cause(uacpi_size idx, enum uacpi_table_load_cause cause) {
 	uacpi_status ret;
 	struct table_ctl_request req = {
-			.type =
-					TABLE_CTL_SET_FLAGS | TABLE_CTL_VALIDATE_CLEAR_FLAGS | TABLE_CTL_GET,
-			.set = UACPI_TABLE_LOADED,
-			.expect_clear = UACPI_TABLE_LOADED,
+		.type = TABLE_CTL_SET_FLAGS | TABLE_CTL_VALIDATE_CLEAR_FLAGS | TABLE_CTL_GET,
+		.set = UACPI_TABLE_LOADED,
+		.expect_clear = UACPI_TABLE_LOADED,
 	};
 
 	ret = table_ctl(idx, &req);
@@ -1069,28 +998,27 @@ uacpi_status uacpi_table_load(uacpi_size idx) {
 }
 
 void uacpi_table_mark_as_loaded(uacpi_size idx) {
-	struct table_ctl_request req = {.type = TABLE_CTL_SET_FLAGS,
-																	.set = UACPI_TABLE_LOADED};
+	struct table_ctl_request req = { .type = TABLE_CTL_SET_FLAGS, .set = UACPI_TABLE_LOADED };
 
 	table_ctl(idx, &req);
 }
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
-uacpi_status uacpi_table_ref(uacpi_table* tbl) {
-	struct table_ctl_request req = {.type = TABLE_CTL_GET};
-
-	return table_ctl(tbl->index, &req);
-}
-
-uacpi_status uacpi_table_unref(uacpi_table* tbl) {
-	struct table_ctl_request req = {.type = TABLE_CTL_PUT};
+uacpi_status uacpi_table_ref(uacpi_table *tbl) {
+	struct table_ctl_request req = { .type = TABLE_CTL_GET };
 
 	return table_ctl(tbl->index, &req);
 }
 
-uacpi_u16 fadt_version_sizes[] = {116, 132, 244, 244, 268, 276};
+uacpi_status uacpi_table_unref(uacpi_table *tbl) {
+	struct table_ctl_request req = { .type = TABLE_CTL_PUT };
 
-static void fadt_ensure_correct_revision(struct acpi_fadt* fadt) {
+	return table_ctl(tbl->index, &req);
+}
+
+uacpi_u16 fadt_version_sizes[] = { 116, 132, 244, 244, 268, 276 };
+
+static void fadt_ensure_correct_revision(struct acpi_fadt *fadt) {
 	uacpi_size current_rev, rev;
 
 	current_rev = fadt->hdr.revision;
@@ -1101,10 +1029,10 @@ static void fadt_ensure_correct_revision(struct acpi_fadt* fadt) {
 	}
 
 	if (rev == UACPI_ARRAY_SIZE(fadt_version_sizes)) {
-		uacpi_trace(
-				"FADT revision (%zu) is likely greater than the last "
-				"supported, reducing to %zu\n",
-				current_rev, rev);
+		uacpi_trace("FADT revision (%zu) is likely greater than the last "
+								"supported, reducing to %zu\n",
+								current_rev,
+								rev);
 		fadt->hdr.revision = rev;
 		return;
 	}
@@ -1112,17 +1040,16 @@ static void fadt_ensure_correct_revision(struct acpi_fadt* fadt) {
 	rev++;
 
 	if (current_rev != rev && !(rev == 3 && current_rev == 4)) {
-		uacpi_warn(
-				"FADT length %u doesn't match expected for revision %zu, "
-				"assuming version %zu\n",
-				fadt->hdr.length, current_rev, rev);
+		uacpi_warn("FADT length %u doesn't match expected for revision %zu, "
+							 "assuming version %zu\n",
+							 fadt->hdr.length,
+							 current_rev,
+							 rev);
 		fadt->hdr.revision = rev;
 	}
 }
 
-static void gas_init_system_io(struct acpi_gas* gas,
-															 uacpi_u64 address,
-															 uacpi_u8 byte_size) {
+static void gas_init_system_io(struct acpi_gas *gas, uacpi_u64 address, uacpi_u8 byte_size) {
 	gas->address = address;
 	gas->address_space_id = UACPI_ADDRESS_SPACE_SYSTEM_IO;
 	gas->register_bit_width = UACPI_MIN(255, byte_size * 8);
@@ -1142,64 +1069,64 @@ struct register_description {
  * the x_* fields for convenience and faster access at runtime.
  */
 static struct register_description fadt_registers[] = {
-		{
-				.offset = fadt_offset(pm1a_evt_blk),
-				.xoffset = fadt_offset(x_pm1a_evt_blk),
-				.length_offset = fadt_offset(pm1_evt_len),
-		},
-		{
-				.offset = fadt_offset(pm1b_evt_blk),
-				.xoffset = fadt_offset(x_pm1b_evt_blk),
-				.length_offset = fadt_offset(pm1_evt_len),
-		},
-		{
-				.offset = fadt_offset(pm1a_cnt_blk),
-				.xoffset = fadt_offset(x_pm1a_cnt_blk),
-				.length_offset = fadt_offset(pm1_cnt_len),
-		},
-		{
-				.offset = fadt_offset(pm1b_cnt_blk),
-				.xoffset = fadt_offset(x_pm1b_cnt_blk),
-				.length_offset = fadt_offset(pm1_cnt_len),
-		},
-		{
-				.offset = fadt_offset(pm2_cnt_blk),
-				.xoffset = fadt_offset(x_pm2_cnt_blk),
-				.length_offset = fadt_offset(pm2_cnt_len),
-		},
-		{
-				.offset = fadt_offset(pm_tmr_blk),
-				.xoffset = fadt_offset(x_pm_tmr_blk),
-				.length_offset = fadt_offset(pm_tmr_len),
-		},
-		{
-				.offset = fadt_offset(gpe0_blk),
-				.xoffset = fadt_offset(x_gpe0_blk),
-				.length_offset = fadt_offset(gpe0_blk_len),
-		},
-		{
-				.offset = fadt_offset(gpe1_blk),
-				.xoffset = fadt_offset(x_gpe1_blk),
-				.length_offset = fadt_offset(gpe1_blk_len),
-		},
+	{
+		.offset = fadt_offset(pm1a_evt_blk),
+		.xoffset = fadt_offset(x_pm1a_evt_blk),
+		.length_offset = fadt_offset(pm1_evt_len),
+	 },
+	{
+		.offset = fadt_offset(pm1b_evt_blk),
+		.xoffset = fadt_offset(x_pm1b_evt_blk),
+		.length_offset = fadt_offset(pm1_evt_len),
+	 },
+	{
+		.offset = fadt_offset(pm1a_cnt_blk),
+		.xoffset = fadt_offset(x_pm1a_cnt_blk),
+		.length_offset = fadt_offset(pm1_cnt_len),
+	 },
+	{
+		.offset = fadt_offset(pm1b_cnt_blk),
+		.xoffset = fadt_offset(x_pm1b_cnt_blk),
+		.length_offset = fadt_offset(pm1_cnt_len),
+	 },
+	{
+		.offset = fadt_offset(pm2_cnt_blk),
+		.xoffset = fadt_offset(x_pm2_cnt_blk),
+		.length_offset = fadt_offset(pm2_cnt_len),
+	 },
+	{
+		.offset = fadt_offset(pm_tmr_blk),
+		.xoffset = fadt_offset(x_pm_tmr_blk),
+		.length_offset = fadt_offset(pm_tmr_len),
+	 },
+	{
+		.offset = fadt_offset(gpe0_blk),
+		.xoffset = fadt_offset(x_gpe0_blk),
+		.length_offset = fadt_offset(gpe0_blk_len),
+	 },
+	{
+		.offset = fadt_offset(gpe1_blk),
+		.xoffset = fadt_offset(x_gpe1_blk),
+		.length_offset = fadt_offset(gpe1_blk_len),
+	 },
 };
 
-static void* fadt_relative(uacpi_size offset) {
-	return ((uacpi_u8*)&g_uacpi_rt_ctx.fadt) + offset;
+static void *fadt_relative(uacpi_size offset) {
+	return ((uacpi_u8 *) &g_uacpi_rt_ctx.fadt) + offset;
 }
 
 static void convert_registers_to_gas(void) {
 	uacpi_size i;
-	struct register_description* desc;
-	struct acpi_gas* gas;
+	struct register_description *desc;
+	struct acpi_gas *gas;
 	uacpi_u32 legacy_addr;
 	uacpi_u8 length;
 
 	for (i = 0; i < UACPI_ARRAY_SIZE(fadt_registers); ++i) {
 		desc = &fadt_registers[i];
 
-		legacy_addr = *(uacpi_u32*)fadt_relative(desc->offset);
-		length = *(uacpi_u8*)fadt_relative(desc->length_offset);
+		legacy_addr = *(uacpi_u32 *) fadt_relative(desc->offset);
+		length = *(uacpi_u8 *) fadt_relative(desc->length_offset);
 		gas = fadt_relative(desc->xoffset);
 
 		if (gas->address)
@@ -1210,9 +1137,7 @@ static void convert_registers_to_gas(void) {
 }
 
 #ifndef UACPI_BAREBONES_MODE
-static void split_one_block(struct acpi_gas* src,
-														struct acpi_gas* dst0,
-														struct acpi_gas* dst1) {
+static void split_one_block(struct acpi_gas *src, struct acpi_gas *dst0, struct acpi_gas *dst1) {
 	uacpi_size byte_length;
 
 	if (src->address == 0)
@@ -1226,19 +1151,15 @@ static void split_one_block(struct acpi_gas* src,
 }
 
 static void split_event_blocks(void) {
-	split_one_block(&g_uacpi_rt_ctx.fadt.x_pm1a_evt_blk,
-									&g_uacpi_rt_ctx.pm1a_status_blk,
-									&g_uacpi_rt_ctx.pm1a_enable_blk);
-	split_one_block(&g_uacpi_rt_ctx.fadt.x_pm1b_evt_blk,
-									&g_uacpi_rt_ctx.pm1b_status_blk,
-									&g_uacpi_rt_ctx.pm1b_enable_blk);
+	split_one_block(&g_uacpi_rt_ctx.fadt.x_pm1a_evt_blk, &g_uacpi_rt_ctx.pm1a_status_blk, &g_uacpi_rt_ctx.pm1a_enable_blk);
+	split_one_block(&g_uacpi_rt_ctx.fadt.x_pm1b_evt_blk, &g_uacpi_rt_ctx.pm1b_status_blk, &g_uacpi_rt_ctx.pm1b_enable_blk);
 }
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
-static uacpi_status initialize_fadt(const void* virt) {
+static uacpi_status initialize_fadt(const void *virt) {
 	uacpi_status ret;
-	struct acpi_fadt* fadt = &g_uacpi_rt_ctx.fadt;
-	const struct acpi_sdt_hdr* hdr = virt;
+	struct acpi_fadt *fadt = &g_uacpi_rt_ctx.fadt;
+	const struct acpi_sdt_hdr *hdr = virt;
 
 	/*
 	 * Here we (roughly) follow ACPICA initialization sequence to make sure we
@@ -1269,10 +1190,8 @@ static uacpi_status initialize_fadt(const void* virt) {
 
 	if (fadt->x_dsdt) {
 		ret = table_install_physical_with_origin_unlocked(
-				fadt->x_dsdt, UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL, ACPI_DSDT_SIGNATURE,
-				UACPI_NULL);
-		if (uacpi_unlikely(ret != UACPI_STATUS_OK &&
-											 ret != UACPI_STATUS_OVERRIDDEN))
+										fadt->x_dsdt, UACPI_TABLE_ORIGIN_FIRMWARE_PHYSICAL, ACPI_DSDT_SIGNATURE, UACPI_NULL);
+		if (uacpi_unlikely(ret != UACPI_STATUS_OK && ret != UACPI_STATUS_OVERRIDDEN))
 			return ret;
 	}
 
@@ -1298,7 +1217,7 @@ static uacpi_status initialize_fadt(const void* virt) {
 	return UACPI_STATUS_OK;
 }
 
-uacpi_status uacpi_table_fadt(struct acpi_fadt** out_fadt) {
+uacpi_status uacpi_table_fadt(struct acpi_fadt **out_fadt) {
 	ENSURE_TABLES_ONLINE();
 
 	*out_fadt = &g_uacpi_rt_ctx.fadt;

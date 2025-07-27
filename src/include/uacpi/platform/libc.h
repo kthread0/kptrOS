@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef UACPI_OVERRIDE_LIBC
-#include "uacpi_libc.h"
+#	include "uacpi_libc.h"
 #else
 /*
  * The following libc functions are used internally by uACPI and have a default

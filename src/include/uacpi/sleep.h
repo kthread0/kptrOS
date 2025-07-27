@@ -16,9 +16,7 @@ extern "C" {
  * 'addr32' is the real mode entry-point address
  * 'addr64' is the protected mode entry-point address
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_set_waking_vector(uacpi_phys_addr addr32,
-																				 uacpi_phys_addr addr64))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_set_waking_vector(uacpi_phys_addr addr32, uacpi_phys_addr addr64))
 
 typedef enum uacpi_sleep_state {
 	UACPI_SLEEP_STATE_S0 = 0,
@@ -59,7 +57,7 @@ uacpi_status uacpi_wake_from_sleep_state(uacpi_sleep_state);
  */
 uacpi_status uacpi_reboot(void);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

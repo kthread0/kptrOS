@@ -21,11 +21,11 @@
 #define PIC2_VECTOR_OFFSET 0x28
 
 // Initialization Command Word 1 (ICW1)
-#define ICW1_INIT 0x10	// Required for initialization
-#define ICW1_ICW4 0x01	// Indicates that ICW4 will be present
+#define ICW1_INIT 0x10 // Required for initialization
+#define ICW1_ICW4 0x01 // Indicates that ICW4 will be present
 
 // Initialization Command Word 4 (ICW4)
-#define ICW4_8086 0x01	// 8086/88 (x86) mode
+#define ICW4_8086 0x01 // 8086/88 (x86) mode
 
 // --- Function Prototypes ---
 
@@ -41,4 +41,4 @@ void pic_send_eoi(uint8_t irq);
 // Unmasks (enables) a given IRQ line.
 void pic_unmask_irq(uint8_t irq);
 
-#endif	// KERN_CPU_PIC_H
+#endif // KERN_CPU_PIC_H

@@ -31,7 +31,7 @@ typedef enum uacpi_register {
  *
  * NOTE: write-only bits (if any) are cleared automatically
  */
-uacpi_status uacpi_read_register(uacpi_register, uacpi_u64*);
+uacpi_status uacpi_read_register(uacpi_register, uacpi_u64 *);
 
 /*
  * Write a register from FADT
@@ -87,7 +87,7 @@ typedef enum uacpi_register_field {
  *       the client code doesn't have to do any bit manipulation. E.g. for
  *       a field at 0b???XX??? the returned value will contain just the 0bXX
  */
-uacpi_status uacpi_read_register_field(uacpi_register_field, uacpi_u64*);
+uacpi_status uacpi_read_register_field(uacpi_register_field, uacpi_u64 *);
 
 /*
  * Write to a field of a FADT register
@@ -98,7 +98,7 @@ uacpi_status uacpi_read_register_field(uacpi_register_field, uacpi_u64*);
  */
 uacpi_status uacpi_write_register_field(uacpi_register_field, uacpi_u64);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

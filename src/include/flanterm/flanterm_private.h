@@ -27,8 +27,7 @@
 #define FLANTERM_PRIVATE_H 1
 
 #ifndef FLANTERM_IN_FLANTERM
-#error \
-		"Do not use flanterm_private.h. Use interfaces defined in flanterm.h only."
+#	error "Do not use flanterm_private.h. Use interfaces defined in flanterm.h only."
 #endif
 
 #include <stdbool.h>
@@ -85,44 +84,36 @@ struct flanterm_context {
 
 	size_t rows, cols;
 
-	void (*raw_putchar)(struct flanterm_context*, uint8_t c);
-	void (*clear)(struct flanterm_context*, bool move);
-	void (*set_cursor_pos)(struct flanterm_context*, size_t x, size_t y);
-	void (*get_cursor_pos)(struct flanterm_context*, size_t* x, size_t* y);
-	void (*set_text_fg)(struct flanterm_context*, size_t fg);
-	void (*set_text_bg)(struct flanterm_context*, size_t bg);
-	void (*set_text_fg_bright)(struct flanterm_context*, size_t fg);
-	void (*set_text_bg_bright)(struct flanterm_context*, size_t bg);
-	void (*set_text_fg_rgb)(struct flanterm_context*, uint32_t fg);
-	void (*set_text_bg_rgb)(struct flanterm_context*, uint32_t bg);
-	void (*set_text_fg_default)(struct flanterm_context*);
-	void (*set_text_bg_default)(struct flanterm_context*);
-	void (*set_text_fg_default_bright)(struct flanterm_context*);
-	void (*set_text_bg_default_bright)(struct flanterm_context*);
-	void (*move_character)(struct flanterm_context*,
-												 size_t new_x,
-												 size_t new_y,
-												 size_t old_x,
-												 size_t old_y);
-	void (*scroll)(struct flanterm_context*);
-	void (*revscroll)(struct flanterm_context*);
-	void (*swap_palette)(struct flanterm_context*);
-	void (*save_state)(struct flanterm_context*);
-	void (*restore_state)(struct flanterm_context*);
-	void (*double_buffer_flush)(struct flanterm_context*);
-	void (*full_refresh)(struct flanterm_context*);
-	void (*deinit)(struct flanterm_context*, void (*)(void*, size_t));
+	void (*raw_putchar)(struct flanterm_context *, uint8_t c);
+	void (*clear)(struct flanterm_context *, bool move);
+	void (*set_cursor_pos)(struct flanterm_context *, size_t x, size_t y);
+	void (*get_cursor_pos)(struct flanterm_context *, size_t *x, size_t *y);
+	void (*set_text_fg)(struct flanterm_context *, size_t fg);
+	void (*set_text_bg)(struct flanterm_context *, size_t bg);
+	void (*set_text_fg_bright)(struct flanterm_context *, size_t fg);
+	void (*set_text_bg_bright)(struct flanterm_context *, size_t bg);
+	void (*set_text_fg_rgb)(struct flanterm_context *, uint32_t fg);
+	void (*set_text_bg_rgb)(struct flanterm_context *, uint32_t bg);
+	void (*set_text_fg_default)(struct flanterm_context *);
+	void (*set_text_bg_default)(struct flanterm_context *);
+	void (*set_text_fg_default_bright)(struct flanterm_context *);
+	void (*set_text_bg_default_bright)(struct flanterm_context *);
+	void (*move_character)(struct flanterm_context *, size_t new_x, size_t new_y, size_t old_x, size_t old_y);
+	void (*scroll)(struct flanterm_context *);
+	void (*revscroll)(struct flanterm_context *);
+	void (*swap_palette)(struct flanterm_context *);
+	void (*save_state)(struct flanterm_context *);
+	void (*restore_state)(struct flanterm_context *);
+	void (*double_buffer_flush)(struct flanterm_context *);
+	void (*full_refresh)(struct flanterm_context *);
+	void (*deinit)(struct flanterm_context *, void (*)(void *, size_t));
 
 	/* to be set by client */
 
-	void (*callback)(struct flanterm_context*,
-									 uint64_t,
-									 uint64_t,
-									 uint64_t,
-									 uint64_t);
+	void (*callback)(struct flanterm_context *, uint64_t, uint64_t, uint64_t, uint64_t);
 };
 
-void flanterm_context_reinit(struct flanterm_context* ctx);
+void flanterm_context_reinit(struct flanterm_context *ctx);
 
 #ifdef __cplusplus
 }

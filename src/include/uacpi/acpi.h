@@ -135,8 +135,8 @@ enum acpi_madt_entry_type {
 	ACPI_MADT_ENTRY_TYPE_IMSIC = 0x19,
 	ACPI_MADT_ENTRY_TYPE_APLIC = 0x1A,
 	ACPI_MADT_ENTRY_TYPE_PLIC = 0x1B,
-	ACPI_MADT_ENTRY_TYPE_RESERVED = 0x1C,	 // 0x1C..0x7F
-	ACPI_MADT_ENTRY_TYPE_OEM = 0x80,			 // 0x80..0xFF
+	ACPI_MADT_ENTRY_TYPE_RESERVED = 0x1C, // 0x1C..0x7F
+	ACPI_MADT_ENTRY_TYPE_OEM = 0x80,			// 0x80..0xFF
 };
 
 UACPI_PACKED(struct acpi_madt {
@@ -867,8 +867,7 @@ UACPI_EXPECT_SIZEOF(struct acpi_hpet, 56);
 #define ACPI_PM1_STS_SLPBTN_STS_MASK (1 << ACPI_PM1_STS_SLPBTN_STS_IDX)
 #define ACPI_PM1_STS_RTC_STS_MASK (1 << ACPI_PM1_STS_RTC_STS_IDX)
 #define ACPI_PM1_STS_IGN0_MASK (1 << ACPI_PM1_STS_IGN0_IDX)
-#define ACPI_PM1_STS_PCIEXP_WAKE_STS_MASK \
-	(1 << ACPI_PM1_STS_PCIEXP_WAKE_STS_IDX)
+#define ACPI_PM1_STS_PCIEXP_WAKE_STS_MASK (1 << ACPI_PM1_STS_PCIEXP_WAKE_STS_IDX)
 #define ACPI_PM1_STS_WAKE_STS_MASK (1 << ACPI_PM1_STS_WAKE_STS_IDX)
 
 #define ACPI_PM1_STS_CLEAR 1
@@ -918,19 +917,17 @@ UACPI_EXPECT_SIZEOF(struct acpi_hpet, 56);
  * software writing 1 to it after resume (as indicated by a similar comment in
  * ACPICA)
  */
-#define ACPI_PM1_CNT_PRESERVE_MASK                                 \
-	((1 << ACPI_PM1_CNT_RSVD0_IDX) | (1 << ACPI_PM1_CNT_RSVD1_IDX) | \
-	 (1 << ACPI_PM1_CNT_RSVD2_IDX) | (1 << ACPI_PM1_CNT_RSVD3_IDX) | \
-	 (1 << ACPI_PM1_CNT_RSVD4_IDX) | (1 << ACPI_PM1_CNT_RSVD5_IDX) | \
-	 (1 << ACPI_PM1_CNT_IGN0_IDX) | (1 << ACPI_PM1_CNT_RSVD6_IDX) |  \
-	 (1 << ACPI_PM1_CNT_RSVD7_IDX))
+#define ACPI_PM1_CNT_PRESERVE_MASK                                                                 \
+	((1 << ACPI_PM1_CNT_RSVD0_IDX) | (1 << ACPI_PM1_CNT_RSVD1_IDX) | (1 << ACPI_PM1_CNT_RSVD2_IDX) | \
+	 (1 << ACPI_PM1_CNT_RSVD3_IDX) | (1 << ACPI_PM1_CNT_RSVD4_IDX) | (1 << ACPI_PM1_CNT_RSVD5_IDX) | \
+	 (1 << ACPI_PM1_CNT_IGN0_IDX) | (1 << ACPI_PM1_CNT_RSVD6_IDX) | (1 << ACPI_PM1_CNT_RSVD7_IDX))
 
 // PM2_CNT
 #define ACPI_PM2_CNT_ARB_DIS_IDX 0
 #define ACPI_PM2_CNT_ARB_DIS_MASK (1 << ACPI_PM2_CNT_ARB_DIS_IDX)
 
 // All bits are reserved but this first one
-#define ACPI_PM2_CNT_PRESERVE_MASK (~((uacpi_u64)ACPI_PM2_CNT_ARB_DIS_MASK))
+#define ACPI_PM2_CNT_PRESERVE_MASK (~((uacpi_u64) ACPI_PM2_CNT_ARB_DIS_MASK))
 
 // SLEEP_CONTROL_REG
 #define ACPI_SLP_CNT_RSVD0_IDX 0
@@ -943,9 +940,9 @@ UACPI_EXPECT_SIZEOF(struct acpi_hpet, 56);
 #define ACPI_SLP_CNT_SLP_TYP_MASK (ACPI_SLP_TYP_MAX << ACPI_SLP_CNT_SLP_TYP_IDX)
 #define ACPI_SLP_CNT_SLP_EN_MASK (1 << ACPI_SLP_CNT_SLP_EN_IDX)
 
-#define ACPI_SLP_CNT_PRESERVE_MASK                                \
-	((1 << ACPI_SLP_CNT_RSVD0_IDX) | (1 << ACPI_SLP_CNT_IGN0_IDX) | \
-	 (1 << ACPI_SLP_CNT_RSVD1_IDX) | (1 << ACPI_SLP_CNT_RSVD2_IDX))
+#define ACPI_SLP_CNT_PRESERVE_MASK                                                                \
+	((1 << ACPI_SLP_CNT_RSVD0_IDX) | (1 << ACPI_SLP_CNT_IGN0_IDX) | (1 << ACPI_SLP_CNT_RSVD1_IDX) | \
+	 (1 << ACPI_SLP_CNT_RSVD2_IDX))
 
 // SLEEP_STATUS_REG
 #define ACPI_SLP_STS_WAK_STS_IDX 7
@@ -953,7 +950,7 @@ UACPI_EXPECT_SIZEOF(struct acpi_hpet, 56);
 #define ACPI_SLP_STS_WAK_STS_MASK (1 << ACPI_SLP_STS_WAK_STS_IDX)
 
 // All bits are reserved but this last one
-#define ACPI_SLP_STS_PRESERVE_MASK (~((uacpi_u64)ACPI_SLP_STS_WAK_STS_MASK))
+#define ACPI_SLP_STS_PRESERVE_MASK (~((uacpi_u64) ACPI_SLP_STS_WAK_STS_MASK))
 
 #define ACPI_SLP_STS_CLEAR 1
 
@@ -1125,9 +1122,7 @@ UACPI_PACKED(struct acpi_resource_start_dependent {
 })
 UACPI_EXPECT_SIZEOF(struct acpi_resource_start_dependent, 2);
 
-UACPI_PACKED(struct acpi_resource_end_dependent {
-	struct acpi_small_item common;
-})
+UACPI_PACKED(struct acpi_resource_end_dependent { struct acpi_small_item common; })
 UACPI_EXPECT_SIZEOF(struct acpi_resource_end_dependent, 1);
 
 UACPI_PACKED(struct acpi_resource_io {
@@ -1338,9 +1333,7 @@ UACPI_PACKED(struct acpi_resource_serial_uart {
 })
 UACPI_EXPECT_SIZEOF(struct acpi_resource_serial_uart, 22);
 
-UACPI_PACKED(struct acpi_resource_serial_csi2 {
-	struct acpi_resource_serial common;
-})
+UACPI_PACKED(struct acpi_resource_serial_csi2 { struct acpi_resource_serial common; })
 UACPI_EXPECT_SIZEOF(struct acpi_resource_serial_csi2, 12);
 
 UACPI_PACKED(struct acpi_resource_pin_function {

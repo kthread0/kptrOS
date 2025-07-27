@@ -5,10 +5,10 @@
 #include <uacpi/log.h>
 
 #ifdef UACPI_FORMATTED_LOGGING
-#define uacpi_log uacpi_kernel_log
+#	define uacpi_log uacpi_kernel_log
 #else
 UACPI_PRINTF_DECL(2, 3)
-void uacpi_log(uacpi_log_level, const uacpi_char*, ...);
+void uacpi_log(uacpi_log_level, const uacpi_char *, ...);
 #endif
 
 #define uacpi_log_lvl(lvl, ...)    \

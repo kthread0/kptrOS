@@ -18,7 +18,7 @@ typedef uacpi_u64 uacpi_phys_addr;
 typedef uacpi_u64 uacpi_io_addr;
 #endif
 
-typedef void* uacpi_handle;
+typedef void *uacpi_handle;
 
 typedef union uacpi_object_name {
 	uacpi_char text[4];
@@ -51,7 +51,7 @@ typedef enum uacpi_address_space {
 	// Internal type
 	UACPI_ADDRESS_SPACE_TABLE_DATA = 0xDA1A,
 } uacpi_address_space;
-const uacpi_char* uacpi_address_space_to_string(uacpi_address_space space);
+const uacpi_char *uacpi_address_space_to_string(uacpi_address_space space);
 
 #ifndef UACPI_BAREBONES_MODE
 
@@ -87,14 +87,14 @@ typedef struct uacpi_pci_address {
 
 typedef struct uacpi_data_view {
 	union {
-		uacpi_u8* bytes;
-		const uacpi_u8* const_bytes;
+		uacpi_u8 *bytes;
+		const uacpi_u8 *const_bytes;
 
-		uacpi_char* text;
-		const uacpi_char* const_text;
+		uacpi_char *text;
+		const uacpi_char *const_text;
 
-		void* data;
-		const void* const_data;
+		void *data;
+		const void *const_data;
 	};
 	uacpi_size length;
 } uacpi_data_view;
@@ -148,36 +148,35 @@ typedef enum uacpi_object_type_bits {
 
 typedef struct uacpi_object uacpi_object;
 
-void uacpi_object_ref(uacpi_object* obj);
-void uacpi_object_unref(uacpi_object* obj);
+void uacpi_object_ref(uacpi_object *obj);
+void uacpi_object_unref(uacpi_object *obj);
 
-uacpi_object_type uacpi_object_get_type(uacpi_object*);
-uacpi_object_type_bits uacpi_object_get_type_bit(uacpi_object*);
+uacpi_object_type uacpi_object_get_type(uacpi_object *);
+uacpi_object_type_bits uacpi_object_get_type_bit(uacpi_object *);
 
 /*
  * Returns UACPI_TRUE if the provided object's type matches this type.
  */
-uacpi_bool uacpi_object_is(uacpi_object*, uacpi_object_type);
+uacpi_bool uacpi_object_is(uacpi_object *, uacpi_object_type);
 
 /*
  * Returns UACPI_TRUE if the provided object's type is one of the values
  * specified in the 'type_mask' of UACPI_OBJECT_*_BIT.
  */
-uacpi_bool uacpi_object_is_one_of(uacpi_object*,
-																	uacpi_object_type_bits type_mask);
+uacpi_bool uacpi_object_is_one_of(uacpi_object *, uacpi_object_type_bits type_mask);
 
-const uacpi_char* uacpi_object_type_to_string(uacpi_object_type);
+const uacpi_char *uacpi_object_type_to_string(uacpi_object_type);
 
 /*
  * Create an uninitialized object. The object can be further overwritten via
  * uacpi_object_assign_* to anything.
  */
-uacpi_object* uacpi_object_create_uninitialized(void);
+uacpi_object *uacpi_object_create_uninitialized(void);
 
 /*
  * Create an integer object with the value provided.
  */
-uacpi_object* uacpi_object_create_integer(uacpi_u64);
+uacpi_object *uacpi_object_create_integer(uacpi_u64);
 
 typedef enum uacpi_overflow_behavior {
 	UACPI_OVERFLOW_ALLOW = 0,
@@ -197,12 +196,10 @@ typedef enum uacpi_overflow_behavior {
  *                              UACPI_STATUS_INVALID_ARGUMENT if the provided
  *                              value happens to be too large
  */
-uacpi_status uacpi_object_create_integer_safe(uacpi_u64,
-																							uacpi_overflow_behavior,
-																							uacpi_object** out_obj);
+uacpi_status uacpi_object_create_integer_safe(uacpi_u64, uacpi_overflow_behavior, uacpi_object **out_obj);
 
-uacpi_status uacpi_object_assign_integer(uacpi_object*, uacpi_u64 value);
-uacpi_status uacpi_object_get_integer(uacpi_object*, uacpi_u64* out);
+uacpi_status uacpi_object_assign_integer(uacpi_object *, uacpi_u64 value);
+uacpi_status uacpi_object_get_integer(uacpi_object *, uacpi_u64 *out);
 
 /*
  * Create a string/buffer object. Takes in a constant view of the data.
@@ -210,18 +207,17 @@ uacpi_status uacpi_object_get_integer(uacpi_object*, uacpi_u64* out);
  * NOTE: The data is copied to a separately allocated buffer and is not taken
  *       ownership of.
  */
-uacpi_object* uacpi_object_create_string(uacpi_data_view);
-uacpi_object* uacpi_object_create_cstring(const uacpi_char*);
-uacpi_object* uacpi_object_create_buffer(uacpi_data_view);
+uacpi_object *uacpi_object_create_string(uacpi_data_view);
+uacpi_object *uacpi_object_create_cstring(const uacpi_char *);
+uacpi_object *uacpi_object_create_buffer(uacpi_data_view);
 
 /*
  * Returns a writable view of the data stored in the string or buffer type
  * object.
  */
-uacpi_status uacpi_object_get_string_or_buffer(uacpi_object*,
-																							 uacpi_data_view* out);
-uacpi_status uacpi_object_get_string(uacpi_object*, uacpi_data_view* out);
-uacpi_status uacpi_object_get_buffer(uacpi_object*, uacpi_data_view* out);
+uacpi_status uacpi_object_get_string_or_buffer(uacpi_object *, uacpi_data_view *out);
+uacpi_status uacpi_object_get_string(uacpi_object *, uacpi_data_view *out);
+uacpi_status uacpi_object_get_buffer(uacpi_object *, uacpi_data_view *out);
 
 /*
  * Returns UACPI_TRUE if the provided string object is actually an AML namepath.
@@ -247,7 +243,7 @@ uacpi_status uacpi_object_get_buffer(uacpi_object*, uacpi_data_view* out);
  *         );
  *     }
  */
-uacpi_bool uacpi_object_is_aml_namepath(uacpi_object*);
+uacpi_bool uacpi_object_is_aml_namepath(uacpi_object *);
 
 /*
  * Resolve an AML namepath contained in a string object.
@@ -265,9 +261,7 @@ uacpi_bool uacpi_object_is_aml_namepath(uacpi_object*);
  *     );
  */
 uacpi_status uacpi_object_resolve_as_aml_namepath(
-		uacpi_object*,
-		uacpi_namespace_node* scope,
-		uacpi_namespace_node** out_node);
+								uacpi_object *, uacpi_namespace_node *scope, uacpi_namespace_node **out_node);
 
 /*
  * Make the provided object a string/buffer.
@@ -276,11 +270,11 @@ uacpi_status uacpi_object_resolve_as_aml_namepath(
  * NOTE: The data is copied to a separately allocated buffer and is not taken
  *       ownership of.
  */
-uacpi_status uacpi_object_assign_string(uacpi_object*, uacpi_data_view in);
-uacpi_status uacpi_object_assign_buffer(uacpi_object*, uacpi_data_view in);
+uacpi_status uacpi_object_assign_string(uacpi_object *, uacpi_data_view in);
+uacpi_status uacpi_object_assign_buffer(uacpi_object *, uacpi_data_view in);
 
 typedef struct uacpi_object_array {
-	uacpi_object** objects;
+	uacpi_object **objects;
 	uacpi_size count;
 } uacpi_object_array;
 
@@ -292,7 +286,7 @@ typedef struct uacpi_object_array {
  *       in the object. Client code must remove all of the locally created
  *       references at its own discretion.
  */
-uacpi_object* uacpi_object_create_package(uacpi_object_array in);
+uacpi_object *uacpi_object_create_package(uacpi_object_array in);
 
 /*
  * Returns the list of objects stored in a package object.
@@ -302,7 +296,7 @@ uacpi_object* uacpi_object_create_package(uacpi_object_array in);
  *       all of the objects stored inside unless the reference count is
  *       incremented by the client via uacpi_object_ref.
  */
-uacpi_status uacpi_object_get_package(uacpi_object*, uacpi_object_array* out);
+uacpi_status uacpi_object_get_package(uacpi_object *, uacpi_object_array *out);
 
 /*
  * Make the provided object a package and store all of the objects in the array
@@ -312,7 +306,7 @@ uacpi_status uacpi_object_get_package(uacpi_object*, uacpi_object_array* out);
  *       in the object. Client code must remove all of the locally created
  *       references at its own discretion.
  */
-uacpi_status uacpi_object_assign_package(uacpi_object*, uacpi_object_array in);
+uacpi_status uacpi_object_assign_package(uacpi_object *, uacpi_object_array in);
 
 /*
  * Create a reference object and make it point to 'child'.
@@ -320,7 +314,7 @@ uacpi_status uacpi_object_assign_package(uacpi_object*, uacpi_object_array in);
  * NOTE: child's reference count is incremented by one. Client code must remove
  *       all of the locally created references at its own discretion.
  */
-uacpi_object* uacpi_object_create_reference(uacpi_object* child);
+uacpi_object *uacpi_object_create_reference(uacpi_object *child);
 
 /*
  * Make the provided object a reference and make it point to 'child'.
@@ -328,7 +322,7 @@ uacpi_object* uacpi_object_create_reference(uacpi_object* child);
  * NOTE: child's reference count is incremented by one. Client code must remove
  *       all of the locally created references at its own discretion.
  */
-uacpi_status uacpi_object_assign_reference(uacpi_object*, uacpi_object* child);
+uacpi_status uacpi_object_assign_reference(uacpi_object *, uacpi_object *child);
 
 /*
  * Retrieve the object pointed to by a reference object.
@@ -336,7 +330,7 @@ uacpi_status uacpi_object_assign_reference(uacpi_object*, uacpi_object* child);
  * NOTE: the reference count of the returned object is incremented by one and
  *       must be uacpi_object_unref'ed by the client when no longer needed.
  */
-uacpi_status uacpi_object_get_dereferenced(uacpi_object*, uacpi_object** out);
+uacpi_status uacpi_object_get_dereferenced(uacpi_object *, uacpi_object **out);
 
 typedef struct uacpi_processor_info {
 	uacpi_u8 id;
@@ -347,8 +341,7 @@ typedef struct uacpi_processor_info {
 /*
  * Returns the information about the provided processor object.
  */
-uacpi_status uacpi_object_get_processor_info(uacpi_object*,
-																						 uacpi_processor_info* out);
+uacpi_status uacpi_object_get_processor_info(uacpi_object *, uacpi_processor_info *out);
 
 typedef struct uacpi_power_resource_info {
 	uacpi_u8 system_level;
@@ -358,9 +351,7 @@ typedef struct uacpi_power_resource_info {
 /*
  * Returns the information about the provided power resource object.
  */
-uacpi_status uacpi_object_get_power_resource_info(
-		uacpi_object*,
-		uacpi_power_resource_info* out);
+uacpi_status uacpi_object_get_power_resource_info(uacpi_object *, uacpi_power_resource_info *out);
 
 typedef enum uacpi_region_op {
 	// data => uacpi_region_attach_data
@@ -408,19 +399,19 @@ typedef struct uacpi_gpio_region_info {
 } uacpi_gpio_region_info;
 
 typedef struct uacpi_region_attach_data {
-	void* handler_context;
-	uacpi_namespace_node* region_node;
+	void *handler_context;
+	uacpi_namespace_node *region_node;
 	union {
 		uacpi_generic_region_info generic_info;
 		uacpi_pcc_region_info pcc_info;
 		uacpi_gpio_region_info gpio_info;
 	};
-	void* out_region_context;
+	void *out_region_context;
 } uacpi_region_attach_data;
 
 typedef struct uacpi_region_rw_data {
-	void* handler_context;
-	void* region_context;
+	void *handler_context;
+	void *region_context;
 	union {
 		uacpi_phys_addr address;
 		uacpi_u64 offset;
@@ -430,14 +421,14 @@ typedef struct uacpi_region_rw_data {
 } uacpi_region_rw_data;
 
 typedef struct uacpi_region_pcc_send_data {
-	void* handler_context;
-	void* region_context;
+	void *handler_context;
+	void *region_context;
 	uacpi_data_view buffer;
 } uacpi_region_pcc_send_data;
 
 typedef struct uacpi_region_gpio_rw_data {
-	void* handler_context;
-	void* region_context;
+	void *handler_context;
+	void *region_context;
 	uacpi_data_view connection;
 	uacpi_u32 pin_offset;
 	uacpi_u32 num_pins;
@@ -445,8 +436,8 @@ typedef struct uacpi_region_gpio_rw_data {
 } uacpi_region_gpio_rw_data;
 
 typedef struct uacpi_region_ipmi_rw_data {
-	void* handler_context;
-	void* region_context;
+	void *handler_context;
+	void *region_context;
 	uacpi_data_view in_out_message;
 	uacpi_u64 command;
 } uacpi_region_ipmi_rw_data;
@@ -454,8 +445,8 @@ typedef struct uacpi_region_ipmi_rw_data {
 typedef uacpi_region_ipmi_rw_data uacpi_region_ffixedhw_rw_data;
 
 typedef struct uacpi_region_prm_rw_data {
-	void* handler_context;
-	void* region_context;
+	void *handler_context;
+	void *region_context;
 	uacpi_data_view in_out_message;
 } uacpi_region_prm_rw_data;
 
@@ -473,8 +464,8 @@ typedef enum uacpi_access_attribute {
 } uacpi_access_attribute;
 
 typedef struct uacpi_region_serial_rw_data {
-	void* handler_context;
-	void* region_context;
+	void *handler_context;
+	void *region_context;
 	uacpi_u64 command;
 	uacpi_data_view connection;
 	uacpi_data_view in_out_buffer;
@@ -490,17 +481,14 @@ typedef struct uacpi_region_serial_rw_data {
 } uacpi_region_serial_rw_data;
 
 typedef struct uacpi_region_detach_data {
-	void* handler_context;
-	void* region_context;
-	uacpi_namespace_node* region_node;
+	void *handler_context;
+	void *region_context;
+	uacpi_namespace_node *region_node;
 } uacpi_region_detach_data;
 
-typedef uacpi_status (*uacpi_region_handler)(uacpi_region_op op,
-																						 uacpi_handle op_data);
+typedef uacpi_status (*uacpi_region_handler)(uacpi_region_op op, uacpi_handle op_data);
 
-typedef uacpi_status (*uacpi_notify_handler)(uacpi_handle context,
-																						 uacpi_namespace_node* node,
-																						 uacpi_u64 value);
+typedef uacpi_status (*uacpi_notify_handler)(uacpi_handle context, uacpi_namespace_node *node, uacpi_u64 value);
 
 typedef enum uacpi_firmware_request_type {
 	UACPI_FIRMWARE_REQUEST_TYPE_BREAKPOINT,
@@ -526,13 +514,13 @@ typedef struct uacpi_firmware_request {
 	};
 } uacpi_firmware_request;
 
-#define UACPI_INTERRUPT_NOT_HANDLED 0
-#define UACPI_INTERRUPT_HANDLED 1
+#	define UACPI_INTERRUPT_NOT_HANDLED 0
+#	define UACPI_INTERRUPT_HANDLED 1
 typedef uacpi_u32 uacpi_interrupt_ret;
 
 typedef uacpi_interrupt_ret (*uacpi_interrupt_handler)(uacpi_handle);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

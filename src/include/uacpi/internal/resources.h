@@ -84,8 +84,7 @@ enum uacpi_resource_convert_opcode {
 	UACPI_RESOURCE_CONVERT_OPCODE_BIT_FIELD_1,
 	UACPI_RESOURCE_CONVERT_OPCODE_BIT_FIELD_2,
 	UACPI_RESOURCE_CONVERT_OPCODE_BIT_FIELD_3,
-	UACPI_RESOURCE_CONVERT_OPCODE_BIT_FIELD_6 =
-			UACPI_RESOURCE_CONVERT_OPCODE_BIT_FIELD_3 + 3,
+	UACPI_RESOURCE_CONVERT_OPCODE_BIT_FIELD_6 = UACPI_RESOURCE_CONVERT_OPCODE_BIT_FIELD_3 + 3,
 
 	/*
 	 * AML -> native:
@@ -287,39 +286,27 @@ struct uacpi_resource_spec {
 	 * native resource given the AML counterpart. This being NULL means no extra
 	 * bytes are needed, aka native resources is always the same size.
 	 */
-	uacpi_size (*extra_size_for_native)(const struct uacpi_resource_spec*,
-																			void*,
-																			uacpi_size);
+	uacpi_size (*extra_size_for_native)(const struct uacpi_resource_spec *, void *, uacpi_size);
 
 	/*
 	 * Calculate the number of bytes needed to represent a native resource as
 	 * AML. The 'aml_size' field is used if this is NULL.
 	 */
-	uacpi_size (*size_for_aml)(const struct uacpi_resource_spec*,
-														 uacpi_resource*);
+	uacpi_size (*size_for_aml)(const struct uacpi_resource_spec *, uacpi_resource *);
 
-	const struct uacpi_resource_convert_instruction* to_native;
-	const struct uacpi_resource_convert_instruction* to_aml;
+	const struct uacpi_resource_convert_instruction *to_native;
+	const struct uacpi_resource_convert_instruction *to_aml;
 };
 
 typedef uacpi_iteration_decision (*uacpi_aml_resource_iteration_callback)(
-		void*,
-		uacpi_u8* data,
-		uacpi_u16 resource_size,
-		const struct uacpi_resource_spec*);
+								void *, uacpi_u8 *data, uacpi_u16 resource_size, const struct uacpi_resource_spec *);
 
-uacpi_status uacpi_for_each_aml_resource(
-		uacpi_data_view,
-		uacpi_aml_resource_iteration_callback cb,
-		void* user);
+uacpi_status uacpi_for_each_aml_resource(uacpi_data_view, uacpi_aml_resource_iteration_callback cb, void *user);
 
-uacpi_status uacpi_find_aml_resource_end_tag(uacpi_data_view,
-																						 uacpi_size* out_offset);
+uacpi_status uacpi_find_aml_resource_end_tag(uacpi_data_view, uacpi_size *out_offset);
 
-uacpi_status uacpi_native_resources_from_aml(uacpi_data_view,
-																						 uacpi_resources** out_resources);
+uacpi_status uacpi_native_resources_from_aml(uacpi_data_view, uacpi_resources **out_resources);
 
-uacpi_status uacpi_native_resources_to_aml(uacpi_resources* resources,
-																					 uacpi_object** out_template);
+uacpi_status uacpi_native_resources_to_aml(uacpi_resources *resources, uacpi_object **out_template);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE

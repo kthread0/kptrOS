@@ -1,26 +1,27 @@
+#include "../kern/serial/serial.h"
+#include "stdio.h"
+
 #include <limine.h>
 #include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <uacpi/helpers.h>
 #include <uacpi/kernel_api.h>
-#include "../kern/serial/serial.h"
-#include "stdio.h"
 
 typedef struct {
-	uint64_t rip;	 // Instruction pointer
-	uint64_t rsp;	 // Stack pointer
-	uint64_t rbp;	 // Base pointer
+	uint64_t rip; // Instruction pointer
+	uint64_t rsp; // Stack pointer
+	uint64_t rbp; // Base pointer
 	uint64_t rflags;
-	uint64_t registers[16];	 // General-purpose registers
+	uint64_t registers[16]; // General-purpose registers
 } cpu_state_t;
 
 #define PSF1_FONT_MAGIC 0x0436
 
 typedef struct {
-	uint16_t magic;					// Magic bytes for identification.
-	uint8_t fontMode;				// PSF font mode.
-	uint8_t characterSize;	// PSF character size.
+	uint16_t magic;				 // Magic bytes for identification.
+	uint8_t fontMode;			 // PSF font mode.
+	uint8_t characterSize; // PSF character size.
 } PSF1_Header;
 
 #define PSF_FONT_MAGIC 0x864ab572
@@ -37,12 +38,12 @@ typedef struct {
 } PSF_font;
 
 void enable_cursor(uint8_t, uint8_t);
-void panic(cpu_state_t*);
-void capture_cpu_state(cpu_state_t*);
-int memcmp(const void*, const void*, size_t);
-void* memcpy(void*, const void*, size_t);
-void* memmove(void*, const void*, size_t);
-void* memset(void*, int, size_t);
+void panic(cpu_state_t *);
+void capture_cpu_state(cpu_state_t *);
+int memcmp(const void *, const void *, size_t);
+void *memcpy(void *, const void *, size_t);
+void *memmove(void *, const void *, size_t);
+void *memset(void *, int, size_t);
 void debug_limine_requests();
 void debug();
 void fbinit();

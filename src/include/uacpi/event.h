@@ -19,25 +19,19 @@ typedef enum uacpi_fixed_event {
 } uacpi_fixed_event;
 
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_install_fixed_event_handler(
-				uacpi_fixed_event event,
-				uacpi_interrupt_handler handler,
-				uacpi_handle user))
+								uacpi_status uacpi_install_fixed_event_handler(
+																uacpi_fixed_event event, uacpi_interrupt_handler handler, uacpi_handle user))
 
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_uninstall_fixed_event_handler(uacpi_fixed_event event))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_uninstall_fixed_event_handler(uacpi_fixed_event event))
 
 /*
  * Enable/disable a fixed event. Note that the event is automatically enabled
  * upon installing a handler to it.
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_enable_fixed_event(uacpi_fixed_event event))
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_disable_fixed_event(uacpi_fixed_event event))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_enable_fixed_event(uacpi_fixed_event event))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_disable_fixed_event(uacpi_fixed_event event))
 
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_clear_fixed_event(uacpi_fixed_event event))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_clear_fixed_event(uacpi_fixed_event event))
 
 typedef enum uacpi_event_info {
 	// Event is enabled in software
@@ -60,21 +54,15 @@ typedef enum uacpi_event_info {
 } uacpi_event_info;
 
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_fixed_event_info(uacpi_fixed_event event,
-																				uacpi_event_info* out_info))
+								uacpi_status uacpi_fixed_event_info(uacpi_fixed_event event, uacpi_event_info *out_info))
 
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_gpe_info(uacpi_namespace_node* gpe_device,
-																uacpi_u16 idx,
-																uacpi_event_info* out_info))
+								uacpi_status uacpi_gpe_info(uacpi_namespace_node *gpe_device, uacpi_u16 idx, uacpi_event_info *out_info))
 
 // Set if the handler wishes to reenable the GPE it just handled
-#define UACPI_GPE_REENABLE (1 << 7)
+#	define UACPI_GPE_REENABLE (1 << 7)
 
-typedef uacpi_interrupt_ret (*uacpi_gpe_handler)(
-		uacpi_handle ctx,
-		uacpi_namespace_node* gpe_device,
-		uacpi_u16 idx);
+typedef uacpi_interrupt_ret (*uacpi_gpe_handler)(uacpi_handle ctx, uacpi_namespace_node *gpe_device, uacpi_u16 idx);
 
 typedef enum uacpi_gpe_triggering {
 	UACPI_GPE_TRIGGERING_LEVEL = 0,
@@ -82,8 +70,7 @@ typedef enum uacpi_gpe_triggering {
 	UACPI_GPE_TRIGGERING_MAX = UACPI_GPE_TRIGGERING_EDGE,
 } uacpi_gpe_triggering;
 
-const uacpi_char* uacpi_gpe_triggering_to_string(
-		uacpi_gpe_triggering triggering);
+const uacpi_char *uacpi_gpe_triggering_to_string(uacpi_gpe_triggering triggering);
 
 /*
  * Installs a handler to the provided GPE at 'idx' controlled by device
@@ -94,11 +81,12 @@ const uacpi_char* uacpi_gpe_triggering_to_string(
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_install_gpe_handler(uacpi_namespace_node* gpe_device,
-																					 uacpi_u16 idx,
-																					 uacpi_gpe_triggering triggering,
-																					 uacpi_gpe_handler handler,
-																					 uacpi_handle ctx))
+								uacpi_status uacpi_install_gpe_handler(
+																uacpi_namespace_node *gpe_device,
+																uacpi_u16 idx,
+																uacpi_gpe_triggering triggering,
+																uacpi_gpe_handler handler,
+																uacpi_handle ctx))
 
 /*
  * Installs a raw handler to the provided GPE at 'idx' controlled by device
@@ -108,16 +96,16 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_install_gpe_handler_raw(uacpi_namespace_node* gpe_device,
-																							 uacpi_u16 idx,
-																							 uacpi_gpe_triggering triggering,
-																							 uacpi_gpe_handler handler,
-																							 uacpi_handle ctx))
+								uacpi_status uacpi_install_gpe_handler_raw(
+																uacpi_namespace_node *gpe_device,
+																uacpi_u16 idx,
+																uacpi_gpe_triggering triggering,
+																uacpi_gpe_handler handler,
+																uacpi_handle ctx))
 
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_uninstall_gpe_handler(uacpi_namespace_node* gpe_device,
-																						 uacpi_u16 idx,
-																						 uacpi_gpe_handler handler))
+								uacpi_status uacpi_uninstall_gpe_handler(
+																uacpi_namespace_node *gpe_device, uacpi_u16 idx, uacpi_gpe_handler handler))
 
 /*
  * Marks the GPE 'idx' managed by 'gpe_device' as wake-capable. 'wake_device' is
@@ -127,9 +115,8 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_setup_gpe_for_wake(uacpi_namespace_node* gpe_device,
-																					uacpi_u16 idx,
-																					uacpi_namespace_node* wake_device))
+								uacpi_status uacpi_setup_gpe_for_wake(
+																uacpi_namespace_node *gpe_device, uacpi_u16 idx, uacpi_namespace_node *wake_device))
 
 /*
  * Mark a GPE managed by 'gpe_device' as enabled/disabled for wake. The GPE must
@@ -140,11 +127,9 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_enable_gpe_for_wake(uacpi_namespace_node* gpe_device,
-																					 uacpi_u16 idx))
+								uacpi_status uacpi_enable_gpe_for_wake(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_disable_gpe_for_wake(uacpi_namespace_node* gpe_device,
-																						uacpi_u16 idx))
+								uacpi_status uacpi_disable_gpe_for_wake(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
 
 /*
  * Finalize GPE initialization by enabling all GPEs not configured for wake and
@@ -155,8 +140,7 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  * marking those it wishes to use for wake by calling uacpi_setup_gpe_for_wake
  * or uacpi_mark_gpe_for_wake.
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_finalize_gpe_initialization(void))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_finalize_gpe_initialization(void))
 
 /*
  * Enable/disable a general purpose event managed by 'gpe_device'. Internally
@@ -167,21 +151,15 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  *
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_enable_gpe(uacpi_namespace_node* gpe_device,
-																	uacpi_u16 idx))
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_disable_gpe(uacpi_namespace_node* gpe_device,
-																	 uacpi_u16 idx))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_enable_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_disable_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
 
 /*
  * Clear the status bit of the event 'idx' managed by 'gpe_device'.
  *
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_clear_gpe(uacpi_namespace_node* gpe_device,
-																 uacpi_u16 idx))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_clear_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
 
 /*
  * Suspend/resume a general purpose event managed by 'gpe_device'. This bypasses
@@ -191,12 +169,8 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  *
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_suspend_gpe(uacpi_namespace_node* gpe_device,
-																	 uacpi_u16 idx))
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_resume_gpe(uacpi_namespace_node* gpe_device,
-																	uacpi_u16 idx))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_suspend_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_resume_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
 
 /*
  * Finish handling the GPE managed by 'gpe_device' at 'idx'. This clears the
@@ -206,8 +180,7 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_finish_handling_gpe(uacpi_namespace_node* gpe_device,
-																					 uacpi_u16 idx))
+								uacpi_status uacpi_finish_handling_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
 
 /*
  * Hard mask/umask a general purpose event at 'idx' managed by 'gpe_device'.
@@ -218,47 +191,40 @@ UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
  *
  * NOTE: 'gpe_device' may be null for GPEs managed by \_GPE
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_mask_gpe(uacpi_namespace_node* gpe_device,
-																uacpi_u16 idx))
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_unmask_gpe(uacpi_namespace_node* gpe_device,
-																	uacpi_u16 idx))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_mask_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_unmask_gpe(uacpi_namespace_node *gpe_device, uacpi_u16 idx))
 
 /*
  * Disable all GPEs currently set up on the system.
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_disable_all_gpes(void))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_disable_all_gpes(void))
 
 /*
  * Enable all GPEs not marked as wake. This is only needed after the system
  * wakes from a shallow sleep state and is called automatically by wake code.
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_enable_all_runtime_gpes(void))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_enable_all_runtime_gpes(void))
 
 /*
  * Enable all GPEs marked as wake. This is only needed before the system goes
  * to sleep is called automatically by sleep code.
  */
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_enable_all_wake_gpes(void))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_enable_all_wake_gpes(void))
 
 /*
  * Install/uninstall a new GPE block, usually defined by a device in the
  * namespace with a _HID of ACPI0006.
  */
 UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_install_gpe_block(uacpi_namespace_node* gpe_device,
-																				 uacpi_u64 address,
-																				 uacpi_address_space address_space,
-																				 uacpi_u16 num_registers,
-																				 uacpi_u32 irq))
-UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(
-		uacpi_status uacpi_uninstall_gpe_block(uacpi_namespace_node* gpe_device))
+								uacpi_status uacpi_install_gpe_block(
+																uacpi_namespace_node *gpe_device,
+																uacpi_u64 address,
+																uacpi_address_space address_space,
+																uacpi_u16 num_registers,
+																uacpi_u32 irq))
+UACPI_ALWAYS_ERROR_FOR_REDUCED_HARDWARE(uacpi_status uacpi_uninstall_gpe_block(uacpi_namespace_node *gpe_device))
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

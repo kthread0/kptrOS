@@ -1,42 +1,41 @@
 #pragma once
 
 #ifdef UACPI_OVERRIDE_CONFIG
-#include "uacpi_config.h"
+#	include "uacpi_config.h"
 #else
 
-#include <uacpi/helpers.h>
-#include <uacpi/log.h>
+#	include <uacpi/helpers.h>
+#	include <uacpi/log.h>
 
 /*
  * =======================
  * Context-related options
  * =======================
  */
-#ifndef UACPI_DEFAULT_LOG_LEVEL
-#define UACPI_DEFAULT_LOG_LEVEL UACPI_LOG_INFO
-#endif
+#	ifndef UACPI_DEFAULT_LOG_LEVEL
+#		define UACPI_DEFAULT_LOG_LEVEL UACPI_LOG_INFO
+#	endif
 
 UACPI_BUILD_BUG_ON_WITH_MSG(
-		UACPI_DEFAULT_LOG_LEVEL<UACPI_LOG_ERROR || UACPI_DEFAULT_LOG_LEVEL>
-				UACPI_LOG_DEBUG,
-		"configured default log level is invalid");
+								UACPI_DEFAULT_LOG_LEVEL< UACPI_LOG_ERROR || UACPI_DEFAULT_LOG_LEVEL > UACPI_LOG_DEBUG,
+								"configured default log level is invalid");
 
-#ifndef UACPI_DEFAULT_LOOP_TIMEOUT_SECONDS
-#define UACPI_DEFAULT_LOOP_TIMEOUT_SECONDS 30
-#endif
-
-UACPI_BUILD_BUG_ON_WITH_MSG(
-		UACPI_DEFAULT_LOOP_TIMEOUT_SECONDS < 1,
-		"configured default loop timeout is invalid (expecting at least 1 second)");
-
-#ifndef UACPI_DEFAULT_MAX_CALL_STACK_DEPTH
-#define UACPI_DEFAULT_MAX_CALL_STACK_DEPTH 256
-#endif
+#	ifndef UACPI_DEFAULT_LOOP_TIMEOUT_SECONDS
+#		define UACPI_DEFAULT_LOOP_TIMEOUT_SECONDS 30
+#	endif
 
 UACPI_BUILD_BUG_ON_WITH_MSG(
-		UACPI_DEFAULT_MAX_CALL_STACK_DEPTH < 4,
-		"configured default max call stack depth is invalid "
-		"(expecting at least 4 frames)");
+								UACPI_DEFAULT_LOOP_TIMEOUT_SECONDS < 1,
+								"configured default loop timeout is invalid (expecting at least 1 second)");
+
+#	ifndef UACPI_DEFAULT_MAX_CALL_STACK_DEPTH
+#		define UACPI_DEFAULT_MAX_CALL_STACK_DEPTH 256
+#	endif
+
+UACPI_BUILD_BUG_ON_WITH_MSG(
+								UACPI_DEFAULT_MAX_CALL_STACK_DEPTH < 4,
+								"configured default max call stack depth is invalid "
+								"(expecting at least 4 frames)");
 
 /*
  * ===================
@@ -48,7 +47,7 @@ UACPI_BUILD_BUG_ON_WITH_MSG(
  * Convenience initialization/deinitialization hooks that will be called by
  * uACPI automatically when appropriate if compiled-in.
  */
-#define UACPI_KERNEL_INITIALIZATION
+#	define UACPI_KERNEL_INITIALIZATION
 
 /*
  * Makes kernel api logging callbacks work with unformatted printf-style
@@ -83,7 +82,7 @@ UACPI_BUILD_BUG_ON_WITH_MSG(
  * compiling uACPI may theoretically generate implicit dependencies on them
  * even if this option is defined.
  */
-#define UACPI_USE_BUILTIN_STRING
+#	define UACPI_USE_BUILTIN_STRING
 
 /*
  * Turns uacpi_phys_addr and uacpi_io_addr into a 32-bit type, and adds extra
@@ -120,7 +119,7 @@ UACPI_BUILD_BUG_ON_WITH_MSG(
  *   ECAM, etc., but doesn't yet have enough subsystems implemented in order
  *   to run a fully-featured AML interpreter.
  */
-#define UACPI_BAREBONES_MODE
+#	define UACPI_BAREBONES_MODE
 
 /*
  * =============
@@ -132,25 +131,25 @@ UACPI_BUILD_BUG_ON_WITH_MSG(
  * If UACPI_FORMATTED_LOGGING is not enabled, this is the maximum length of the
  * pre-formatted message that is passed to the logging callback.
  */
-#ifndef UACPI_PLAIN_LOG_BUFFER_SIZE
-#define UACPI_PLAIN_LOG_BUFFER_SIZE 128
-#endif
+#	ifndef UACPI_PLAIN_LOG_BUFFER_SIZE
+#		define UACPI_PLAIN_LOG_BUFFER_SIZE 128
+#	endif
 
 UACPI_BUILD_BUG_ON_WITH_MSG(
-		UACPI_PLAIN_LOG_BUFFER_SIZE < 16,
-		"configured log buffer size is too small (expecting at least 16 bytes)");
+								UACPI_PLAIN_LOG_BUFFER_SIZE < 16,
+								"configured log buffer size is too small (expecting at least 16 bytes)");
 
 /*
  * The size of the table descriptor inline storage. All table descriptors past
  * this length will be stored in a dynamically allocated heap array. The size
  * of one table descriptor is approximately 56 bytes.
  */
-#ifndef UACPI_STATIC_TABLE_ARRAY_LEN
-#define UACPI_STATIC_TABLE_ARRAY_LEN 16
-#endif
+#	ifndef UACPI_STATIC_TABLE_ARRAY_LEN
+#		define UACPI_STATIC_TABLE_ARRAY_LEN 16
+#	endif
 
 UACPI_BUILD_BUG_ON_WITH_MSG(
-		UACPI_STATIC_TABLE_ARRAY_LEN < 1,
-		"configured static table array length is too small (expecting at least 1)");
+								UACPI_STATIC_TABLE_ARRAY_LEN < 1,
+								"configured static table array length is too small (expecting at least 1)");
 
 #endif

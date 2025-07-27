@@ -1,27 +1,28 @@
-#include <system.h>
-#include <uacpi/kernel_api.h>
-#include <uacpi/types.h>
 #include "kern/cpu/access.h"
 #include "kern/mem/pmm.h"
 #include "uacpi/platform/types.h"
 #include "uacpi/status.h"
 
-static volatile struct limine_rsdp_request rsdp_request
-		__attribute__((aligned(8))) = {.id = LIMINE_RSDP_REQUEST, .revision = 0};
+#include <system.h>
+#include <uacpi/kernel_api.h>
+#include <uacpi/types.h>
 
-void* uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len) {
+static volatile struct limine_rsdp_request rsdp_request
+								__attribute__((aligned(8))) = { .id = LIMINE_RSDP_REQUEST, .revision = 0 };
+
+void *uacpi_kernel_map(uacpi_phys_addr addr, uacpi_size len) {
 	return pmm_alloc(len);
 }
-void uacpi_kernel_unmap(void* addr, uacpi_size len) {
+void uacpi_kernel_unmap(void *addr, uacpi_size len) {
 	pmm_free_page(&addr);
 }
-void* uacpi_kernel_alloc(uacpi_phys_addr addr) {
+void *uacpi_kernel_alloc(uacpi_phys_addr addr) {
 	return pmm_alloc(addr);
 }
-void uacpi_kernel_free(void* addr) {
+void uacpi_kernel_free(void *addr) {
 	pmm_free_page(&addr);
 }
-void uacpi_kernel_log(uacpi_log_level level, const char* fmt) {
+void uacpi_kernel_log(uacpi_log_level level, const char *fmt) {
 	va_list args;
 	serial_printf(fmt);
 	va_end(args);
@@ -48,7 +49,7 @@ void uacpi_platform_outl(uint16_t port, uint32_t value) {
 	outb(port, value);
 }
 
-uacpi_status uacpi_kernel_get_rsdp(uacpi_phys_addr* out_rsdp_address) {
+uacpi_status uacpi_kernel_get_rsdp(uacpi_phys_addr *out_rsdp_address) {
 	*out_rsdp_address = rsdp_request.response->address;
 	return UACPI_STATUS_OK;
 }

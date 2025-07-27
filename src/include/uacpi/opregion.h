@@ -17,17 +17,15 @@ extern "C" {
  * this type installed is encountered.
  */
 uacpi_status uacpi_install_address_space_handler(
-		uacpi_namespace_node* device_node,
-		enum uacpi_address_space space,
-		uacpi_region_handler handler,
-		uacpi_handle handler_context);
+								uacpi_namespace_node *device_node,
+								enum uacpi_address_space space,
+								uacpi_region_handler handler,
+								uacpi_handle handler_context);
 
 /*
  * Uninstall the handler of type 'space' from a given device node.
  */
-uacpi_status uacpi_uninstall_address_space_handler(
-		uacpi_namespace_node* device_node,
-		enum uacpi_address_space space);
+uacpi_status uacpi_uninstall_address_space_handler(uacpi_namespace_node *device_node, enum uacpi_address_space space);
 
 /*
  * Execute _REG(space, ACPI_REG_CONNECT) for all of the opregions with this
@@ -35,10 +33,9 @@ uacpi_status uacpi_uninstall_address_space_handler(
  * if you want to register an early handler that must be available before the
  * call to uacpi_namespace_initialize().
  */
-uacpi_status uacpi_reg_all_opregions(uacpi_namespace_node* device_node,
-																		 enum uacpi_address_space space);
+uacpi_status uacpi_reg_all_opregions(uacpi_namespace_node *device_node, enum uacpi_address_space space);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }

@@ -27,20 +27,20 @@ void uacpi_deinitialize_notify(void) {
 }
 
 struct notification_ctx {
-	uacpi_namespace_node* node;
+	uacpi_namespace_node *node;
 	uacpi_u64 value;
-	uacpi_object* node_object;
+	uacpi_object *node_object;
 };
 
-static void free_notification_ctx(struct notification_ctx* ctx) {
+static void free_notification_ctx(struct notification_ctx *ctx) {
 	uacpi_namespace_node_release_object(ctx->node_object);
 	uacpi_namespace_node_unref(ctx->node);
 	uacpi_free(ctx, sizeof(*ctx));
 }
 
 static void do_notify(uacpi_handle opaque) {
-	struct notification_ctx* ctx = opaque;
-	uacpi_device_notify_handler* handler;
+	struct notification_ctx *ctx = opaque;
+	uacpi_device_notify_handler *handler;
 	uacpi_bool did_notify_root = UACPI_FALSE;
 
 	handler = ctx->node_object->handlers->notify_head;
@@ -62,14 +62,13 @@ static void do_notify(uacpi_handle opaque) {
 	}
 }
 
-uacpi_status uacpi_notify_all(uacpi_namespace_node* node, uacpi_u64 value) {
+uacpi_status uacpi_notify_all(uacpi_namespace_node *node, uacpi_u64 value) {
 	uacpi_status ret;
-	struct notification_ctx* ctx;
-	uacpi_object* node_object;
+	struct notification_ctx *ctx;
+	uacpi_object *node_object;
 
 	node_object = uacpi_namespace_node_get_object_typed(
-			node, UACPI_OBJECT_DEVICE_BIT | UACPI_OBJECT_THERMAL_ZONE_BIT |
-								UACPI_OBJECT_PROCESSOR_BIT);
+									node, UACPI_OBJECT_DEVICE_BIT | UACPI_OBJECT_THERMAL_ZONE_BIT | UACPI_OBJECT_PROCESSOR_BIT);
 	if (uacpi_unlikely(node_object == UACPI_NULL))
 		return UACPI_STATUS_INVALID_ARGUMENT;
 
@@ -99,8 +98,7 @@ uacpi_status uacpi_notify_all(uacpi_namespace_node* node, uacpi_u64 value) {
 
 	ret = uacpi_kernel_schedule_work(UACPI_WORK_NOTIFICATION, do_notify, ctx);
 	if (uacpi_unlikely_error(ret)) {
-		uacpi_warn("unable to schedule notification work: %s\n",
-							 uacpi_status_to_string(ret));
+		uacpi_warn("unable to schedule notification work: %s\n", uacpi_status_to_string(ret));
 		free_notification_ctx(ctx);
 	}
 
@@ -109,10 +107,8 @@ out:
 	return ret;
 }
 
-static uacpi_device_notify_handler* handler_container(
-		uacpi_handlers* handlers,
-		uacpi_notify_handler target_handler) {
-	uacpi_device_notify_handler* handler = handlers->notify_head;
+static uacpi_device_notify_handler *handler_container(uacpi_handlers *handlers, uacpi_notify_handler target_handler) {
+	uacpi_device_notify_handler *handler = handlers->notify_head;
 
 	while (handler) {
 		if (handler->callback == target_handler)
@@ -124,13 +120,12 @@ static uacpi_device_notify_handler* handler_container(
 	return UACPI_NULL;
 }
 
-uacpi_status uacpi_install_notify_handler(uacpi_namespace_node* node,
-																					uacpi_notify_handler handler,
-																					uacpi_handle handler_context) {
+uacpi_status uacpi_install_notify_handler(
+								uacpi_namespace_node *node, uacpi_notify_handler handler, uacpi_handle handler_context) {
 	uacpi_status ret;
-	uacpi_object* obj;
-	uacpi_handlers* handlers;
-	uacpi_device_notify_handler* new_handler;
+	uacpi_object *obj;
+	uacpi_handlers *handlers;
+	uacpi_device_notify_handler *new_handler;
 
 	UACPI_ENSURE_INIT_LEVEL_AT_LEAST(UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED);
 
@@ -138,10 +133,7 @@ uacpi_status uacpi_install_notify_handler(uacpi_namespace_node* node,
 		obj = g_uacpi_rt_ctx.root_object;
 	} else {
 		ret = uacpi_namespace_node_acquire_object_typed(
-				node,
-				UACPI_OBJECT_DEVICE_BIT | UACPI_OBJECT_THERMAL_ZONE_BIT |
-						UACPI_OBJECT_PROCESSOR_BIT,
-				&obj);
+										node, UACPI_OBJECT_DEVICE_BIT | UACPI_OBJECT_THERMAL_ZONE_BIT | UACPI_OBJECT_PROCESSOR_BIT, &obj);
 		if (uacpi_unlikely_error(ret))
 			return ret;
 	}
@@ -178,11 +170,10 @@ out_no_mutex:
 	return ret;
 }
 
-uacpi_status uacpi_uninstall_notify_handler(uacpi_namespace_node* node,
-																						uacpi_notify_handler handler) {
+uacpi_status uacpi_uninstall_notify_handler(uacpi_namespace_node *node, uacpi_notify_handler handler) {
 	uacpi_status ret;
-	uacpi_object* obj;
-	uacpi_handlers* handlers;
+	uacpi_object *obj;
+	uacpi_handlers *handlers;
 	uacpi_device_notify_handler *prev_handler, *containing = UACPI_NULL;
 
 	UACPI_ENSURE_INIT_LEVEL_AT_LEAST(UACPI_INIT_LEVEL_SUBSYSTEM_INITIALIZED);
@@ -191,10 +182,7 @@ uacpi_status uacpi_uninstall_notify_handler(uacpi_namespace_node* node,
 		obj = g_uacpi_rt_ctx.root_object;
 	} else {
 		ret = uacpi_namespace_node_acquire_object_typed(
-				node,
-				UACPI_OBJECT_DEVICE_BIT | UACPI_OBJECT_THERMAL_ZONE_BIT |
-						UACPI_OBJECT_PROCESSOR_BIT,
-				&obj);
+										node, UACPI_OBJECT_DEVICE_BIT | UACPI_OBJECT_THERMAL_ZONE_BIT | UACPI_OBJECT_PROCESSOR_BIT, &obj);
 		if (uacpi_unlikely_error(ret))
 			return ret;
 	}
@@ -243,4 +231,4 @@ out_no_mutex:
 	return ret;
 }
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE

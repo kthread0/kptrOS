@@ -1,6 +1,8 @@
 #include "pic.h"
-#include <stdint.h>
+
 #include "access.h"
+
+#include <stdint.h>
 
 // Function to send End-of-Interrupt signal to the PICs.
 void pic_send_eoi(unsigned char irq) {

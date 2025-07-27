@@ -1,6 +1,7 @@
-#include <system.h>
 #include "../cpu/access.h"
 #include "keyboard.h"
+
+#include <system.h>
 
 void keyboard_test_controller(void) {
 	serial_write("Testing keyboard controller...\n");
@@ -16,7 +17,7 @@ void keyboard_test_controller(void) {
 	}
 
 	// Test self-test command
-	outb(0x64, 0xAA);	 // Self-test command
+	outb(0x64, 0xAA); // Self-test command
 	io_wait();
 
 	// Wait for response

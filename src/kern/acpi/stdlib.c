@@ -3,22 +3,22 @@
 
 #ifdef UACPI_USE_BUILTIN_STRING
 
-#ifndef uacpi_memcpy
-void* uacpi_memcpy(void* dest, const void* src, uacpi_size count) {
-	uacpi_char* cd = dest;
-	const uacpi_char* cs = src;
+#	ifndef uacpi_memcpy
+void *uacpi_memcpy(void *dest, const void *src, uacpi_size count) {
+	uacpi_char *cd = dest;
+	const uacpi_char *cs = src;
 
 	while (count--)
 		*cd++ = *cs++;
 
 	return dest;
 }
-#endif
+#	endif
 
-#ifndef uacpi_memmove
-void* uacpi_memmove(void* dest, const void* src, uacpi_size count) {
-	uacpi_char* cd = dest;
-	const uacpi_char* cs = src;
+#	ifndef uacpi_memmove
+void *uacpi_memmove(void *dest, const void *src, uacpi_size count) {
+	uacpi_char *cd = dest;
+	const uacpi_char *cs = src;
 
 	if (src < dest) {
 		cs += count;
@@ -33,24 +33,24 @@ void* uacpi_memmove(void* dest, const void* src, uacpi_size count) {
 
 	return dest;
 }
-#endif
+#	endif
 
-#ifndef uacpi_memset
-void* uacpi_memset(void* dest, uacpi_i32 ch, uacpi_size count) {
+#	ifndef uacpi_memset
+void *uacpi_memset(void *dest, uacpi_i32 ch, uacpi_size count) {
 	uacpi_u8 fill = ch;
-	uacpi_u8* cdest = dest;
+	uacpi_u8 *cdest = dest;
 
 	while (count--)
 		*cdest++ = fill;
 
 	return dest;
 }
-#endif
+#	endif
 
-#ifndef uacpi_memcmp
-uacpi_i32 uacpi_memcmp(const void* lhs, const void* rhs, uacpi_size count) {
-	const uacpi_u8* byte_lhs = lhs;
-	const uacpi_u8* byte_rhs = rhs;
+#	ifndef uacpi_memcmp
+uacpi_i32 uacpi_memcmp(const void *lhs, const void *rhs, uacpi_size count) {
+	const uacpi_u8 *byte_lhs = lhs;
+	const uacpi_u8 *byte_rhs = rhs;
 	uacpi_size i;
 
 	for (i = 0; i < count; ++i) {
@@ -60,13 +60,13 @@ uacpi_i32 uacpi_memcmp(const void* lhs, const void* rhs, uacpi_size count) {
 
 	return 0;
 }
-#endif
+#	endif
 
-#endif	// UACPI_USE_BUILTIN_STRING
+#endif // UACPI_USE_BUILTIN_STRING
 
 #ifndef uacpi_strlen
-uacpi_size uacpi_strlen(const uacpi_char* str) {
-	const uacpi_char* str1;
+uacpi_size uacpi_strlen(const uacpi_char *str) {
+	const uacpi_char *str1;
 
 	for (str1 = str; *str1; str1++)
 		;
@@ -77,71 +77,68 @@ uacpi_size uacpi_strlen(const uacpi_char* str) {
 
 #ifndef UACPI_BAREBONES_MODE
 
-#ifndef uacpi_strnlen
-uacpi_size uacpi_strnlen(const uacpi_char* str, uacpi_size max) {
-	const uacpi_char* str1;
+#	ifndef uacpi_strnlen
+uacpi_size uacpi_strnlen(const uacpi_char *str, uacpi_size max) {
+	const uacpi_char *str1;
 
 	for (str1 = str; max-- && *str1; str1++)
 		;
 
 	return str1 - str;
 }
-#endif
+#	endif
 
-#ifndef uacpi_strcmp
-uacpi_i32 uacpi_strcmp(const uacpi_char* lhs, const uacpi_char* rhs) {
+#	ifndef uacpi_strcmp
+uacpi_i32 uacpi_strcmp(const uacpi_char *lhs, const uacpi_char *rhs) {
 	uacpi_size i = 0;
-	typedef const uacpi_u8* cucp;
+	typedef const uacpi_u8 *cucp;
 
 	while (lhs[i] && rhs[i]) {
 		if (lhs[i] != rhs[i])
-			return *(cucp)&lhs[i] - *(cucp)&rhs[i];
+			return *(cucp) &lhs[i] - *(cucp) &rhs[i];
 
 		i++;
 	}
 
-	return *(cucp)&lhs[i] - *(cucp)&rhs[i];
+	return *(cucp) &lhs[i] - *(cucp) &rhs[i];
 }
-#endif
+#	endif
 
-void uacpi_memcpy_zerout(void* dst,
-												 const void* src,
-												 uacpi_size dst_size,
-												 uacpi_size src_size) {
+void uacpi_memcpy_zerout(void *dst, const void *src, uacpi_size dst_size, uacpi_size src_size) {
 	uacpi_size bytes_to_copy = UACPI_MIN(src_size, dst_size);
 
 	if (bytes_to_copy)
 		uacpi_memcpy(dst, src, bytes_to_copy);
 
 	if (dst_size > bytes_to_copy)
-		uacpi_memzero((uacpi_u8*)dst + bytes_to_copy, dst_size - bytes_to_copy);
+		uacpi_memzero((uacpi_u8 *) dst + bytes_to_copy, dst_size - bytes_to_copy);
 }
 
 uacpi_u8 uacpi_bit_scan_forward(uacpi_u64 value) {
-#if defined(_MSC_VER) && !defined(__clang__)
+#	if defined(_MSC_VER) && !defined(__clang__)
 	unsigned char ret;
 	unsigned long index;
 
-#ifdef _WIN64
+#		ifdef _WIN64
 	ret = _BitScanForward64(&index, value);
 	if (ret == 0)
 		return 0;
 
-	return (uacpi_u8)index + 1;
-#else
+	return (uacpi_u8) index + 1;
+#		else
 	ret = _BitScanForward(&index, value);
 	if (ret == 0) {
 		ret = _BitScanForward(&index, value >> 32);
 		if (ret == 0)
 			return 0;
 
-		return (uacpi_u8)index + 33;
+		return (uacpi_u8) index + 33;
 	}
 
-	return (uacpi_u8)index + 1;
-#endif
+	return (uacpi_u8) index + 1;
+#		endif
 
-#elif defined(__WATCOMC__)
+#	elif defined(__WATCOMC__)
 	// TODO: Use compiler intrinsics or inline ASM here
 	uacpi_u8 index;
 	uacpi_u64 mask = 1;
@@ -153,36 +150,36 @@ uacpi_u8 uacpi_bit_scan_forward(uacpi_u64 value) {
 	}
 
 	return 0;
-#else
+#	else
 	return __builtin_ffsll(value);
-#endif
+#	endif
 }
 
 uacpi_u8 uacpi_bit_scan_backward(uacpi_u64 value) {
-#if defined(_MSC_VER) && !defined(__clang__)
+#	if defined(_MSC_VER) && !defined(__clang__)
 	unsigned char ret;
 	unsigned long index;
 
-#ifdef _WIN64
+#		ifdef _WIN64
 	ret = _BitScanReverse64(&index, value);
 	if (ret == 0)
 		return 0;
 
-	return (uacpi_u8)index + 1;
-#else
+	return (uacpi_u8) index + 1;
+#		else
 	ret = _BitScanReverse(&index, value >> 32);
 	if (ret == 0) {
 		ret = _BitScanReverse(&index, value);
 		if (ret == 0)
 			return 0;
 
-		return (uacpi_u8)index + 1;
+		return (uacpi_u8) index + 1;
 	}
 
-	return (uacpi_u8)index + 33;
-#endif
+	return (uacpi_u8) index + 33;
+#		endif
 
-#elif defined(__WATCOMC__)
+#	elif defined(__WATCOMC__)
 	// TODO: Use compiler intrinsics or inline ASM here
 	uacpi_u8 index;
 	uacpi_u64 mask = (1ull << 63);
@@ -194,17 +191,17 @@ uacpi_u8 uacpi_bit_scan_backward(uacpi_u64 value) {
 	}
 
 	return 0;
-#else
+#	else
 	if (value == 0)
 		return 0;
 
 	return 64 - __builtin_clzll(value);
-#endif
+#	endif
 }
 
-#ifndef UACPI_NATIVE_ALLOC_ZEROED
-void* uacpi_builtin_alloc_zeroed(uacpi_size size) {
-	void* ptr;
+#	ifndef UACPI_NATIVE_ALLOC_ZEROED
+void *uacpi_builtin_alloc_zeroed(uacpi_size size) {
+	void *ptr;
 
 	ptr = uacpi_kernel_alloc(size);
 	if (uacpi_unlikely(ptr == UACPI_NULL))
@@ -213,13 +210,13 @@ void* uacpi_builtin_alloc_zeroed(uacpi_size size) {
 	uacpi_memzero(ptr, size);
 	return ptr;
 }
-#endif
+#	endif
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifndef uacpi_vsnprintf
 struct fmt_buf_state {
-	uacpi_char* buffer;
+	uacpi_char *buffer;
 	uacpi_size capacity;
 	uacpi_size bytes_written;
 };
@@ -238,23 +235,19 @@ struct fmt_spec {
 	uacpi_u32 base;
 };
 
-static void write_one(struct fmt_buf_state* fb_state, uacpi_char c) {
+static void write_one(struct fmt_buf_state *fb_state, uacpi_char c) {
 	if (fb_state->bytes_written < fb_state->capacity)
 		fb_state->buffer[fb_state->bytes_written] = c;
 
 	fb_state->bytes_written++;
 }
 
-static void write_many(struct fmt_buf_state* fb_state,
-											 const uacpi_char* string,
-											 uacpi_size count) {
+static void write_many(struct fmt_buf_state *fb_state, const uacpi_char *string, uacpi_size count) {
 	if (fb_state->bytes_written < fb_state->capacity) {
 		uacpi_size count_to_write;
 
-		count_to_write =
-				UACPI_MIN(count, fb_state->capacity - fb_state->bytes_written);
-		uacpi_memcpy(&fb_state->buffer[fb_state->bytes_written], string,
-								 count_to_write);
+		count_to_write = UACPI_MIN(count, fb_state->capacity - fb_state->bytes_written);
+		uacpi_memcpy(&fb_state->buffer[fb_state->bytes_written], string, count_to_write);
 	}
 
 	fb_state->bytes_written += count;
@@ -267,9 +260,7 @@ static uacpi_char hex_char(uacpi_bool upper, uacpi_u64 value) {
 	return (upper ? upper_hex : lower_hex)[value];
 }
 
-static void write_padding(struct fmt_buf_state* fb_state,
-													struct fmt_spec* fm,
-													uacpi_size repr_size) {
+static void write_padding(struct fmt_buf_state *fb_state, struct fmt_spec *fm, uacpi_size repr_size) {
 	uacpi_u64 mw = fm->min_width;
 
 	if (mw <= repr_size)
@@ -281,11 +272,9 @@ static void write_padding(struct fmt_buf_state* fb_state,
 		write_one(fb_state, fm->left_justify ? ' ' : fm->pad_char);
 }
 
-#define REPR_BUFFER_SIZE 32
+#	define REPR_BUFFER_SIZE 32
 
-static void write_integer(struct fmt_buf_state* fb_state,
-													struct fmt_spec* fm,
-													uacpi_u64 value) {
+static void write_integer(struct fmt_buf_state *fb_state, struct fmt_spec *fm, uacpi_u64 value) {
 	uacpi_char repr_buffer[REPR_BUFFER_SIZE];
 	uacpi_size index = REPR_BUFFER_SIZE;
 	uacpi_u64 remainder;
@@ -346,8 +335,7 @@ static void write_integer(struct fmt_buf_state* fb_state,
 	}
 }
 
-static uacpi_bool string_has_at_least(const uacpi_char* string,
-																			uacpi_size characters) {
+static uacpi_bool string_has_at_least(const uacpi_char *string, uacpi_size characters) {
 	while (*string) {
 		if (--characters == 0)
 			return UACPI_TRUE;
@@ -358,8 +346,7 @@ static uacpi_bool string_has_at_least(const uacpi_char* string,
 	return UACPI_FALSE;
 }
 
-static uacpi_bool consume_digits(const uacpi_char** string,
-																 uacpi_size* out_size) {
+static uacpi_bool consume_digits(const uacpi_char **string, uacpi_size *out_size) {
 	uacpi_size size = 0;
 
 	for (;;) {
@@ -383,12 +370,10 @@ enum parse_number_mode {
 	PARSE_NUMBER_MODE_MUST,
 };
 
-static uacpi_bool parse_number(const uacpi_char** fmt,
-															 enum parse_number_mode mode,
-															 uacpi_u64* out_value) {
+static uacpi_bool parse_number(const uacpi_char **fmt, enum parse_number_mode mode, uacpi_u64 *out_value) {
 	uacpi_status ret;
 	uacpi_size num_digits;
-	const uacpi_char* digits = *fmt;
+	const uacpi_char *digits = *fmt;
 
 	if (!consume_digits(fmt, &num_digits))
 		return mode != PARSE_NUMBER_MODE_MUST;
@@ -397,7 +382,7 @@ static uacpi_bool parse_number(const uacpi_char** fmt,
 	return ret == UACPI_STATUS_OK;
 }
 
-static uacpi_bool consume(const uacpi_char** string, const uacpi_char* token) {
+static uacpi_bool consume(const uacpi_char **string, const uacpi_char *token) {
 	uacpi_size token_size;
 
 	token_size = uacpi_strlen(token);
@@ -413,7 +398,7 @@ static uacpi_bool consume(const uacpi_char** string, const uacpi_char* token) {
 	return UACPI_FALSE;
 }
 
-static uacpi_bool is_one_of(uacpi_char c, const uacpi_char* list) {
+static uacpi_bool is_one_of(uacpi_char c, const uacpi_char *list) {
 	for (; *list; list++) {
 		if (c == *list)
 			return UACPI_TRUE;
@@ -422,9 +407,7 @@ static uacpi_bool is_one_of(uacpi_char c, const uacpi_char* list) {
 	return UACPI_FALSE;
 }
 
-static uacpi_bool consume_one_of(const uacpi_char** string,
-																 const uacpi_char* list,
-																 uacpi_char* consumed_char) {
+static uacpi_bool consume_one_of(const uacpi_char **string, const uacpi_char *list, uacpi_char *consumed_char) {
 	uacpi_char c = **string;
 	if (!c)
 		return UACPI_FALSE;
@@ -440,13 +423,13 @@ static uacpi_bool consume_one_of(const uacpi_char** string,
 
 static uacpi_u32 base_from_specifier(uacpi_char specifier) {
 	switch (specifier) {
-		case 'x':
-		case 'X':
-			return 16;
-		case 'o':
-			return 8;
-		default:
-			return 10;
+	case 'x':
+	case 'X':
+		return 16;
+	case 'o':
+		return 8;
+	default:
+		return 10;
 	}
 }
 
@@ -454,8 +437,7 @@ static uacpi_bool is_uppercase_specifier(uacpi_char specifier) {
 	return specifier == 'X';
 }
 
-static const uacpi_char* find_next_conversion(const uacpi_char* fmt,
-																							uacpi_size* offset) {
+static const uacpi_char *find_next_conversion(const uacpi_char *fmt, uacpi_size *offset) {
 	*offset = 0;
 
 	while (*fmt) {
@@ -469,13 +451,10 @@ static const uacpi_char* find_next_conversion(const uacpi_char* fmt,
 	return UACPI_NULL;
 }
 
-uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
-													uacpi_size capacity,
-													const uacpi_char* fmt,
-													uacpi_va_list vlist) {
-	struct fmt_buf_state fb_state = {0};
+uacpi_i32 uacpi_vsnprintf(uacpi_char *buffer, uacpi_size capacity, const uacpi_char *fmt, uacpi_va_list vlist) {
+	struct fmt_buf_state fb_state = { 0 };
 	uacpi_u64 value;
-	const uacpi_char* next_conversion;
+	const uacpi_char *next_conversion;
 	uacpi_size next_offset;
 	uacpi_char flag;
 
@@ -485,8 +464,8 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 
 	while (*fmt) {
 		struct fmt_spec fm = {
-				.pad_char = ' ',
-				.base = 10,
+			.pad_char = ' ',
+			.base = 10,
 		};
 		next_conversion = find_next_conversion(fmt, &next_offset);
 
@@ -507,22 +486,22 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 
 		while (consume_one_of(&fmt, "+- 0#", &flag)) {
 			switch (flag) {
-				case '+':
-				case ' ':
-					fm.prepend = UACPI_TRUE;
-					fm.prepend_char = flag;
-					continue;
-				case '-':
-					fm.left_justify = UACPI_TRUE;
-					continue;
-				case '0':
-					fm.pad_char = '0';
-					continue;
-				case '#':
-					fm.alternate_form = UACPI_TRUE;
-					continue;
-				default:
-					return -1;
+			case '+':
+			case ' ':
+				fm.prepend = UACPI_TRUE;
+				fm.prepend_char = flag;
+				continue;
+			case '-':
+				fm.left_justify = UACPI_TRUE;
+				continue;
+			case '0':
+				fm.pad_char = '0';
+				continue;
+			case '#':
+				fm.alternate_form = UACPI_TRUE;
+				continue;
+			default:
+				return -1;
 			}
 		}
 
@@ -552,7 +531,7 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 		}
 
 		if (consume(&fmt, "s")) {
-			const uacpi_char* string = uacpi_va_arg(vlist, uacpi_char*);
+			const uacpi_char *string = uacpi_va_arg(vlist, uacpi_char *);
 			uacpi_size i;
 
 			if (uacpi_unlikely(string == UACPI_NULL))
@@ -566,7 +545,7 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 		}
 
 		if (consume(&fmt, "p")) {
-			value = (uacpi_uintptr)uacpi_va_arg(vlist, void*);
+			value = (uacpi_uintptr) uacpi_va_arg(vlist, void *);
 			fm.base = 16;
 			fm.min_width = UACPI_POINTER_SIZE * 2;
 			fm.pad_char = '0';
@@ -575,10 +554,10 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 
 		if (consume(&fmt, "hh")) {
 			if (consume(&fmt, "d") || consume(&fmt, "i")) {
-				value = (signed char)uacpi_va_arg(vlist, int);
+				value = (signed char) uacpi_va_arg(vlist, int);
 				fm.is_signed = UACPI_TRUE;
 			} else if (consume_one_of(&fmt, "oxXu", &flag)) {
-				value = (unsigned char)uacpi_va_arg(vlist, int);
+				value = (unsigned char) uacpi_va_arg(vlist, int);
 			} else {
 				return -1;
 			}
@@ -587,18 +566,17 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 
 		if (consume(&fmt, "h")) {
 			if (consume(&fmt, "d") || consume(&fmt, "i")) {
-				value = (signed short)uacpi_va_arg(vlist, int);
+				value = (signed short) uacpi_va_arg(vlist, int);
 				fm.is_signed = UACPI_TRUE;
 			} else if (consume_one_of(&fmt, "oxXu", &flag)) {
-				value = (unsigned short)uacpi_va_arg(vlist, int);
+				value = (unsigned short) uacpi_va_arg(vlist, int);
 			} else {
 				return -1;
 			}
 			goto write_int;
 		}
 
-		if (consume(&fmt, "ll") ||
-				(sizeof(uacpi_size) == sizeof(long long) && consume(&fmt, "z"))) {
+		if (consume(&fmt, "ll") || (sizeof(uacpi_size) == sizeof(long long) && consume(&fmt, "z"))) {
 			if (consume(&fmt, "d") || consume(&fmt, "i")) {
 				value = uacpi_va_arg(vlist, long long);
 				fm.is_signed = UACPI_TRUE;
@@ -610,8 +588,7 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 			goto write_int;
 		}
 
-		if (consume(&fmt, "l") ||
-				(sizeof(uacpi_size) == sizeof(long) && consume(&fmt, "z"))) {
+		if (consume(&fmt, "l") || (sizeof(uacpi_size) == sizeof(long) && consume(&fmt, "z"))) {
 			if (consume(&fmt, "d") || consume(&fmt, "i")) {
 				value = uacpi_va_arg(vlist, long);
 				fm.is_signed = UACPI_TRUE;
@@ -653,10 +630,7 @@ uacpi_i32 uacpi_vsnprintf(uacpi_char* buffer,
 #endif
 
 #ifndef uacpi_snprintf
-uacpi_i32 uacpi_snprintf(uacpi_char* buffer,
-												 uacpi_size capacity,
-												 const uacpi_char* fmt,
-												 ...) {
+uacpi_i32 uacpi_snprintf(uacpi_char *buffer, uacpi_size capacity, const uacpi_char *fmt, ...) {
 	uacpi_va_list vlist;
 	uacpi_i32 ret;
 
@@ -669,7 +643,7 @@ uacpi_i32 uacpi_snprintf(uacpi_char* buffer,
 #endif
 
 #ifndef UACPI_FORMATTED_LOGGING
-void uacpi_log(uacpi_log_level lvl, const uacpi_char* str, ...) {
+void uacpi_log(uacpi_log_level lvl, const uacpi_char *str, ...) {
 	uacpi_char buf[UACPI_PLAIN_LOG_BUFFER_SIZE];
 	int ret;
 

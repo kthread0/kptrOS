@@ -52,8 +52,7 @@ uacpi_vendor_interface uacpi_latest_queried_vendor_interface(void);
 typedef enum uacpi_interface_kind {
 	UACPI_INTERFACE_KIND_VENDOR = (1 << 0),
 	UACPI_INTERFACE_KIND_FEATURE = (1 << 1),
-	UACPI_INTERFACE_KIND_ALL =
-			UACPI_INTERFACE_KIND_VENDOR | UACPI_INTERFACE_KIND_FEATURE,
+	UACPI_INTERFACE_KIND_ALL = UACPI_INTERFACE_KIND_VENDOR | UACPI_INTERFACE_KIND_FEATURE,
 } uacpi_interface_kind;
 
 /*
@@ -64,9 +63,8 @@ typedef enum uacpi_interface_kind {
  *
  * After installing an interface, all _OSI queries report it as supported.
  */
-uacpi_status uacpi_install_interface(const uacpi_char* name,
-																		 uacpi_interface_kind);
-uacpi_status uacpi_uninstall_interface(const uacpi_char* name);
+uacpi_status uacpi_install_interface(const uacpi_char *name, uacpi_interface_kind);
+uacpi_status uacpi_uninstall_interface(const uacpi_char *name);
 
 typedef enum uacpi_host_interface {
 	UACPI_HOST_INTERFACE_MODULE_DEVICE = 1,
@@ -84,8 +82,7 @@ typedef enum uacpi_host_interface {
 uacpi_status uacpi_enable_host_interface(uacpi_host_interface);
 uacpi_status uacpi_disable_host_interface(uacpi_host_interface);
 
-typedef uacpi_bool (*uacpi_interface_handler)(const uacpi_char* name,
-																							uacpi_bool supported);
+typedef uacpi_bool (*uacpi_interface_handler)(const uacpi_char *name, uacpi_bool supported);
 
 /*
  * Set a custom interface query (_OSI) handler.
@@ -113,10 +110,9 @@ typedef enum uacpi_interface_action {
  * By default, all vendor strings (like "Windows 2000") are enabled, and all
  * host features (like "3.0 Thermal Model") are disabled.
  */
-uacpi_status uacpi_bulk_configure_interfaces(uacpi_interface_action action,
-																						 uacpi_interface_kind kind);
+uacpi_status uacpi_bulk_configure_interfaces(uacpi_interface_action action, uacpi_interface_kind kind);
 
-#endif	// !UACPI_BAREBONES_MODE
+#endif // !UACPI_BAREBONES_MODE
 
 #ifdef __cplusplus
 }
