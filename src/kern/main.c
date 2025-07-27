@@ -1,7 +1,7 @@
 #include "cpu/access.h"
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
-#include "cpu/pic.h"
+#include "kbd/keyboard.h"
 #include "mem/paging/paging.h"
 #include <limine.h>
 #include <stdbool.h>
@@ -12,7 +12,6 @@ extern void panic(cpu_state_t *state);
 
 void kmain(void)
 {
-
 	gdt_init();
 	serial_write("GDT Initialized!\n");
 	idt_init();
@@ -30,6 +29,7 @@ void kmain(void)
 	}
 
 	fbinit();
+	keyboard_init();
 	serial_printf("Hello from Serial Console!\n");
 
 	for (;;)

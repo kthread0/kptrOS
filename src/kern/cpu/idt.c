@@ -1,9 +1,12 @@
 #include "idt.h"
+#include "../cpu/access.h"
+#include "../cpu/pic.h"
+#include "../kbd/keyboard.h"
 #include <limine.h>
 #include <stdbool.h>
 #include <system.h>
 
-#define KERNEL_CS 0x1000
+#define KERNEL_CS 0x28
 #define IDT_MAX_DESCRIPTORS 256
 
 typedef struct
@@ -34,6 +37,17 @@ __attribute__((aligned(0x10))) static idt_entry_t
 
 void exception_handler(uint64_t vector, uint64_t error_code)
 {
+	__asm__ volatile("cli");
+	// Handle keyboard interrupt safely
+	if (vector == 33)
+	{								  // IRQ1
+		uint8_t scancode = inb(0x60); // Read scancode
+		serial_printf("Key: 0x%02X\n", scancode);
+		outb(0x20, 0x20); // Send EOI to PIC
+		__asm__ volatile("sti");
+		return;
+	}
+
 	serial_printf("Exception: Vector=%d, Error Code=%x\n", vector, error_code);
 	cpu_state_t state;
 	capture_cpu_state(&state);
@@ -56,18 +70,25 @@ void idt_set_descriptor(uint64_t vector, void *isr, uint8_t flags)
 
 static bool vectors[IDT_MAX_DESCRIPTORS];
 
+extern void keyboard_isr_stub(void);
 void *isr_stub_table[IDT_MAX_DESCRIPTORS];
+
+void keyboard_isr_wrapper(void)
+{
+	keyboard_interrupt_handler();
+}
 
 void idt_init()
 {
 	idtr.base = (uintptr_t)&idt[0];
 	idtr.limit = (uint16_t)sizeof(idt_entry_t) * IDT_MAX_DESCRIPTORS - 1;
-
 	for (uint16_t vector = 0; vector < IDT_MAX_DESCRIPTORS; vector++)
 	{
 		idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
 		vectors[vector] = true;
 	}
+
+	idt_set_descriptor(33, keyboard_isr_wrapper, 0x8E);
 
 	__asm__ volatile("lidt %0" : : "m"(idtr)); // load the new IDT
 	__asm__ volatile("sti");				   // set the interrupt flag
