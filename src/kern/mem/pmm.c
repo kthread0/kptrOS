@@ -1,5 +1,5 @@
 #include "pmm.h"
-#include "limine.h"
+#include <limine.h>
 #include <stddef.h> // for NULL
 
 extern char _kernel_start[], _kernel_end[];
