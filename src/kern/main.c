@@ -1,6 +1,7 @@
 #include "acpi/init.h"
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
+#include "gpu/fb/framebuffer.h"
 #include "kbd/keyboard.h"
 #include "mem/pmm.h"
 #include <limine.h>
@@ -12,7 +13,11 @@ void kmain(void)
 	idt_init();
 	acpi_init();
 	keyboard_init();
-	fbinit();
+	start_pmm();
+	if (check_fb() == true)
+	{
+		fbinit();
+	}
 
 	for (;;)
 	{

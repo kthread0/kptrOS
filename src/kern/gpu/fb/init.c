@@ -7,7 +7,7 @@
 static volatile struct limine_framebuffer_request limine_framebuffer = {
 	.id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0};
 
-void fbinit()
+bool check_fb(void)
 {
 	if (limine_framebuffer.response == NULL ||
 		limine_framebuffer.response->framebuffer_count < 1)
@@ -17,13 +17,18 @@ void fbinit()
 		cpu_state_t state;
 		capture_cpu_state(&state);
 		panic(&state);
+		return false;
 	}
 	else
 	{
 		serial_printf("Framebuffers: %d\n",
 					  limine_framebuffer.response->framebuffer_count);
 	}
+	return true;
+}
 
+void fbinit(void)
+{
 	struct limine_framebuffer *framebuffer =
 		limine_framebuffer.response->framebuffers[0];
 
