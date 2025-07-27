@@ -8,7 +8,7 @@ static volatile struct limine_framebuffer_request limine_framebuffer = {
 		.id = LIMINE_FRAMEBUFFER_REQUEST,
 		.revision = 0};
 
-bool check_fb(void) {
+bool check_fb(bool valid) {
 	if (limine_framebuffer.response == NULL ||
 			limine_framebuffer.response->framebuffer_count < 1) {
 		serial_printf(

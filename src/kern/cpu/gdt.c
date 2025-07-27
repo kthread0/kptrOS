@@ -1,6 +1,6 @@
 #include "gdt.h"
 #include <stdint.h>
-#include "../../include/system.h"
+#include <system.h>
 
 // Each define here is for a specific flag in the descriptor.
 // Refer to the intel documentation for a description of what each one does.

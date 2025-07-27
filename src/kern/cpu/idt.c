@@ -66,7 +66,7 @@ void page_fault_handler(registers_t* regs) {
 	// The faulting address is stored in the CR2 register.
 	asm volatile("mov %%cr2, %0" : "=r"(faulting_address));
 
-	serial_write("\n--- KERNEL PAGE FAULT (64-bit) ---\n");
+	serial_write("\n--- KERNEL PAGE FAULT ---\n");
 	serial_printf("Faulting Address: 0x%lx\n", faulting_address);
 	serial_printf("Instruction Pointer (RIP): 0x%lx\n", regs->rip);
 	serial_printf("Error Code: 0x%lx\n", regs->err_code);
