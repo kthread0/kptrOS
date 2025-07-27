@@ -1,37 +1,37 @@
 #include "pmm.h"
-#include <limine.h>
-#include <stddef.h> // for NULL
+#include <system.h> // For panic()
 
 extern char _kernel_start[], _kernel_end[];
-
-struct free_list_node
-{
-	struct free_list_node *next;
-};
 
 struct page
 {
 	uint8_t in_use;
-	uint8_t order;
 };
 
-static struct free_list_node *free_lists[MAX_ORDER];
-static struct page *page_metadata;
-static uint64_t total_pages;
-static uint64_t highest_addr = 0;
-
-static inline uint64_t get_buddy_addr(uint64_t addr, size_t order)
-{
-	return addr ^ (1UL << (order + 12));
-}
-
-static void pmm_free_early(void *addr, size_t order);
+static struct page *page_metadata = NULL;
+static uint64_t total_pages = 0;
 
 void pmm_init(struct limine_memmap_response *memmap)
 {
+	// Add null check for memmap
+	if (memmap == NULL)
+	{
+		serial_printf("memmap is NULL!\n");
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+	}
+
+	uint64_t highest_addr = 0;
+	uint64_t metadata_base = 0;
+
+	// First, find the highest address to determine memory size
 	for (uint64_t i = 0; i < memmap->entry_count; i++)
 	{
 		struct limine_memmap_entry *entry = memmap->entries[i];
+		if (entry == NULL)
+			continue;
+
 		if (entry->type == LIMINE_MEMMAP_USABLE)
 		{
 			uint64_t top = entry->base + entry->length;
@@ -41,144 +41,131 @@ void pmm_init(struct limine_memmap_response *memmap)
 			}
 		}
 	}
-	total_pages = highest_addr / PAGE_SIZE;
 
+	// Add sanity check for highest_addr
+	if (highest_addr == 0)
+	{
+		serial_printf("highest_addr is NULL!\n");
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+	}
+
+	total_pages = highest_addr / PAGE_SIZE;
 	uint64_t metadata_size = total_pages * sizeof(struct page);
-	struct limine_memmap_entry *metadata_region = NULL;
+
+	// Second, find a place for our metadata
 	for (uint64_t i = 0; i < memmap->entry_count; i++)
 	{
 		struct limine_memmap_entry *entry = memmap->entries[i];
+		if (entry == NULL)
+			continue;
+
 		if (entry->type == LIMINE_MEMMAP_USABLE &&
 			entry->length >= metadata_size)
 		{
-			page_metadata = (struct page *)entry->base;
-			entry = metadata_region;
+			metadata_base = entry->base;
 			break;
 		}
 	}
+
+	if (metadata_base == 0)
+	{
+		serial_printf("metadata_base is NULL!\n");
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+	}
+
+	// If using virtual memory, ensure this address is mapped
+	page_metadata = (struct page *)metadata_base;
+
+	// Third, mark all pages as used initially
 	for (uint64_t i = 0; i < total_pages; i++)
 	{
 		page_metadata[i].in_use = 1;
-		page_metadata[i].order = 0;
-	}
-	for (int i = 0; i < MAX_ORDER; i++)
-	{
-		free_lists[i] = NULL;
 	}
 
+	// Fourth, free all usable memory regions
 	for (uint64_t i = 0; i < memmap->entry_count; i++)
 	{
 		struct limine_memmap_entry *entry = memmap->entries[i];
-		if (entry->type == LIMINE_MEMMAP_USABLE)
+		if (entry == NULL || entry->type != LIMINE_MEMMAP_USABLE)
 		{
-			// Free memory in page-sized chunks
-			for (uint64_t j = 0; j < entry->length; j += PAGE_SIZE)
-			{
-				pmm_free_early((void *)(entry->base + j), 0);
-			}
+			continue;
+		}
+
+		for (uint64_t j = 0; j < entry->length; j += PAGE_SIZE)
+		{
+			pmm_free_page((void *)(entry->base + j));
 		}
 	}
 
-	uint64_t kernel_start = (uint64_t)_kernel_start;
-	uint64_t kernel_end = (uint64_t)_kernel_end;
-	for (uint64_t i = kernel_start; i < kernel_end; i += PAGE_SIZE)
+	// Fifth, re-mark the kernel and PMM metadata as used
+	uint64_t kernel_start_page = (uint64_t)_kernel_start / PAGE_SIZE;
+	uint64_t kernel_end_page =
+		((uint64_t)_kernel_end + PAGE_SIZE - 1) / PAGE_SIZE;
+	for (uint64_t i = kernel_start_page; i < kernel_end_page; i++)
 	{
-		pmm_alloc_page();
+		if (i < total_pages)
+			page_metadata[i].in_use = 1;
 	}
-	for (uint64_t i = (uint64_t)page_metadata;
-		 i < (uint64_t)page_metadata + metadata_size; i += PAGE_SIZE)
+
+	uint64_t metadata_start_page = metadata_base / PAGE_SIZE;
+	uint64_t metadata_end_page =
+		(metadata_base + metadata_size + PAGE_SIZE - 1) / PAGE_SIZE;
+	for (uint64_t i = metadata_start_page; i < metadata_end_page; i++)
 	{
-		pmm_alloc_page();
+		if (i < total_pages)
+			page_metadata[i].in_use = 1;
 	}
 }
 
 void *pmm_alloc(size_t order)
 {
-	if (order >= MAX_ORDER)
-		return NULL;
+	size_t num_pages = 1 << order;
+	uint64_t consecutive_pages = 0;
 
-	size_t current_order;
-	for (current_order = order; current_order < MAX_ORDER; ++current_order)
+	for (uint64_t i = 0; i < total_pages; i++)
 	{
-		if (free_lists[current_order])
-			break;
+		if (!page_metadata[i].in_use)
+		{
+			consecutive_pages++;
+		}
+		else
+		{
+			consecutive_pages = 0;
+		}
+
+		if (consecutive_pages >= num_pages)
+		{
+			uint64_t start_page_index = i - num_pages + 1;
+			for (uint64_t j = 0; j < num_pages; j++)
+			{
+				page_metadata[start_page_index + j].in_use = 1;
+			}
+			return (void *)(start_page_index * PAGE_SIZE);
+		}
 	}
 
-	if (current_order == MAX_ORDER)
-		return NULL;
-
-	struct free_list_node *block = free_lists[current_order];
-	free_lists[current_order] = block->next;
-
-	while (current_order > order)
-	{
-		current_order--;
-		uint64_t buddy_addr = (uint64_t)block + (1UL << (current_order + 12));
-
-		struct free_list_node *buddy_node = (struct free_list_node *)buddy_addr;
-		buddy_node->next = free_lists[current_order];
-		free_lists[current_order] = buddy_node;
-		page_metadata[buddy_addr / PAGE_SIZE].order = current_order;
-		page_metadata[buddy_addr / PAGE_SIZE].in_use = 0;
-	}
-
-	uint64_t page_index = (uint64_t)block / PAGE_SIZE;
-	page_metadata[page_index].in_use = 1;
-	page_metadata[page_index].order = order;
-
-	return block;
+	return NULL; // Out of memory
 }
 
 void pmm_free(void *addr, size_t order)
 {
-	uint64_t page_index = (uint64_t)addr / PAGE_SIZE;
+	if (addr == NULL)
+		return;
 
-	while (order < MAX_ORDER - 1)
+	size_t num_pages = 1 << order;
+	uint64_t start_page_index = (uint64_t)addr / PAGE_SIZE;
+
+	for (uint64_t i = 0; i < num_pages; i++)
 	{
-		uint64_t buddy_addr = get_buddy_addr((uint64_t)addr, order);
-		uint64_t buddy_page_index = buddy_addr / PAGE_SIZE;
-
-		if (buddy_page_index >= total_pages ||
-			page_metadata[buddy_page_index].in_use ||
-			page_metadata[buddy_page_index].order != order)
+		if (start_page_index + i < total_pages)
 		{
-			break;
+			page_metadata[start_page_index + i].in_use = 0;
 		}
-
-		struct free_list_node *list = free_lists[order];
-		struct free_list_node *prev = NULL;
-		while (list)
-		{
-			if (list == (struct free_list_node *)buddy_addr)
-			{
-				if (prev)
-					prev->next = list->next;
-				else
-					free_lists[order] = list->next;
-				break;
-			}
-			prev = list;
-			list = list->next;
-		}
-
-		if (buddy_addr < (uint64_t)addr)
-		{
-			addr = (void *)buddy_addr;
-		}
-		order++;
 	}
-
-	struct free_list_node *node = (struct free_list_node *)addr;
-	page_index = (uint64_t)addr / PAGE_SIZE;
-	page_metadata[page_index].in_use = 0;
-	page_metadata[page_index].order = order;
-	node->next = free_lists[order];
-	free_lists[order] = node;
-}
-
-static void pmm_free_early(void *addr, size_t order)
-{
-	pmm_free(addr, order);
 }
 
 void *pmm_alloc_page()
@@ -188,10 +175,5 @@ void *pmm_alloc_page()
 
 void pmm_free_page(void *addr)
 {
-	if (!addr)
-		return;
-	uint64_t page_index = (uint64_t)addr / PAGE_SIZE;
-	if (page_index >= total_pages)
-		return;
-	pmm_free(addr, page_metadata[page_index].order);
+	pmm_free(addr, 0);
 }

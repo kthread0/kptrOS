@@ -7,17 +7,29 @@
 #include <limine.h>
 #include <system.h>
 
+// Define the memory map request
+volatile struct limine_memmap_request memmap_request = {
+	.id = LIMINE_MEMMAP_REQUEST, .revision = 0};
+
 void kmain(void)
 {
 	gdt_init();
 	idt_init();
 	acpi_init();
 	keyboard_init();
-	start_pmm();
 	if (check_fb() == true)
 	{
 		fbinit();
 	}
+
+	if (memmap_request.response == NULL)
+	{
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+	}
+
+	pmm_init(memmap_request.response);
 
 	for (;;)
 	{
