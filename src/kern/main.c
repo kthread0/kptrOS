@@ -12,5 +12,6 @@ void kmain(void)
 
 	for (;;)
 	{
+		serial_printf("did we actually start???\n");
 	}
 }
