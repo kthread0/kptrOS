@@ -2,7 +2,7 @@
 #include "cpu/cpuid.h"
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
-#include "gpu/fb/framebuffer.h"
+#include "cpu/userspace.h"
 #include "kbd/keyboard.h"
 #include "mem/pmm.h"
 
@@ -16,10 +16,6 @@ void kmain(void) {
 	gdt_init();
 	idt_init();
 	keyboard_init();
-	if (check_fb() == true) {
-		fbinit();
-	}
-
 	if (memmap_request.response == NULL) {
 		cpu_state_t state;
 		capture_cpu_state(&state);
@@ -27,6 +23,8 @@ void kmain(void) {
 	}
 
 	pmm_init(memmap_request.response);
+
+	test_user_function();
 
 	for (;;) {
 		keyboard_interrupt_handler();

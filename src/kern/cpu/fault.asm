@@ -9,14 +9,14 @@ global isr_stub_table
 section .text
 
 %macro ISR_NO_EC 1
-isr%1:
+isr_%1:
     push 0
     push %1
     jmp common_stub
 %endmacro
 
 %macro ISR_EC 1
-isr%1:
+isr_%1:
     push %1
     jmp common_stub
 %endmacro

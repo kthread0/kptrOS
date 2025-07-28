@@ -6,6 +6,7 @@
 
 // Framebuffer request
 static volatile struct limine_framebuffer_request limine_framebuffer = { .id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0 };
+struct flanterm_context *ft_ctx;
 
 bool check_fb(bool valid) {
 	if (limine_framebuffer.response == NULL || limine_framebuffer.response->framebuffer_count < 1) {
@@ -22,7 +23,6 @@ bool check_fb(bool valid) {
 
 void fbinit(void) {
 	struct limine_framebuffer *framebuffer = limine_framebuffer.response->framebuffers[0];
-
 	struct flanterm_context *ft_ctx = flanterm_fb_init(
 									NULL,
 									NULL,
@@ -50,8 +50,7 @@ void fbinit(void) {
 									0,
 									0,
 									0);
-
-	const char msg[] = "Hello from the framebuffer!\n";
+	const char msg[] = "Hello from the framebuffer in userspace!!!\n";
 
 	flanterm_write(ft_ctx, msg, sizeof(msg));
 }

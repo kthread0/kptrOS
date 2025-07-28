@@ -1,6 +1,5 @@
 #include "gdt.h"
 
-#include <stdint.h>
 #include <system.h>
 
 // Each define here is for a specific flag in the descriptor.
@@ -42,7 +41,10 @@
 #define GDT_DATA_PL3 \
 	SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | SEG_PRIV(3) | SEG_DATA_RDWR
 
-void create_descriptor(uint32_t base, uint32_t limit, uint16_t flag) {
+#define TSS_DATA \
+	SEG_DESCTYPE(0) | SEG_PRES(1) | SEG_SAVL(1) | SEG_LONG(1) | SEG_SIZE(1) | SEG_GRAN(1) | SEG_PRIV(3) | SEG_CODE_EXA
+
+void create_descriptor(uint64_t base, uint64_t limit, uint32_t flag) {
 	uint64_t descriptor;
 
 	// Create the high 32 bit segment
@@ -58,7 +60,7 @@ void create_descriptor(uint32_t base, uint32_t limit, uint16_t flag) {
 	descriptor |= base << 16;					// set base bits 15:0
 	descriptor |= limit & 0x0000FFFF; // set limit bits 15:0
 
-	serial_printf("Descriptor %x\n", &descriptor);
+	serial_printf("Descriptor %x created\n", descriptor);
 }
 
 int gdt_init(void) {
@@ -67,6 +69,7 @@ int gdt_init(void) {
 	create_descriptor(0, 0x000FFFFF, (GDT_DATA_PL0));
 	create_descriptor(0, 0x000FFFFF, (GDT_CODE_PL3));
 	create_descriptor(0, 0x000FFFFF, (GDT_DATA_PL3));
+	create_descriptor(0, 0x000FFFFF, (TSS_DATA));
 
 	return 0;
 }
