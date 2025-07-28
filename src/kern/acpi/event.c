@@ -33,41 +33,36 @@ struct fixed_event_handler {
 };
 
 static const struct fixed_event fixed_events[UACPI_FIXED_EVENT_MAX + 1] = {
-		[UACPI_FIXED_EVENT_GLOBAL_LOCK] =
-				{
-						.status_field = UACPI_REGISTER_FIELD_GBL_STS,
-						.enable_field = UACPI_REGISTER_FIELD_GBL_EN,
-						.enable_mask = ACPI_PM1_EN_GBL_EN_MASK,
-						.status_mask = ACPI_PM1_STS_GBL_STS_MASK,
-				},
-		[UACPI_FIXED_EVENT_TIMER_STATUS] =
-				{
-						.status_field = UACPI_REGISTER_FIELD_TMR_STS,
-						.enable_field = UACPI_REGISTER_FIELD_TMR_EN,
-						.enable_mask = ACPI_PM1_EN_TMR_EN_MASK,
-						.status_mask = ACPI_PM1_STS_TMR_STS_MASK,
-				},
-		[UACPI_FIXED_EVENT_POWER_BUTTON] =
-				{
-						.status_field = UACPI_REGISTER_FIELD_PWRBTN_STS,
-						.enable_field = UACPI_REGISTER_FIELD_PWRBTN_EN,
-						.enable_mask = ACPI_PM1_EN_PWRBTN_EN_MASK,
-						.status_mask = ACPI_PM1_STS_PWRBTN_STS_MASK,
-				},
-		[UACPI_FIXED_EVENT_SLEEP_BUTTON] =
-				{
-						.status_field = UACPI_REGISTER_FIELD_SLPBTN_STS,
-						.enable_field = UACPI_REGISTER_FIELD_SLPBTN_EN,
-						.enable_mask = ACPI_PM1_EN_SLPBTN_EN_MASK,
-						.status_mask = ACPI_PM1_STS_SLPBTN_STS_MASK,
-				},
-		[UACPI_FIXED_EVENT_RTC] =
-				{
-						.status_field = UACPI_REGISTER_FIELD_RTC_STS,
-						.enable_field = UACPI_REGISTER_FIELD_RTC_EN,
-						.enable_mask = ACPI_PM1_EN_RTC_EN_MASK,
-						.status_mask = ACPI_PM1_STS_RTC_STS_MASK,
-				},
+	[UACPI_FIXED_EVENT_GLOBAL_LOCK] = {
+																		 .status_field = UACPI_REGISTER_FIELD_GBL_STS,
+																		 .enable_field = UACPI_REGISTER_FIELD_GBL_EN,
+																		 .enable_mask = ACPI_PM1_EN_GBL_EN_MASK,
+																		 .status_mask = ACPI_PM1_STS_GBL_STS_MASK,
+																		 },
+	[UACPI_FIXED_EVENT_TIMER_STATUS] = {
+																		 .status_field = UACPI_REGISTER_FIELD_TMR_STS,
+																		 .enable_field = UACPI_REGISTER_FIELD_TMR_EN,
+																		 .enable_mask = ACPI_PM1_EN_TMR_EN_MASK,
+																		 .status_mask = ACPI_PM1_STS_TMR_STS_MASK,
+																		 },
+	[UACPI_FIXED_EVENT_POWER_BUTTON] = {
+																		 .status_field = UACPI_REGISTER_FIELD_PWRBTN_STS,
+																		 .enable_field = UACPI_REGISTER_FIELD_PWRBTN_EN,
+																		 .enable_mask = ACPI_PM1_EN_PWRBTN_EN_MASK,
+																		 .status_mask = ACPI_PM1_STS_PWRBTN_STS_MASK,
+																		 },
+	[UACPI_FIXED_EVENT_SLEEP_BUTTON] = {
+																		 .status_field = UACPI_REGISTER_FIELD_SLPBTN_STS,
+																		 .enable_field = UACPI_REGISTER_FIELD_SLPBTN_EN,
+																		 .enable_mask = ACPI_PM1_EN_SLPBTN_EN_MASK,
+																		 .status_mask = ACPI_PM1_STS_SLPBTN_STS_MASK,
+																		 },
+	[UACPI_FIXED_EVENT_RTC] = {
+																		 .status_field = UACPI_REGISTER_FIELD_RTC_STS,
+																		 .enable_field = UACPI_REGISTER_FIELD_RTC_EN,
+																		 .enable_mask = ACPI_PM1_EN_RTC_EN_MASK,
+																		 .status_mask = ACPI_PM1_STS_RTC_STS_MASK,
+																		 },
 };
 
 static struct fixed_event_handler fixed_event_handlers[UACPI_FIXED_EVENT_MAX + 1];

@@ -20,16 +20,35 @@ static const struct uacpi_op_spec ext_opcode_table[] = { UACPI_ENUMERATE_EXT_OPC
 #	define _(op) (op & 0x00FF)
 
 static const uacpi_u8 ext_op_to_idx[0x100] = {
-	[_(UACPI_AML_OP_MutexOp)] = 1,			 [_(UACPI_AML_OP_EventOp)] = 2,				 [_(UACPI_AML_OP_CondRefOfOp)] = 3,
-	[_(UACPI_AML_OP_CreateFieldOp)] = 4, [_(UACPI_AML_OP_LoadTableOp)] = 5,		 [_(UACPI_AML_OP_LoadOp)] = 6,
-	[_(UACPI_AML_OP_StallOp)] = 7,			 [_(UACPI_AML_OP_SleepOp)] = 8,				 [_(UACPI_AML_OP_AcquireOp)] = 9,
-	[_(UACPI_AML_OP_SignalOp)] = 10,		 [_(UACPI_AML_OP_WaitOp)] = 11,				 [_(UACPI_AML_OP_ResetOp)] = 12,
-	[_(UACPI_AML_OP_ReleaseOp)] = 13,		 [_(UACPI_AML_OP_FromBCDOp)] = 14,		 [_(UACPI_AML_OP_ToBCDOp)] = 15,
-	[_(UACPI_AML_OP_UnloadOp)] = 16,		 [_(UACPI_AML_OP_RevisionOp)] = 17,		 [_(UACPI_AML_OP_DebugOp)] = 18,
-	[_(UACPI_AML_OP_FatalOp)] = 19,			 [_(UACPI_AML_OP_TimerOp)] = 20,			 [_(UACPI_AML_OP_OpRegionOp)] = 21,
-	[_(UACPI_AML_OP_FieldOp)] = 22,			 [_(UACPI_AML_OP_DeviceOp)] = 23,			 [_(UACPI_AML_OP_ProcessorOp)] = 24,
-	[_(UACPI_AML_OP_PowerResOp)] = 25,	 [_(UACPI_AML_OP_ThermalZoneOp)] = 26, [_(UACPI_AML_OP_IndexFieldOp)] = 27,
-	[_(UACPI_AML_OP_BankFieldOp)] = 28,	 [_(UACPI_AML_OP_DataRegionOp)] = 29,
+	[_(UACPI_AML_OP_MutexOp)] = 1,
+	[_(UACPI_AML_OP_EventOp)] = 2,
+	[_(UACPI_AML_OP_CondRefOfOp)] = 3,
+	[_(UACPI_AML_OP_CreateFieldOp)] = 4,
+	[_(UACPI_AML_OP_LoadTableOp)] = 5,
+	[_(UACPI_AML_OP_LoadOp)] = 6,
+	[_(UACPI_AML_OP_StallOp)] = 7,
+	[_(UACPI_AML_OP_SleepOp)] = 8,
+	[_(UACPI_AML_OP_AcquireOp)] = 9,
+	[_(UACPI_AML_OP_SignalOp)] = 10,
+	[_(UACPI_AML_OP_WaitOp)] = 11,
+	[_(UACPI_AML_OP_ResetOp)] = 12,
+	[_(UACPI_AML_OP_ReleaseOp)] = 13,
+	[_(UACPI_AML_OP_FromBCDOp)] = 14,
+	[_(UACPI_AML_OP_ToBCDOp)] = 15,
+	[_(UACPI_AML_OP_UnloadOp)] = 16,
+	[_(UACPI_AML_OP_RevisionOp)] = 17,
+	[_(UACPI_AML_OP_DebugOp)] = 18,
+	[_(UACPI_AML_OP_FatalOp)] = 19,
+	[_(UACPI_AML_OP_TimerOp)] = 20,
+	[_(UACPI_AML_OP_OpRegionOp)] = 21,
+	[_(UACPI_AML_OP_FieldOp)] = 22,
+	[_(UACPI_AML_OP_DeviceOp)] = 23,
+	[_(UACPI_AML_OP_ProcessorOp)] = 24,
+	[_(UACPI_AML_OP_PowerResOp)] = 25,
+	[_(UACPI_AML_OP_ThermalZoneOp)] = 26,
+	[_(UACPI_AML_OP_IndexFieldOp)] = 27,
+	[_(UACPI_AML_OP_BankFieldOp)] = 28,
+	[_(UACPI_AML_OP_DataRegionOp)] = 29,
 };
 
 const struct uacpi_op_spec *uacpi_get_op_spec(uacpi_aml_op op) {
@@ -73,7 +92,10 @@ const struct uacpi_op_spec *uacpi_get_op_spec(uacpi_aml_op op) {
 										UACPI_PARSE_OP_INVOKE_HANDLER, UACPI_PARSE_OP_END
 
 uacpi_u8 uacpi_field_op_decode_ops[] = {
-	UACPI_PARSE_OP_TRACKED_PKGLEN, UACPI_PARSE_OP_EXISTING_NAMESTRING, UACPI_PARSE_OP_LOAD_IMM, 1,
+	UACPI_PARSE_OP_TRACKED_PKGLEN,
+	UACPI_PARSE_OP_EXISTING_NAMESTRING,
+	UACPI_PARSE_OP_LOAD_IMM,
+	1,
 	PARSE_FIELD_ELEMENTS(4),
 };
 

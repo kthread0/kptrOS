@@ -14,10 +14,10 @@
 #	define UACPI_REV_VALUE 2
 #	define UACPI_OS_VALUE "Microsoft Windows NT"
 
-#	define MAKE_PREDEFINED(c0, c1, c2, c3)                                       \
-		{                                                                           \
-			.name.text = { c0, c1, c2, c3 }, \
-				 .flags = UACPI_NAMESPACE_NODE_PREDEFINED \
+#	define MAKE_PREDEFINED(c0, c1, c2, c3)      \
+		{                                          \
+			.name.text = { c0, c1, c2, c3 },         \
+			.flags = UACPI_NAMESPACE_NODE_PREDEFINED \
 }
 
 static uacpi_namespace_node predefined_namespaces[UACPI_PREDEFINED_NAMESPACE_MAX + 1] = {

@@ -31,99 +31,80 @@ struct register_spec {
 };
 
 static const struct register_spec g_registers[UACPI_REGISTER_MAX + 1] = {
-		[UACPI_REGISTER_PM1_STS] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_WRITE_TO_CLEAR,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.pm1a_status_blk,
-										&g_uacpi_rt_ctx.pm1b_status_blk,
-								},
-						.preserve_mask = ACPI_PM1_STS_IGN0_MASK,
-				},
-		[UACPI_REGISTER_PM1_EN] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.pm1a_enable_blk,
-										&g_uacpi_rt_ctx.pm1b_enable_blk,
-								},
-				},
-		[UACPI_REGISTER_PM1_CNT] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.fadt.x_pm1a_cnt_blk,
-										&g_uacpi_rt_ctx.fadt.x_pm1b_cnt_blk,
-								},
-						.write_only_mask =
-								ACPI_PM1_CNT_SLP_EN_MASK | ACPI_PM1_CNT_GBL_RLS_MASK,
-						.preserve_mask = ACPI_PM1_CNT_PRESERVE_MASK,
-				},
-		[UACPI_REGISTER_PM_TMR] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.fadt.x_pm_tmr_blk,
-								},
-				},
-		[UACPI_REGISTER_PM2_CNT] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.fadt.x_pm2_cnt_blk,
-								},
-						.preserve_mask = ACPI_PM2_CNT_PRESERVE_MASK,
-				},
-		[UACPI_REGISTER_SLP_CNT] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.fadt.sleep_control_reg,
-								},
-						.write_only_mask = ACPI_SLP_CNT_SLP_EN_MASK,
-						.preserve_mask = ACPI_SLP_CNT_PRESERVE_MASK,
-				},
-		[UACPI_REGISTER_SLP_STS] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_WRITE_TO_CLEAR,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.fadt.sleep_status_reg,
-								},
-						.preserve_mask = ACPI_SLP_STS_PRESERVE_MASK,
-				},
-		[UACPI_REGISTER_RESET] =
-				{
-						.kind = REGISTER_KIND_GAS,
-						.access_kind = REGISTER_ACCESS_KIND_NORMAL,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.fadt.reset_reg,
-								},
-				},
-		[UACPI_REGISTER_SMI_CMD] =
-				{
-						.kind = REGISTER_KIND_IO,
-						.access_kind = REGISTER_ACCESS_KIND_NORMAL,
-						.access_width = 1,
-						.accessors =
-								{
-										&g_uacpi_rt_ctx.fadt.smi_cmd,
-								},
-				},
+	[UACPI_REGISTER_PM1_STS] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_WRITE_TO_CLEAR,
+															.accessors = {
+																	&g_uacpi_rt_ctx.pm1a_status_blk,
+																	&g_uacpi_rt_ctx.pm1b_status_blk,
+									},
+															.preserve_mask = ACPI_PM1_STS_IGN0_MASK,
+															},
+	[UACPI_REGISTER_PM1_EN] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
+															.accessors = {
+																	&g_uacpi_rt_ctx.pm1a_enable_blk,
+																	&g_uacpi_rt_ctx.pm1b_enable_blk,
+									},
+															},
+	[UACPI_REGISTER_PM1_CNT] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
+															.accessors = {
+																	&g_uacpi_rt_ctx.fadt.x_pm1a_cnt_blk,
+																	&g_uacpi_rt_ctx.fadt.x_pm1b_cnt_blk,
+									},
+															.write_only_mask = ACPI_PM1_CNT_SLP_EN_MASK | ACPI_PM1_CNT_GBL_RLS_MASK,
+															.preserve_mask = ACPI_PM1_CNT_PRESERVE_MASK,
+															},
+	[UACPI_REGISTER_PM_TMR] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
+															.accessors = {
+																	&g_uacpi_rt_ctx.fadt.x_pm_tmr_blk,
+									},
+															},
+	[UACPI_REGISTER_PM2_CNT] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
+															.accessors = {
+																	&g_uacpi_rt_ctx.fadt.x_pm2_cnt_blk,
+									},
+															.preserve_mask = ACPI_PM2_CNT_PRESERVE_MASK,
+															},
+	[UACPI_REGISTER_SLP_CNT] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_PRESERVE,
+															.accessors = {
+																	&g_uacpi_rt_ctx.fadt.sleep_control_reg,
+									},
+															.write_only_mask = ACPI_SLP_CNT_SLP_EN_MASK,
+															.preserve_mask = ACPI_SLP_CNT_PRESERVE_MASK,
+															},
+	[UACPI_REGISTER_SLP_STS] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_WRITE_TO_CLEAR,
+															.accessors = {
+																	&g_uacpi_rt_ctx.fadt.sleep_status_reg,
+									},
+															.preserve_mask = ACPI_SLP_STS_PRESERVE_MASK,
+															},
+	[UACPI_REGISTER_RESET] = {
+															.kind = REGISTER_KIND_GAS,
+															.access_kind = REGISTER_ACCESS_KIND_NORMAL,
+															.accessors = {
+																	&g_uacpi_rt_ctx.fadt.reset_reg,
+									},
+															},
+	[UACPI_REGISTER_SMI_CMD] = {
+															.kind = REGISTER_KIND_IO,
+															.access_kind = REGISTER_ACCESS_KIND_NORMAL,
+															.access_width = 1,
+															.accessors = {
+																	&g_uacpi_rt_ctx.fadt.smi_cmd,
+									},
+															},
 };
 
 enum register_mapping_state {
@@ -333,144 +314,121 @@ struct register_field {
 };
 
 static const struct register_field g_fields[UACPI_REGISTER_FIELD_MAX + 1] = {
-		[UACPI_REGISTER_FIELD_TMR_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_TMR_STS_IDX,
-						.mask = ACPI_PM1_STS_TMR_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_BM_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_BM_STS_IDX,
-						.mask = ACPI_PM1_STS_BM_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_GBL_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_GBL_STS_IDX,
-						.mask = ACPI_PM1_STS_GBL_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_PWRBTN_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_PWRBTN_STS_IDX,
-						.mask = ACPI_PM1_STS_PWRBTN_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_SLPBTN_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_SLPBTN_STS_IDX,
-						.mask = ACPI_PM1_STS_SLPBTN_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_RTC_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_RTC_STS_IDX,
-						.mask = ACPI_PM1_STS_RTC_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_HWR_WAK_STS] =
-				{
-						.reg = UACPI_REGISTER_SLP_STS,
-						.offset = ACPI_SLP_STS_WAK_STS_IDX,
-						.mask = ACPI_SLP_STS_WAK_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_WAK_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_WAKE_STS_IDX,
-						.mask = ACPI_PM1_STS_WAKE_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_PCIEX_WAKE_STS] =
-				{
-						.reg = UACPI_REGISTER_PM1_STS,
-						.offset = ACPI_PM1_STS_PCIEXP_WAKE_STS_IDX,
-						.mask = ACPI_PM1_STS_PCIEXP_WAKE_STS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_TMR_EN] =
-				{
-						.reg = UACPI_REGISTER_PM1_EN,
-						.offset = ACPI_PM1_EN_TMR_EN_IDX,
-						.mask = ACPI_PM1_EN_TMR_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_GBL_EN] =
-				{
-						.reg = UACPI_REGISTER_PM1_EN,
-						.offset = ACPI_PM1_EN_GBL_EN_IDX,
-						.mask = ACPI_PM1_EN_GBL_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_PWRBTN_EN] =
-				{
-						.reg = UACPI_REGISTER_PM1_EN,
-						.offset = ACPI_PM1_EN_PWRBTN_EN_IDX,
-						.mask = ACPI_PM1_EN_PWRBTN_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_SLPBTN_EN] =
-				{
-						.reg = UACPI_REGISTER_PM1_EN,
-						.offset = ACPI_PM1_EN_SLPBTN_EN_IDX,
-						.mask = ACPI_PM1_EN_SLPBTN_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_RTC_EN] =
-				{
-						.reg = UACPI_REGISTER_PM1_EN,
-						.offset = ACPI_PM1_EN_RTC_EN_IDX,
-						.mask = ACPI_PM1_EN_RTC_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_PCIEXP_WAKE_DIS] =
-				{
-						.reg = UACPI_REGISTER_PM1_EN,
-						.offset = ACPI_PM1_EN_PCIEXP_WAKE_DIS_IDX,
-						.mask = ACPI_PM1_EN_PCIEXP_WAKE_DIS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_SCI_EN] =
-				{
-						.reg = UACPI_REGISTER_PM1_CNT,
-						.offset = ACPI_PM1_CNT_SCI_EN_IDX,
-						.mask = ACPI_PM1_CNT_SCI_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_BM_RLD] =
-				{
-						.reg = UACPI_REGISTER_PM1_CNT,
-						.offset = ACPI_PM1_CNT_BM_RLD_IDX,
-						.mask = ACPI_PM1_CNT_BM_RLD_MASK,
-				},
-		[UACPI_REGISTER_FIELD_GBL_RLS] =
-				{
-						.reg = UACPI_REGISTER_PM1_CNT,
-						.offset = ACPI_PM1_CNT_GBL_RLS_IDX,
-						.mask = ACPI_PM1_CNT_GBL_RLS_MASK,
-				},
-		[UACPI_REGISTER_FIELD_SLP_TYP] =
-				{
-						.reg = UACPI_REGISTER_PM1_CNT,
-						.offset = ACPI_PM1_CNT_SLP_TYP_IDX,
-						.mask = ACPI_PM1_CNT_SLP_TYP_MASK,
-				},
-		[UACPI_REGISTER_FIELD_SLP_EN] =
-				{
-						.reg = UACPI_REGISTER_PM1_CNT,
-						.offset = ACPI_PM1_CNT_SLP_EN_IDX,
-						.mask = ACPI_PM1_CNT_SLP_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_HWR_SLP_TYP] =
-				{
-						.reg = UACPI_REGISTER_SLP_CNT,
-						.offset = ACPI_SLP_CNT_SLP_TYP_IDX,
-						.mask = ACPI_SLP_CNT_SLP_TYP_MASK,
-				},
-		[UACPI_REGISTER_FIELD_HWR_SLP_EN] =
-				{
-						.reg = UACPI_REGISTER_SLP_CNT,
-						.offset = ACPI_SLP_CNT_SLP_EN_IDX,
-						.mask = ACPI_SLP_CNT_SLP_EN_MASK,
-				},
-		[UACPI_REGISTER_FIELD_ARB_DIS] =
-				{
-						.reg = UACPI_REGISTER_PM2_CNT,
-						.offset = ACPI_PM2_CNT_ARB_DIS_IDX,
-						.mask = ACPI_PM2_CNT_ARB_DIS_MASK,
-				},
+	[UACPI_REGISTER_FIELD_TMR_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_TMR_STS_IDX,
+																		.mask = ACPI_PM1_STS_TMR_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_BM_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_BM_STS_IDX,
+																		.mask = ACPI_PM1_STS_BM_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_GBL_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_GBL_STS_IDX,
+																		.mask = ACPI_PM1_STS_GBL_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_PWRBTN_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_PWRBTN_STS_IDX,
+																		.mask = ACPI_PM1_STS_PWRBTN_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_SLPBTN_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_SLPBTN_STS_IDX,
+																		.mask = ACPI_PM1_STS_SLPBTN_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_RTC_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_RTC_STS_IDX,
+																		.mask = ACPI_PM1_STS_RTC_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_HWR_WAK_STS] = {
+																		.reg = UACPI_REGISTER_SLP_STS,
+																		.offset = ACPI_SLP_STS_WAK_STS_IDX,
+																		.mask = ACPI_SLP_STS_WAK_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_WAK_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_WAKE_STS_IDX,
+																		.mask = ACPI_PM1_STS_WAKE_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_PCIEX_WAKE_STS] = {
+																		.reg = UACPI_REGISTER_PM1_STS,
+																		.offset = ACPI_PM1_STS_PCIEXP_WAKE_STS_IDX,
+																		.mask = ACPI_PM1_STS_PCIEXP_WAKE_STS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_TMR_EN] = {
+																		.reg = UACPI_REGISTER_PM1_EN,
+																		.offset = ACPI_PM1_EN_TMR_EN_IDX,
+																		.mask = ACPI_PM1_EN_TMR_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_GBL_EN] = {
+																		.reg = UACPI_REGISTER_PM1_EN,
+																		.offset = ACPI_PM1_EN_GBL_EN_IDX,
+																		.mask = ACPI_PM1_EN_GBL_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_PWRBTN_EN] = {
+																		.reg = UACPI_REGISTER_PM1_EN,
+																		.offset = ACPI_PM1_EN_PWRBTN_EN_IDX,
+																		.mask = ACPI_PM1_EN_PWRBTN_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_SLPBTN_EN] = {
+																		.reg = UACPI_REGISTER_PM1_EN,
+																		.offset = ACPI_PM1_EN_SLPBTN_EN_IDX,
+																		.mask = ACPI_PM1_EN_SLPBTN_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_RTC_EN] = {
+																		.reg = UACPI_REGISTER_PM1_EN,
+																		.offset = ACPI_PM1_EN_RTC_EN_IDX,
+																		.mask = ACPI_PM1_EN_RTC_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_PCIEXP_WAKE_DIS] = {
+																		.reg = UACPI_REGISTER_PM1_EN,
+																		.offset = ACPI_PM1_EN_PCIEXP_WAKE_DIS_IDX,
+																		.mask = ACPI_PM1_EN_PCIEXP_WAKE_DIS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_SCI_EN] = {
+																		.reg = UACPI_REGISTER_PM1_CNT,
+																		.offset = ACPI_PM1_CNT_SCI_EN_IDX,
+																		.mask = ACPI_PM1_CNT_SCI_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_BM_RLD] = {
+																		.reg = UACPI_REGISTER_PM1_CNT,
+																		.offset = ACPI_PM1_CNT_BM_RLD_IDX,
+																		.mask = ACPI_PM1_CNT_BM_RLD_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_GBL_RLS] = {
+																		.reg = UACPI_REGISTER_PM1_CNT,
+																		.offset = ACPI_PM1_CNT_GBL_RLS_IDX,
+																		.mask = ACPI_PM1_CNT_GBL_RLS_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_SLP_TYP] = {
+																		.reg = UACPI_REGISTER_PM1_CNT,
+																		.offset = ACPI_PM1_CNT_SLP_TYP_IDX,
+																		.mask = ACPI_PM1_CNT_SLP_TYP_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_SLP_EN] = {
+																		.reg = UACPI_REGISTER_PM1_CNT,
+																		.offset = ACPI_PM1_CNT_SLP_EN_IDX,
+																		.mask = ACPI_PM1_CNT_SLP_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_HWR_SLP_TYP] = {
+																		.reg = UACPI_REGISTER_SLP_CNT,
+																		.offset = ACPI_SLP_CNT_SLP_TYP_IDX,
+																		.mask = ACPI_SLP_CNT_SLP_TYP_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_HWR_SLP_EN] = {
+																		.reg = UACPI_REGISTER_SLP_CNT,
+																		.offset = ACPI_SLP_CNT_SLP_EN_IDX,
+																		.mask = ACPI_SLP_CNT_SLP_EN_MASK,
+																		},
+	[UACPI_REGISTER_FIELD_ARB_DIS] = {
+																		.reg = UACPI_REGISTER_PM2_CNT,
+																		.offset = ACPI_PM2_CNT_ARB_DIS_IDX,
+																		.mask = ACPI_PM2_CNT_ARB_DIS_MASK,
+																		},
 };
 
 uacpi_status uacpi_initialize_registers(void) {

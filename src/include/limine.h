@@ -80,13 +80,17 @@ struct limine_uuid {
 
 struct limine_file {
 	uint64_t revision;
-	LIMINE_PTR(void *) address;
+	LIMINE_PTR(void *)
+	address;
 	uint64_t size;
-	LIMINE_PTR(char *) path;
+	LIMINE_PTR(char *)
+	path;
 #if LIMINE_API_REVISION >= 3
-	LIMINE_PTR(char *) string;
+	LIMINE_PTR(char *)
+	string;
 #else
-	LIMINE_PTR(char *) cmdline;
+	LIMINE_PTR(char *)
+	cmdline;
 #endif
 	uint32_t media_type;
 	uint32_t unused;
@@ -105,14 +109,17 @@ struct limine_file {
 
 struct limine_bootloader_info_response {
 	uint64_t revision;
-	LIMINE_PTR(char *) name;
-	LIMINE_PTR(char *) version;
+	LIMINE_PTR(char *)
+	name;
+	LIMINE_PTR(char *)
+	version;
 };
 
 struct limine_bootloader_info_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_bootloader_info_response *) response;
+	LIMINE_PTR(struct limine_bootloader_info_response *)
+	response;
 };
 
 /* Executable command line */
@@ -121,13 +128,15 @@ struct limine_bootloader_info_request {
 
 struct limine_executable_cmdline_response {
 	uint64_t revision;
-	LIMINE_PTR(char *) cmdline;
+	LIMINE_PTR(char *)
+	cmdline;
 };
 
 struct limine_executable_cmdline_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_executable_cmdline_response *) response;
+	LIMINE_PTR(struct limine_executable_cmdline_response *)
+	response;
 };
 
 /* Firmware type */
@@ -147,7 +156,8 @@ struct limine_firmware_type_response {
 struct limine_firmware_type_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_firmware_type_response *) response;
+	LIMINE_PTR(struct limine_firmware_type_response *)
+	response;
 };
 
 /* Stack size */
@@ -161,7 +171,8 @@ struct limine_stack_size_response {
 struct limine_stack_size_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_stack_size_response *) response;
+	LIMINE_PTR(struct limine_stack_size_response *)
+	response;
 	uint64_t stack_size;
 };
 
@@ -177,7 +188,8 @@ struct limine_hhdm_response {
 struct limine_hhdm_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_hhdm_response *) response;
+	LIMINE_PTR(struct limine_hhdm_response *)
+	response;
 };
 
 /* Framebuffer */
@@ -201,7 +213,8 @@ struct limine_video_mode {
 };
 
 struct limine_framebuffer {
-	LIMINE_PTR(void *) address;
+	LIMINE_PTR(void *)
+	address;
 	uint64_t width;
 	uint64_t height;
 	uint64_t pitch;
@@ -215,22 +228,26 @@ struct limine_framebuffer {
 	uint8_t blue_mask_shift;
 	uint8_t unused[7];
 	uint64_t edid_size;
-	LIMINE_PTR(void *) edid;
+	LIMINE_PTR(void *)
+	edid;
 	/* Response revision 1 */
 	uint64_t mode_count;
-	LIMINE_PTR(struct limine_video_mode **) modes;
+	LIMINE_PTR(struct limine_video_mode **)
+	modes;
 };
 
 struct limine_framebuffer_response {
 	uint64_t revision;
 	uint64_t framebuffer_count;
-	LIMINE_PTR(struct limine_framebuffer **) framebuffers;
+	LIMINE_PTR(struct limine_framebuffer **)
+	framebuffers;
 };
 
 struct limine_framebuffer_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_framebuffer_response *) response;
+	LIMINE_PTR(struct limine_framebuffer_response *)
+	response;
 };
 
 /* Terminal */
@@ -274,21 +291,26 @@ typedef void (*limine_terminal_callback)(struct limine_terminal *, uint64_t, uin
 struct LIMINE_DEPRECATED limine_terminal {
 	uint64_t columns;
 	uint64_t rows;
-	LIMINE_PTR(struct limine_framebuffer *) framebuffer;
+	LIMINE_PTR(struct limine_framebuffer *)
+	framebuffer;
 };
 
 struct LIMINE_DEPRECATED limine_terminal_response {
 	uint64_t revision;
 	uint64_t terminal_count;
-	LIMINE_PTR(struct limine_terminal **) terminals;
-	LIMINE_PTR(limine_terminal_write) write;
+	LIMINE_PTR(struct limine_terminal **)
+	terminals;
+	LIMINE_PTR(limine_terminal_write)
+	write;
 };
 
 struct LIMINE_DEPRECATED limine_terminal_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_terminal_response *) response;
-	LIMINE_PTR(limine_terminal_callback) callback;
+	LIMINE_PTR(struct limine_terminal_response *)
+	response;
+	LIMINE_PTR(limine_terminal_callback)
+	callback;
 };
 
 LIMINE_DEPRECATED_IGNORE_END
@@ -329,7 +351,8 @@ struct limine_paging_mode_response {
 struct limine_paging_mode_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_paging_mode_response *) response;
+	LIMINE_PTR(struct limine_paging_mode_response *)
+	response;
 	uint64_t mode;
 	uint64_t max_mode;
 	uint64_t min_mode;
@@ -348,7 +371,8 @@ struct LIMINE_DEPRECATED limine_5_level_paging_response {
 struct LIMINE_DEPRECATED limine_5_level_paging_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_5_level_paging_response *) response;
+	LIMINE_PTR(struct limine_5_level_paging_response *)
+	response;
 };
 
 LIMINE_DEPRECATED_IGNORE_END
@@ -379,7 +403,8 @@ struct LIMINE_MP(info) {
 	uint32_t processor_id;
 	uint32_t lapic_id;
 	uint64_t reserved;
-	LIMINE_PTR(limine_goto_address) goto_address;
+	LIMINE_PTR(limine_goto_address)
+	goto_address;
 	uint64_t extra_argument;
 };
 
@@ -388,7 +413,8 @@ struct LIMINE_MP(response) {
 	uint32_t flags;
 	uint32_t bsp_lapic_id;
 	uint64_t cpu_count;
-	LIMINE_PTR(struct LIMINE_MP(info) **) cpus;
+	LIMINE_PTR(struct LIMINE_MP(info) **)
+	cpus;
 };
 
 #elif defined(__aarch64__)
@@ -398,7 +424,8 @@ struct LIMINE_MP(info) {
 	uint32_t reserved1;
 	uint64_t mpidr;
 	uint64_t reserved;
-	LIMINE_PTR(limine_goto_address) goto_address;
+	LIMINE_PTR(limine_goto_address)
+	goto_address;
 	uint64_t extra_argument;
 };
 
@@ -407,7 +434,8 @@ struct LIMINE_MP(response) {
 	uint64_t flags;
 	uint64_t bsp_mpidr;
 	uint64_t cpu_count;
-	LIMINE_PTR(struct LIMINE_MP(info) **) cpus;
+	LIMINE_PTR(struct LIMINE_MP(info) **)
+	cpus;
 };
 
 #elif defined(__riscv) && (__riscv_xlen == 64)
@@ -416,7 +444,8 @@ struct LIMINE_MP(info) {
 	uint64_t processor_id;
 	uint64_t hartid;
 	uint64_t reserved;
-	LIMINE_PTR(limine_goto_address) goto_address;
+	LIMINE_PTR(limine_goto_address)
+	goto_address;
 	uint64_t extra_argument;
 };
 
@@ -425,7 +454,8 @@ struct LIMINE_MP(response) {
 	uint64_t flags;
 	uint64_t bsp_hartid;
 	uint64_t cpu_count;
-	LIMINE_PTR(struct LIMINE_MP(info) **) cpus;
+	LIMINE_PTR(struct LIMINE_MP(info) **)
+	cpus;
 };
 
 #elif defined(__loongarch__) && (__loongarch_grlen == 64)
@@ -436,7 +466,8 @@ struct LIMINE_MP(info) {
 
 struct LIMINE_MP(response) {
 	uint64_t cpu_count;
-	LIMINE_PTR(struct LIMINE_MP(info) **) cpus;
+	LIMINE_PTR(struct LIMINE_MP(info) **)
+	cpus;
 };
 
 #else
@@ -446,7 +477,8 @@ struct LIMINE_MP(response) {
 struct LIMINE_MP(request) {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct LIMINE_MP(response) *) response;
+	LIMINE_PTR(struct LIMINE_MP(response) *)
+	response;
 	uint64_t flags;
 };
 
@@ -476,13 +508,15 @@ struct limine_memmap_entry {
 struct limine_memmap_response {
 	uint64_t revision;
 	uint64_t entry_count;
-	LIMINE_PTR(struct limine_memmap_entry **) entries;
+	LIMINE_PTR(struct limine_memmap_entry **)
+	entries;
 };
 
 struct limine_memmap_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_memmap_response *) response;
+	LIMINE_PTR(struct limine_memmap_response *)
+	response;
 };
 
 /* Entry point */
@@ -498,8 +532,10 @@ struct limine_entry_point_response {
 struct limine_entry_point_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_entry_point_response *) response;
-	LIMINE_PTR(limine_entry_point) entry;
+	LIMINE_PTR(struct limine_entry_point_response *)
+	response;
+	LIMINE_PTR(limine_entry_point)
+	entry;
 };
 
 /* Executable File */
@@ -517,9 +553,11 @@ struct limine_kernel_file_response {
 #endif
 	uint64_t revision;
 #if LIMINE_API_REVISION >= 2
-	LIMINE_PTR(struct limine_file *) executable_file;
+	LIMINE_PTR(struct limine_file *)
+	executable_file;
 #else
-	LIMINE_PTR(struct limine_file *) kernel_file;
+	LIMINE_PTR(struct limine_file *)
+	kernel_file;
 #endif
 };
 
@@ -531,9 +569,11 @@ struct limine_kernel_file_request {
 	uint64_t id[4];
 	uint64_t revision;
 #if LIMINE_API_REVISION >= 2
-	LIMINE_PTR(struct limine_executable_file_response *) response;
+	LIMINE_PTR(struct limine_executable_file_response *)
+	response;
 #else
-	LIMINE_PTR(struct limine_kernel_file_response *) response;
+	LIMINE_PTR(struct limine_kernel_file_response *)
+	response;
 #endif
 };
 
@@ -545,11 +585,14 @@ struct limine_kernel_file_request {
 #define LIMINE_INTERNAL_MODULE_COMPRESSED (1 << 1)
 
 struct limine_internal_module {
-	LIMINE_PTR(const char *) path;
+	LIMINE_PTR(const char *)
+	path;
 #if LIMINE_API_REVISION >= 3
-	LIMINE_PTR(const char *) string;
+	LIMINE_PTR(const char *)
+	string;
 #else
-	LIMINE_PTR(const char *) cmdline;
+	LIMINE_PTR(const char *)
+	cmdline;
 #endif
 	uint64_t flags;
 };
@@ -557,17 +600,20 @@ struct limine_internal_module {
 struct limine_module_response {
 	uint64_t revision;
 	uint64_t module_count;
-	LIMINE_PTR(struct limine_file **) modules;
+	LIMINE_PTR(struct limine_file **)
+	modules;
 };
 
 struct limine_module_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_module_response *) response;
+	LIMINE_PTR(struct limine_module_response *)
+	response;
 
 	/* Request revision 1 */
 	uint64_t internal_module_count;
-	LIMINE_PTR(struct limine_internal_module **) internal_modules;
+	LIMINE_PTR(struct limine_internal_module **)
+	internal_modules;
 };
 
 /* RSDP */
@@ -579,14 +625,16 @@ struct limine_rsdp_response {
 #if LIMINE_API_REVISION >= 1
 	uint64_t address;
 #else
-	LIMINE_PTR(void *) address;
+	LIMINE_PTR(void *)
+	address;
 #endif
 };
 
 struct limine_rsdp_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_rsdp_response *) response;
+	LIMINE_PTR(struct limine_rsdp_response *)
+	response;
 };
 
 /* SMBIOS */
@@ -599,15 +647,18 @@ struct limine_smbios_response {
 	uint64_t entry_32;
 	uint64_t entry_64;
 #else
-	LIMINE_PTR(void *) entry_32;
-	LIMINE_PTR(void *) entry_64;
+	LIMINE_PTR(void *)
+	entry_32;
+	LIMINE_PTR(void *)
+	entry_64;
 #endif
 };
 
 struct limine_smbios_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_smbios_response *) response;
+	LIMINE_PTR(struct limine_smbios_response *)
+	response;
 };
 
 /* EFI system table */
@@ -619,14 +670,16 @@ struct limine_efi_system_table_response {
 #if LIMINE_API_REVISION >= 1
 	uint64_t address;
 #else
-	LIMINE_PTR(void *) address;
+	LIMINE_PTR(void *)
+	address;
 #endif
 };
 
 struct limine_efi_system_table_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_efi_system_table_response *) response;
+	LIMINE_PTR(struct limine_efi_system_table_response *)
+	response;
 };
 
 /* EFI memory map */
@@ -635,7 +688,8 @@ struct limine_efi_system_table_request {
 
 struct limine_efi_memmap_response {
 	uint64_t revision;
-	LIMINE_PTR(void *) memmap;
+	LIMINE_PTR(void *)
+	memmap;
 	uint64_t memmap_size;
 	uint64_t desc_size;
 	uint64_t desc_version;
@@ -644,7 +698,8 @@ struct limine_efi_memmap_response {
 struct limine_efi_memmap_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_efi_memmap_response *) response;
+	LIMINE_PTR(struct limine_efi_memmap_response *)
+	response;
 };
 
 /* Date at boot */
@@ -676,9 +731,11 @@ struct limine_boot_time_request {
 	uint64_t id[4];
 	uint64_t revision;
 #if LIMINE_API_REVISION >= 3
-	LIMINE_PTR(struct limine_date_at_boot_response *) response;
+	LIMINE_PTR(struct limine_date_at_boot_response *)
+	response;
 #else
-	LIMINE_PTR(struct limine_boot_time_response *) response;
+	LIMINE_PTR(struct limine_boot_time_response *)
+	response;
 #endif
 };
 
@@ -708,9 +765,11 @@ struct limine_kernel_address_request {
 	uint64_t id[4];
 	uint64_t revision;
 #if LIMINE_API_REVISION >= 2
-	LIMINE_PTR(struct limine_executable_address_response *) response;
+	LIMINE_PTR(struct limine_executable_address_response *)
+	response;
 #else
-	LIMINE_PTR(struct limine_kernel_address_response *) response;
+	LIMINE_PTR(struct limine_kernel_address_response *)
+	response;
 #endif
 };
 
@@ -720,13 +779,15 @@ struct limine_kernel_address_request {
 
 struct limine_dtb_response {
 	uint64_t revision;
-	LIMINE_PTR(void *) dtb_ptr;
+	LIMINE_PTR(void *)
+	dtb_ptr;
 };
 
 struct limine_dtb_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_dtb_response *) response;
+	LIMINE_PTR(struct limine_dtb_response *)
+	response;
 };
 
 /* RISC-V Boot Hart ID */
@@ -741,7 +802,8 @@ struct limine_riscv_bsp_hartid_response {
 struct limine_riscv_bsp_hartid_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_riscv_bsp_hartid_response *) response;
+	LIMINE_PTR(struct limine_riscv_bsp_hartid_response *)
+	response;
 };
 
 /* Bootloader Performance */
@@ -758,7 +820,8 @@ struct limine_bootloader_performance_response {
 struct limine_bootloader_performance_request {
 	uint64_t id[4];
 	uint64_t revision;
-	LIMINE_PTR(struct limine_bootloader_performance_response *) response;
+	LIMINE_PTR(struct limine_bootloader_performance_response *)
+	response;
 };
 
 #ifdef __cplusplus
