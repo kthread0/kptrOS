@@ -4,6 +4,7 @@ reload_segments:
 	PUSH 0x08; Push code segment to stack
 	LEA  RAX, [rel .reload_cs]; Load address of .reload_CS into RAX
 	PUSH RAX
+	RETFQ
 
 .reload_cs:
 	MOV RAX, 0x10
@@ -12,4 +13,4 @@ reload_segments:
 	MOV FS, RAX
 	MOV GS, RAX
 	MOV SS, RAX
-	IRETQ
+	RET

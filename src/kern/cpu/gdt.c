@@ -9,7 +9,7 @@ typedef struct {
 	uint64_t kernel_data; // 0x00CF92000000FFFF Kernel DATA
 	uint64_t user_code;		// 0x00CFFA000000FFFF User CODE
 	uint64_t user_data;		// 0x00CFF2000000FFFF User DATA
-	uint64_t tss;					// 0x00FFE9000000FFFF Task Stack Segment
+												// uint64_t tss;					// 0x00FFE9000000FFFF Task Stack Segment
 } __attribute__((packed)) gdt_t;
 
 typedef struct {
@@ -25,7 +25,7 @@ void gdt_init(void) {
 	gdt.kernel_data = 0x00CF9A000000FFFF;
 	gdt.user_code = 0x00CFF2000000FFFF;
 	gdt.user_data = 0x00CFF2000000FFFF;
-	gdt.tss = 0x00FFE9000000FFFF;
+	// gdt.tss = 0x00FFE9000000FFFF;
 
 	gdt_descriptor_t descriptor = {
 		.limit = sizeof(gdt) - 1,
