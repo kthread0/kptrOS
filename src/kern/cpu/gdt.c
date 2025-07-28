@@ -12,9 +12,12 @@ typedef struct {
 	uint64_t tss;					// 0x00FFE9000000FFFF Task Stack Segment
 } __attribute__((packed)) gdt_t;
 
-gdt_t gdt;
+typedef struct {
+	uint16_t limit; // Size of the GDT
+	uint64_t base;	// Base address of the GDT
+} __attribute__((packed)) gdt_descriptor_t;
 
-void reloadSegments();
+gdt_t gdt;
 
 void gdt_init(void) {
 	gdt.null = 0x0000000000000000;
@@ -23,6 +26,14 @@ void gdt_init(void) {
 	gdt.user_code = 0x00CFF2000000FFFF;
 	gdt.user_data = 0x00CFF2000000FFFF;
 	gdt.tss = 0x00FFE9000000FFFF;
-	reloadSegments();
+
+	gdt_descriptor_t descriptor = {
+		.limit = sizeof(gdt) - 1,
+		.base = (uint64_t) &gdt,
+	};
+
+	__asm__ volatile("lgdt %0" : : "m"(descriptor));
+	reload_segments();
+
 	serial_printf("garmin, initialize gdt!\n");
 }
