@@ -1,4 +1,3 @@
-#include "acpi/init.h"
 #include "cpu/clk/timer.h"
 #include "cpu/cpuid.h"
 #include "cpu/gdt.h"
@@ -16,7 +15,6 @@ volatile struct limine_memmap_request memmap_request = { .id = LIMINE_MEMMAP_REQ
 void kmain(void) {
 	gdt_init();
 	idt_init();
-	acpi_init();
 	keyboard_init();
 	if (check_fb() == true) {
 		fbinit();

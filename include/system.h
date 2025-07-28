@@ -5,8 +5,6 @@
 #include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <uacpi/helpers.h>
-#include <uacpi/kernel_api.h>
 
 #define KERNEL_CS 0x08
 #define IDT_MAX_DESCRIPTORS 256

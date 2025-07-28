@@ -32,13 +32,13 @@ ifeq ($(TOOLCHAIN),llvm)
 endif
 
 # User controllable C flags.
-CFLAGS := -g3 -ggdb3 -Og -pipe
+CFLAGS := -g3 -ggdb3 -O2 -pipe
 
 # User controllable C preprocessor flags. We set none by default.
 CPPFLAGS :=
 
 # User controllable nasm flags.
-ASMFLAGS := -F dwarf -g -O0
+ASMFLAGS := -g -f elf64 -g -O2
 
 # User controllable linker flags. We set none by default.
 LDFLAGS :=
