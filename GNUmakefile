@@ -6,39 +6,19 @@ MAKEFLAGS += -rR
 # Change as needed.
 override OUTPUT := kptrOS
 
-# User controllable toolchain and toolchain prefix.
-TOOLCHAIN :=
-TOOLCHAIN_PREFIX :=
-ifneq ($(TOOLCHAIN),)
-    ifeq ($(TOOLCHAIN_PREFIX),)
-        TOOLCHAIN_PREFIX := $(TOOLCHAIN)-
-    endif
-endif
-
-# User controllable C compiler command.
-ifneq ($(TOOLCHAIN_PREFIX),)
-    CC := $(TOOLCHAIN_PREFIX)gcc
-else
-    CC := cc
-endif
-
-# User controllable linker command.
-LD := $(TOOLCHAIN_PREFIX)ld
-
-# Defaults overrides for variables if using "llvm" as toolchain.
-ifeq ($(TOOLCHAIN),llvm)
-    CC := clang
-    LD := ld.lld
-endif
+CC = clang
+LD = ld.lld
+AR = llvm-ar
+AS = nasm
 
 # User controllable C flags.
 CFLAGS := -g3 -ggdb3 -O2 -pipe
 
 # User controllable C preprocessor flags. We set none by default.
-CPPFLAGS :=
+CPPFLAGS := 
 
 # User controllable nasm flags.
-ASMFLAGS := -g -f elf64 -g -O2
+ASMFLAGS := -g -O2
 
 # User controllable linker flags. We set none by default.
 LDFLAGS :=
@@ -46,7 +26,6 @@ LDFLAGS :=
 # Check if CC is Clang.
 override CC_IS_CLANG := $(shell ! $(CC) --version 2>/dev/null | grep -q '^Target: '; echo $$?)
 
-# If the C compiler is Clang, set the target as needed.
 ifeq ($(CC_IS_CLANG),1)
     override CC += \
         -target x86_64-unknown-none-elf
@@ -129,7 +108,7 @@ obj/%.S.o: %.S GNUmakefile
 # Compilation rules for *.asm(nasm) files.
 obj/%.asm.o: %.asm GNUmakefile
 	mkdir -p "$$(dirname $@)"
-	nasm $(ASMFLAGS) $< -o $@
+	$(AS) $(ASMFLAGS) $< -o $@
 
 # Remove object files and the final executable.
 .PHONY: clean

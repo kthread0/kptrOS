@@ -1,5 +1,4 @@
 #include "../src/kern/serial/serial.h"
-#include "stdio.h"
 
 #include <limine.h>
 #include <limits.h>
