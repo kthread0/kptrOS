@@ -1,5 +1,6 @@
 #include "acpi/init.h"
 #include "cpu/clk/timer.h"
+#include "cpu/cpuid.h"
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
 #include "gpu/fb/framebuffer.h"

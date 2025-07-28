@@ -69,14 +69,13 @@ override CFLAGS += \
     -mno-sse2 \
     -mno-red-zone \
     -mcmodel=large \
-    -Isrc/include \
-    -Isrc/include/acpi
+    -I src \
+    -I include
 
 # Internal C preprocessor flags that should not be changed by the user.
 override CPPFLAGS := \
     -I src \
-    -I src/include \
-    -Isrc/include/acpi \
+    -I include \
     $(CPPFLAGS) \
     -DLIMINE_API_REVISION=3 \
     -MMD \

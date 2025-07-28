@@ -103,8 +103,8 @@ void pmm_init(struct limine_memmap_response *memmap) {
 	}
 }
 
-void *pmm_alloc(size_t order) {
-	size_t num_pages = 1 << order;
+void *pmm_alloc(size_t len) {
+	size_t num_pages = 1 << len;
 	uint64_t consecutive_pages = 0;
 
 	for (uint64_t i = 0; i < total_pages; i++) {
@@ -126,11 +126,11 @@ void *pmm_alloc(size_t order) {
 	return NULL; // Out of memory
 }
 
-void pmm_free(void *addr, size_t order) {
+void pmm_free(void *addr, size_t len) {
 	if (addr == NULL)
 		return;
 
-	size_t num_pages = 1 << order;
+	size_t num_pages = 1 << len;
 	uint64_t start_page_index = (uint64_t) addr / PAGE_SIZE;
 
 	for (uint64_t i = 0; i < num_pages; i++) {

@@ -8,9 +8,6 @@
 #include <stdbool.h>
 #include <system.h>
 
-#define KERNEL_CS 0x08
-#define IDT_MAX_DESCRIPTORS 256
-
 typedef struct {
 	uint16_t isr_low;		// The lower 16 bits of the ISR's address
 	uint16_t kernel_cs; // The GDT segment selector that the CPU will load
