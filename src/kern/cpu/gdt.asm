@@ -1,0 +1,16 @@
+extern reloadSegments
+
+reloadSegments:
+	PUSH 0x08; Push code segment to stack
+	LEA  RAX, [rel .reload_cs]; Load address of .reload_CS into RAX
+	PUSH RAX
+	IRETQ
+
+.reload_cs:
+	MOV RAX, 0x10
+	MOV DS, RAX
+	MOV ES, RAX
+	MOV FS, RAX
+	MOV GS, RAX
+	MOV SS, RAX
+	IRETQ

@@ -60,7 +60,6 @@ void interrupt_handler(registers_t *regs) {
 // The page fault handler
 void page_fault_handler(registers_t *regs) {
 	uint64_t faulting_address;
-	// The faulting address is stored in the CR2 register.
 	asm volatile("mov %%cr2, %0" : "=r"(faulting_address));
 
 	serial_write("\n--- KERNEL PAGE FAULT ---\n");
@@ -85,15 +84,6 @@ void page_fault_handler(registers_t *regs) {
 
 void exception_handler(uint64_t vector, uint64_t error_code) {
 	__asm__ volatile("cli");
-	// Handle keyboard interrupt safely
-	if (vector == 33) {							// IRQ1
-		uint8_t scancode = inb(0x60); // Read scancode
-		serial_printf("Key: 0x%02X\n", scancode);
-		outb(0x20, 0x20); // Send EOI to PIC
-		__asm__ volatile("sti");
-		return;
-	}
-
 	serial_printf("Exception: Vector=%d, Error Code=%x\n", vector, error_code);
 	cpu_state_t state;
 	capture_cpu_state(&state);
