@@ -18,7 +18,7 @@ CFLAGS := -g3 -ggdb3 -O2 -pipe
 CPPFLAGS := 
 
 # User controllable nasm flags.
-ASMFLAGS := -g -O2
+ASMFLAGS := -g -O2 -f elf64
 
 # User controllable linker flags. We set none by default.
 LDFLAGS :=
@@ -62,7 +62,6 @@ override CPPFLAGS := \
 
 # Internal nasm flags that should not be changed by the user.
 override ASMFLAGS := \
-    -f elf64 \
     $(ASMFLAGS) \
     -Wall
 

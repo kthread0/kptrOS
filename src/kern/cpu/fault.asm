@@ -3,7 +3,7 @@ extern interrupt_handler
 global isr_stub_table
 %assign i 0
 %rep 48
-    global isr%[i]
+    global isr_%[i]
 %endrep
 
 section .text
@@ -110,13 +110,3 @@ ISR_NO_EC 44
 ISR_NO_EC 45
 ISR_NO_EC 46
 ISR_NO_EC 47
-
-section .data
-align 8
-isr_stub_table:
-%assign i 0
-%rep 48
-    dq isr%[i]
-%assign i i+1
-%endrep
-

@@ -1,99 +1,138 @@
+extern interrupt_handler
+
+global isr_stub_table
+
+%assign i 0
+%rep 48
+    global isr%[i]
+%endrep
+
 section .text
-global isr_stub_0
-isr_stub_0:
-    iret
-global isr_stub_1
-isr_stub_1:
-    iret
-global isr_stub_2
-isr_stub_2:
-    iret
-global isr_stub_3
-isr_stub_3:
-    iret
-global isr_stub_4
-isr_stub_4:
-    iret
-global isr_stub_5
-isr_stub_5:
-    iret
-global isr_stub_6
-isr_stub_6:
-    iret
-global isr_stub_7
-isr_stub_7:
-    iret
-global isr_stub_8
-isr_stub_8:
-    iret
-global isr_stub_9
-isr_stub_9:
-    iret
-global isr_stub_10
-isr_stub_10:
-    iret
-global isr_stub_11
-isr_stub_11:
-    iret
-global isr_stub_12
-isr_stub_12:
-    iret
-global isr_stub_13
-isr_stub_13:
-    iret
-global isr_stub_14
-isr_stub_14:
-    iret
-global isr_stub_15
-isr_stub_15:
-    iret
-global isr_stub_16
-isr_stub_16:
-    iret
-global isr_stub_17
-isr_stub_17:
-    iret
-global isr_stub_18
-isr_stub_18:
-    iret
-global isr_stub_19
-isr_stub_19:
-    iret
-global isr_stub_20
-isr_stub_20:
-    iret
-global isr_stub_21
-isr_stub_21:
-    iret
-global isr_stub_22
-isr_stub_22:
-    iret
-global isr_stub_23
-isr_stub_23:
-    iret
-global isr_stub_24
-isr_stub_24:
-    iret
-global isr_stub_25
-isr_stub_25:
-    iret
-global isr_stub_26
-isr_stub_26:
-    iret
-global isr_stub_27
-isr_stub_27:
-    iret
-global isr_stub_28
-isr_stub_28:
-    iret
-global isr_stub_29
-isr_stub_29:
-    iret
-global isr_stub_30
-isr_stub_30:
-    iret
-global isr_stub_31
-isr_stub_31:
-    iret
+
+%assign stubs 0
+%rep 32
+    %define isr_stubs isr_stub_
+    global isr_stub_
+    isr_stub_%[stubs]:
+    	push rbx
+	cld
+	call interrupt_handler
+	pop rbx
+        iretq
+    %assign stubs stubs + 1
+%endrep
+
+%macro ISR_NO_EC 1
+isr%1:
+    push 0
+    push %1
+    jmp common_stub
+%endmacro
+
+%macro ISR_EC 1
+isr%1:
+    push %1
+    jmp common_stub
+%endmacro
+
+common_stub:
+    push rax
+    push rbx
+    push rcx
+    push rdx
+    push rbp
+    push rdi
+    push rsi
+    push r8
+    push r9
+    push r10
+    push r11
+    push r12
+    push r13
+    push r14
+    push r15
+
+    mov rdi, rsp
+    call interrupt_handler
+
+    pop r15
+    pop r14
+    pop r13
+    pop r12
+    pop r11
+    pop r10
+    pop r9
+    pop r8
+    pop rsi
+    pop rdi
+    pop rbp
+    pop rdx
+    pop rcx
+    pop rbx
+    pop rax
+
+    add rsp, 16
+
+    iretq
+
+ISR_NO_EC  0
+ISR_NO_EC  1
+ISR_NO_EC  2
+ISR_NO_EC  3
+ISR_NO_EC  4
+ISR_NO_EC  5
+ISR_NO_EC  6
+ISR_NO_EC  7
+ISR_EC     8
+ISR_NO_EC  9
+ISR_EC    10
+ISR_EC    11
+ISR_EC    12
+ISR_EC    13
+ISR_EC    14
+ISR_NO_EC 15
+ISR_NO_EC 16
+ISR_EC    17
+ISR_NO_EC 18
+ISR_NO_EC 19
+ISR_NO_EC 20
+ISR_EC    21
+ISR_NO_EC 22
+ISR_NO_EC 23
+ISR_NO_EC 24
+ISR_NO_EC 25
+ISR_NO_EC 26
+ISR_NO_EC 27
+ISR_NO_EC 28
+ISR_EC    29
+ISR_EC    30
+ISR_NO_EC 31
+
+ISR_NO_EC 32
+ISR_NO_EC 33
+ISR_NO_EC 34
+ISR_NO_EC 35
+ISR_NO_EC 36
+ISR_NO_EC 37
+ISR_NO_EC 38
+ISR_NO_EC 39
+ISR_NO_EC 40
+ISR_NO_EC 41
+ISR_NO_EC 42
+ISR_NO_EC 43
+ISR_NO_EC 44
+ISR_NO_EC 45
+ISR_NO_EC 46
+ISR_NO_EC 47
+
+section .data
+align 8
+isr_stub_table:
+%assign i 0
+%rep 48
+    dq isr%[i]
+%assign i i+1
+%endrep
+
 
 
