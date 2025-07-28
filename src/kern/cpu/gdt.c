@@ -3,8 +3,14 @@
 #include <stdint.h>
 #include <system.h>
 
+#define KCS 0x00CFF2000000FFFF
+#define KDS 0x00CF92000000FFFF
+#define UCS 0x00CFFA000000FFFF
+#define UDS 0x00CFF2000000FFFF
+#define TSS 0x00FFE9000000FFFF
+
 typedef struct {
-	uint64_t null;				// 0x0000000000000000  NULL
+	uint64_t null;
 	uint64_t kernel_code; // 0x00CF9A000000FFFF Kernel CODE
 	uint64_t kernel_data; // 0x00CF92000000FFFF Kernel DATA
 	uint64_t user_code;		// 0x00CFFA000000FFFF User CODE
@@ -25,14 +31,14 @@ gdt_descriptor_t descriptor = {
 };
 
 void gdt_init(void) {
-	gdt.null = 0x0000000000000000;
-	gdt.kernel_code = 0x00CF92000000FFFF;
-	gdt.kernel_data = 0x00CF9A000000FFFF;
-	gdt.user_code = 0x00CFF2000000FFFF;
-	gdt.user_data = 0x00CFF2000000FFFF;
-	gdt.tss = 0x00FFE9000000FFFF;
+	gdt.null = 0;
+	gdt.kernel_code = KCS;
+	gdt.kernel_data = KDS;
+	gdt.user_code = UCS;
+	gdt.user_data = UDS;
+	gdt.tss = TSS;
 
 	__asm__ volatile("lgdt %0" : : "m"(descriptor));
 
-	serial_printf("garmin, initialize gdt!\n");
+	serial_printf("GDT Initialized.\n");
 }
