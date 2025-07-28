@@ -50,7 +50,7 @@ void fbinit(void) {
 									0,
 									0,
 									0);
-	const char msg[] = "Hello from the framebuffer in userspace!!!\n";
+	const char msg[] = "poo\n";
 
 	flanterm_write(ft_ctx, msg, sizeof(msg));
 }

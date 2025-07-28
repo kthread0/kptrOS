@@ -16,15 +16,8 @@ void kmain(void) {
 	gdt_init();
 	idt_init();
 	keyboard_init();
-	if (memmap_request.response == NULL) {
-		cpu_state_t state;
-		capture_cpu_state(&state);
-		panic(&state);
-	}
-
 	pmm_init(memmap_request.response);
-
-	test_user_function();
+	fbinit();
 
 	for (;;) {
 		keyboard_interrupt_handler();
