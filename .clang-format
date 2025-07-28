@@ -18,7 +18,7 @@ BreakBeforeBraces: Custom
 BreakBeforeTernaryOperators: false
 BreakInheritanceList: BeforeComma
 BreakStringLiterals: false
-ColumnLimit: 120
+ColumnLimit: 0
 CompactNamespaces: true
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 2
@@ -28,7 +28,7 @@ IncludeBlocks: Regroup
 IndentPPDirectives: AfterHash
 IndentWidth: 2
 IndentWrappedFunctionNames: true
-MaxEmptyLinesToKeep: 2
+MaxEmptyLinesToKeep: 1
 PenaltyBreakAssignment: 65
 PenaltyBreakBeforeFirstCallParameter: 16
 PenaltyBreakComment: 320

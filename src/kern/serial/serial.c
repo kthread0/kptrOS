@@ -34,7 +34,6 @@ void serial_write_hex(uint64_t value) {
 // Write a decimal value to the serial port
 void serial_write_dec(uint64_t value) {
 	char buffer[21]; // Maximum length for 64-bit decimal + null
-									 // terminator
 	int i = 20;
 	buffer[i] = '\0';
 
@@ -110,7 +109,7 @@ void serial_printf(const char *format, ...) {
 				break;
 			}
 			default: { // Unknown format specifier
-				serial_write("[ERR:UNKNOWN]");
+				serial_write("[UNKNOWN]");
 				break;
 			}
 			}
