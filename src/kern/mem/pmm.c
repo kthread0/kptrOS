@@ -103,7 +103,7 @@ void pmm_init(struct limine_memmap_response *memmap) {
 	}
 }
 
-void *pmm_alloc(size_t len) {
+void *pmm_alloc(void *addr, size_t len) {
 	size_t num_pages = 1 << len;
 	uint64_t consecutive_pages = 0;
 
@@ -130,18 +130,17 @@ void pmm_free(void *addr, size_t len) {
 	if (addr == NULL)
 		return;
 
-	size_t num_pages = 1 << len;
 	uint64_t start_page_index = (uint64_t) addr / PAGE_SIZE;
 
-	for (uint64_t i = 0; i < num_pages; i++) {
+	for (uint64_t i = 0; i < PAGE_SIZE; i++) {
 		if (start_page_index + i < total_pages) {
 			page_metadata[start_page_index + i].in_use = 0;
 		}
 	}
 }
 
-void *pmm_alloc_page() {
-	return pmm_alloc(0);
+void *pmm_alloc_page(void *addr, size_t len) {
+	return pmm_alloc(&addr, len);
 }
 
 void pmm_free_page(void *addr) {
