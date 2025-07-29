@@ -58,7 +58,7 @@ iso_root
 obj
 bin
 limine
-./image.iso
+*.iso
 
 .cache/
 *.idx
