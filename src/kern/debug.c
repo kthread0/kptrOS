@@ -1,5 +1,4 @@
 #include "../kern/serial/serial.h"
-#include "mem/pmm.h"
 
 #include <limine.h>
 #include <stddef.h>
@@ -19,6 +18,12 @@ static volatile struct limine_paging_mode_request paging_mode_request = { .id = 
 																																					.mode = LIMINE_PAGING_MODE_X86_64_4LVL,
 																																					.max_mode = LIMINE_PAGING_MODE_X86_64_4LVL,
 																																					.min_mode = LIMINE_PAGING_MODE_X86_64_4LVL };
+
+// Firmware type request
+static volatile struct limine_firmware_type_request firmware_type_request = { .id = LIMINE_FIRMWARE_TYPE_REQUEST, .revision = 0 };
+
+// Stack size request
+static volatile struct limine_stack_size_request stack_size_request = { .id = LIMINE_STACK_SIZE_REQUEST, .revision = 0 };
 
 void debug_limine_requests() {
 	// Kernel address request
@@ -49,5 +54,23 @@ void debug_limine_requests() {
 		panic(&state);
 	} else {
 		serial_printf("Paging mode: %d\n", paging_mode_request.response->mode);
+	}
+
+	if (firmware_type_request.response == NULL) {
+		serial_printf("Firmware type request failed: response is NULL.\n");
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+	} else {
+		serial_printf("Firmware type: %d\n", firmware_type_request.response->firmware_type);
+	}
+
+	if (stack_size_request.response == NULL) {
+		serial_printf("Stack size request failed: response is NULL.\n");
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
+	} else {
+		serial_printf("Stack size: %x\n", stack_size_request.stack_size);
 	}
 }
