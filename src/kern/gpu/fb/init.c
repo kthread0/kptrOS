@@ -5,7 +5,7 @@
 #include <system.h>
 
 // Framebuffer request
-static volatile struct limine_framebuffer_request limine_framebuffer = { .id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0 };
+static volatile struct limine_framebuffer_request limine_framebuffer = {.id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0};
 struct flanterm_context *ft_ctx;
 
 bool check_fb(bool valid) {
@@ -24,32 +24,32 @@ bool check_fb(bool valid) {
 void fbinit(void) {
 	struct limine_framebuffer *framebuffer = limine_framebuffer.response->framebuffers[0];
 	struct flanterm_context *ft_ctx = flanterm_fb_init(
-									NULL,
-									NULL,
-									framebuffer->address,
-									framebuffer->width,
-									framebuffer->height,
-									framebuffer->pitch,
-									framebuffer->red_mask_size,
-									framebuffer->red_mask_shift,
-									framebuffer->green_mask_size,
-									framebuffer->green_mask_shift,
-									framebuffer->blue_mask_size,
-									framebuffer->blue_mask_shift,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0);
+			NULL,
+			NULL,
+			framebuffer->address,
+			framebuffer->width,
+			framebuffer->height,
+			framebuffer->pitch,
+			framebuffer->red_mask_size,
+			framebuffer->red_mask_shift,
+			framebuffer->green_mask_size,
+			framebuffer->green_mask_shift,
+			framebuffer->blue_mask_size,
+			framebuffer->blue_mask_shift,
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0);
 	const char msg[] = "poo\n";
 
 	flanterm_write(ft_ctx, msg, sizeof(msg));

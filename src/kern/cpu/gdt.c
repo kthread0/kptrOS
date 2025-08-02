@@ -26,8 +26,8 @@ typedef struct {
 gdt_t gdt;
 
 gdt_descriptor_t descriptor = {
-	.limit = sizeof(gdt) - 1,
-	.base = (uint64_t) &gdt,
+		.limit = sizeof(gdt) - 1,
+		.base = (uint64_t)&gdt,
 };
 
 void gdt_init(void) {

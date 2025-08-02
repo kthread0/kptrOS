@@ -27,7 +27,7 @@
 #define FLANTERM_FB_PRIVATE_H 1
 
 #ifndef FLANTERM_IN_FLANTERM
-#	error "Do not use fb_private.h. Use interfaces defined in fb.h only."
+#error "Do not use fb_private.h. Use interfaces defined in fb.h only."
 #endif
 
 #include <stdbool.h>

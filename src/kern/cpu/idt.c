@@ -92,7 +92,7 @@ void exception_handler(uint64_t vector, uint64_t error_code) {
 
 void idt_set_descriptor(uint64_t vector, void *isr, uint8_t flags) {
 	idt_entry_t *descriptor = &idt[vector];
-	uintptr_t isr_addr = (uintptr_t) isr;
+	uintptr_t isr_addr = (uintptr_t)isr;
 
 	descriptor->isr_low = isr_addr & 0xFFFF;
 	descriptor->kernel_cs = KERNEL_CS;
@@ -112,8 +112,8 @@ void keyboard_isr_wrapper(void) {
 }
 
 void idt_init() {
-	idtr.base = (uintptr_t) &idt[0];
-	idtr.limit = (uint16_t) sizeof(idt_entry_t) * IDT_MAX_DESCRIPTORS - 1;
+	idtr.base = (uintptr_t)&idt[0];
+	idtr.limit = (uint16_t)sizeof(idt_entry_t) * IDT_MAX_DESCRIPTORS - 1;
 
 	for (int i = 0; i < 48; ++i) {
 		idt_set_descriptor(i, isr_stub_table[i], 0x8E);

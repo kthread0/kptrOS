@@ -14,9 +14,9 @@ void load_page(unsigned int *) {
 		pml4_table[i] = 0x00000002; // Not present initially
 	}
 
-	pml4_table[0] = (uint64_t) &page_dir_ptr_tab | 0x03; // Present + Write
+	pml4_table[0] = (uint64_t)&page_dir_ptr_tab | 0x03; // Present + Write
 
-	page_dir_ptr_tab[0] = (uint64_t) &page_directory | 0x03;
+	page_dir_ptr_tab[0] = (uint64_t)&page_directory | 0x03;
 	page_directory[0] = 0b10000011;
 
 	asm volatile("mov %%cr4, %%rax; bts $5, %%rax; mov %%rax, %%cr4" ::: "rax");		// PAE

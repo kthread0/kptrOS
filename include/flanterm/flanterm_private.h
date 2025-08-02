@@ -27,7 +27,7 @@
 #define FLANTERM_PRIVATE_H 1
 
 #ifndef FLANTERM_IN_FLANTERM
-#	error "Do not use flanterm_private.h. Use interfaces defined in flanterm.h only."
+#error "Do not use flanterm_private.h. Use interfaces defined in flanterm.h only."
 #endif
 
 #include <stdbool.h>

@@ -54,7 +54,7 @@ extern "C" {
 
 #ifdef FLANTERM_IN_FLANTERM
 
-#	include "flanterm_private.h"
+#include "flanterm_private.h"
 
 #else
 
@@ -70,8 +70,8 @@ void flanterm_deinit(struct flanterm_context *ctx, void (*_free)(void *ptr, size
 void flanterm_get_dimensions(struct flanterm_context *ctx, size_t *cols, size_t *rows);
 void flanterm_set_autoflush(struct flanterm_context *ctx, bool state);
 void flanterm_set_callback(
-								struct flanterm_context *ctx,
-								void (*callback)(struct flanterm_context *, uint64_t, uint64_t, uint64_t, uint64_t));
+		struct flanterm_context *ctx,
+		void (*callback)(struct flanterm_context *, uint64_t, uint64_t, uint64_t, uint64_t));
 uint64_t flanterm_get_oob_output(struct flanterm_context *ctx);
 void flanterm_set_oob_output(struct flanterm_context *ctx, uint64_t oob_output);
 
