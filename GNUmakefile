@@ -12,27 +12,14 @@ AR = llvm-ar
 AS = nasm
 
 # User controllable C flags.
-CFLAGS := -g3 -ggdb3 -O2 -pipe
-
-# User controllable C preprocessor flags. We set none by default.
-CPPFLAGS := 
-
-# User controllable nasm flags.
+CFLAGS := -g3 -ggdb3 -O3 -pipe
+CPPFLAGS :=
 ASMFLAGS := -g -O2 -f elf64
-
-# User controllable linker flags. We set none by default.
 LDFLAGS :=
-
-# Check if CC is Clang.
-override CC_IS_CLANG := $(shell ! $(CC) --version 2>/dev/null | grep -q '^Target: '; echo $$?)
-
-ifeq ($(CC_IS_CLANG),1)
-    override CC += \
-        -target x86_64-unknown-none-elf
-endif
 
 # Internal C flags that should not be changed by the user.
 override CFLAGS += \
+ -target x86_64-unknown-none-elf \
     -Wall \
     -std=gnu23 \
     -ffreestanding \

@@ -1,8 +1,6 @@
 #include "idt.h"
 
 #include "../cpu/access.h"
-#include "../cpu/pic.h"
-#include "../kbd/keyboard.h"
 
 #include <limine.h>
 #include <stdbool.h>
@@ -47,7 +45,7 @@ void interrupt_handler(registers_t *regs) {
 			uint8_t scancode = inb(0x60);
 			serial_printf("[ksc: 0x%x]", scancode);
 		}
-		pic_send_eoi(regs->int_no - 32);
+
 	} else { // CPU Exception
 		serial_printf("\nCPU EXCEPTION %d, ERR_CODE %d at RIP=0x%lx\n", regs->int_no, regs->err_code, regs->rip);
 		serial_write("SYSTEM HALTED\n");
@@ -103,13 +101,8 @@ void idt_set_descriptor(uint64_t vector, void *isr, uint8_t flags) {
 	descriptor->reserved = 0;
 }
 
-extern void keyboard_isr_stub(void);
 extern void *isr_stub_table[];
 extern void page_fault_isr_stub(void);
-
-void keyboard_isr_wrapper(void) {
-	keyboard_interrupt_handler();
-}
 
 void idt_init() {
 	idtr.base = (uintptr_t)&idt[0];
