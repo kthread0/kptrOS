@@ -28,11 +28,7 @@ override CFLAGS += \
     -fno-lto \
     -fno-PIC \
     -m64 \
-    -march=x86-64 \
-    -mno-80387 \
-    -mno-mmx \
-    -mno-sse \
-    -mno-sse2 \
+    -march=native \
     -mno-red-zone \
     -mcmodel=large \
     -I src \
