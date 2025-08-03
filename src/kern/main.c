@@ -11,7 +11,9 @@ struct limine_memmap_request memmap = {.id = LIMINE_MEMMAP_REQUEST, .revision = 
 void kmain(void) {
 	gdt_init();
 	idt_init();
-	pmm_init(memmap.response->entries);
+	bitmap_init(&memmap);
+
+	alloc_page();
 
 	for (;;) {
 	}

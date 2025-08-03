@@ -14,7 +14,7 @@ AS = nasm
 # User controllable C flags.
 CFLAGS := -g3 -ggdb3 -O3 -pipe
 CPPFLAGS :=
-ASMFLAGS := -g -O2 -f elf64
+ASMFLAGS := -g -O3 -f elf64
 LDFLAGS :=
 
 # Internal C flags that should not be changed by the user.
@@ -50,7 +50,6 @@ override CPPFLAGS := \
 # Internal nasm flags that should not be changed by the user.
 override ASMFLAGS := \
     $(ASMFLAGS) \
-    -Wall
 
 # Internal linker flags that should not be changed by the user.
 override LDFLAGS += \

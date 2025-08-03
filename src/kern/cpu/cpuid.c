@@ -4,14 +4,14 @@
 
 /* Example: Get CPU's model number */
 int get_model(void) {
-	int ebx, unused;
-	__cpuid(0, unused, ebx, unused, unused);
-	return ebx;
+	int rbx, unused;
+	__cpuid(0, unused, rbx, unused, unused);
+	return rbx;
 }
 
 /* Example: Check for builtin local APIC. */
 int check_apic(void) {
-	unsigned int eax, unused, edx;
-	__get_cpuid(1, &eax, &unused, &unused, &edx);
-	return edx & CPUID_FEAT_EDX_APIC;
+	unsigned int rax, unused, rdx;
+	__get_cpuid(1, &rax, &unused, &unused, &rdx);
+	return rdx & CPUID_FEAT_EDX_APIC;
 }

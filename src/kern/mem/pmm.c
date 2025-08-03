@@ -1,18 +1,87 @@
 #include "pmm.h"
 #include "../serial/serial.h"
 #include <panic.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <system.h>
 
-int bitmap_bytes(int bit) {
-	return bit;
+#define MAX_PAGES PAGE_SIZE * 64
+
+static uint64_t bitmap[MAX_PAGES / 8];
+static uintptr_t page_addrs[MAX_PAGES];
+static size_t total_pages = 0;
+
+static void set_bit(size_t rdx) { bitmap[rdx / 8] |= (1 << (rdx % 8)); }
+static void clear_bit(size_t rdx) { bitmap[rdx / 8] &= ~(1 << (rdx % 8)); }
+static int test_bit(size_t rdx) { return (bitmap[rdx / 8] & (1 << (rdx % 8))) != 0; }
+
+void *alloc_page(void) {
+	for (size_t rdx = 0; rdx < total_pages; rdx++) {
+		if (!test_bit(rdx)) {
+			set_bit(rdx);
+			return (void *)(uintptr_t)page_addrs[rdx];
+		}
+	}
+	serial_write("Not enough memory!!!\n");
+	return NULL;
 }
 
-void bitmap_init(bitmap_t *bitmap, int bits_count, char *buf) {
-	bitmap->bits_count;
-	bitmap->buf = buf;
-	bitmap->size = bitmap_bytes(bits_count);
+void free_page(void *addr) {
+	uintptr_t paddr = (uintptr_t)addr;
+	for (size_t rdx = 0; rdx < total_pages; rdx++) {
+		if (page_addrs[rdx] == paddr) {
+			clear_bit(rdx);
+			return;
+		}
+	}
 }
 
-void pmm_init(struct limine_memmap_request *memmap) {
-	bitmap_init(&memmap, PAGE_SIZE, 0);
+unsigned char memory_pool[PAGE_SIZE * 2];
+
+void *get_block_addr(int block_index) {
+	if (block_index >= 0 && block_index < PAGE_SIZE) {
+		return &memory_pool[block_index * PAGE_SIZE];
+	}
+	return NULL;
+}
+
+void bitmap_init(struct limine_memmap_request *memmap) {
+	load_page(memmap->response->entry_count);
+	total_pages = 0;
+
+	for (size_t i = 0; i < memmap->response->entry_count; i++) {
+		struct limine_memmap_entry *entry = memmap->response->entries[i];
+		if (entry->type == LIMINE_MEMMAP_USABLE) {
+			uintptr_t region_start = entry->base;
+			uintptr_t region_end = entry->base + entry->length;
+
+			uintptr_t page_start = (region_start + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
+			uintptr_t page_end = region_end & ~(PAGE_SIZE - 1);
+
+			for (uintptr_t addr = page_start; addr < page_end; addr += PAGE_SIZE) {
+				if (total_pages < MAX_PAGES) {
+					page_addrs[total_pages] = addr;
+					clear_bit(total_pages);
+					total_pages++;
+				}
+			}
+		}
+	}
+	for (size_t i = 0; i < memmap->response->entry_count; i++) {
+		struct limine_memmap_entry *entry = memmap->response->entries[i];
+		if (entry->type != LIMINE_MEMMAP_USABLE) {
+			uintptr_t region_start = entry->base;
+			uintptr_t region_end = entry->base + entry->length;
+
+			uintptr_t page_start = (region_start + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
+			uintptr_t page_end = region_end & ~(PAGE_SIZE - 1);
+
+			for (size_t rdx = 0; rdx < total_pages; rdx++) {
+				uintptr_t paddr = page_addrs[rdx];
+				if (paddr >= page_start && paddr < page_end) {
+					set_bit(rdx);
+				}
+			}
+		}
+	}
 }
