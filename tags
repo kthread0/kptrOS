@@ -126,7 +126,6 @@
 0	compile_commands.json	/^      "\/usr\/lib64\/ccache\/clang",$/;"	s	array:0.arguments
 0	compile_commands.json	/^      "\/usr\/lib64\/ccache\/clang",$/;"	s	array:1.arguments
 0	compile_commands.json	/^      "\/usr\/lib64\/ccache\/clang",$/;"	s	array:10.arguments
-0	compile_commands.json	/^      "\/usr\/lib64\/ccache\/clang",$/;"	s	array:11.arguments
 0	compile_commands.json	/^      "\/usr\/lib64\/ccache\/clang",$/;"	s	array:2.arguments
 0	compile_commands.json	/^      "\/usr\/lib64\/ccache\/clang",$/;"	s	array:3.arguments
 0	compile_commands.json	/^      "\/usr\/lib64\/ccache\/clang",$/;"	s	array:4.arguments
@@ -139,7 +138,6 @@
 1	compile_commands.json	/^      "-g3",$/;"	s	array:0.arguments
 1	compile_commands.json	/^      "-g3",$/;"	s	array:1.arguments
 1	compile_commands.json	/^      "-g3",$/;"	s	array:10.arguments
-1	compile_commands.json	/^      "-g3",$/;"	s	array:11.arguments
 1	compile_commands.json	/^      "-g3",$/;"	s	array:2.arguments
 1	compile_commands.json	/^      "-g3",$/;"	s	array:3.arguments
 1	compile_commands.json	/^      "-g3",$/;"	s	array:4.arguments
@@ -152,7 +150,6 @@
 10	compile_commands.json	/^      "-fno-stack-protector",$/;"	s	array:0.arguments
 10	compile_commands.json	/^      "-fno-stack-protector",$/;"	s	array:1.arguments
 10	compile_commands.json	/^      "-fno-stack-protector",$/;"	s	array:10.arguments
-10	compile_commands.json	/^      "-fno-stack-protector",$/;"	s	array:11.arguments
 10	compile_commands.json	/^      "-fno-stack-protector",$/;"	s	array:2.arguments
 10	compile_commands.json	/^      "-fno-stack-protector",$/;"	s	array:3.arguments
 10	compile_commands.json	/^      "-fno-stack-protector",$/;"	s	array:4.arguments
@@ -165,7 +162,6 @@
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:0.arguments
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:1.arguments
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:10.arguments
-11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:11.arguments
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:2.arguments
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:3.arguments
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:4.arguments
@@ -174,11 +170,9 @@
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:7.arguments
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:8.arguments
 11	compile_commands.json	/^      "-fno-stack-check",$/;"	s	array:9.arguments
-11	compile_commands.json	/^  {$/;"	o
 12	compile_commands.json	/^      "-fno-lto",$/;"	s	array:0.arguments
 12	compile_commands.json	/^      "-fno-lto",$/;"	s	array:1.arguments
 12	compile_commands.json	/^      "-fno-lto",$/;"	s	array:10.arguments
-12	compile_commands.json	/^      "-fno-lto",$/;"	s	array:11.arguments
 12	compile_commands.json	/^      "-fno-lto",$/;"	s	array:2.arguments
 12	compile_commands.json	/^      "-fno-lto",$/;"	s	array:3.arguments
 12	compile_commands.json	/^      "-fno-lto",$/;"	s	array:4.arguments
@@ -190,7 +184,6 @@
 13	compile_commands.json	/^      "-fno-PIC",$/;"	s	array:0.arguments
 13	compile_commands.json	/^      "-fno-PIC",$/;"	s	array:1.arguments
 13	compile_commands.json	/^      "-fno-PIC",$/;"	s	array:10.arguments
-13	compile_commands.json	/^      "-fno-PIC",$/;"	s	array:11.arguments
 13	compile_commands.json	/^      "-fno-PIC",$/;"	s	array:2.arguments
 13	compile_commands.json	/^      "-fno-PIC",$/;"	s	array:3.arguments
 13	compile_commands.json	/^      "-fno-PIC",$/;"	s	array:4.arguments
@@ -202,7 +195,6 @@
 14	compile_commands.json	/^      "-m64",$/;"	s	array:0.arguments
 14	compile_commands.json	/^      "-m64",$/;"	s	array:1.arguments
 14	compile_commands.json	/^      "-m64",$/;"	s	array:10.arguments
-14	compile_commands.json	/^      "-m64",$/;"	s	array:11.arguments
 14	compile_commands.json	/^      "-m64",$/;"	s	array:2.arguments
 14	compile_commands.json	/^      "-m64",$/;"	s	array:3.arguments
 14	compile_commands.json	/^      "-m64",$/;"	s	array:4.arguments
@@ -214,7 +206,6 @@
 15	compile_commands.json	/^      "-march=x86-64",$/;"	s	array:0.arguments
 15	compile_commands.json	/^      "-march=x86-64",$/;"	s	array:1.arguments
 15	compile_commands.json	/^      "-march=x86-64",$/;"	s	array:10.arguments
-15	compile_commands.json	/^      "-march=x86-64",$/;"	s	array:11.arguments
 15	compile_commands.json	/^      "-march=x86-64",$/;"	s	array:2.arguments
 15	compile_commands.json	/^      "-march=x86-64",$/;"	s	array:3.arguments
 15	compile_commands.json	/^      "-march=x86-64",$/;"	s	array:4.arguments
@@ -226,7 +217,6 @@
 16	compile_commands.json	/^      "-mno-80387",$/;"	s	array:0.arguments
 16	compile_commands.json	/^      "-mno-80387",$/;"	s	array:1.arguments
 16	compile_commands.json	/^      "-mno-80387",$/;"	s	array:10.arguments
-16	compile_commands.json	/^      "-mno-80387",$/;"	s	array:11.arguments
 16	compile_commands.json	/^      "-mno-80387",$/;"	s	array:2.arguments
 16	compile_commands.json	/^      "-mno-80387",$/;"	s	array:3.arguments
 16	compile_commands.json	/^      "-mno-80387",$/;"	s	array:4.arguments
@@ -238,7 +228,6 @@
 17	compile_commands.json	/^      "-mno-mmx",$/;"	s	array:0.arguments
 17	compile_commands.json	/^      "-mno-mmx",$/;"	s	array:1.arguments
 17	compile_commands.json	/^      "-mno-mmx",$/;"	s	array:10.arguments
-17	compile_commands.json	/^      "-mno-mmx",$/;"	s	array:11.arguments
 17	compile_commands.json	/^      "-mno-mmx",$/;"	s	array:2.arguments
 17	compile_commands.json	/^      "-mno-mmx",$/;"	s	array:3.arguments
 17	compile_commands.json	/^      "-mno-mmx",$/;"	s	array:4.arguments
@@ -250,7 +239,6 @@
 18	compile_commands.json	/^      "-mno-sse",$/;"	s	array:0.arguments
 18	compile_commands.json	/^      "-mno-sse",$/;"	s	array:1.arguments
 18	compile_commands.json	/^      "-mno-sse",$/;"	s	array:10.arguments
-18	compile_commands.json	/^      "-mno-sse",$/;"	s	array:11.arguments
 18	compile_commands.json	/^      "-mno-sse",$/;"	s	array:2.arguments
 18	compile_commands.json	/^      "-mno-sse",$/;"	s	array:3.arguments
 18	compile_commands.json	/^      "-mno-sse",$/;"	s	array:4.arguments
@@ -262,7 +250,6 @@
 19	compile_commands.json	/^      "-mno-sse2",$/;"	s	array:0.arguments
 19	compile_commands.json	/^      "-mno-sse2",$/;"	s	array:1.arguments
 19	compile_commands.json	/^      "-mno-sse2",$/;"	s	array:10.arguments
-19	compile_commands.json	/^      "-mno-sse2",$/;"	s	array:11.arguments
 19	compile_commands.json	/^      "-mno-sse2",$/;"	s	array:2.arguments
 19	compile_commands.json	/^      "-mno-sse2",$/;"	s	array:3.arguments
 19	compile_commands.json	/^      "-mno-sse2",$/;"	s	array:4.arguments
@@ -274,7 +261,6 @@
 2	compile_commands.json	/^      "-ggdb3",$/;"	s	array:0.arguments
 2	compile_commands.json	/^      "-ggdb3",$/;"	s	array:1.arguments
 2	compile_commands.json	/^      "-ggdb3",$/;"	s	array:10.arguments
-2	compile_commands.json	/^      "-ggdb3",$/;"	s	array:11.arguments
 2	compile_commands.json	/^      "-ggdb3",$/;"	s	array:2.arguments
 2	compile_commands.json	/^      "-ggdb3",$/;"	s	array:3.arguments
 2	compile_commands.json	/^      "-ggdb3",$/;"	s	array:4.arguments
@@ -287,7 +273,6 @@
 20	compile_commands.json	/^      "-mno-red-zone",$/;"	s	array:0.arguments
 20	compile_commands.json	/^      "-mno-red-zone",$/;"	s	array:1.arguments
 20	compile_commands.json	/^      "-mno-red-zone",$/;"	s	array:10.arguments
-20	compile_commands.json	/^      "-mno-red-zone",$/;"	s	array:11.arguments
 20	compile_commands.json	/^      "-mno-red-zone",$/;"	s	array:2.arguments
 20	compile_commands.json	/^      "-mno-red-zone",$/;"	s	array:3.arguments
 20	compile_commands.json	/^      "-mno-red-zone",$/;"	s	array:4.arguments
@@ -299,7 +284,6 @@
 21	compile_commands.json	/^      "-mcmodel=large",$/;"	s	array:0.arguments
 21	compile_commands.json	/^      "-mcmodel=large",$/;"	s	array:1.arguments
 21	compile_commands.json	/^      "-mcmodel=large",$/;"	s	array:10.arguments
-21	compile_commands.json	/^      "-mcmodel=large",$/;"	s	array:11.arguments
 21	compile_commands.json	/^      "-mcmodel=large",$/;"	s	array:2.arguments
 21	compile_commands.json	/^      "-mcmodel=large",$/;"	s	array:3.arguments
 21	compile_commands.json	/^      "-mcmodel=large",$/;"	s	array:4.arguments
@@ -311,7 +295,6 @@
 22	compile_commands.json	/^      "-I",$/;"	s	array:0.arguments
 22	compile_commands.json	/^      "-I",$/;"	s	array:1.arguments
 22	compile_commands.json	/^      "-I",$/;"	s	array:10.arguments
-22	compile_commands.json	/^      "-I",$/;"	s	array:11.arguments
 22	compile_commands.json	/^      "-I",$/;"	s	array:2.arguments
 22	compile_commands.json	/^      "-I",$/;"	s	array:3.arguments
 22	compile_commands.json	/^      "-I",$/;"	s	array:4.arguments
@@ -323,7 +306,6 @@
 23	compile_commands.json	/^      "src",$/;"	s	array:0.arguments
 23	compile_commands.json	/^      "src",$/;"	s	array:1.arguments
 23	compile_commands.json	/^      "src",$/;"	s	array:10.arguments
-23	compile_commands.json	/^      "src",$/;"	s	array:11.arguments
 23	compile_commands.json	/^      "src",$/;"	s	array:2.arguments
 23	compile_commands.json	/^      "src",$/;"	s	array:3.arguments
 23	compile_commands.json	/^      "src",$/;"	s	array:4.arguments
@@ -335,7 +317,6 @@
 24	compile_commands.json	/^      "-I",$/;"	s	array:0.arguments
 24	compile_commands.json	/^      "-I",$/;"	s	array:1.arguments
 24	compile_commands.json	/^      "-I",$/;"	s	array:10.arguments
-24	compile_commands.json	/^      "-I",$/;"	s	array:11.arguments
 24	compile_commands.json	/^      "-I",$/;"	s	array:2.arguments
 24	compile_commands.json	/^      "-I",$/;"	s	array:3.arguments
 24	compile_commands.json	/^      "-I",$/;"	s	array:4.arguments
@@ -347,7 +328,6 @@
 25	compile_commands.json	/^      "include",$/;"	s	array:0.arguments
 25	compile_commands.json	/^      "include",$/;"	s	array:1.arguments
 25	compile_commands.json	/^      "include",$/;"	s	array:10.arguments
-25	compile_commands.json	/^      "include",$/;"	s	array:11.arguments
 25	compile_commands.json	/^      "include",$/;"	s	array:2.arguments
 25	compile_commands.json	/^      "include",$/;"	s	array:3.arguments
 25	compile_commands.json	/^      "include",$/;"	s	array:4.arguments
@@ -359,7 +339,6 @@
 26	compile_commands.json	/^      "-I",$/;"	s	array:0.arguments
 26	compile_commands.json	/^      "-I",$/;"	s	array:1.arguments
 26	compile_commands.json	/^      "-I",$/;"	s	array:10.arguments
-26	compile_commands.json	/^      "-I",$/;"	s	array:11.arguments
 26	compile_commands.json	/^      "-I",$/;"	s	array:2.arguments
 26	compile_commands.json	/^      "-I",$/;"	s	array:3.arguments
 26	compile_commands.json	/^      "-I",$/;"	s	array:4.arguments
@@ -371,7 +350,6 @@
 27	compile_commands.json	/^      "src",$/;"	s	array:0.arguments
 27	compile_commands.json	/^      "src",$/;"	s	array:1.arguments
 27	compile_commands.json	/^      "src",$/;"	s	array:10.arguments
-27	compile_commands.json	/^      "src",$/;"	s	array:11.arguments
 27	compile_commands.json	/^      "src",$/;"	s	array:2.arguments
 27	compile_commands.json	/^      "src",$/;"	s	array:3.arguments
 27	compile_commands.json	/^      "src",$/;"	s	array:4.arguments
@@ -383,7 +361,6 @@
 28	compile_commands.json	/^      "-I",$/;"	s	array:0.arguments
 28	compile_commands.json	/^      "-I",$/;"	s	array:1.arguments
 28	compile_commands.json	/^      "-I",$/;"	s	array:10.arguments
-28	compile_commands.json	/^      "-I",$/;"	s	array:11.arguments
 28	compile_commands.json	/^      "-I",$/;"	s	array:2.arguments
 28	compile_commands.json	/^      "-I",$/;"	s	array:3.arguments
 28	compile_commands.json	/^      "-I",$/;"	s	array:4.arguments
@@ -395,7 +372,6 @@
 29	compile_commands.json	/^      "include",$/;"	s	array:0.arguments
 29	compile_commands.json	/^      "include",$/;"	s	array:1.arguments
 29	compile_commands.json	/^      "include",$/;"	s	array:10.arguments
-29	compile_commands.json	/^      "include",$/;"	s	array:11.arguments
 29	compile_commands.json	/^      "include",$/;"	s	array:2.arguments
 29	compile_commands.json	/^      "include",$/;"	s	array:3.arguments
 29	compile_commands.json	/^      "include",$/;"	s	array:4.arguments
@@ -407,7 +383,6 @@
 3	compile_commands.json	/^      "-O3",$/;"	s	array:0.arguments
 3	compile_commands.json	/^      "-O3",$/;"	s	array:1.arguments
 3	compile_commands.json	/^      "-O3",$/;"	s	array:10.arguments
-3	compile_commands.json	/^      "-O3",$/;"	s	array:11.arguments
 3	compile_commands.json	/^      "-O3",$/;"	s	array:2.arguments
 3	compile_commands.json	/^      "-O3",$/;"	s	array:3.arguments
 3	compile_commands.json	/^      "-O3",$/;"	s	array:4.arguments
@@ -420,7 +395,6 @@
 30	compile_commands.json	/^      "-DLIMINE_API_REVISION=3",$/;"	s	array:0.arguments
 30	compile_commands.json	/^      "-DLIMINE_API_REVISION=3",$/;"	s	array:1.arguments
 30	compile_commands.json	/^      "-DLIMINE_API_REVISION=3",$/;"	s	array:10.arguments
-30	compile_commands.json	/^      "-DLIMINE_API_REVISION=3",$/;"	s	array:11.arguments
 30	compile_commands.json	/^      "-DLIMINE_API_REVISION=3",$/;"	s	array:2.arguments
 30	compile_commands.json	/^      "-DLIMINE_API_REVISION=3",$/;"	s	array:3.arguments
 30	compile_commands.json	/^      "-DLIMINE_API_REVISION=3",$/;"	s	array:4.arguments
@@ -432,7 +406,6 @@
 31	compile_commands.json	/^      "-c",$/;"	s	array:0.arguments
 31	compile_commands.json	/^      "-c",$/;"	s	array:1.arguments
 31	compile_commands.json	/^      "-c",$/;"	s	array:10.arguments
-31	compile_commands.json	/^      "-c",$/;"	s	array:11.arguments
 31	compile_commands.json	/^      "-c",$/;"	s	array:2.arguments
 31	compile_commands.json	/^      "-c",$/;"	s	array:3.arguments
 31	compile_commands.json	/^      "-c",$/;"	s	array:4.arguments
@@ -444,7 +417,6 @@
 32	compile_commands.json	/^      "-o",$/;"	s	array:0.arguments
 32	compile_commands.json	/^      "-o",$/;"	s	array:1.arguments
 32	compile_commands.json	/^      "-o",$/;"	s	array:10.arguments
-32	compile_commands.json	/^      "-o",$/;"	s	array:11.arguments
 32	compile_commands.json	/^      "-o",$/;"	s	array:2.arguments
 32	compile_commands.json	/^      "-o",$/;"	s	array:3.arguments
 32	compile_commands.json	/^      "-o",$/;"	s	array:4.arguments
@@ -453,34 +425,31 @@
 32	compile_commands.json	/^      "-o",$/;"	s	array:7.arguments
 32	compile_commands.json	/^      "-o",$/;"	s	array:8.arguments
 32	compile_commands.json	/^      "-o",$/;"	s	array:9.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/cpu\/cpuid.c.o",$/;"	s	array:3.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/cpu\/gdt.c.o",$/;"	s	array:5.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/cpu\/idt.c.o",$/;"	s	array:1.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/debug.c.o",$/;"	s	array:6.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/main.c.o",$/;"	s	array:2.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/cpu\/cpuid.c.o",$/;"	s	array:2.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/cpu\/gdt.c.o",$/;"	s	array:4.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/cpu\/idt.c.o",$/;"	s	array:5.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/main.c.o",$/;"	s	array:3.arguments
 33	compile_commands.json	/^      "obj\/src\/kern\/mem\/memcmp.c.o",$/;"	s	array:0.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/mem\/memcpy.c.o",$/;"	s	array:7.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/mem\/memmove.c.o",$/;"	s	array:4.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/mem\/memset.c.o",$/;"	s	array:9.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/mem\/paging\/paging.c.o",$/;"	s	array:8.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/panic.c.o",$/;"	s	array:10.arguments
-33	compile_commands.json	/^      "obj\/src\/kern\/serial\/serial.c.o",$/;"	s	array:11.arguments
-34	compile_commands.json	/^      "src\/kern\/cpu\/cpuid.c"$/;"	s	array:3.arguments
-34	compile_commands.json	/^      "src\/kern\/cpu\/gdt.c"$/;"	s	array:5.arguments
-34	compile_commands.json	/^      "src\/kern\/cpu\/idt.c"$/;"	s	array:1.arguments
-34	compile_commands.json	/^      "src\/kern\/debug.c"$/;"	s	array:6.arguments
-34	compile_commands.json	/^      "src\/kern\/main.c"$/;"	s	array:2.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/mem\/memcpy.c.o",$/;"	s	array:6.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/mem\/memmove.c.o",$/;"	s	array:1.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/mem\/memset.c.o",$/;"	s	array:10.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/mem\/pmm.c.o",$/;"	s	array:8.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/panic.c.o",$/;"	s	array:7.arguments
+33	compile_commands.json	/^      "obj\/src\/kern\/serial\/serial.c.o",$/;"	s	array:9.arguments
+34	compile_commands.json	/^      "src\/kern\/cpu\/cpuid.c"$/;"	s	array:2.arguments
+34	compile_commands.json	/^      "src\/kern\/cpu\/gdt.c"$/;"	s	array:4.arguments
+34	compile_commands.json	/^      "src\/kern\/cpu\/idt.c"$/;"	s	array:5.arguments
+34	compile_commands.json	/^      "src\/kern\/main.c"$/;"	s	array:3.arguments
 34	compile_commands.json	/^      "src\/kern\/mem\/memcmp.c"$/;"	s	array:0.arguments
-34	compile_commands.json	/^      "src\/kern\/mem\/memcpy.c"$/;"	s	array:7.arguments
-34	compile_commands.json	/^      "src\/kern\/mem\/memmove.c"$/;"	s	array:4.arguments
-34	compile_commands.json	/^      "src\/kern\/mem\/memset.c"$/;"	s	array:9.arguments
-34	compile_commands.json	/^      "src\/kern\/mem\/paging\/paging.c"$/;"	s	array:8.arguments
-34	compile_commands.json	/^      "src\/kern\/panic.c"$/;"	s	array:10.arguments
-34	compile_commands.json	/^      "src\/kern\/serial\/serial.c"$/;"	s	array:11.arguments
+34	compile_commands.json	/^      "src\/kern\/mem\/memcpy.c"$/;"	s	array:6.arguments
+34	compile_commands.json	/^      "src\/kern\/mem\/memmove.c"$/;"	s	array:1.arguments
+34	compile_commands.json	/^      "src\/kern\/mem\/memset.c"$/;"	s	array:10.arguments
+34	compile_commands.json	/^      "src\/kern\/mem\/pmm.c"$/;"	s	array:8.arguments
+34	compile_commands.json	/^      "src\/kern\/panic.c"$/;"	s	array:7.arguments
+34	compile_commands.json	/^      "src\/kern\/serial\/serial.c"$/;"	s	array:9.arguments
 4	compile_commands.json	/^      "-pipe",$/;"	s	array:0.arguments
 4	compile_commands.json	/^      "-pipe",$/;"	s	array:1.arguments
 4	compile_commands.json	/^      "-pipe",$/;"	s	array:10.arguments
-4	compile_commands.json	/^      "-pipe",$/;"	s	array:11.arguments
 4	compile_commands.json	/^      "-pipe",$/;"	s	array:2.arguments
 4	compile_commands.json	/^      "-pipe",$/;"	s	array:3.arguments
 4	compile_commands.json	/^      "-pipe",$/;"	s	array:4.arguments
@@ -493,7 +462,6 @@
 5	compile_commands.json	/^      "-target",$/;"	s	array:0.arguments
 5	compile_commands.json	/^      "-target",$/;"	s	array:1.arguments
 5	compile_commands.json	/^      "-target",$/;"	s	array:10.arguments
-5	compile_commands.json	/^      "-target",$/;"	s	array:11.arguments
 5	compile_commands.json	/^      "-target",$/;"	s	array:2.arguments
 5	compile_commands.json	/^      "-target",$/;"	s	array:3.arguments
 5	compile_commands.json	/^      "-target",$/;"	s	array:4.arguments
@@ -506,7 +474,6 @@
 6	compile_commands.json	/^      "x86_64-unknown-none-elf",$/;"	s	array:0.arguments
 6	compile_commands.json	/^      "x86_64-unknown-none-elf",$/;"	s	array:1.arguments
 6	compile_commands.json	/^      "x86_64-unknown-none-elf",$/;"	s	array:10.arguments
-6	compile_commands.json	/^      "x86_64-unknown-none-elf",$/;"	s	array:11.arguments
 6	compile_commands.json	/^      "x86_64-unknown-none-elf",$/;"	s	array:2.arguments
 6	compile_commands.json	/^      "x86_64-unknown-none-elf",$/;"	s	array:3.arguments
 6	compile_commands.json	/^      "x86_64-unknown-none-elf",$/;"	s	array:4.arguments
@@ -519,7 +486,6 @@
 7	compile_commands.json	/^      "-Wall",$/;"	s	array:0.arguments
 7	compile_commands.json	/^      "-Wall",$/;"	s	array:1.arguments
 7	compile_commands.json	/^      "-Wall",$/;"	s	array:10.arguments
-7	compile_commands.json	/^      "-Wall",$/;"	s	array:11.arguments
 7	compile_commands.json	/^      "-Wall",$/;"	s	array:2.arguments
 7	compile_commands.json	/^      "-Wall",$/;"	s	array:3.arguments
 7	compile_commands.json	/^      "-Wall",$/;"	s	array:4.arguments
@@ -532,7 +498,6 @@
 8	compile_commands.json	/^      "-std=gnu23",$/;"	s	array:0.arguments
 8	compile_commands.json	/^      "-std=gnu23",$/;"	s	array:1.arguments
 8	compile_commands.json	/^      "-std=gnu23",$/;"	s	array:10.arguments
-8	compile_commands.json	/^      "-std=gnu23",$/;"	s	array:11.arguments
 8	compile_commands.json	/^      "-std=gnu23",$/;"	s	array:2.arguments
 8	compile_commands.json	/^      "-std=gnu23",$/;"	s	array:3.arguments
 8	compile_commands.json	/^      "-std=gnu23",$/;"	s	array:4.arguments
@@ -545,7 +510,6 @@
 9	compile_commands.json	/^      "-ffreestanding",$/;"	s	array:0.arguments
 9	compile_commands.json	/^      "-ffreestanding",$/;"	s	array:1.arguments
 9	compile_commands.json	/^      "-ffreestanding",$/;"	s	array:10.arguments
-9	compile_commands.json	/^      "-ffreestanding",$/;"	s	array:11.arguments
 9	compile_commands.json	/^      "-ffreestanding",$/;"	s	array:2.arguments
 9	compile_commands.json	/^      "-ffreestanding",$/;"	s	array:3.arguments
 9	compile_commands.json	/^      "-ffreestanding",$/;"	s	array:4.arguments
@@ -557,7 +521,7 @@
 9	compile_commands.json	/^  {$/;"	o
 AR	GNUmakefile	/^AR = llvm-ar$/;"	m
 AS	GNUmakefile	/^AS = nasm$/;"	m
-ASMFLAGS	GNUmakefile	/^ASMFLAGS := -g -O2 -f elf64$/;"	m
+ASMFLAGS	GNUmakefile	/^ASMFLAGS := -g -O3 -f elf64$/;"	m
 CACHE_CLEAN	limine/limine.c	/^    CACHE_CLEAN,$/;"	e	enum:__anon351677e10103	file:
 CACHE_DIRTY	limine/limine.c	/^    CACHE_DIRTY$/;"	e	enum:__anon351677e10103	file:
 CC	GNUmakefile	/^CC = clang$/;"	m
@@ -953,12 +917,10 @@ LIMINE_TERMINAL_OOB_OUTPUT_SET	limine/limine.h	/^#define LIMINE_TERMINAL_OOB_OUT
 LIMINE_TERMINAL_REQUEST	include/limine.h	/^#define LIMINE_TERMINAL_REQUEST /;"	d
 LIMINE_TERMINAL_REQUEST	limine/limine.h	/^#define LIMINE_TERMINAL_REQUEST /;"	d
 LIMINE_VERSION	limine/limine.c	/^#define LIMINE_VERSION /;"	d	file:
+MAX_PAGES	src/kern/mem/pmm.c	/^#define MAX_PAGES /;"	d	file:
 PAGE_SIZE	include/system.h	/^#define PAGE_SIZE /;"	d
+PMM_H	src/kern/mem/pmm.h	/^#define PMM_H$/;"	d
 PREFIX	limine/Makefile	/^PREFIX=\/usr\/local$/;"	m
-PSF1_FONT_MAGIC	include/system.h	/^#define PSF1_FONT_MAGIC /;"	d
-PSF1_Header	include/system.h	/^} PSF1_Header;$/;"	t	typeref:struct:__anon5932e4330208
-PSF_FONT_MAGIC	include/system.h	/^#define PSF_FONT_MAGIC /;"	d
-PSF_font	include/system.h	/^} PSF_font;$/;"	t	typeref:struct:__anon5932e4330308
 Requirements	README.md	/^## Requirements$/;"	s	chapter:kptrOS
 SERIAL_H	src/kern/serial/serial.h	/^#define SERIAL_H$/;"	d
 SERIAL_PORT	src/kern/serial/serial.c	/^#define SERIAL_PORT /;"	d	file:
@@ -972,15 +934,13 @@ UNINSTALL_DATA_MAX	limine/limine.c	/^#define UNINSTALL_DATA_MAX /;"	d	file:
 WERROR_FLAG	limine/Makefile	/^WERROR_FLAG=$/;"	m
 __anon351677e10103	limine/limine.c	/^static enum {$/;"	g	file:
 __anon351677e10208	limine/limine.c	/^        struct {$/;"	s	function:bios_install	file:
-__anon5932e4330108	include/system.h	/^typedef struct {$/;"	s
-__anon5932e4330208	include/system.h	/^typedef struct {$/;"	s
-__anon5932e4330308	include/system.h	/^typedef struct {$/;"	s
 __anon6334c1820108	src/kern/cpu/gdt.c	/^typedef struct {$/;"	s	file:
 __anon6334c1820208	src/kern/cpu/gdt.c	/^typedef struct {$/;"	s	file:
 __anon6358f2840108	src/kern/cpu/idt.c	/^typedef struct {$/;"	s	file:
 __anon6358f2840208	src/kern/cpu/idt.c	/^typedef struct {$/;"	s	file:
 __anon6358f2840308	src/kern/cpu/idt.c	/^typedef struct {$/;"	s	file:
 __anon769176da0108	src/kern/cpu/access.h	/^	struct {$/;"	s	function:lidt
+__anond3e4fdf90108	include/panic.h	/^typedef struct {$/;"	s
 __anonebb29bfd0103	src/kern/cpu/cpuid.h	/^enum {$/;"	g
 _device_read	limine/limine.c	/^static bool _device_read(void *_buffer, uint64_t loc, size_t count) {$/;"	f	typeref:typename:bool	file:
 _device_write	limine/limine.c	/^static bool _device_write(const void *_buffer, uint64_t loc, size_t count) {$/;"	f	typeref:typename:bool	file:
@@ -994,12 +954,12 @@ address	limine/limine.h	/^    uint64_t address;$/;"	m	struct:limine_efi_system_t
 address	limine/limine.h	/^    uint64_t address;$/;"	m	struct:limine_rsdp_response	typeref:typename:uint64_t
 all	GNUmakefile	/^all: bin\/$(OUTPUT)$/;"	t
 all	limine/Makefile	/^all: limine$/;"	t
+alloc_page	src/kern/mem/pmm.c	/^void *alloc_page(void) {$/;"	f	typeref:typename:void *
 alternate_lba	limine/limine.c	/^    uint64_t alternate_lba;$/;"	m	struct:gpt_table_header	typeref:typename:uint64_t	file:
 are_interrupts_enabled	src/kern/cpu/access.h	/^static inline bool are_interrupts_enabled() {$/;"	f	typeref:typename:bool
 arguments	compile_commands.json	/^    "arguments": [$/;"	a	object:0
 arguments	compile_commands.json	/^    "arguments": [$/;"	a	object:1
 arguments	compile_commands.json	/^    "arguments": [$/;"	a	object:10
-arguments	compile_commands.json	/^    "arguments": [$/;"	a	object:11
 arguments	compile_commands.json	/^    "arguments": [$/;"	a	object:2
 arguments	compile_commands.json	/^    "arguments": [$/;"	a	object:3
 arguments	compile_commands.json	/^    "arguments": [$/;"	a	object:4
@@ -1023,6 +983,8 @@ bin/$(OUTPUT)	GNUmakefile	/^bin\/$(OUTPUT): GNUmakefile linker.lds $(OBJ)$/;"	t
 binary_limine_hdd_bin_data	limine/limine-bios-hdd.h	/^const uint8_t binary_limine_hdd_bin_data[] = {$/;"	v	typeref:typename:const uint8_t[]
 bios_install	limine/limine.c	/^static int bios_install(int argc, char *argv[]) {$/;"	f	typeref:typename:int	file:
 bios_install_usage	limine/limine.c	/^static void bios_install_usage(void) {$/;"	f	typeref:typename:void	file:
+bitmap	src/kern/mem/pmm.c	/^static uint64_t bitmap[MAX_PAGES \/ 8];$/;"	v	typeref:typename:uint64_t[]	file:
+bitmap_init	src/kern/mem/pmm.c	/^void bitmap_init(struct limine_memmap_request *memmap) {$/;"	f	typeref:typename:void
 block_size	limine/limine.c	/^static size_t   block_size;$/;"	v	typeref:typename:size_t	file:
 blue_mask_shift	include/limine.h	/^	uint8_t blue_mask_shift;$/;"	m	struct:limine_framebuffer	typeref:typename:uint8_t
 blue_mask_shift	include/limine.h	/^	uint8_t blue_mask_shift;$/;"	m	struct:limine_video_mode	typeref:typename:uint8_t
@@ -1041,26 +1003,25 @@ bpp	limine/limine.h	/^    uint16_t bpp;$/;"	m	struct:limine_video_mode	typeref:t
 bsp_hartid	include/limine.h	/^	uint64_t bsp_hartid;$/;"	m	struct:limine_riscv_bsp_hartid_response	typeref:typename:uint64_t
 bsp_hartid	limine/limine.h	/^    uint64_t bsp_hartid;$/;"	m	struct:limine_riscv_bsp_hartid_response	typeref:typename:uint64_t
 build-iso	GNUmakefile	/^build-iso:$/;"	t
-bytesperglyph	include/system.h	/^	uint32_t bytesperglyph; \/* size of each glyph *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 c	include/limine.h	/^	uint16_t c;$/;"	m	struct:limine_uuid	typeref:typename:uint16_t
 c	limine/limine.h	/^    uint16_t c;$/;"	m	struct:limine_uuid	typeref:typename:uint16_t
 cache	limine/limine.c	/^static uint8_t *cache  = NULL;$/;"	v	typeref:typename:uint8_t *	file:
 cache_state	limine/limine.c	/^} cache_state;$/;"	v	typeref:enum:__anon351677e10103	file:
 cached_block	limine/limine.c	/^static uint64_t cached_block;$/;"	v	typeref:typename:uint64_t	file:
 capture_cpu_state	src/kern/panic.c	/^void capture_cpu_state(cpu_state_t *state) {$/;"	f	typeref:typename:void
-characterSize	include/system.h	/^	uint8_t characterSize; \/\/ PSF character size.$/;"	m	struct:__anon5932e4330208	typeref:typename:uint8_t
 check_apic	src/kern/cpu/cpuid.c	/^int check_apic(void) {$/;"	f	typeref:typename:int
 chs_end	limine/limine.c	/^            uint8_t chs_end[3];$/;"	m	struct:bios_install::__anon351677e10208	typeref:typename:uint8_t[3]	file:
 chs_start	limine/limine.c	/^            uint8_t chs_start[3];$/;"	m	struct:bios_install::__anon351677e10208	typeref:typename:uint8_t[3]	file:
 clean	GNUmakefile	/^clean:$/;"	t
 clean	limine/Makefile	/^clean:$/;"	t
+clear_bit	src/kern/mem/pmm.c	/^static void clear_bit(size_t rdx) { bitmap[rdx \/ 8] &= ~(1 << (rdx % 8)); }$/;"	f	typeref:typename:void	file:
 columns	include/limine.h	/^	uint64_t columns;$/;"	m	struct:limine_terminal	typeref:typename:uint64_t
 columns	limine/limine.h	/^    uint64_t columns;$/;"	m	struct:limine_terminal	typeref:typename:uint64_t
 common_stub	src/kern/cpu/fault.asm	/^common_stub:$/;"	l
 common_stub	src/kern/cpu/stub.asm	/^common_stub:$/;"	l
 coredump	src/kern/panic.c	/^void coredump(cpu_state_t *state) {$/;"	f	typeref:typename:void
 count	limine/limine.c	/^    uint64_t count;$/;"	m	struct:uninstall_data	typeref:typename:uint64_t	file:
-cpu_state_t	include/system.h	/^} cpu_state_t;$/;"	t	typeref:struct:__anon5932e4330108
+cpu_state_t	include/panic.h	/^} cpu_state_t;$/;"	t	typeref:struct:__anond3e4fdf90108
 crc32	limine/limine.c	/^    uint32_t crc32;$/;"	m	struct:gpt_table_header	typeref:typename:uint32_t	file:
 crc32	limine/limine.c	/^static uint32_t crc32(void *_stream, size_t len) {$/;"	f	typeref:typename:uint32_t	file:
 crc32_table	limine/limine.c	/^static const uint32_t crc32_table[] = {$/;"	v	typeref:typename:const uint32_t[]	file:
@@ -1068,7 +1029,6 @@ cs	src/kern/cpu/idt.c	/^	uint64_t rip, cs, rflags, user_rsp, ss;$/;"	m	struct:__
 d	include/limine.h	/^	uint8_t d[8];$/;"	m	struct:limine_uuid	typeref:typename:uint8_t[8]
 d	limine/limine.h	/^    uint8_t d[8];$/;"	m	struct:limine_uuid	typeref:typename:uint8_t[8]
 data	limine/limine.c	/^    void *data;$/;"	m	struct:uninstall_data	typeref:typename:void *	file:
-debug_limine_requests	src/kern/debug.c	/^void debug_limine_requests() {$/;"	f	typeref:typename:void
 desc_size	include/limine.h	/^	uint64_t desc_size;$/;"	m	struct:limine_efi_memmap_response	typeref:typename:uint64_t
 desc_size	limine/limine.h	/^    uint64_t desc_size;$/;"	m	struct:limine_efi_memmap_response	typeref:typename:uint64_t
 desc_version	include/limine.h	/^	uint64_t desc_version;$/;"	m	struct:limine_efi_memmap_response	typeref:typename:uint64_t
@@ -1083,7 +1043,6 @@ device_write	limine/limine.c	/^#define device_write(/;"	d	file:
 directory	compile_commands.json	/^    "directory": "\/home\/kptr\/Projects\/kptrOS",$/;"	s	object:0
 directory	compile_commands.json	/^    "directory": "\/home\/kptr\/Projects\/kptrOS",$/;"	s	object:1
 directory	compile_commands.json	/^    "directory": "\/home\/kptr\/Projects\/kptrOS",$/;"	s	object:10
-directory	compile_commands.json	/^    "directory": "\/home\/kptr\/Projects\/kptrOS",$/;"	s	object:11
 directory	compile_commands.json	/^    "directory": "\/home\/kptr\/Projects\/kptrOS",$/;"	s	object:2
 directory	compile_commands.json	/^    "directory": "\/home\/kptr\/Projects\/kptrOS",$/;"	s	object:3
 directory	compile_commands.json	/^    "directory": "\/home\/kptr\/Projects\/kptrOS",$/;"	s	object:4
@@ -1112,38 +1071,35 @@ err_code	src/kern/cpu/idt.c	/^	uint64_t int_no, err_code;$/;"	m	struct:__anon635
 exception_handler	src/kern/cpu/idt.c	/^void exception_handler(uint64_t vector, uint64_t error_code) {$/;"	f	typeref:typename:void
 exec_usec	include/limine.h	/^	uint64_t exec_usec;$/;"	m	struct:limine_bootloader_performance_response	typeref:typename:uint64_t
 exec_usec	limine/limine.h	/^    uint64_t exec_usec;$/;"	m	struct:limine_bootloader_performance_response	typeref:typename:uint64_t
-executable_address_request	src/kern/debug.c	/^		executable_address_request __attribute__((aligned(8))) = {$/;"	v	typeref:typename:volatile struct limine_executable_address_request	file:
 extern	src/kern/cpu/fault.asm	/^extern interrupt_handler$/;"	l
 extern	src/kern/cpu/stub.asm	/^extern interrupt_handler$/;"	l
 fence	src/kern/cpu/access.h	/^#define fence(/;"	d
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/cpuid.c",$/;"	s	object:3
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/gdt.c",$/;"	s	object:5
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/idt.c",$/;"	s	object:1
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/debug.c",$/;"	s	object:6
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/main.c",$/;"	s	object:2
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/cpuid.c",$/;"	s	object:2
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/gdt.c",$/;"	s	object:4
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/idt.c",$/;"	s	object:5
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/main.c",$/;"	s	object:3
 file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memcmp.c",$/;"	s	object:0
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memcpy.c",$/;"	s	object:7
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memmove.c",$/;"	s	object:4
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memset.c",$/;"	s	object:9
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/paging\/paging.c",$/;"	s	object:8
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/panic.c",$/;"	s	object:10
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/serial\/serial.c",$/;"	s	object:11
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memcpy.c",$/;"	s	object:6
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memmove.c",$/;"	s	object:1
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memset.c",$/;"	s	object:10
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/pmm.c",$/;"	s	object:8
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/panic.c",$/;"	s	object:7
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/serial\/serial.c",$/;"	s	object:9
 firmware_type	include/limine.h	/^	uint64_t firmware_type;$/;"	m	struct:limine_firmware_type_response	typeref:typename:uint64_t
 firmware_type	limine/limine.h	/^    uint64_t firmware_type;$/;"	m	struct:limine_firmware_type_response	typeref:typename:uint64_t
-firmware_type_request	src/kern/debug.c	/^static volatile struct limine_firmware_type_request firmware_type_request = {$/;"	v	typeref:typename:volatile struct limine_firmware_type_request	file:
 first_usable_lba	limine/limine.c	/^    uint64_t first_usable_lba;$/;"	m	struct:gpt_table_header	typeref:typename:uint64_t	file:
 flags	include/limine.h	/^	uint64_t flags;$/;"	m	struct:limine_internal_module	typeref:typename:uint64_t
-flags	include/system.h	/^	uint32_t flags;					\/* 0 if there's no unicode table *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 flags	limine/limine.h	/^    uint64_t flags;$/;"	m	struct:limine_internal_module	typeref:typename:uint64_t
-fontMode	include/system.h	/^	uint8_t fontMode;			 \/\/ PSF font mode.$/;"	m	struct:__anon5932e4330208	typeref:typename:uint8_t
 framebuffer_count	include/limine.h	/^	uint64_t framebuffer_count;$/;"	m	struct:limine_framebuffer_response	typeref:typename:uint64_t
 framebuffer_count	limine/limine.h	/^    uint64_t framebuffer_count;$/;"	m	struct:limine_framebuffer_response	typeref:typename:uint64_t
+free_page	src/kern/mem/pmm.c	/^void free_page(void *addr) {$/;"	f	typeref:typename:void
 free_uninstall_data	limine/limine.c	/^static void free_uninstall_data(void) {$/;"	f	typeref:typename:void	file:
 gdt	src/kern/cpu/gdt.c	/^gdt_t gdt;$/;"	v	typeref:typename:gdt_t
 gdt_descriptor_t	src/kern/cpu/gdt.c	/^} __attribute__((packed)) gdt_descriptor_t;$/;"	t	typeref:struct:__anon6334c1820208	file:
 gdt_init	src/kern/cpu/gdt.c	/^void gdt_init(void) {$/;"	f	typeref:typename:void
 gdt_t	src/kern/cpu/gdt.c	/^} __attribute__((packed)) gdt_t;$/;"	t	typeref:struct:__anon6334c1820108	file:
 general_usage	limine/limine.c	/^static void general_usage(void) {$/;"	f	typeref:typename:void	file:
+get_block_addr	src/kern/mem/pmm.c	/^void *get_block_addr(int block_index) {$/;"	f	typeref:typename:void *
 get_model	src/kern/cpu/cpuid.c	/^int get_model(void) {$/;"	f	typeref:typename:int
 gpt2mbr_type	limine/limine.c	/^static int gpt2mbr_type(uint64_t gpt_type1, uint64_t gpt_type2) {$/;"	f	typeref:typename:int	file:
 gpt2mbr_type_conv	limine/limine.c	/^struct gpt2mbr_type_conv {$/;"	s	file:
@@ -1165,10 +1121,8 @@ green_mask_size	include/limine.h	/^	uint8_t green_mask_size;$/;"	m	struct:limine
 green_mask_size	limine/limine.h	/^    uint8_t green_mask_size;$/;"	m	struct:limine_framebuffer	typeref:typename:uint8_t
 green_mask_size	limine/limine.h	/^    uint8_t green_mask_size;$/;"	m	struct:limine_video_mode	typeref:typename:uint8_t
 header_size	limine/limine.c	/^    uint32_t header_size;$/;"	m	struct:gpt_table_header	typeref:typename:uint32_t	file:
-headersize	include/system.h	/^	uint32_t headersize;		\/* offset of bitmaps in file, 32 *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 height	include/limine.h	/^	uint64_t height;$/;"	m	struct:limine_framebuffer	typeref:typename:uint64_t
 height	include/limine.h	/^	uint64_t height;$/;"	m	struct:limine_video_mode	typeref:typename:uint64_t
-height	include/system.h	/^	uint32_t height;				\/* height in pixels *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 height	limine/limine.h	/^    uint64_t height;$/;"	m	struct:limine_framebuffer	typeref:typename:uint64_t
 height	limine/limine.h	/^    uint64_t height;$/;"	m	struct:limine_video_mode	typeref:typename:uint64_t
 id	include/limine.h	/^	uint64_t id[4];$/;"	m	struct:limine_5_level_paging_request	typeref:typename:uint64_t[4]
@@ -1367,11 +1321,9 @@ limine_video_mode	include/limine.h	/^struct limine_video_mode {$/;"	s
 limine_video_mode	limine/limine.h	/^struct limine_video_mode {$/;"	s
 limit	src/kern/cpu/gdt.c	/^	uint16_t limit; \/\/ Size of the GDT$/;"	m	struct:__anon6334c1820208	typeref:typename:uint16_t	file:
 limit	src/kern/cpu/idt.c	/^	uint16_t limit;$/;"	m	struct:__anon6358f2840208	typeref:typename:uint16_t	file:
-load_page	src/kern/mem/paging/paging.c	/^void load_page(unsigned int *) {$/;"	f	typeref:typename:void
+load_page	src/kern/mem/paging.c	/^void load_page(uint64_t) {$/;"	f	typeref:typename:void
 load_uninstall_data	limine/limine.c	/^static bool load_uninstall_data(const char *filename) {$/;"	f	typeref:typename:bool	file:
 loc	limine/limine.c	/^    uint64_t loc;$/;"	m	struct:uninstall_data	typeref:typename:uint64_t	file:
-magic	include/system.h	/^	uint16_t magic;				 \/\/ Magic bytes for identification.$/;"	m	struct:__anon5932e4330208	typeref:typename:uint16_t
-magic	include/system.h	/^	uint32_t magic;					\/* magic bytes to identify PSF *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 main	limine/limine.c	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
 max_mode	include/limine.h	/^	uint64_t max_mode;$/;"	m	struct:limine_paging_mode_request	typeref:typename:uint64_t
 max_mode	limine/limine.h	/^    uint64_t max_mode;$/;"	m	struct:limine_paging_mode_request	typeref:typename:uint64_t
@@ -1382,6 +1334,7 @@ media_type	include/limine.h	/^	uint32_t media_type;$/;"	m	struct:limine_file	typ
 media_type	limine/limine.h	/^    uint32_t media_type;$/;"	m	struct:limine_file	typeref:typename:uint32_t
 memcmp	src/kern/mem/memcmp.c	/^int memcmp(const void *s1, const void *s2, size_t n) {$/;"	f	typeref:typename:int
 memcpy	src/kern/mem/memcpy.c	/^void *memcpy(void *dest, const void *src, size_t n) {$/;"	f	typeref:typename:void *
+memmap	src/kern/main.c	/^struct limine_memmap_request memmap = {.id = LIMINE_MEMMAP_REQUEST, .revision = 0};$/;"	v	typeref:struct:limine_memmap_request
 memmap_size	include/limine.h	/^	uint64_t memmap_size;$/;"	m	struct:limine_efi_memmap_response	typeref:typename:uint64_t
 memmap_size	limine/limine.h	/^    uint64_t memmap_size;$/;"	m	struct:limine_efi_memmap_response	typeref:typename:uint64_t
 memmove	src/kern/mem/memmove.c	/^void *memmove(void *dest, const void *src, size_t n) {$/;"	f	typeref:typename:void *
@@ -1389,6 +1342,7 @@ memory_model	include/limine.h	/^	uint8_t memory_model;$/;"	m	struct:limine_frame
 memory_model	include/limine.h	/^	uint8_t memory_model;$/;"	m	struct:limine_video_mode	typeref:typename:uint8_t
 memory_model	limine/limine.h	/^    uint8_t memory_model;$/;"	m	struct:limine_framebuffer	typeref:typename:uint8_t
 memory_model	limine/limine.h	/^    uint8_t memory_model;$/;"	m	struct:limine_video_mode	typeref:typename:uint8_t
+memory_pool	src/kern/mem/pmm.c	/^unsigned char memory_pool[PAGE_SIZE * 2];$/;"	v	typeref:typename:unsigned char[]
 memset	src/kern/mem/memset.c	/^void *memset(void *s, int c, size_t n) {$/;"	f	typeref:typename:void *
 min_mode	include/limine.h	/^	uint64_t min_mode;$/;"	m	struct:limine_paging_mode_request	typeref:typename:uint64_t
 min_mode	limine/limine.h	/^    uint64_t min_mode;$/;"	m	struct:limine_paging_mode_request	typeref:typename:uint64_t
@@ -1400,10 +1354,10 @@ mode_count	include/limine.h	/^	uint64_t mode_count;$/;"	m	struct:limine_framebuf
 mode_count	limine/limine.h	/^    uint64_t mode_count;$/;"	m	struct:limine_framebuffer	typeref:typename:uint64_t
 module_count	include/limine.h	/^	uint64_t module_count;$/;"	m	struct:limine_module_response	typeref:typename:uint64_t
 module_count	limine/limine.h	/^    uint64_t module_count;$/;"	m	struct:limine_module_response	typeref:typename:uint64_t
+mov	src/kern/cpu/gdt.asm	/^	mov ds, rax$/;"	d
 my_lba	limine/limine.c	/^    uint64_t my_lba;$/;"	m	struct:gpt_table_header	typeref:typename:uint64_t	file:
 null	src/kern/cpu/gdt.c	/^	uint64_t null;$/;"	m	struct:__anon6334c1820108	typeref:typename:uint64_t	file:
 number_of_partition_entries	limine/limine.c	/^    uint32_t number_of_partition_entries;$/;"	m	struct:gpt_table_header	typeref:typename:uint32_t	file:
-numglyph	include/system.h	/^	uint32_t numglyph;			\/* number of glyphs *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 obj/%.S.o	GNUmakefile	/^obj\/%.S.o: %.S GNUmakefile$/;"	t
 obj/%.asm.o	GNUmakefile	/^obj\/%.asm.o: %.asm GNUmakefile$/;"	t
 obj/%.c.o	GNUmakefile	/^obj\/%.c.o: %.c GNUmakefile$/;"	t
@@ -1411,23 +1365,21 @@ offset	include/limine.h	/^	uint64_t offset;$/;"	m	struct:limine_hhdm_response	ty
 offset	limine/limine.h	/^    uint64_t offset;$/;"	m	struct:limine_hhdm_response	typeref:typename:uint64_t
 outb	src/kern/cpu/access.h	/^static inline void outb(uint16_t port, uint8_t val) {$/;"	f	typeref:typename:void
 outb	src/kern/serial/serial.c	/^static inline void outb(uint16_t port, uint8_t value) {$/;"	f	typeref:typename:void	file:
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/cpuid.c.o"$/;"	s	object:3
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/gdt.c.o"$/;"	s	object:5
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/idt.c.o"$/;"	s	object:1
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/debug.c.o"$/;"	s	object:6
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/main.c.o"$/;"	s	object:2
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/cpuid.c.o"$/;"	s	object:2
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/gdt.c.o"$/;"	s	object:4
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/idt.c.o"$/;"	s	object:5
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/main.c.o"$/;"	s	object:3
 output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memcmp.c.o"$/;"	s	object:0
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memcpy.c.o"$/;"	s	object:7
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memmove.c.o"$/;"	s	object:4
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memset.c.o"$/;"	s	object:9
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/paging\/paging.c.o"$/;"	s	object:8
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/panic.c.o"$/;"	s	object:10
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/serial\/serial.c.o"$/;"	s	object:11
-page_dir_ptr_tab	src/kern/mem/paging/paging.c	/^uint64_t page_dir_ptr_tab[4] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[4]
-page_directory	src/kern/mem/paging/paging.c	/^uint64_t page_directory[512] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[512]
-page_fault_handler	src/kern/cpu/idt.c	/^void page_fault_handler(registers_t *regs) {$/;"	f	typeref:typename:void
-page_table	src/kern/mem/paging/paging.c	/^uint64_t page_table[512] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[512]
-paging_mode_request	src/kern/debug.c	/^static volatile struct limine_paging_mode_request paging_mode_request = {$/;"	v	typeref:typename:volatile struct limine_paging_mode_request	file:
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memcpy.c.o"$/;"	s	object:6
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memmove.c.o"$/;"	s	object:1
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memset.c.o"$/;"	s	object:10
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/pmm.c.o"$/;"	s	object:8
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/panic.c.o"$/;"	s	object:7
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/serial\/serial.c.o"$/;"	s	object:9
+page_addrs	src/kern/mem/pmm.c	/^static uintptr_t page_addrs[MAX_PAGES];$/;"	v	typeref:typename:uintptr_t[]	file:
+page_dir_ptr_tab	src/kern/mem/paging.c	/^uint64_t page_dir_ptr_tab[4] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[4]
+page_directory	src/kern/mem/paging.c	/^uint64_t page_directory[512] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[512]
+page_table	src/kern/mem/paging.c	/^uint64_t page_table[512] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[512]
 panic	src/kern/panic.c	/^void panic(cpu_state_t *state) {$/;"	f	typeref:typename:void
 part_uuid	include/limine.h	/^	struct limine_uuid part_uuid;$/;"	m	struct:limine_file	typeref:struct:limine_uuid
 part_uuid	limine/limine.h	/^    struct limine_uuid part_uuid;$/;"	m	struct:limine_file	typeref:struct:limine_uuid
@@ -1444,7 +1396,7 @@ pitch	include/limine.h	/^	uint64_t pitch;$/;"	m	struct:limine_framebuffer	typere
 pitch	include/limine.h	/^	uint64_t pitch;$/;"	m	struct:limine_video_mode	typeref:typename:uint64_t
 pitch	limine/limine.h	/^    uint64_t pitch;$/;"	m	struct:limine_framebuffer	typeref:typename:uint64_t
 pitch	limine/limine.h	/^    uint64_t pitch;$/;"	m	struct:limine_video_mode	typeref:typename:uint64_t
-pml4_table	src/kern/mem/paging/paging.c	/^uint64_t pml4_table[512] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[512]
+pml4_table	src/kern/mem/paging.c	/^uint64_t pml4_table[512] __attribute__((aligned(KERNEL_CS)));$/;"	v	typeref:typename:uint64_t[512]
 print_datadir	limine/limine.c	/^static int print_datadir(void) {$/;"	f	typeref:typename:int	file:
 program_name	limine/limine.c	/^static char *program_name = NULL;$/;"	v	typeref:typename:char *	file:
 quiet	limine/limine.c	/^static bool quiet = false;$/;"	v	typeref:typename:bool	file:
@@ -1457,11 +1409,11 @@ r15	src/kern/cpu/idt.c	/^	uint64_t r15, r14, r13, r12, r11, r10, r9, r8;$/;"	m	s
 r8	src/kern/cpu/idt.c	/^	uint64_t r15, r14, r13, r12, r11, r10, r9, r8;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 r9	src/kern/cpu/idt.c	/^	uint64_t r15, r14, r13, r12, r11, r10, r9, r8;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 rax	src/kern/cpu/idt.c	/^	uint64_t rdx, rcx, rbx, rax;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
-rbp	include/system.h	/^	uint64_t rbp; \/\/ Base pointer$/;"	m	struct:__anon5932e4330108	typeref:typename:uint64_t
-rbp	src/kern/cpu/idt.c	/^	uint64_t rsi, rdi, rbp; \/\/ Correct order$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
+rbp	include/panic.h	/^	uint64_t rbp; \/\/ Base pointer$/;"	m	struct:__anond3e4fdf90108	typeref:typename:uint64_t
+rbp	src/kern/cpu/idt.c	/^	uint64_t rsi, rdi, rbp;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 rbx	src/kern/cpu/idt.c	/^	uint64_t rdx, rcx, rbx, rax;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 rcx	src/kern/cpu/idt.c	/^	uint64_t rdx, rcx, rbx, rax;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
-rdi	src/kern/cpu/idt.c	/^	uint64_t rsi, rdi, rbp; \/\/ Correct order$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
+rdi	src/kern/cpu/idt.c	/^	uint64_t rsi, rdi, rbp;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 rdmsr	src/kern/cpu/access.h	/^static inline uint64_t rdmsr(uint64_t msr) {$/;"	f	typeref:typename:uint64_t
 rdx	src/kern/cpu/idt.c	/^	uint64_t rdx, rcx, rbx, rax;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 read_cr0	src/kern/cpu/access.h	/^static inline unsigned long read_cr0(void) {$/;"	f	typeref:typename:unsigned long
@@ -1473,8 +1425,10 @@ red_mask_size	include/limine.h	/^	uint8_t red_mask_size;$/;"	m	struct:limine_fra
 red_mask_size	include/limine.h	/^	uint8_t red_mask_size;$/;"	m	struct:limine_video_mode	typeref:typename:uint8_t
 red_mask_size	limine/limine.h	/^    uint8_t red_mask_size;$/;"	m	struct:limine_framebuffer	typeref:typename:uint8_t
 red_mask_size	limine/limine.h	/^    uint8_t red_mask_size;$/;"	m	struct:limine_video_mode	typeref:typename:uint8_t
-registers	include/system.h	/^	uint64_t registers[16]; \/\/ General-purpose registers$/;"	m	struct:__anon5932e4330108	typeref:typename:uint64_t[16]
+registers	include/panic.h	/^	uint64_t registers[16]; \/\/ General-purpose registers$/;"	m	struct:__anond3e4fdf90108	typeref:typename:uint64_t[16]
 registers_t	src/kern/cpu/idt.c	/^} __attribute__((packed)) registers_t;$/;"	t	typeref:struct:__anon6358f2840308	file:
+reload_cs	src/kern/cpu/gdt.asm	/^.reload_cs:$/;"	l
+reload_segments	src/kern/cpu/gdt.asm	/^reload_segments:$/;"	l
 remove_arg	limine/limine.c	/^static void remove_arg(int *argc, char *argv[], int index) {$/;"	f	typeref:typename:void	file:
 reserved	src/kern/cpu/idt.c	/^	uint32_t reserved;	\/\/ Set to zero$/;"	m	struct:__anon6358f2840108	typeref:typename:uint32_t	file:
 reset_usec	include/limine.h	/^	uint64_t reset_usec;$/;"	m	struct:limine_bootloader_performance_response	typeref:typename:uint64_t
@@ -1571,35 +1525,36 @@ revision	limine/limine.h	/^    uint64_t revision;$/;"	m	struct:limine_stack_size
 revision	limine/limine.h	/^    uint64_t revision;$/;"	m	struct:limine_stack_size_response	typeref:typename:uint64_t
 revision	limine/limine.h	/^    uint64_t revision;$/;"	m	struct:limine_terminal_request	typeref:typename:uint64_t
 revision	limine/limine.h	/^    uint64_t revision;$/;"	m	struct:limine_terminal_response	typeref:typename:uint64_t
-rflags	include/system.h	/^	uint64_t rflags;$/;"	m	struct:__anon5932e4330108	typeref:typename:uint64_t
+rflags	include/panic.h	/^	uint64_t rflags;$/;"	m	struct:__anond3e4fdf90108	typeref:typename:uint64_t
 rflags	src/kern/cpu/idt.c	/^	uint64_t rip, cs, rflags, user_rsp, ss;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
-rip	include/system.h	/^	uint64_t rip; \/\/ Instruction pointer$/;"	m	struct:__anon5932e4330108	typeref:typename:uint64_t
+rip	include/panic.h	/^	uint64_t rip; \/\/ Instruction pointer$/;"	m	struct:__anond3e4fdf90108	typeref:typename:uint64_t
 rip	src/kern/cpu/idt.c	/^	uint64_t rip, cs, rflags, user_rsp, ss;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 rows	include/limine.h	/^	uint64_t rows;$/;"	m	struct:limine_terminal	typeref:typename:uint64_t
 rows	limine/limine.h	/^    uint64_t rows;$/;"	m	struct:limine_terminal	typeref:typename:uint64_t
-rsi	src/kern/cpu/idt.c	/^	uint64_t rsi, rdi, rbp; \/\/ Correct order$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
-rsp	include/system.h	/^	uint64_t rsp; \/\/ Stack pointer$/;"	m	struct:__anon5932e4330108	typeref:typename:uint64_t
-run	GNUmakefile	/^run:$/;"	t
+rsi	src/kern/cpu/idt.c	/^	uint64_t rsi, rdi, rbp;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
+rsp	include/panic.h	/^	uint64_t rsp; \/\/ Stack pointer$/;"	m	struct:__anond3e4fdf90108	typeref:typename:uint64_t
+run-kvm	GNUmakefile	/^run-kvm :$/;"	t
+run-tcg	GNUmakefile	/^run-tcg:$/;"	t
 save_irqdisable	src/kern/cpu/access.h	/^static inline unsigned long save_irqdisable(void) {$/;"	f	typeref:typename:unsigned long
 sbss	linker.lds	/^        sbss = .;$/;"	s	section:.bss
 serial_printf	src/kern/serial/serial.c	/^void serial_printf(const char *format, ...) {$/;"	f	typeref:typename:void
 serial_write	src/kern/serial/serial.c	/^void serial_write(const char *str) {$/;"	f	typeref:typename:void
 serial_write_dec	src/kern/serial/serial.c	/^void serial_write_dec(uint64_t value) {$/;"	f	typeref:typename:void
 serial_write_hex	src/kern/serial/serial.c	/^void serial_write_hex(uint64_t value) {$/;"	f	typeref:typename:void
+set_bit	src/kern/mem/pmm.c	/^static void set_bit(size_t rdx) { bitmap[rdx \/ 8] |= (1 << (rdx % 8)); }$/;"	f	typeref:typename:void	file:
 set_pos	limine/limine.c	/^static int set_pos(FILE *stream, uint64_t pos) {$/;"	f	typeref:typename:int	file:
 signature	limine/limine.c	/^    char     signature[8];$/;"	m	struct:gpt_table_header	typeref:typename:char[8]	file:
 size	include/limine.h	/^	uint64_t size;$/;"	m	struct:limine_file	typeref:typename:uint64_t
 size	limine/limine.h	/^    uint64_t size;$/;"	m	struct:limine_file	typeref:typename:uint64_t
 size_of_partition_entry	limine/limine.c	/^    uint32_t size_of_partition_entry;$/;"	m	struct:gpt_table_header	typeref:typename:uint32_t	file:
-smbios_request	src/kern/debug.c	/^static volatile struct limine_smbios_request smbios_request$/;"	v	typeref:typename:volatile struct limine_smbios_request	file:
 ss	src/kern/cpu/idt.c	/^	uint64_t rip, cs, rflags, user_rsp, ss;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
 stack_size	include/limine.h	/^	uint64_t stack_size;$/;"	m	struct:limine_stack_size_request	typeref:typename:uint64_t
 stack_size	limine/limine.h	/^    uint64_t stack_size;$/;"	m	struct:limine_stack_size_request	typeref:typename:uint64_t
-stack_size_request	src/kern/debug.c	/^static volatile struct limine_stack_size_request stack_size_request = {$/;"	v	typeref:typename:volatile struct limine_stack_size_request	file:
 starting_lba	limine/limine.c	/^    uint64_t starting_lba;$/;"	m	struct:gpt_entry	typeref:typename:uint64_t	file:
 store_uninstall_data	limine/limine.c	/^static bool store_uninstall_data(const char *filename) {$/;"	f	typeref:typename:bool	file:
 terminal_count	include/limine.h	/^	uint64_t terminal_count;$/;"	m	struct:limine_terminal_response	typeref:typename:uint64_t
 terminal_count	limine/limine.h	/^    uint64_t terminal_count;$/;"	m	struct:limine_terminal_response	typeref:typename:uint64_t
+test_bit	src/kern/mem/pmm.c	/^static int test_bit(size_t rdx) { return (bitmap[rdx \/ 8] & (1 << (rdx % 8))) != 0; }$/;"	f	typeref:typename:int	file:
 tftp_ip	include/limine.h	/^	uint32_t tftp_ip;$/;"	m	struct:limine_file	typeref:typename:uint32_t
 tftp_ip	limine/limine.h	/^    uint32_t tftp_ip;$/;"	m	struct:limine_file	typeref:typename:uint32_t
 tftp_port	include/limine.h	/^	uint32_t tftp_port;$/;"	m	struct:limine_file	typeref:typename:uint32_t
@@ -1609,6 +1564,7 @@ timeout	iso_root/boot/limine/limine.conf	/^timeout: 5$/;"	k
 timeout	limine.conf	/^timeout: 5$/;"	k
 timestamp	include/limine.h	/^	int64_t timestamp;$/;"	m	struct:limine_date_at_boot_response	typeref:typename:int64_t
 timestamp	limine/limine.h	/^    int64_t timestamp;$/;"	m	struct:limine_date_at_boot_response	typeref:typename:int64_t
+total_pages	src/kern/mem/pmm.c	/^static size_t total_pages = 0;$/;"	v	typeref:typename:size_t	file:
 tss	src/kern/cpu/gdt.c	/^	uint64_t tss;					\/\/ 0x00FFE9000000FFFF Task Stack Segment$/;"	m	struct:__anon6334c1820108	typeref:typename:uint64_t	file:
 type	include/limine.h	/^	uint64_t type;$/;"	m	struct:limine_memmap_entry	typeref:typename:uint64_t
 type	limine/limine.c	/^            uint8_t type;$/;"	m	struct:bios_install::__anon351677e10208	typeref:typename:uint8_t	file:
@@ -1628,14 +1584,12 @@ unused	limine/limine.h	/^    uint8_t unused[7];$/;"	m	struct:limine_framebuffer	
 user_code	src/kern/cpu/gdt.c	/^	uint64_t user_code;		\/\/ 0x00CFFA000000FFFF User CODE$/;"	m	struct:__anon6334c1820108	typeref:typename:uint64_t	file:
 user_data	src/kern/cpu/gdt.c	/^	uint64_t user_data;		\/\/ 0x00CFF2000000FFFF User DATA$/;"	m	struct:__anon6334c1820108	typeref:typename:uint64_t	file:
 user_rsp	src/kern/cpu/idt.c	/^	uint64_t rip, cs, rflags, user_rsp, ss;$/;"	m	struct:__anon6358f2840308	typeref:typename:uint64_t	file:
-version	include/system.h	/^	uint32_t version;				\/* zero *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 version	limine/limine.c	/^static int version(int argc, char *argv[]) {$/;"	f	typeref:typename:int	file:
 version_usage	limine/limine.c	/^static void version_usage(void) {$/;"	f	typeref:typename:void	file:
 virtual_base	include/limine.h	/^	uint64_t virtual_base;$/;"	m	struct:limine_executable_address_response	typeref:typename:uint64_t
 virtual_base	limine/limine.h	/^    uint64_t virtual_base;$/;"	m	struct:limine_executable_address_response	typeref:typename:uint64_t
 width	include/limine.h	/^	uint64_t width;$/;"	m	struct:limine_framebuffer	typeref:typename:uint64_t
 width	include/limine.h	/^	uint64_t width;$/;"	m	struct:limine_video_mode	typeref:typename:uint64_t
-width	include/system.h	/^	uint32_t width;					\/* width in pixels *\/$/;"	m	struct:__anon5932e4330308	typeref:typename:uint32_t
 width	limine/limine.h	/^    uint64_t width;$/;"	m	struct:limine_framebuffer	typeref:typename:uint64_t
 width	limine/limine.h	/^    uint64_t width;$/;"	m	struct:limine_video_mode	typeref:typename:uint64_t
 wrmsr	src/kern/cpu/access.h	/^static inline void wrmsr(uint64_t msr, uint64_t value) {$/;"	f	typeref:typename:void
