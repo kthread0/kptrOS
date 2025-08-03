@@ -1,8 +1,10 @@
 #include "idt.h"
+#include "../serial/serial.h"
 
 #include "../cpu/access.h"
 
 #include <limine.h>
+#include <panic.h>
 #include <stdbool.h>
 #include <system.h>
 
@@ -45,44 +47,16 @@ void interrupt_handler(registers_t *regs) {
 			uint8_t scancode = inb(0x60);
 			serial_printf("[ksc: 0x%x]", scancode);
 		}
-
 	} else { // CPU Exception
-		serial_printf("\nCPU EXCEPTION %d, ERR_CODE %d at RIP=0x%lx\n", regs->int_no, regs->err_code, regs->rip);
-		serial_write("SYSTEM HALTED\n");
-		for (;;) {
-			asm("cli; hlt");
-		}
+		__asm__ volatile("cli");
+		cpu_state_t state;
+		capture_cpu_state(&state);
+		panic(&state);
 	}
-}
-
-// The page fault handler
-void page_fault_handler(registers_t *regs) {
-	uint64_t faulting_address;
-	asm volatile("mov %%cr2, %0" : "=r"(faulting_address));
-
-	serial_write("\n--- KERNEL PAGE FAULT ---\n");
-	serial_printf("Faulting Address: 0x%lx\n", faulting_address);
-	serial_printf("Instruction Pointer (RIP): 0x%lx\n", regs->rip);
-	serial_printf("Error Code: 0x%lx\n", regs->err_code);
-	serial_printf("Stack Pointer (RSI): 0x%lx\n", regs->rsi);
-	serial_printf("Flags (RFLAGS): 0x%lx\n", regs->rflags);
-	serial_write("Error Code Details:\n");
-	serial_printf("  - %s\n", (regs->err_code & 0x1) ? "Protection violation" : "Page not present");
-	serial_printf("  - Caused by a %s\n", (regs->err_code & 0x2) ? "write operation" : "read operation");
-	serial_printf("  - Processor was in %s\n", (regs->err_code & 0x4) ? "user-mode" : "kernel-mode");
-	if (regs->err_code & 0x8)
-		serial_write("  - Reserved bits in page entry were set\n");
-	if (regs->err_code & 0x10)
-		serial_write("  - Caused by an instruction fetch\n");
-
-	serial_write("System halted.\n");
-	for (;;)
-		; // Halt
 }
 
 void exception_handler(uint64_t vector, uint64_t error_code) {
 	__asm__ volatile("cli");
-	serial_printf("Exception: Vector=%d, Error Code=%x\n", vector, error_code);
 	cpu_state_t state;
 	capture_cpu_state(&state);
 	panic(&state);
@@ -110,7 +84,8 @@ void idt_init() {
 
 	for (int i = 0; i < 48; ++i) {
 		idt_set_descriptor(i, isr_stub_table[i], 0x8E);
+		asm volatile("lidt %0" : : "m"(idtr));
 	}
 
-	asm volatile("lidt %0" : : "m"(idtr));
+	serial_write("[ OK ] IDT\n");
 }

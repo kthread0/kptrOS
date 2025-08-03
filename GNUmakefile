@@ -101,9 +101,13 @@ obj/%.asm.o: %.asm GNUmakefile
 clean:
 	rm -rf bin obj
 
-.PHONY: run
-run:
+.PHONY: run-tcg
+run-tcg:
 	qemu-system-x86_64 image.iso -serial stdio -vga std -accel tcg -d int -no-reboot -no-shutdown -machine q35 -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/ovmf/OVMF_CODE.fd -s
+
+.PHONY: run-kvm
+run-kvm :
+	qemu-system-x86_64 image.iso -serial stdio -vga std -accel kvm -cpu host -d int -no-reboot -no-shutdown -machine q35 -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/ovmf/OVMF_CODE.fd -s
 
 .PHONY: build-iso
 build-iso:

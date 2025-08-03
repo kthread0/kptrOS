@@ -1,9 +1,11 @@
 #include "gdt.h"
+#include "../serial/serial.h"
 
+#include <panic.h>
 #include <stdint.h>
 #include <system.h>
 
-#define KCS 0x00CFF2000000FFFF
+#define KCS 0x00AF9A000000FFFF
 #define KDS 0x00CF92000000FFFF
 #define UCS 0x00CFFA000000FFFF
 #define UDS 0x00CFF2000000FFFF
@@ -30,6 +32,8 @@ gdt_descriptor_t descriptor = {
 		.base = (uint64_t)&gdt,
 };
 
+extern void reload_segments(void);
+
 void gdt_init(void) {
 	gdt.null = 0;
 	gdt.kernel_code = KCS;
@@ -40,5 +44,7 @@ void gdt_init(void) {
 
 	__asm__ volatile("lgdt %0" : : "m"(descriptor));
 
-	serial_printf("GDT Initialized.\n");
+	reload_segments();
+
+	serial_write("[ OK ] GDT\n");
 }

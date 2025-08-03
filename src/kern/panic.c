@@ -1,5 +1,6 @@
-#include "../include/system.h"
 #include "../kern/serial/serial.h"
+#include <panic.h>
+#include <system.h>
 
 // Function to capture CPU state
 void capture_cpu_state(cpu_state_t *state) {
