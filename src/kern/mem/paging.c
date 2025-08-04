@@ -4,12 +4,13 @@
 #include <limine.h>
 #include <stdint.h>
 
-#define HH_BASE 0xFFFFFFFF80000000
 #define PAGE_SIZE 4096
 
 volatile struct limine_executable_file_request executable_file_request = {
 		.id = LIMINE_EXECUTABLE_FILE_REQUEST,
 		.revision = 0};
+
+volatile struct limine_hhdm_request hhdm_request = {.id = LIMINE_HHDM_REQUEST, .revision = 0};
 
 uint64_t pml4[512] __attribute__((aligned(4096)));
 uint64_t pdpt[512] __attribute__((aligned(4096)));
@@ -17,7 +18,7 @@ uint64_t pd[512] __attribute__((aligned(4096)));
 uint64_t pt[512] __attribute__((aligned(4096)));
 
 void load_pages(void) {
-	int i = 0;
+	uint64_t i = 0;
 	for (uint64_t addr = 0; addr < 0x1000000; addr++) {
 		pt[addr / PAGE_SIZE] = addr | 0x03;
 	}
@@ -29,12 +30,12 @@ void load_pages(void) {
 	uint64_t kernel_size = executable_file_request.response->executable_file->size;
 
 	for (uint64_t off = 0; off < kernel_size; off++) {
-		uint64_t virt = HH_BASE + off;
+		uint64_t virt = hhdm_request.response->offset + off;
 		uint64_t phys = (uintptr_t)kernel_addr + off;
 		size_t idx = (virt & 0x1FFFFF) / PAGE_SIZE;
 		pt[idx] = phys | 0x03;
 		i++;
 	}
 
-	serial_printf("%d pages loaded\n", i);
+	serial_printf("[ INFO ] %d Pages allocated\n", i);
 }

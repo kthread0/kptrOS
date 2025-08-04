@@ -2,6 +2,7 @@
 #include "../serial/serial.h"
 
 #include "../cpu/access.h"
+#include "../hpet.h"
 
 #include <limine.h>
 #include <panic.h>
@@ -41,7 +42,67 @@ typedef struct {
 
 volatile uint64_t tick = 0;
 
+void page_fault_handler(registers_t *regs) {
+	uintptr_t faulting_address;
+	__asm__ volatile("mov %%cr2, %0" : "=r"(faulting_address));
+
+	serial_printf("[ ERR ] Page Fault at address: %x, Error Code: %x\n", faulting_address, regs->err_code);
+
+	if (regs->err_code & 1) {
+		serial_write("[ INFO ] Page-level protection violation\n");
+	} else {
+		serial_write("[ INFO ] Non-present page\n");
+	}
+
+	if (regs->err_code & 2) {
+		serial_write("[ INFO ] Write access\n");
+	} else {
+		serial_write("[ INFO ] Read access\n");
+	}
+
+	if (regs->err_code & 4) {
+		serial_write("[ INFO ] Fault in user-mode\n");
+	} else {
+		serial_write("[ INFO ] Fault in kernel-mode\n");
+	}
+
+	if (regs->err_code & 8) {
+		serial_write("[ INFO ] Fault caused by reserved bit set\n");
+	}
+
+	if (regs->err_code & 16) {
+		serial_write("[ INFO ] Instruction fetch fault\n");
+	}
+}
+
+void hpet_interrupt_handler(registers_t *regs) {
+	if (!hpet_base) {
+		serial_write("[ ERR ] HPET base address is NULL\n");
+		return;
+	}
+
+	uint64_t *interrupt_status = (uint64_t *)(hpet_base + 0x20);
+	*interrupt_status = 1;
+
+	tick++;
+	serial_printf("[ INFO ] HPET Interrupt: Tick %d\n", tick);
+}
+
 void interrupt_handler(registers_t *regs) {
+	if (!regs) {
+		serial_write("[ ERR ] interrupt_handler called with NULL regs\n");
+		return;
+	}
+
+	serial_printf("[ DEBUG ] Interrupt vector: %x, Error Code: %x\n", regs->int_no, regs->err_code);
+
+	if (regs->int_no == 14) {
+		page_fault_handler(regs);
+	} else if (regs->int_no == HPET_IRQ_VECTOR) {
+		hpet_interrupt_handler(regs);
+	} else {
+		serial_printf("[ INFO ] Other Interrupt: Vector %x\n", regs->int_no);
+	}
 }
 
 void exception_handler(uint64_t vector, uint64_t error_code) {
@@ -75,6 +136,8 @@ void idt_init() {
 		idt_set_descriptor(i, isr_stub_table[i], 0x8E);
 		asm volatile("lidt %0" : : "m"(idtr));
 	}
+
+	idt_set_descriptor(14, isr_stub_table[14], 0x8E);
 
 	serial_write("[ OK ] IDT\n");
 }

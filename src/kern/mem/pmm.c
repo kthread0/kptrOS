@@ -18,6 +18,14 @@ static int test_bit(size_t rdx) { return (bitmap[rdx / 8] & (1 << (rdx % 8))) !=
 struct limine_memmap_request memmap = {.id = LIMINE_MEMMAP_REQUEST, .revision = 0};
 
 void alloc_page(void **addr, size_t len) {
+	len = PAGE_SIZE;
+
+	if (len % PAGE_SIZE != 0) {
+		serial_write("[ ERR ] Requested length is not page-aligned\n");
+		*addr = NULL;
+		return;
+	}
+
 	for (size_t rdx = 0; rdx < total_pages; rdx++) {
 		if (!test_bit(rdx)) {
 			set_bit(rdx);
@@ -25,18 +33,29 @@ void alloc_page(void **addr, size_t len) {
 			return;
 		}
 	}
-	serial_write("Not enough memory!!!\n");
+
+	serial_write("[ ERR ] Not enough memory\n");
 	*addr = NULL;
 }
 
 void free_page(void *addr, size_t len) {
+	len = PAGE_SIZE;
+
 	uintptr_t paddr = (uintptr_t)addr;
+
+	if (paddr % PAGE_SIZE != 0) {
+		serial_printf("[ ERR ] Unaligned physical address in free_page: paddr=%x\n", paddr);
+		return;
+	}
+
 	for (size_t rdx = 0; rdx < total_pages; rdx++) {
 		if (page_addrs[rdx] == paddr) {
 			clear_bit(rdx);
 			return;
 		}
 	}
+
+	serial_printf("[ ERR ] Physical address not found in page_addrs: paddr=%x\n", paddr);
 }
 
 unsigned char memory_pool[PAGE_SIZE * 2];

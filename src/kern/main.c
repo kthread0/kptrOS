@@ -14,14 +14,18 @@
 #include <uacpi/event.h>
 #include <uacpi/uacpi.h>
 
+#include "hpet.h"
+
 void kmain(void) {
 	gdt_init();
 	idt_init();
 	bitmap_init();
 	load_pages();
-	serial_write("ok...\n");
+	serial_write("[ OK ] Started Physical Memory Manager\n");
 	acpi_init();
+	hpet_init();
 
 	for (;;) {
+		hpet_configure_timer(0, 100);
 	}
 }
