@@ -1,23 +1,26 @@
+#include "acpi.h"
 #include "cpu/cpuid.h"
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
-#include "cpu/simd.h"
+#include "mem/paging.h"
 #include "mem/pmm.h"
+#include <uacpi/log.h>
+#include <uacpi/status.h>
+
+#include "serial/serial.h"
 
 #include <limine.h>
 #include <system.h>
-
-struct limine_memmap_request memmap = {.id = LIMINE_MEMMAP_REQUEST, .revision = 0};
+#include <uacpi/event.h>
+#include <uacpi/uacpi.h>
 
 void kmain(void) {
 	gdt_init();
 	idt_init();
-	EnableFPU();
-	EnableSSE();
-	EnableXSAVE();
-	bitmap_init(&memmap);
-
-	alloc_page();
+	bitmap_init();
+	load_pages();
+	serial_write("ok...\n");
+	acpi_init();
 
 	for (;;) {
 	}

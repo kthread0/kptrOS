@@ -42,17 +42,6 @@ typedef struct {
 volatile uint64_t tick = 0;
 
 void interrupt_handler(registers_t *regs) {
-	if (regs->int_no >= 32) {		// Hardware IRQ
-		if (regs->int_no == 33) { // Keyboard
-			uint8_t scancode = inb(0x60);
-			serial_printf("[ksc: 0x%x]", scancode);
-		}
-	} else { // CPU Exception
-		__asm__ volatile("cli");
-		cpu_state_t state;
-		capture_cpu_state(&state);
-		panic(&state);
-	}
 }
 
 void exception_handler(uint64_t vector, uint64_t error_code) {

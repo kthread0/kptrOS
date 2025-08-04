@@ -1,7 +1,9 @@
 #include <system.h>
 
-extern void load_page(uint64_t);
+#define ENTRIES 512
 
-extern uint64_t page_directory[512] __attribute__((aligned(KERNEL_CS)));
-extern uint64_t page_table[512] __attribute__((aligned(KERNEL_CS)));
-extern uint64_t pml4_table[512] __attribute__((aligned(KERNEL_CS)));
+extern void load_pages(void);
+extern uint64_t pml4[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
+extern uint64_t pdpt[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
+extern uint64_t pd[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
+extern uint64_t pts[ENTRIES][ENTRIES] __attribute__((aligned(PAGE_SIZE)));

@@ -4,7 +4,7 @@
 
 // Function to capture CPU state
 void capture_cpu_state(cpu_state_t *state) {
-	__asm__ volatile(
+	asm(
 			"lea (%%rip), %0\n" // Load the address of the next instruction into RIP
 			"mov %%rsp, %1\n"		// Move stack pointer into RSP
 			"mov %%rbp, %2\n"		// Move base pointer into RBP

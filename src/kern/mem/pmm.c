@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <system.h>
 
-#define MAX_PAGES PAGE_SIZE * 64
+#define MAX_PAGES 65536
 
 static uint64_t bitmap[MAX_PAGES / 8];
 static uintptr_t page_addrs[MAX_PAGES];
@@ -15,18 +15,21 @@ static void set_bit(size_t rdx) { bitmap[rdx / 8] |= (1 << (rdx % 8)); }
 static void clear_bit(size_t rdx) { bitmap[rdx / 8] &= ~(1 << (rdx % 8)); }
 static int test_bit(size_t rdx) { return (bitmap[rdx / 8] & (1 << (rdx % 8))) != 0; }
 
-void *alloc_page(void) {
+struct limine_memmap_request memmap = {.id = LIMINE_MEMMAP_REQUEST, .revision = 0};
+
+void alloc_page(void **addr, size_t len) {
 	for (size_t rdx = 0; rdx < total_pages; rdx++) {
 		if (!test_bit(rdx)) {
 			set_bit(rdx);
-			return (void *)(uintptr_t)page_addrs[rdx];
+			*addr = (void *)(uintptr_t)page_addrs[rdx];
+			return;
 		}
 	}
 	serial_write("Not enough memory!!!\n");
-	return NULL;
+	*addr = NULL;
 }
 
-void free_page(void *addr) {
+void free_page(void *addr, size_t len) {
 	uintptr_t paddr = (uintptr_t)addr;
 	for (size_t rdx = 0; rdx < total_pages; rdx++) {
 		if (page_addrs[rdx] == paddr) {
@@ -45,12 +48,11 @@ void *get_block_addr(int block_index) {
 	return NULL;
 }
 
-void bitmap_init(struct limine_memmap_request *memmap) {
-	load_page(memmap->response->entry_count);
+void bitmap_init() {
 	total_pages = 0;
 
-	for (size_t i = 0; i < memmap->response->entry_count; i++) {
-		struct limine_memmap_entry *entry = memmap->response->entries[i];
+	for (size_t i = 0; i < memmap.response->entry_count; i++) {
+		struct limine_memmap_entry *entry = memmap.response->entries[i];
 		if (entry->type == LIMINE_MEMMAP_USABLE) {
 			uintptr_t region_start = entry->base;
 			uintptr_t region_end = entry->base + entry->length;
@@ -67,8 +69,8 @@ void bitmap_init(struct limine_memmap_request *memmap) {
 			}
 		}
 	}
-	for (size_t i = 0; i < memmap->response->entry_count; i++) {
-		struct limine_memmap_entry *entry = memmap->response->entries[i];
+	for (size_t i = 0; i < memmap.response->entry_count; i++) {
+		struct limine_memmap_entry *entry = memmap.response->entries[i];
 		if (entry->type != LIMINE_MEMMAP_USABLE) {
 			uintptr_t region_start = entry->base;
 			uintptr_t region_end = entry->base + entry->length;

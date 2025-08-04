@@ -7,9 +7,12 @@
 #include <stdint.h>
 
 extern struct limine_memmap_request memmap;
-void bitmap_init(struct limine_memmap_request *memmap);
+void bitmap_init();
 void *get_block_addr(int block_index);
-void free_page(void *addr);
-void *alloc_page(void);
+void free_page(void *addr, size_t len);
+void alloc_page(void **addr, size_t len);
+
+void loadPageDirectory(uint64_t pml4);
+void enablePaging();
 
 #endif // PMM_H
