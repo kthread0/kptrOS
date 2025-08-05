@@ -42,7 +42,7 @@ void gdt_init(void) {
 	gdt.user_data = UDS;
 	gdt.tss = TSS;
 
-	__asm__ volatile("lgdt %0" : : "m"(descriptor));
+	asm volatile("lgdt %0" : : "m"(descriptor));
 
 	reload_segments();
 

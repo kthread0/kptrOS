@@ -7,8 +7,6 @@
 #include <uacpi/log.h>
 #include <uacpi/status.h>
 
-#include "serial/serial.h"
-
 #include <limine.h>
 #include <system.h>
 #include <uacpi/event.h>
@@ -21,11 +19,10 @@ void kmain(void) {
 	idt_init();
 	bitmap_init();
 	load_pages();
-	serial_write("[ OK ] Started Physical Memory Manager\n");
 	acpi_init();
 	hpet_init();
+	hpet_configure_timer(0, 100);
 
 	for (;;) {
-		hpet_configure_timer(0, 100);
 	}
 }

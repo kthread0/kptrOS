@@ -12,30 +12,30 @@ AR = llvm-ar
 AS = nasm
 
 # User controllable C flags.
-CFLAGS := -g3 -ggdb3 -O3 -pipe
+CFLAGS := -march=native -O3 -pipe -g
 CPPFLAGS :=
-ASMFLAGS := -g -O3 -f elf64
+ASMFLAGS := -O3 -f elf64 -g
 LDFLAGS :=
 
 # Internal C flags that should not be changed by the user.
 override CFLAGS += \
  -target x86_64-unknown-none-elf \
     -Wall \
+    -flto=thin \
     -std=gnu23 \
     -ffreestanding \
     -fno-stack-protector \
     -fno-stack-check \
-    -fno-lto \
     -fno-PIC \
+    -fno-PIE \
     -m64 \
-    -march=x86-64 \
     -mno-80387 \
     -mno-mmx \
     -mno-sse \
     -mno-sse2 \
     -mno-avx \
     -mno-red-zone \
-    -mcmodel=large \
+    -mcmodel=kernel \
     -I src \
     -I include
 
@@ -103,11 +103,11 @@ clean:
 
 .PHONY: run-tcg
 run-tcg:
-	qemu-system-x86_64 image.iso -serial stdio -vga std -accel tcg -d int -no-reboot -no-shutdown -machine q35 -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/ovmf/OVMF_CODE.fd -s
+	qemu-system-x86_64 image.iso -serial stdio -vga std -accel tcg -d int -machine q35 -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/ovmf/OVMF_CODE.fd -s
 
 .PHONY: run-kvm
 run-kvm :
-	qemu-system-x86_64 image.iso -serial stdio -vga std -accel kvm -cpu host -d int -no-reboot -no-shutdown -machine q35 -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/ovmf/OVMF_CODE.fd -s
+	qemu-system-x86_64 image.iso -serial stdio -vga std -accel kvm -cpu host -d int -machine q35 -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/ovmf/OVMF_CODE.fd -s
 
 .PHONY: build-iso
 build-iso:

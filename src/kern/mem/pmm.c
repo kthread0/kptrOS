@@ -5,11 +5,9 @@
 #include <stdint.h>
 #include <system.h>
 
-#define MAX_PAGES 65536
-
 static uint64_t bitmap[MAX_PAGES / 8];
 static uintptr_t page_addrs[MAX_PAGES];
-static size_t total_pages = 0;
+static size_t total_pages = MAX_PAGES;
 
 static void set_bit(size_t rdx) { bitmap[rdx / 8] |= (1 << (rdx % 8)); }
 static void clear_bit(size_t rdx) { bitmap[rdx / 8] &= ~(1 << (rdx % 8)); }
@@ -43,22 +41,15 @@ void free_page(void *addr, size_t len) {
 
 	uintptr_t paddr = (uintptr_t)addr;
 
-	if (paddr % PAGE_SIZE != 0) {
-		serial_printf("[ ERR ] Unaligned physical address in free_page: paddr=%x\n", paddr);
-		return;
-	}
-
 	for (size_t rdx = 0; rdx < total_pages; rdx++) {
 		if (page_addrs[rdx] == paddr) {
 			clear_bit(rdx);
 			return;
 		}
 	}
-
-	serial_printf("[ ERR ] Physical address not found in page_addrs: paddr=%x\n", paddr);
 }
 
-unsigned char memory_pool[PAGE_SIZE * 2];
+unsigned char memory_pool[PAGE_SIZE];
 
 void *get_block_addr(int block_index) {
 	if (block_index >= 0 && block_index < PAGE_SIZE) {
