@@ -6,3 +6,4 @@ limine
 .cache/
 *.idx
 *.json
+*.gdbhistory
