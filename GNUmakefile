@@ -12,9 +12,9 @@ AR = llvm-ar
 AS = nasm
 
 # User controllable C flags.
-CFLAGS := -march=x86-64 -O3 -pipe -g
+CFLAGS := -march=x86-64 -O2 -pipe -g
 CPPFLAGS :=
-ASMFLAGS := -O3 -f elf64 -g
+ASMFLAGS := -O2 -f elf64 -g
 LDFLAGS :=
 
 # Internal C flags that should not be changed by the user.
