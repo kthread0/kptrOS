@@ -12,7 +12,7 @@ AR = llvm-ar
 AS = nasm
 
 # User controllable C flags.
-CFLAGS := -march=native -O3 -pipe -g
+CFLAGS := -march=x86-64 -O3 -pipe -g
 CPPFLAGS :=
 ASMFLAGS := -O3 -f elf64 -g
 LDFLAGS :=
@@ -21,11 +21,11 @@ LDFLAGS :=
 override CFLAGS += \
  -target x86_64-unknown-none-elf \
     -Wall \
-    -flto=thin \
     -std=gnu23 \
     -ffreestanding \
     -fno-stack-protector \
     -fno-stack-check \
+    -fno-lto \
     -fno-PIC \
     -fno-PIE \
     -m64 \

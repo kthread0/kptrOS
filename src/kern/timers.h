@@ -1,5 +1,5 @@
-#ifndef HPET_H
-#define HPET_H
+#ifndef TIMERS_H
+#define TIMERS_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -21,8 +21,8 @@
 static void *hpet_base = NULL;
 static uint64_t hpet_period = 0;
 
-int hpet_init(void);
-int hpet_configure_timer(uint32_t timer, uint64_t interval_ms);
+int timer_init(void);
+int hpet_configure_timer(uint64_t timer, uint64_t interval_ms);
 uint64_t hpet_get_counter(void);
 
-#endif // HPET_H
+#endif // TIMERS_H

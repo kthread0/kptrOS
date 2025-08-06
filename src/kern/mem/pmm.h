@@ -6,7 +6,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define MAX_PAGES 65536
+#define MAX_PAGES 65536 * 8
 
 extern struct limine_memmap_request memmap;
 void bitmap_init();

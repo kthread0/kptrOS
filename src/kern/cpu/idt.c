@@ -2,11 +2,11 @@
 #include "../serial/serial.h"
 
 #include "../cpu/access.h"
-#include "../hpet.h"
 
 #include <limine.h>
 #include <panic.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <system.h>
 
 typedef struct {
@@ -79,6 +79,7 @@ void page_fault_handler(registers_t *regs) {
 }
 
 void hpet_interrupt_handler(registers_t *regs) {
+	void *hpet_base = NULL;
 	if (!hpet_base) {
 		serial_write("[ ERR ] HPET base address is NULL\n");
 		return;
@@ -99,12 +100,10 @@ void interrupt_handler(registers_t *regs) {
 
 	// serial_printf("[ DEBUG ] Interrupt vector: %x, Error Code: %x\n", regs->int_no, regs->err_code);
 
-	if (regs->int_no == 2) {
+	if (regs->int_no == 14) {
 		page_fault_handler(regs);
-	} else if (regs->int_no == HPET_IRQ_VECTOR) {
+	} else if (regs->int_no == 2) {
 		hpet_interrupt_handler(regs);
-	} else {
-		serial_printf("[ INFO ] Other Interrupt: Vector %x\n", regs->int_no);
 	}
 }
 
@@ -158,7 +157,6 @@ void idt_init() {
 		idt_set_descriptor(i, isr_stub_table[i], 0x8E);
 	}
 
-	idt_set_descriptor(14, isr_stub_table[14], 0x8E);
 	asm volatile("lidt %0" : : "m"(idtr));
 
 	serial_write("[ OK ] IDT\n");

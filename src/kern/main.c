@@ -12,16 +12,19 @@
 #include <uacpi/event.h>
 #include <uacpi/uacpi.h>
 
-#include "hpet.h"
+#include "timers.h"
 
-void kmain(void) {
+void kinit(void) {
 	gdt_init();
 	idt_init();
 	bitmap_init();
 	load_pages();
 	acpi_init();
-	hpet_init();
-	hpet_configure_timer(0, 100);
+	timer_init();
+}
+
+void kmain(void) {
+	kinit();
 
 	for (;;) {
 	}
