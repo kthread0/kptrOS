@@ -1,3 +1,0 @@
-[submodule "src/mlibc"]
-	path = src/mlibc
-	url = git@github.com:managarm/mlibc.git

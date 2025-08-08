@@ -77,22 +77,22 @@ all: bin/$(OUTPUT)
 -include $(HEADER_DEPS)
 
 # Link rules for the final executable.
-bin/$(OUTPUT): GNUmakefile linker.lds $(OBJ)
+bin/$(OUTPUT): Makefile linker.lds $(OBJ)
 	mkdir -p "$$(dirname $@)"
 	$(LD) $(OBJ) $(LDFLAGS) -o $@
 
 # Compilation rules for *.c files.
-obj/%.c.o: %.c GNUmakefile
+obj/%.c.o: %.c Makefile
 	mkdir -p "$$(dirname $@)"
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Compilation rules for *.S files.
-obj/%.S.o: %.S GNUmakefile
+obj/%.S.o: %.S Makefile
 	mkdir -p "$$(dirname $@)"
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Compilation rules for *.asm(nasm) files.
-obj/%.asm.o: %.asm GNUmakefile
+obj/%.asm.o: %.asm Makefile
 	mkdir -p "$$(dirname $@)"
 	$(AS) $(ASMFLAGS) $< -o $@
 
