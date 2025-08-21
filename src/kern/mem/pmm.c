@@ -5,7 +5,7 @@
 #include <system.h>
 
 static uint64_t bitmap[MAX_PAGES / 2];
-static uintptr_t page_addrs[MAX_PAGES];
+static uint64_t page_addrs[MAX_PAGES];
 static size_t total_pages = MAX_PAGES;
 
 static void set_bit(size_t index) { bitmap[index / 8] |= (1 << (index % 8)); }
@@ -20,7 +20,7 @@ void alloc_page(void **addr, size_t len) {
 	for (size_t index = 0; index < total_pages; index++) {
 		if (!test_bit(index)) {
 			set_bit(index);
-			*addr = (void *)(uintptr_t)page_addrs[index];
+			*addr = (void *)(uint64_t)page_addrs[index];
 			return;
 		}
 	}
@@ -29,7 +29,7 @@ void alloc_page(void **addr, size_t len) {
 void free_page(void *addr, size_t len) {
 	len = PAGE_SIZE;
 
-	uintptr_t paddr = (uintptr_t)addr;
+	uint64_t paddr = (uint64_t)addr;
 
 	for (size_t index = 0; index < total_pages; index++) {
 		if (page_addrs[index] == paddr) {
@@ -55,13 +55,13 @@ void bitmap_init() {
 	for (size_t i = 0; i < memmap.response->entry_count; i++) {
 		struct limine_memmap_entry *entry = memmap.response->entries[i];
 		if (entry->type == LIMINE_MEMMAP_USABLE) {
-			uintptr_t region_start = entry->base;
-			uintptr_t region_end = entry->base + entry->length;
+			uint64_t region_start = entry->base;
+			uint64_t region_end = entry->base + entry->length;
 
-			uintptr_t page_start = (region_start + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
-			uintptr_t page_end = region_end & ~(PAGE_SIZE - 1);
+			uint64_t page_start = (region_start + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
+			uint64_t page_end = region_end & ~(PAGE_SIZE - 1);
 
-			for (uintptr_t addr = page_start; addr < page_end; addr += PAGE_SIZE) {
+			for (uint64_t addr = page_start; addr < page_end; addr += PAGE_SIZE) {
 				if (total_pages < MAX_PAGES) {
 					page_addrs[total_pages] = addr;
 					clear_bit(total_pages);
@@ -73,13 +73,13 @@ void bitmap_init() {
 	for (size_t i = 0; i < memmap.response->entry_count; i++) {
 		struct limine_memmap_entry *entry = memmap.response->entries[i];
 		if (entry->type != LIMINE_MEMMAP_USABLE) {
-			uintptr_t region_start = entry->base;
-			uintptr_t region_end = entry->base + entry->length;
+			uint64_t region_start = entry->base;
+			uint64_t region_end = entry->base + entry->length;
 
-			uintptr_t page_start = (region_start + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
-			uintptr_t page_end = region_end & ~(PAGE_SIZE - 1);
+			uint64_t page_start = (region_start + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
+			uint64_t page_end = region_end & ~(PAGE_SIZE - 1);
 
-			for (uintptr_t addr = page_start; addr > page_end; addr -= PAGE_SIZE) {
+			for (uint64_t addr = page_start; addr > page_end; addr -= PAGE_SIZE) {
 				if (total_pages > MAX_PAGES) {
 					page_addrs[total_pages] = addr;
 					set_bit(total_pages);

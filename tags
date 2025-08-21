@@ -1081,72 +1081,72 @@
 33	compile_commands.json	/^      "-o",$/;"	s	array:7.arguments
 33	compile_commands.json	/^      "-o",$/;"	s	array:8.arguments
 33	compile_commands.json	/^      "-o",$/;"	s	array:9.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi.c.o",$/;"	s	array:3.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/default_handlers.c.o",$/;"	s	array:6.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/event.c.o",$/;"	s	array:4.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/interpreter.c.o",$/;"	s	array:0.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/io.c.o",$/;"	s	array:7.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/mutex.c.o",$/;"	s	array:5.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/namespace.c.o",$/;"	s	array:8.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/notify.c.o",$/;"	s	array:1.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/opcodes.c.o",$/;"	s	array:2.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi.c.o",$/;"	s	array:0.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/default_handlers.c.o",$/;"	s	array:1.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/event.c.o",$/;"	s	array:8.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/interpreter.c.o",$/;"	s	array:2.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/io.c.o",$/;"	s	array:5.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/mutex.c.o",$/;"	s	array:3.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/namespace.c.o",$/;"	s	array:4.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/notify.c.o",$/;"	s	array:6.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/opcodes.c.o",$/;"	s	array:7.arguments
 34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/opregion.c.o",$/;"	s	array:9.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/osi.c.o",$/;"	s	array:31.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/registers.c.o",$/;"	s	array:10.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/resources.c.o",$/;"	s	array:12.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/shareable.c.o",$/;"	s	array:11.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/osi.c.o",$/;"	s	array:11.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/registers.c.o",$/;"	s	array:17.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/resources.c.o",$/;"	s	array:10.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/shareable.c.o",$/;"	s	array:14.arguments
 34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/sleep.c.o",$/;"	s	array:13.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/stdlib.c.o",$/;"	s	array:32.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/tables.c.o",$/;"	s	array:14.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/stdlib.c.o",$/;"	s	array:12.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/tables.c.o",$/;"	s	array:16.arguments
 34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/types.c.o",$/;"	s	array:15.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/uacpi.c.o",$/;"	s	array:18.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/utilities.c.o",$/;"	s	array:16.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/cpu\/cpuid.c.o",$/;"	s	array:17.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/cpu\/gdt.c.o",$/;"	s	array:22.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/cpu\/idt.c.o",$/;"	s	array:21.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/hpet.c.o",$/;"	s	array:20.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/main.c.o",$/;"	s	array:19.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/uacpi.c.o",$/;"	s	array:21.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/acpi\/utilities.c.o",$/;"	s	array:18.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/cpu\/cpuid.c.o",$/;"	s	array:19.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/cpu\/gdt.c.o",$/;"	s	array:20.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/cpu\/idt.c.o",$/;"	s	array:32.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/hpet.c.o",$/;"	s	array:22.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/main.c.o",$/;"	s	array:23.arguments
 34	compile_commands.json	/^      "obj\/src\/kern\/mem\/memcmp.c.o",$/;"	s	array:24.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/mem\/memcpy.c.o",$/;"	s	array:23.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/mem\/memcpy.c.o",$/;"	s	array:29.arguments
 34	compile_commands.json	/^      "obj\/src\/kern\/mem\/memmove.c.o",$/;"	s	array:25.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/mem\/memset.c.o",$/;"	s	array:27.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/mem\/paging.c.o",$/;"	s	array:30.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/mem\/pmm.c.o",$/;"	s	array:26.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/panic.c.o",$/;"	s	array:28.arguments
-34	compile_commands.json	/^      "obj\/src\/kern\/serial\/serial.c.o",$/;"	s	array:29.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi.c"$/;"	s	array:3.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/default_handlers.c"$/;"	s	array:6.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/event.c"$/;"	s	array:4.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/interpreter.c"$/;"	s	array:0.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/io.c"$/;"	s	array:7.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/mutex.c"$/;"	s	array:5.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/namespace.c"$/;"	s	array:8.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/notify.c"$/;"	s	array:1.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/opcodes.c"$/;"	s	array:2.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/mem\/memset.c.o",$/;"	s	array:28.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/mem\/paging.c.o",$/;"	s	array:26.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/mem\/pmm.c.o",$/;"	s	array:27.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/panic.c.o",$/;"	s	array:30.arguments
+34	compile_commands.json	/^      "obj\/src\/kern\/serial\/serial.c.o",$/;"	s	array:31.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi.c"$/;"	s	array:0.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/default_handlers.c"$/;"	s	array:1.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/event.c"$/;"	s	array:8.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/interpreter.c"$/;"	s	array:2.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/io.c"$/;"	s	array:5.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/mutex.c"$/;"	s	array:3.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/namespace.c"$/;"	s	array:4.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/notify.c"$/;"	s	array:6.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/opcodes.c"$/;"	s	array:7.arguments
 35	compile_commands.json	/^      "src\/kern\/acpi\/opregion.c"$/;"	s	array:9.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/osi.c"$/;"	s	array:31.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/registers.c"$/;"	s	array:10.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/resources.c"$/;"	s	array:12.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/shareable.c"$/;"	s	array:11.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/osi.c"$/;"	s	array:11.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/registers.c"$/;"	s	array:17.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/resources.c"$/;"	s	array:10.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/shareable.c"$/;"	s	array:14.arguments
 35	compile_commands.json	/^      "src\/kern\/acpi\/sleep.c"$/;"	s	array:13.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/stdlib.c"$/;"	s	array:32.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/tables.c"$/;"	s	array:14.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/stdlib.c"$/;"	s	array:12.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/tables.c"$/;"	s	array:16.arguments
 35	compile_commands.json	/^      "src\/kern\/acpi\/types.c"$/;"	s	array:15.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/uacpi.c"$/;"	s	array:18.arguments
-35	compile_commands.json	/^      "src\/kern\/acpi\/utilities.c"$/;"	s	array:16.arguments
-35	compile_commands.json	/^      "src\/kern\/cpu\/cpuid.c"$/;"	s	array:17.arguments
-35	compile_commands.json	/^      "src\/kern\/cpu\/gdt.c"$/;"	s	array:22.arguments
-35	compile_commands.json	/^      "src\/kern\/cpu\/idt.c"$/;"	s	array:21.arguments
-35	compile_commands.json	/^      "src\/kern\/hpet.c"$/;"	s	array:20.arguments
-35	compile_commands.json	/^      "src\/kern\/main.c"$/;"	s	array:19.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/uacpi.c"$/;"	s	array:21.arguments
+35	compile_commands.json	/^      "src\/kern\/acpi\/utilities.c"$/;"	s	array:18.arguments
+35	compile_commands.json	/^      "src\/kern\/cpu\/cpuid.c"$/;"	s	array:19.arguments
+35	compile_commands.json	/^      "src\/kern\/cpu\/gdt.c"$/;"	s	array:20.arguments
+35	compile_commands.json	/^      "src\/kern\/cpu\/idt.c"$/;"	s	array:32.arguments
+35	compile_commands.json	/^      "src\/kern\/hpet.c"$/;"	s	array:22.arguments
+35	compile_commands.json	/^      "src\/kern\/main.c"$/;"	s	array:23.arguments
 35	compile_commands.json	/^      "src\/kern\/mem\/memcmp.c"$/;"	s	array:24.arguments
-35	compile_commands.json	/^      "src\/kern\/mem\/memcpy.c"$/;"	s	array:23.arguments
+35	compile_commands.json	/^      "src\/kern\/mem\/memcpy.c"$/;"	s	array:29.arguments
 35	compile_commands.json	/^      "src\/kern\/mem\/memmove.c"$/;"	s	array:25.arguments
-35	compile_commands.json	/^      "src\/kern\/mem\/memset.c"$/;"	s	array:27.arguments
-35	compile_commands.json	/^      "src\/kern\/mem\/paging.c"$/;"	s	array:30.arguments
-35	compile_commands.json	/^      "src\/kern\/mem\/pmm.c"$/;"	s	array:26.arguments
-35	compile_commands.json	/^      "src\/kern\/panic.c"$/;"	s	array:28.arguments
-35	compile_commands.json	/^      "src\/kern\/serial\/serial.c"$/;"	s	array:29.arguments
+35	compile_commands.json	/^      "src\/kern\/mem\/memset.c"$/;"	s	array:28.arguments
+35	compile_commands.json	/^      "src\/kern\/mem\/paging.c"$/;"	s	array:26.arguments
+35	compile_commands.json	/^      "src\/kern\/mem\/pmm.c"$/;"	s	array:27.arguments
+35	compile_commands.json	/^      "src\/kern\/panic.c"$/;"	s	array:30.arguments
+35	compile_commands.json	/^      "src\/kern\/serial\/serial.c"$/;"	s	array:31.arguments
 4	compile_commands.json	/^      "-g",$/;"	s	array:0.arguments
 4	compile_commands.json	/^      "-g",$/;"	s	array:1.arguments
 4	compile_commands.json	/^      "-g",$/;"	s	array:10.arguments
@@ -2924,7 +2924,6 @@ UDS	src/kern/cpu/gdt.c	/^#define UDS /;"	d	file:
 UNINSTALL_DATA_MAX	limine/limine.c	/^#define UNINSTALL_DATA_MAX /;"	d	file:
 UNREG_NO	src/kern/acpi/opregion.c	/^	UNREG_NO = 0,$/;"	e	enum:unreg	file:
 UNREG_YES	src/kern/acpi/opregion.c	/^	UNREG_YES,$/;"	e	enum:unreg	file:
-WERROR_FLAG	limine/Makefile	/^WERROR_FLAG=$/;"	m
 WINDOWS	src/kern/acpi/osi.c	/^#define WINDOWS(/;"	d	file:
 _	src/kern/acpi/opcodes.c	/^#define _(/;"	d	file:
 __anon1a98fe2c010a	src/kern/acpi/interpreter.c	/^	union {$/;"	u	struct:item	file:
@@ -3134,7 +3133,7 @@ bit_offset_within_first_byte	include/uacpi/internal/types.h	/^    uacpi_u8 bit_o
 bit_span	src/kern/acpi/io.c	/^struct bit_span {$/;"	s	file:
 bit_span_offset	src/kern/acpi/io.c	/^static uacpi_size bit_span_offset(struct bit_span *span, uacpi_size bits) {$/;"	f	typeref:typename:uacpi_size	file:
 bit_width	include/uacpi/resources.h	/^    uacpi_u8 bit_width;$/;"	m	struct:uacpi_resource_generic_register	typeref:typename:uacpi_u8
-bitmap	src/kern/mem/pmm.c	/^static uint64_t bitmap[MAX_PAGES \/ 8];$/;"	v	typeref:typename:uint64_t[]	file:
+bitmap	src/kern/mem/pmm.c	/^static uint64_t bitmap[MAX_PAGES \/ 2];$/;"	v	typeref:typename:uint64_t[]	file:
 bitmap_init	src/kern/mem/pmm.c	/^void bitmap_init() {$/;"	f	typeref:typename:void
 block	src/kern/acpi/event.c	/^	struct gpe_block *block;$/;"	m	struct:gpe_match_ctx	typeref:struct:gpe_block *	file:
 block_address	include/uacpi/internal/types.h	/^    uacpi_u32 block_address;$/;"	m	struct:uacpi_processor	typeref:typename:uacpi_u32
@@ -3216,7 +3215,7 @@ cid	include/uacpi/utilities.h	/^    uacpi_pnp_id_list cid;$/;"	m	struct:uacpi_na
 clean	Makefile	/^clean:$/;"	t
 clean	limine/Makefile	/^clean:$/;"	t
 clear	src/kern/acpi/tables.c	/^	uacpi_u8 clear;$/;"	m	struct:table_ctl_request	typeref:typename:uacpi_u8	file:
-clear_bit	src/kern/mem/pmm.c	/^static void clear_bit(size_t rdx) { bitmap[rdx \/ 8] &= ~(1 << (rdx % 8)); }$/;"	f	typeref:typename:void	file:
+clear_bit	src/kern/mem/pmm.c	/^static void clear_bit(size_t index) { bitmap[index \/ 8] &= ~(1 << (index % 8)); }$/;"	f	typeref:typename:void	file:
 clear_gpe	src/kern/acpi/event.c	/^static uacpi_status clear_gpe(struct gp_event *event) {$/;"	f	typeref:typename:uacpi_status	file:
 clock_input	include/uacpi/resources.h	/^        uacpi_resource_clock_input clock_input;$/;"	m	union:uacpi_resource::__anonaf0f74ea020a	typeref:typename:uacpi_resource_clock_input
 cls	include/uacpi/utilities.h	/^    uacpi_id_string cls;$/;"	m	struct:uacpi_namespace_node_info	typeref:typename:uacpi_id_string
@@ -3529,39 +3528,39 @@ field_get_read_type	src/kern/acpi/interpreter.c	/^static uacpi_status field_get_
 field_specific_data	src/kern/acpi/interpreter.c	/^struct field_specific_data {$/;"	s	file:
 field_unit	include/uacpi/internal/types.h	/^        uacpi_field_unit *field_unit;$/;"	m	union:uacpi_object::__anon939e4e30080a	typeref:typename:uacpi_field_unit *
 field_unit_alloc	src/kern/acpi/types.c	/^static uacpi_bool field_unit_alloc(uacpi_object *obj) {$/;"	f	typeref:typename:uacpi_bool	file:
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi.c",$/;"	s	object:3
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/default_handlers.c",$/;"	s	object:6
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/event.c",$/;"	s	object:4
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/interpreter.c",$/;"	s	object:0
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/io.c",$/;"	s	object:7
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/mutex.c",$/;"	s	object:5
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/namespace.c",$/;"	s	object:8
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/notify.c",$/;"	s	object:1
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/opcodes.c",$/;"	s	object:2
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi.c",$/;"	s	object:0
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/default_handlers.c",$/;"	s	object:1
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/event.c",$/;"	s	object:8
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/interpreter.c",$/;"	s	object:2
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/io.c",$/;"	s	object:5
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/mutex.c",$/;"	s	object:3
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/namespace.c",$/;"	s	object:4
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/notify.c",$/;"	s	object:6
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/opcodes.c",$/;"	s	object:7
 file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/opregion.c",$/;"	s	object:9
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/osi.c",$/;"	s	object:31
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/registers.c",$/;"	s	object:10
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/resources.c",$/;"	s	object:12
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/shareable.c",$/;"	s	object:11
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/osi.c",$/;"	s	object:11
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/registers.c",$/;"	s	object:17
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/resources.c",$/;"	s	object:10
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/shareable.c",$/;"	s	object:14
 file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/sleep.c",$/;"	s	object:13
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/stdlib.c",$/;"	s	object:32
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/tables.c",$/;"	s	object:14
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/stdlib.c",$/;"	s	object:12
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/tables.c",$/;"	s	object:16
 file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/types.c",$/;"	s	object:15
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/uacpi.c",$/;"	s	object:18
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/utilities.c",$/;"	s	object:16
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/cpuid.c",$/;"	s	object:17
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/gdt.c",$/;"	s	object:22
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/idt.c",$/;"	s	object:21
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/hpet.c",$/;"	s	object:20
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/main.c",$/;"	s	object:19
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/uacpi.c",$/;"	s	object:21
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/acpi\/utilities.c",$/;"	s	object:18
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/cpuid.c",$/;"	s	object:19
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/gdt.c",$/;"	s	object:20
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/cpu\/idt.c",$/;"	s	object:32
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/hpet.c",$/;"	s	object:22
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/main.c",$/;"	s	object:23
 file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memcmp.c",$/;"	s	object:24
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memcpy.c",$/;"	s	object:23
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memcpy.c",$/;"	s	object:29
 file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memmove.c",$/;"	s	object:25
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memset.c",$/;"	s	object:27
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/paging.c",$/;"	s	object:30
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/pmm.c",$/;"	s	object:26
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/panic.c",$/;"	s	object:28
-file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/serial\/serial.c",$/;"	s	object:29
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/memset.c",$/;"	s	object:28
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/paging.c",$/;"	s	object:26
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/mem\/pmm.c",$/;"	s	object:27
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/panic.c",$/;"	s	object:30
+file	compile_commands.json	/^    "file": "\/home\/kptr\/Projects\/kptrOS\/src\/kern\/serial\/serial.c",$/;"	s	object:31
 find_end	src/kern/acpi/resources.c	/^static uacpi_iteration_decision find_end($/;"	f	typeref:typename:uacpi_iteration_decision	file:
 find_handler	src/kern/acpi/opregion.c	/^static uacpi_address_space_handler *find_handler($/;"	f	typeref:typename:uacpi_address_space_handler *	file:
 find_host_interface_unlocked	src/kern/acpi/osi.c	/^static struct registered_interface *find_host_interface_unlocked($/;"	f	typeref:struct:registered_interface *	file:
@@ -4324,39 +4323,39 @@ out_table	src/kern/acpi/tables.c	/^	uacpi_table *out_table;$/;"	m	struct:table_s
 out_tbl	src/kern/acpi/tables.c	/^	void *out_tbl;$/;"	m	struct:table_ctl_request	typeref:typename:void *	file:
 outb	src/kern/cpu/access.h	/^static inline void outb(uint16_t port, uint8_t val) {$/;"	f	typeref:typename:void
 outb	src/kern/serial/serial.c	/^static inline void outb(uint16_t port, uint8_t value) {$/;"	f	typeref:typename:void	file:
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi.c.o"$/;"	s	object:3
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/default_handlers.c.o"$/;"	s	object:6
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/event.c.o"$/;"	s	object:4
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/interpreter.c.o"$/;"	s	object:0
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/io.c.o"$/;"	s	object:7
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/mutex.c.o"$/;"	s	object:5
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/namespace.c.o"$/;"	s	object:8
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/notify.c.o"$/;"	s	object:1
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/opcodes.c.o"$/;"	s	object:2
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi.c.o"$/;"	s	object:0
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/default_handlers.c.o"$/;"	s	object:1
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/event.c.o"$/;"	s	object:8
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/interpreter.c.o"$/;"	s	object:2
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/io.c.o"$/;"	s	object:5
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/mutex.c.o"$/;"	s	object:3
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/namespace.c.o"$/;"	s	object:4
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/notify.c.o"$/;"	s	object:6
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/opcodes.c.o"$/;"	s	object:7
 output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/opregion.c.o"$/;"	s	object:9
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/osi.c.o"$/;"	s	object:31
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/registers.c.o"$/;"	s	object:10
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/resources.c.o"$/;"	s	object:12
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/shareable.c.o"$/;"	s	object:11
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/osi.c.o"$/;"	s	object:11
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/registers.c.o"$/;"	s	object:17
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/resources.c.o"$/;"	s	object:10
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/shareable.c.o"$/;"	s	object:14
 output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/sleep.c.o"$/;"	s	object:13
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/stdlib.c.o"$/;"	s	object:32
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/tables.c.o"$/;"	s	object:14
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/stdlib.c.o"$/;"	s	object:12
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/tables.c.o"$/;"	s	object:16
 output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/types.c.o"$/;"	s	object:15
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/uacpi.c.o"$/;"	s	object:18
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/utilities.c.o"$/;"	s	object:16
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/cpuid.c.o"$/;"	s	object:17
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/gdt.c.o"$/;"	s	object:22
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/idt.c.o"$/;"	s	object:21
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/hpet.c.o"$/;"	s	object:20
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/main.c.o"$/;"	s	object:19
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/uacpi.c.o"$/;"	s	object:21
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/acpi\/utilities.c.o"$/;"	s	object:18
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/cpuid.c.o"$/;"	s	object:19
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/gdt.c.o"$/;"	s	object:20
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/cpu\/idt.c.o"$/;"	s	object:32
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/hpet.c.o"$/;"	s	object:22
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/main.c.o"$/;"	s	object:23
 output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memcmp.c.o"$/;"	s	object:24
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memcpy.c.o"$/;"	s	object:23
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memcpy.c.o"$/;"	s	object:29
 output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memmove.c.o"$/;"	s	object:25
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memset.c.o"$/;"	s	object:27
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/paging.c.o"$/;"	s	object:30
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/pmm.c.o"$/;"	s	object:26
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/panic.c.o"$/;"	s	object:28
-output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/serial\/serial.c.o"$/;"	s	object:29
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/memset.c.o"$/;"	s	object:28
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/paging.c.o"$/;"	s	object:26
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/mem\/pmm.c.o"$/;"	s	object:27
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/panic.c.o"$/;"	s	object:30
+output	compile_commands.json	/^    "output": "\/home\/kptr\/Projects\/kptrOS\/obj\/src\/kern\/serial\/serial.c.o"$/;"	s	object:31
 owner	include/uacpi/internal/mutex.h	/^    uacpi_thread_id owner;$/;"	m	struct:uacpi_recursive_lock	typeref:typename:uacpi_thread_id
 owner	include/uacpi/internal/types.h	/^    uacpi_thread_id owner;$/;"	m	struct:uacpi_mutex	typeref:typename:uacpi_thread_id
 owns_code	include/uacpi/internal/types.h	/^    uacpi_u8 owns_code : 1;$/;"	m	struct:uacpi_control_method	typeref:typename:uacpi_u8:1
@@ -4388,8 +4387,8 @@ pcc_info	include/uacpi/types.h	/^        uacpi_pcc_region_info pcc_info;$/;"	m	u
 pci_region_attach	src/kern/acpi/default_handlers.c	/^static uacpi_status pci_region_attach(uacpi_region_attach_data *data) {$/;"	f	typeref:typename:uacpi_status	file:
 pci_region_detach	src/kern/acpi/default_handlers.c	/^static uacpi_status pci_region_detach(uacpi_region_detach_data *data) {$/;"	f	typeref:typename:uacpi_status	file:
 pci_region_do_rw	src/kern/acpi/default_handlers.c	/^static uacpi_status pci_region_do_rw($/;"	f	typeref:typename:uacpi_status	file:
-pd	src/kern/mem/paging.c	/^uint64_t pd[512] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[512]
-pdpt	src/kern/mem/paging.c	/^uint64_t pdpt[512] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[512]
+pd	src/kern/mem/paging.c	/^uint64_t pd[ENTRIES] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[]
+pdpt	src/kern/mem/paging.c	/^uint64_t pdpt[ENTRIES] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[]
 peek_next_op	src/kern/acpi/interpreter.c	/^static uacpi_u8 peek_next_op(struct call_frame *frame, uacpi_aml_op *out_op) {$/;"	f	typeref:typename:uacpi_u8	file:
 peek_one	src/kern/acpi/utilities.c	/^static uacpi_bool peek_one($/;"	f	typeref:typename:uacpi_bool	file:
 pending_ops	src/kern/acpi/interpreter.c	/^	struct op_context_array pending_ops;$/;"	m	struct:call_frame	typeref:struct:op_context_array	file:
@@ -4427,7 +4426,7 @@ pm1a_enable_blk	include/uacpi/internal/context.h	/^    struct acpi_gas pm1a_enab
 pm1a_status_blk	include/uacpi/internal/context.h	/^    struct acpi_gas pm1a_status_blk;$/;"	m	struct:uacpi_runtime_context	typeref:struct:acpi_gas
 pm1b_enable_blk	include/uacpi/internal/context.h	/^    struct acpi_gas pm1b_enable_blk;$/;"	m	struct:uacpi_runtime_context	typeref:struct:acpi_gas
 pm1b_status_blk	include/uacpi/internal/context.h	/^    struct acpi_gas pm1b_status_blk;$/;"	m	struct:uacpi_runtime_context	typeref:struct:acpi_gas
-pml4	src/kern/mem/paging.c	/^uint64_t pml4[512] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[512]
+pml4	src/kern/mem/paging.c	/^uint64_t pml4[ENTRIES] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[]
 polarity	include/uacpi/resources.h	/^    uacpi_u8 polarity;$/;"	m	struct:uacpi_interrupt_connection_flags	typeref:typename:uacpi_u8
 polarity	include/uacpi/resources.h	/^    uacpi_u8 polarity;$/;"	m	struct:uacpi_resource_extended_irq	typeref:typename:uacpi_u8
 polarity	include/uacpi/resources.h	/^    uacpi_u8 polarity;$/;"	m	struct:uacpi_resource_irq	typeref:typename:uacpi_u8
@@ -4464,7 +4463,7 @@ processor	include/uacpi/internal/types.h	/^        uacpi_processor *processor;$/
 processor_alloc	src/kern/acpi/types.c	/^static uacpi_bool processor_alloc(uacpi_object *obj) {$/;"	f	typeref:typename:uacpi_bool	file:
 program_name	limine/limine.c	/^static char *program_name = NULL;$/;"	v	typeref:typename:char *	file:
 properties	include/uacpi/internal/opcodes.h	/^    uacpi_u8 properties;$/;"	m	struct:uacpi_op_spec	typeref:typename:uacpi_u8
-pt	src/kern/mem/paging.c	/^uint64_t pt[512] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[512]
+pt	src/kern/mem/paging.c	/^uint64_t pt[ENTRIES] __attribute__((aligned(PAGE_SIZE)));$/;"	v	typeref:typename:uint64_t[]
 ptr	include/uacpi/internal/tables.h	/^    void *ptr;$/;"	m	struct:uacpi_installed_table	typeref:typename:void *
 ptr	include/uacpi/tables.h	/^        void *ptr;$/;"	m	union:uacpi_table::__anon513b8aea010a	typeref:typename:void *
 ptr	src/kern/acpi/resources.c	/^				void *ptr;$/;"	m	union:do_aml_resource_to_native::__anon5d35f693020a	typeref:typename:void *	file:
@@ -4699,7 +4698,7 @@ serial_write	src/kern/serial/serial.c	/^void serial_write(const char *str) {$/;"
 serial_write_dec	src/kern/serial/serial.c	/^void serial_write_dec(uint64_t value) {$/;"	f	typeref:typename:void
 serial_write_hex	src/kern/serial/serial.c	/^void serial_write_hex(uint64_t value) {$/;"	f	typeref:typename:void
 set	src/kern/acpi/tables.c	/^	uacpi_u8 set;$/;"	m	struct:table_ctl_request	typeref:typename:uacpi_u8	file:
-set_bit	src/kern/mem/pmm.c	/^static void set_bit(size_t rdx) { bitmap[rdx \/ 8] |= (1 << (rdx % 8)); }$/;"	f	typeref:typename:void	file:
+set_bit	src/kern/mem/pmm.c	/^static void set_bit(size_t index) { bitmap[index \/ 8] |= (1 << (index % 8)); }$/;"	f	typeref:typename:void	file:
 set_event	src/kern/acpi/event.c	/^static uacpi_status set_event(uacpi_u8 event, uacpi_u8 value) {$/;"	f	typeref:typename:uacpi_status	file:
 set_gpe_state	src/kern/acpi/event.c	/^static uacpi_status set_gpe_state(struct gp_event *event, enum gpe_state state) {$/;"	f	typeref:typename:uacpi_status	file:
 set_mode	src/kern/acpi/uacpi.c	/^static uacpi_status set_mode(enum hw_mode mode) {$/;"	f	typeref:typename:uacpi_status	file:
@@ -4829,7 +4828,7 @@ target_hids	src/kern/acpi/utilities.c	/^	const uacpi_char *const *target_hids;$/
 temp_nodes	src/kern/acpi/interpreter.c	/^	struct temp_namespace_node_array temp_nodes;$/;"	m	struct:call_frame	typeref:struct:temp_namespace_node_array	file:
 terminal_count	include/limine.h	/^	uint64_t terminal_count;$/;"	m	struct:limine_terminal_response	typeref:typename:uint64_t
 terminal_count	limine/limine.h	/^    uint64_t terminal_count;$/;"	m	struct:limine_terminal_response	typeref:typename:uint64_t
-test_bit	src/kern/mem/pmm.c	/^static int test_bit(size_t rdx) { return (bitmap[rdx \/ 8] & (1 << (rdx % 8))) != 0; }$/;"	f	typeref:typename:int	file:
+test_bit	src/kern/mem/pmm.c	/^static int test_bit(size_t index) { return (bitmap[index \/ 8] & (1 << (index % 8))) != 0; }$/;"	f	typeref:typename:int	file:
 text	include/uacpi/internal/types.h	/^        uacpi_char *text;$/;"	m	union:uacpi_buffer::__anon939e4e30010a	typeref:typename:uacpi_char *
 text	include/uacpi/types.h	/^        uacpi_char *text;$/;"	m	union:uacpi_data_view::__anonafc8c4a4010a	typeref:typename:uacpi_char *
 text	include/uacpi/types.h	/^    uacpi_char text[4];$/;"	m	union:uacpi_object_name	typeref:typename:uacpi_char[4]

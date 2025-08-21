@@ -17,7 +17,6 @@ uint64_t pd[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
 uint64_t pt[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
 
 void load_pages(void) {
-	uint64_t i = 0;
 	for (uint64_t addr = 0; addr < MAX_PAGES; addr++) {
 		pt[addr / PAGE_SIZE] = addr | 0x03;
 	}
@@ -35,8 +34,5 @@ void load_pages(void) {
 		for (int i = 0; i < MAX_PAGES; i++) {
 			*pt = virt | 1; // mark page present.
 		}
-		i++;
 	}
-
-	serial_printf("[ INFO ] %d Pages allocated\n", i);
 }

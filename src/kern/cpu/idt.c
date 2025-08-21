@@ -132,7 +132,6 @@ void idt_set_descriptor(uint64_t vector, void *isr, uint8_t flags) {
 		serial_printf("[ ERR ] Null ISR for vector: %x\n", vector);
 		return;
 	}
-	serial_printf("[ DEBUG ] Setting IDT vector: %x, ISR: %x\n", vector, isr);
 
 	idt_entry_t *descriptor = &idt[vector];
 	uintptr_t isr_addr = (uintptr_t)isr;
