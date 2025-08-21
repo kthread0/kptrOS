@@ -11,10 +11,10 @@ volatile struct limine_executable_file_request executable_file_request = {
 
 volatile struct limine_hhdm_request hhdm_request = {.id = LIMINE_HHDM_REQUEST, .revision = 0};
 
-uint64_t pml4[512] __attribute__((aligned(PAGE_SIZE)));
-uint64_t pdpt[512] __attribute__((aligned(PAGE_SIZE)));
-uint64_t pd[512] __attribute__((aligned(PAGE_SIZE)));
-uint64_t pt[512] __attribute__((aligned(PAGE_SIZE)));
+uint64_t pml4[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
+uint64_t pdpt[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
+uint64_t pd[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
+uint64_t pt[ENTRIES] __attribute__((aligned(PAGE_SIZE)));
 
 void load_pages(void) {
 	uint64_t i = 0;
@@ -30,8 +30,8 @@ void load_pages(void) {
 	for (uint64_t off = 0; off < MAX_PAGES; off++) {
 		uint64_t virt = hhdm_request.response->offset + off;
 		uint64_t phys = (uintptr_t)kernel_addr + off;
-		size_t idx = (virt & 0x1FFFFF) / PAGE_SIZE;
-		pt[idx] = phys | 0x03;
+		size_t index = (virt & 0x1FFFFF) / PAGE_SIZE;
+		pt[index] = phys | 0x03;
 		for (int i = 0; i < MAX_PAGES; i++) {
 			*pt = virt | 1; // mark page present.
 		}

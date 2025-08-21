@@ -18,7 +18,6 @@ void kinit(void) {
 	gdt_init();
 	idt_init();
 	bitmap_init();
-	load_pages();
 	acpi_init();
 	timer_init();
 }

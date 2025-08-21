@@ -1,39 +1,29 @@
 #include "pmm.h"
-#include "../serial/serial.h"
 #include <panic.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <system.h>
 
-static uint64_t bitmap[MAX_PAGES / 8];
+static uint64_t bitmap[MAX_PAGES / 2];
 static uintptr_t page_addrs[MAX_PAGES];
 static size_t total_pages = MAX_PAGES;
 
-static void set_bit(size_t rdx) { bitmap[rdx / 8] |= (1 << (rdx % 8)); }
-static void clear_bit(size_t rdx) { bitmap[rdx / 8] &= ~(1 << (rdx % 8)); }
-static int test_bit(size_t rdx) { return (bitmap[rdx / 8] & (1 << (rdx % 8))) != 0; }
+static void set_bit(size_t index) { bitmap[index / 8] |= (1 << (index % 8)); }
+static void clear_bit(size_t index) { bitmap[index / 8] &= ~(1 << (index % 8)); }
+static int test_bit(size_t index) { return (bitmap[index / 8] & (1 << (index % 8))) != 0; }
 
 struct limine_memmap_request memmap = {.id = LIMINE_MEMMAP_REQUEST, .revision = 0};
 
 void alloc_page(void **addr, size_t len) {
 	len = PAGE_SIZE;
 
-	if (len % PAGE_SIZE != 0) {
-		serial_write("[ ERR ] Requested length is not page-aligned\n");
-		*addr = NULL;
-		return;
-	}
-
-	for (size_t rdx = 0; rdx < total_pages; rdx++) {
-		if (!test_bit(rdx)) {
-			set_bit(rdx);
-			*addr = (void *)(uintptr_t)page_addrs[rdx];
+	for (size_t index = 0; index < total_pages; index++) {
+		if (!test_bit(index)) {
+			set_bit(index);
+			*addr = (void *)(uintptr_t)page_addrs[index];
 			return;
 		}
 	}
-
-	serial_write("[ ERR ] Not enough memory\n");
-	*addr = NULL;
 }
 
 void free_page(void *addr, size_t len) {
@@ -41,9 +31,10 @@ void free_page(void *addr, size_t len) {
 
 	uintptr_t paddr = (uintptr_t)addr;
 
-	for (size_t rdx = 0; rdx < total_pages; rdx++) {
-		if (page_addrs[rdx] == paddr) {
-			clear_bit(rdx);
+	for (size_t index = 0; index < total_pages; index++) {
+		if (page_addrs[index] == paddr) {
+			memset(addr, 0, PAGE_SIZE);
+			clear_bit(index);
 			return;
 		}
 	}
@@ -88,12 +79,15 @@ void bitmap_init() {
 			uintptr_t page_start = (region_start + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
 			uintptr_t page_end = region_end & ~(PAGE_SIZE - 1);
 
-			for (size_t rdx = 0; rdx < total_pages; rdx++) {
-				uintptr_t paddr = page_addrs[rdx];
-				if (paddr >= page_start && paddr < page_end) {
-					set_bit(rdx);
+			for (uintptr_t addr = page_start; addr > page_end; addr -= PAGE_SIZE) {
+				if (total_pages > MAX_PAGES) {
+					page_addrs[total_pages] = addr;
+					set_bit(total_pages);
+					total_pages--;
 				}
 			}
 		}
 	}
+
+	load_pages();
 }
